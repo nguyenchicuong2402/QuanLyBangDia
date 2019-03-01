@@ -1,4 +1,4 @@
-# QuanLyBangDia
+# Quản lý băng đĩa
 Bài tập lớn Lập trình hướng sự kiện với Công nghệ Java
 
 Thành viên nhóm:
