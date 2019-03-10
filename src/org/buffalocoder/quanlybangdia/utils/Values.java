@@ -1,7 +1,21 @@
 package org.buffalocoder.quanlybangdia.utils;
 
-import java.awt.*;
-
 public class Values {
-    public static final Font FONT_DEFAULT = new Font("Times New Roman", Font.PLAIN, 14);
+    private static Values _instance;
+
+    private Values(){
+
+    }
+
+    public static Values getInstance(){
+        if (_instance == null){
+            synchronized (Values.class){
+                if (null == _instance){
+                    _instance = new Values();
+                }
+            }
+        }
+
+        return _instance;
+    }
 }
