@@ -31,7 +31,6 @@ public class MainForm extends JFrame {
                 setSize(WIDTH, HEIGHT);
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
                 setTitle(TITLE);
-                setFont(Values.FONT_DEFAULT);
                 setVisible(true);
             }
         });
