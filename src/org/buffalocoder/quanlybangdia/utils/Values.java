@@ -13,4 +13,5 @@ public class Values {
     public static final Color COLOR_ERROR = Color.decode("#ff1744");
     public static final Color COLOR_ACCEPT = Color.decode("#00e676");
     public static final Color COLOR_DARK = Color.decode("#1a237e");
+    public static final Color COLOR_PRIMARY_LOGIN = Color.decode("#311b92");
 }
