@@ -1,20 +1,25 @@
 package org.buffalocoder.quanlybangdia.views;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 
 import javax.swing.*;
 
 import org.buffalocoder.quanlybangdia.components.UIComponent;
+import org.buffalocoder.quanlybangdia.utils.Values;
 
 public class MainForm extends JFrame {
     //========== CONSTANT ==========//
     final int WIDTH = 1200;
     final int HEIGHT = 600;
     final String TITLE = "Quản lý băng đĩa";
+
     //========= UI ===========//
-    private JPanel mainPanel, menuPanel, contentPanel;
+    private JPanel mainPanel, topPanel, contentPanel, userPanel, menuPanel;
     private JTabbedPane menuTabbed;
     private JTextField txtSearch;
+    private CustomTabbedPanelUI customTabbedPanelUI;
+    private JMenuBar menuBar;
+    private JMenu menuFile, menuEdit, menuView;
     
     
 
@@ -22,17 +27,59 @@ public class MainForm extends JFrame {
      * Tạo GUI
      */
     private void prepareUI(){
-    	this.setContentPane(mainPanel = new JPanel(new BorderLayout()));
-//    				header
-    	UIComponent mnbar = new UIComponent();
-    	setJMenuBar(mnbar.Menu());
-//    	            content
-        contentPanel = new JPanel();
-        contentPanel.add(mnbar.btn("Thêm"));
-        contentPanel.add(mnbar.btn("Sửa"));
-        contentPanel.add(mnbar.btn("Xóa"));
+        /*========== MAIN PANEL =========*/
+        mainPanel = new JPanel(new BorderLayout());
+        this.setContentPane(mainPanel);
+
+        /*========== TOP PANEL ==========*/
+        topPanel = new JPanel(new BorderLayout());
+        topPanel.setPreferredSize(new Dimension(this.getWidth(), 40));
+        mainPanel.add(topPanel, BorderLayout.NORTH);
+
+        // menu panel
+        menuPanel = new JPanel();
+        topPanel.add(menuPanel);
+
+        menuBar = new JMenuBar();
+        menuBar.setBackground(Values.COLOR_PRIMARY);
+        topPanel.add(menuBar);
+
+        menuFile = new JMenu("File");
+        menuFile.setForeground(Values.COLOR_TEXT);
+        menuFile.setPreferredSize(new Dimension(60, topPanel.getHeight()));
+        menuBar.add(menuFile);
+
+        menuEdit = new JMenu("Edit");
+        menuEdit.setForeground(Values.COLOR_TEXT);
+        menuEdit.setPreferredSize(menuFile.getPreferredSize());
+        menuBar.add(menuEdit);
+
+        menuView = new JMenu("View");
+        menuView.setForeground(Values.COLOR_TEXT);
+        menuView.setPreferredSize(menuFile.getPreferredSize());
+        menuBar.add(menuView);
+
+        /*========== MENU PANEL =========*/
+        contentPanel = new JPanel(new BorderLayout());
         mainPanel.add(contentPanel, BorderLayout.CENTER);
 
+        // custom tabbed panel
+        customTabbedPanelUI = new CustomTabbedPanelUI();
+        customTabbedPanelUI.setWidth(150);
+        customTabbedPanelUI.setHeight(60);
+        customTabbedPanelUI.setColorSelected(Values.COLOR_PRIMARY);
+        customTabbedPanelUI.setColorDeselected(Values.COLOR_SECONDARY);
+
+        // tabbed panel
+        menuTabbed = new JTabbedPane(JTabbedPane.LEFT);
+        menuTabbed.setUI(customTabbedPanelUI);
+        menuTabbed.addTab("Quản lý nhân viên", new QuanLyNhanVienTabbed());
+        menuTabbed.addTab("Quản lý nhân viên", new QuanLyNhanVienTabbed());
+        menuTabbed.addTab("Quản lý nhân viên", new QuanLyNhanVienTabbed());
+        menuTabbed.addTab("Quản lý nhân viên", new QuanLyNhanVienTabbed());
+        menuTabbed.addTab("Quản lý nhân viên", new QuanLyNhanVienTabbed());
+        menuTabbed.addTab("Quản lý nhân viên", new QuanLyNhanVienTabbed());
+        contentPanel.add(menuTabbed);
     }
 
     /**
@@ -47,7 +94,7 @@ public class MainForm extends JFrame {
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
                 setLocation(300, 100);
                 setTitle(TITLE);
-                setUndecorated(true);
+//                setUndecorated(true);
                 setVisible(true);
             }
         });

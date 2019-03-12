@@ -6,6 +6,6 @@ import org.buffalocoder.quanlybangdia.views.MainForm;
 
 public class MainProgram {
     public static void main(String args[]){
-        new LoginForm();
+        new MainForm();
     }
 }
