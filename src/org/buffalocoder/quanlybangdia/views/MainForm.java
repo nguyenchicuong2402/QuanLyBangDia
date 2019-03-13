@@ -10,7 +10,7 @@ import org.buffalocoder.quanlybangdia.utils.Values;
 public class MainForm extends JFrame {
     //========== CONSTANT ==========//
     final int WIDTH = 1200;
-    final int HEIGHT = 600;
+    final int HEIGHT = 800;
     final String TITLE = "Quản lý băng đĩa";
 
     //========= UI ===========//
@@ -65,20 +65,22 @@ public class MainForm extends JFrame {
 
         // custom tabbed panel
         customTabbedPanelUI = new CustomTabbedPanelUI();
-        customTabbedPanelUI.setWidth(150);
+        customTabbedPanelUI.setWidth(120);
         customTabbedPanelUI.setHeight(60);
+        customTabbedPanelUI.setMargin(10, 0);
         customTabbedPanelUI.setColorSelected(Values.COLOR_PRIMARY);
-        customTabbedPanelUI.setColorDeselected(Values.COLOR_SECONDARY);
+        customTabbedPanelUI.setColorDeselected(Values.COLOR_DARK);
 
         // tabbed panel
         menuTabbed = new JTabbedPane(JTabbedPane.LEFT);
         menuTabbed.setUI(customTabbedPanelUI);
+        menuTabbed.setFont(Values.FONT_PLAIN_DEFAULT);
+        menuTabbed.addTab("Trang chủ", new TrangChuTabbed());
+        menuTabbed.addTab("Cho thuê", new ChoThueTabbed())  ;
+        menuTabbed.addTab("Quản lý băng đĩa", new QuanLyBangDiaTabbed());
+        menuTabbed.addTab("Quản lý khách hàng", new QuanLyKhachHangTabbed());
         menuTabbed.addTab("Quản lý nhân viên", new QuanLyNhanVienTabbed());
-        menuTabbed.addTab("Quản lý nhân viên", new QuanLyNhanVienTabbed());
-        menuTabbed.addTab("Quản lý nhân viên", new QuanLyNhanVienTabbed());
-        menuTabbed.addTab("Quản lý nhân viên", new QuanLyNhanVienTabbed());
-        menuTabbed.addTab("Quản lý nhân viên", new QuanLyNhanVienTabbed());
-        menuTabbed.addTab("Quản lý nhân viên", new QuanLyNhanVienTabbed());
+        menuTabbed.addTab("Thống kê", new ThongKeTabbed());
         contentPanel.add(menuTabbed);
     }
 
@@ -92,7 +94,7 @@ public class MainForm extends JFrame {
                 prepareUI();
                 setSize(WIDTH, HEIGHT);
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
-                setLocation(300, 100);
+                setLocationRelativeTo(null);
                 setTitle(TITLE);
 //                setUndecorated(true);
                 setVisible(true);

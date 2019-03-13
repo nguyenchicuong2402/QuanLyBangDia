@@ -7,6 +7,6 @@ public class QuanLyNhanVienTabbed extends JPanel {
     public QuanLyNhanVienTabbed() {
         this.setLayout(new BorderLayout());
 
-        this.add(new JLabel("Heloo"));
+        this.add(new JLabel("Quản lý nhân viên tabbed"));
     }
 }

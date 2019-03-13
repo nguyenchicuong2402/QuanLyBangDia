@@ -15,6 +15,7 @@ public class CustomTabbedPanelUI extends BasicTabbedPaneUI {
     private Color colorDeselected = Color.CYAN;
     private Color colorTextSelected = Color.WHITE;
     private Color colorTextDeselected = Color.BLACK;
+    private int[] margin = {0, 0};
 
     private int inclTab = 0;
     private int anchoCarpetas = 18;
@@ -72,10 +73,9 @@ public class CustomTabbedPanelUI extends BasicTabbedPaneUI {
         this.colorTextDeselected = colorTextDeselected;
     }
 
-    @Override
-    protected void installDefaults() {
-        super.installDefaults();
-        tabAreaInsets.right = anchoCarpetas;
+    public void setMargin(int margin_x, int margin_y){
+        this.margin[0] = margin_x;
+        this.margin[1] = margin_y;
     }
 
     @Override
@@ -197,7 +197,8 @@ public class CustomTabbedPanelUI extends BasicTabbedPaneUI {
      */
     @Override
     protected void paintText(Graphics g, int tabPlacement, Font font, FontMetrics metrics, int tabIndex, String title, Rectangle textRect, boolean isSelected) {
-        super.paintText(g, tabPlacement, font, metrics, tabIndex, title, textRect, isSelected);
+        // nếu muốn cho label nằm ở giữa thì dùng dòng này
+        //super.paintText(g, tabPlacement, font, metrics, tabIndex, title, textRect, isSelected);
 
         g.setFont(font);
         View v = getTextViewForTab(tabIndex);
@@ -214,7 +215,7 @@ public class CustomTabbedPanelUI extends BasicTabbedPaneUI {
                 else
                     g.setColor(colorTextDeselected);            // màu chữ khi tab không được chọn
 
-                BasicGraphicsUtils.drawStringUnderlineCharAt(g, title, mnemIndex, textRect.x, textRect.y + metrics.getAscent());
+                BasicGraphicsUtils.drawStringUnderlineCharAt(g, title, mnemIndex, margin[0] + metrics.getDescent(), margin[1] + textRect.y + metrics.getAscent());
             } else { // tab disabled
                 g.setColor(Color.BLACK);
                 BasicGraphicsUtils.drawStringUnderlineCharAt(g, title, mnemIndex, textRect.x, textRect.y + metrics.getAscent());
