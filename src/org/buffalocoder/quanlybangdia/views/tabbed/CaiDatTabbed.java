@@ -1,11 +1,11 @@
-package org.buffalocoder.quanlybangdia.views;
+package org.buffalocoder.quanlybangdia.views.tabbed;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class CaiDatPanel extends JPanel {
+public class CaiDatTabbed extends JPanel {
 
-    public CaiDatPanel(){
+    public CaiDatTabbed(){
         this.setLayout(new BorderLayout());
 
         this.add(new JLabel("Cài đặt tabbed"));

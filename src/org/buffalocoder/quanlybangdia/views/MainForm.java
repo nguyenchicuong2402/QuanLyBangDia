@@ -81,7 +81,7 @@ public class MainForm extends JFrame {
         menuTabbed.addTab("Quản lý khách hàng", new QuanLyKhachHangTabbed());
         menuTabbed.addTab("Quản lý nhân viên", new QuanLyNhanVienTabbed());
         menuTabbed.addTab("Thống kê", new ThongKeTabbed());
-        menuTabbed.addTab("Cài đặtt", new CaiDatPanel());
+        menuTabbed.addTab("Cài đặtt", new CaiDatTabbed());
         contentPanel.add(menuTabbed);
     }
 
