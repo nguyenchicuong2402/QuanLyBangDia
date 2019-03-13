@@ -14,7 +14,7 @@ public class CustomTabbedPanelUI extends BasicTabbedPaneUI {
     private Color colorSelected = Color.BLUE;
     private Color colorDeselected = Color.CYAN;
     private Color colorTextSelected = Color.WHITE;
-    private Color colorTextDeselected = Color.BLACK;
+    private Color colorTextDeselected = Color.WHITE;
     private int[] margin = {0, 0};
 
     private int inclTab = 0;

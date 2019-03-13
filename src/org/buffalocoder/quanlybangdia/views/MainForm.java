@@ -66,7 +66,7 @@ public class MainForm extends JFrame {
         // custom tabbed panel
         customTabbedPanelUI = new CustomTabbedPanelUI();
         customTabbedPanelUI.setWidth(120);
-        customTabbedPanelUI.setHeight(60);
+        customTabbedPanelUI.setHeight(80);
         customTabbedPanelUI.setMargin(10, 0);
         customTabbedPanelUI.setColorSelected(Values.COLOR_PRIMARY);
         customTabbedPanelUI.setColorDeselected(Values.COLOR_DARK);
@@ -81,6 +81,7 @@ public class MainForm extends JFrame {
         menuTabbed.addTab("Quản lý khách hàng", new QuanLyKhachHangTabbed());
         menuTabbed.addTab("Quản lý nhân viên", new QuanLyNhanVienTabbed());
         menuTabbed.addTab("Thống kê", new ThongKeTabbed());
+        menuTabbed.addTab("Cài đặt", new CaiDatPanel());
         contentPanel.add(menuTabbed);
     }
 
