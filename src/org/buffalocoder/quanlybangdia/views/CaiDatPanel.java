@@ -3,10 +3,11 @@ package org.buffalocoder.quanlybangdia.views;
 import javax.swing.*;
 import java.awt.*;
 
-public class QuanLyNhanVienTabbed extends JPanel {
-    public QuanLyNhanVienTabbed() {
+public class CaiDatPanel extends JPanel {
+
+    public CaiDatPanel(){
         this.setLayout(new BorderLayout());
 
-        this.add(new JLabel("Heloo"));
+        this.add(new JLabel("Cài đặt tabbed"));
     }
 }

@@ -1,8 +1,5 @@
-package org.buffalocoder.quanlybangdia.models;
-
-import com.sun.jdi.Value;
+package org.buffalocoder.quanlybangdia.views;
 import org.buffalocoder.quanlybangdia.utils.Values;
-
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
@@ -11,24 +8,74 @@ import javax.swing.text.View;
 import java.awt.*;
 import java.util.Arrays;
 
-public class TabbedPanelModel extends BasicTabbedPaneUI {
-    private static final int WIDTH = 200;       // chiều dài tab
-    private static final int HEIGHT = 50;       // chiểu rộng tab
+public class CustomTabbedPanelUI extends BasicTabbedPaneUI {
+    private int width = 200;       // chiều dài tab
+    private int height = 50;       // chiểu rộng tab
+    private Color colorSelected = Color.BLUE;
+    private Color colorDeselected = Color.CYAN;
+    private Color colorTextSelected = Color.WHITE;
+    private Color colorTextDeselected = Color.WHITE;
+    private int[] margin = {0, 0};
 
     private int inclTab = 0;
-    private int anchoFocoV = inclTab;
-    private int anchoFocoH = 4;
     private int anchoCarpetas = 18;
     private Polygon shape;
 
     public static ComponentUI createUI(JComponent c) {
-        return new TabbedPanelModel();
+        return new CustomTabbedPanelUI();
     }
 
-    @Override
-    protected void installDefaults() {
-        super.installDefaults();
-        tabAreaInsets.right = anchoCarpetas;
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width > 0 ? width : this.width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height > 0 ? height : this.height;
+    }
+
+    public Color getColorSelected() {
+        return colorSelected;
+    }
+
+    public void setColorSelected(Color colorSelected) {
+        this.colorSelected = colorSelected;
+    }
+
+    public Color getColorDeselected() {
+        return colorDeselected;
+    }
+
+    public void setColorDeselected(Color colorDeselected) {
+        this.colorDeselected = colorDeselected;
+    }
+
+    public Color getColorTextSelected() {
+        return colorTextSelected;
+    }
+
+    public void setColorTextSelected(Color colorTextSelected) {
+        this.colorTextSelected = colorTextSelected;
+    }
+
+    public Color getColorTextDeselected() {
+        return colorTextDeselected;
+    }
+
+    public void setColorTextDeselected(Color colorTextDeselected) {
+        this.colorTextDeselected = colorTextDeselected;
+    }
+
+    public void setMargin(int margin_x, int margin_y){
+        this.margin[0] = margin_x;
+        this.margin[1] = margin_y;
     }
 
     @Override
@@ -55,7 +102,6 @@ public class TabbedPanelModel extends BasicTabbedPaneUI {
                         carp.addPoint(0, lines[i] + rects[selectedIndex].height);
                     }
                     carp.addPoint(0, lines[i]);
-                    g.setColor(hazAlfa(fila));
                     g.fillPolygon(carp);
                     g.setColor(darkShadow.darker());
                     g.drawPolygon(carp);
@@ -70,7 +116,6 @@ public class TabbedPanelModel extends BasicTabbedPaneUI {
                     carp.addPoint(tabPane.getWidth() - 2 * fila - 3, lines[i + 1]);
                     carp.addPoint(0, lines[i + 1]);
                     carp.addPoint(0, lines[i]);
-                    g.setColor(hazAlfa(fila + 2));
                     g.fillPolygon(carp);
                     g.setColor(darkShadow.darker());
                     g.drawPolygon(carp);
@@ -122,19 +167,18 @@ public class TabbedPanelModel extends BasicTabbedPaneUI {
 
         // màu khi tab được chọn
         if (isSelected) {
-            g2D.setColor(Values.COLOR_PRIMARY);
+            g2D.setColor(colorSelected);
         } else {
             // màu khi tab enable
             if (tabPane.isEnabled() && tabPane.isEnabledAt(tabIndex)) {
-                g2D.setColor(Values.COLOR_SECONDARY);
+                g2D.setColor(colorDeselected);
             } else {
-                g2D.setColor(Values.COLOR_DARK);
+                g2D.setColor(Color.DARK_GRAY);
             }
         }
         g2D.fill(shape);
 
         if (runCount > 1) {
-            g2D.setColor(hazAlfa(getRunForTab(tabPane.getTabCount(), tabIndex) - 1));
             g2D.fill(shape);
         }
         g2D.fill(shape);
@@ -153,7 +197,8 @@ public class TabbedPanelModel extends BasicTabbedPaneUI {
      */
     @Override
     protected void paintText(Graphics g, int tabPlacement, Font font, FontMetrics metrics, int tabIndex, String title, Rectangle textRect, boolean isSelected) {
-        super.paintText(g, tabPlacement, font, metrics, tabIndex, title, textRect, isSelected);
+        // nếu muốn cho label nằm ở giữa thì dùng dòng này
+        //super.paintText(g, tabPlacement, font, metrics, tabIndex, title, textRect, isSelected);
 
         g.setFont(font);
         View v = getTextViewForTab(tabIndex);
@@ -166,11 +211,11 @@ public class TabbedPanelModel extends BasicTabbedPaneUI {
             if (tabPane.isEnabled() && tabPane.isEnabledAt(tabIndex)) {
 
                 if (isSelected)
-                    g.setColor(Values.COLOR_TEXT);      // màu chữ khi tab được chọn
+                    g.setColor(colorTextSelected);      // màu chữ khi tab được chọn
                 else
-                    g.setColor(Color.BLACK);            // màu chữ khi tab không được chọn
+                    g.setColor(colorTextDeselected);            // màu chữ khi tab không được chọn
 
-                BasicGraphicsUtils.drawStringUnderlineCharAt(g, title, mnemIndex, textRect.x, textRect.y + metrics.getAscent());
+                BasicGraphicsUtils.drawStringUnderlineCharAt(g, title, mnemIndex, margin[0] + metrics.getDescent(), margin[1] + textRect.y + metrics.getAscent());
             } else { // tab disabled
                 g.setColor(Color.BLACK);
                 BasicGraphicsUtils.drawStringUnderlineCharAt(g, title, mnemIndex, textRect.x, textRect.y + metrics.getAscent());
@@ -182,13 +227,13 @@ public class TabbedPanelModel extends BasicTabbedPaneUI {
 
     @Override
     protected int calculateTabWidth(int tabPlacement, int tabIndex, FontMetrics metrics) {
-        return WIDTH + super.calculateTabWidth(tabPlacement, tabIndex, metrics);
+        return width + super.calculateTabWidth(tabPlacement, tabIndex, metrics);
     }
 
     @Override
     protected int calculateTabHeight(int tabPlacement, int tabIndex, int fontHeight) {
         if (tabPlacement == LEFT || tabPlacement == RIGHT) {
-            return super.calculateTabHeight(tabPlacement, tabIndex, fontHeight + HEIGHT);
+            return super.calculateTabHeight(tabPlacement, tabIndex, height);
         } else {
             return super.calculateTabHeight(tabPlacement, tabIndex, fontHeight);
         }
@@ -204,13 +249,5 @@ public class TabbedPanelModel extends BasicTabbedPaneUI {
             g.setColor(UIManager.getColor("ScrollBar.thumbShadow"));
             g.drawPolygon(shape);
         }
-    }
-
-    protected Color hazAlfa(int fila) {
-        int alfa = 0;
-        if (fila >= 0) {
-            alfa = 50 + (fila > 7 ? 70 : 10 * fila);
-        }
-        return new Color(0, 0, 0, alfa);
     }
 }
