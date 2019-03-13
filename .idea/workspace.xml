@@ -2,15 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ecdd5e3-bc5b-493b-80fa-dbdc743fa957" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/TabbedPanelModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/DemoComponent/DemoTabbedPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/QuanLyNhanVienTabbed.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/CustomerModelList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/CustomerModelListIMP.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/DiscModelList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/DiscModelListIMP.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/EmployeeModelList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/EmployeeModelListIMP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/MainProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/MainProgram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/resources/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/resources/colors.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/utils/Values.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/utils/Values.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/LoginForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/LoginForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/MainForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/MainForm.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,61 +35,105 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/LoginForm.java">
+        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/resources/database/SCRIPT.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="17" column="52" lean-forward="true" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
+            <state relative-caret-position="2108">
+              <caret line="124" column="34" selection-start-line="124" selection-start-column="34" selection-end-line="124" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/DiscModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2040">
+              <caret line="145" selection-start-line="145" selection-end-line="145" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="method#DiscModel#0;class#DiscModel#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/utils/Values.java">
+        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/EmployeeModelListIMP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="8" column="44" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
+            <state relative-caret-position="102">
+              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+              <folding>
+                <element signature="e#240#241#0" expanded="true" />
+                <element signature="e#268#269#0" expanded="true" />
+                <element signature="e#349#350#0" expanded="true" />
+                <element signature="e#377#378#0" expanded="true" />
+                <element signature="e#436#437#0" expanded="true" />
+                <element signature="e#464#465#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/TabbedPanelModel.java">
+        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/CustomerModelList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="109" column="22" lean-forward="true" selection-start-line="109" selection-start-column="22" selection-end-line="109" selection-end-column="22" />
+            <state relative-caret-position="85">
+              <caret line="5" column="24" selection-start-line="5" selection-start-column="3" selection-end-line="7" selection-end-column="67" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/DiscModelList.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="41" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/DiscModelListIMP.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="21" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#installDefaults#0;class#TabbedPanelModel#0" />
-                <element signature="docComment;method#paintTabBackground#0;class#TabbedPanelModel#0" />
-                <element signature="docComment;method#paintText#0;class#TabbedPanelModel#0" />
-                <element signature="method#hazAlfa#0;class#TabbedPanelModel#0" />
+                <element signature="e#220#221#0" expanded="true" />
+                <element signature="e#248#249#0" expanded="true" />
+                <element signature="e#322#323#0" expanded="true" />
+                <element signature="e#350#351#0" expanded="true" />
+                <element signature="e#406#407#0" expanded="true" />
+                <element signature="e#434#435#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/CustomerModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+              <folding>
+                <element signature="e#451#452#0" expanded="true" />
+                <element signature="e#479#480#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/DemoComponent/DemoTabbedPanel.java">
+        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/EmployeeModelList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="109">
-              <caret line="12" column="40" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#871#872#0" expanded="true" />
-                <element signature="e#907#908#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="119">
+              <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/QuanLyNhanVienTabbed.java">
+        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/CustomerModelListIMP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="-153">
+              <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -104,6 +147,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -134,6 +178,12 @@
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/LoginForm.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/TabbedPanelModel.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/DemoComponent/DemoTabbedPanel.java" />
+        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/CustomerModelList.java" />
+        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/DiscModelList.java" />
+        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/EmployeeModelList.java" />
+        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/DiscModelListIMP.java" />
+        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/EmployeeModelListIMP.java" />
+        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/CustomerModelListIMP.java" />
       </list>
     </option>
   </component>
@@ -151,7 +201,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -175,6 +224,42 @@
               <item name="QuanLyBangDia" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="quanlybangdia" type="462c0819:PsiDirectoryNode" />
+              <item name="DemoList" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="QuanLyBangDia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="QuanLyBangDia" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="quanlybangdia" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="QuanLyBangDia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="QuanLyBangDia" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="quanlybangdia" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="QuanLyBangDia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="QuanLyBangDia" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="quanlybangdia" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="QuanLyBangDia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="QuanLyBangDia" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="quanlybangdia" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="QuanLyBangDia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="QuanLyBangDia" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="quanlybangdia" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -182,13 +267,14 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="sqlserver" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552304848228" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552406665804" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/resources/database/QUANLYBANGDIA_DATA.MDF" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -320,16 +406,19 @@
     <option name="totallyTimeSpent" value="34298000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28820375" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2153518" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info id="DB Browser" order="7" />
+      <window_info id="Project Explorer" order="8" />
+      <window_info id="Job Explorer" order="9" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932975" visible="true" weight="0.21059972" />
@@ -343,6 +432,8 @@
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50067025" side_tool="true" weight="0.21059972" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32914925" />
+      <window_info anchor="bottom" id="DB Execution Console" order="13" />
+      <window_info anchor="bottom" id="Console" order="14" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -379,13 +470,6 @@
     <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/dao/BangDiaDAO.java" />
     <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/bus/BangDiaDTO.java" />
     <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/gui/QuanLyBangDiaGUI.java" />
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/utils/PasswordEncryption.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/OrderModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
@@ -393,84 +477,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/DiscModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2728">
-          <caret line="145" selection-start-line="145" selection-end-line="145" />
-          <folding>
-            <element signature="method#DiscModel#0;class#DiscModel#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/EmployeeModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="4" column="24" lean-forward="true" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.desktop/javax/swing/BorderFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="400" lean-forward="true" selection-start-line="400" selection-end-line="400" />
-          <folding>
-            <element signature="e#4213#4214#0" expanded="true" />
-            <element signature="e#4259#4260#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.desktop/javax/swing/BorderFactory.java" />
     <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/PersonModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="448">
           <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/CustomerModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="9" column="7" lean-forward="true" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
-          <folding>
-            <element signature="e#451#452#0" expanded="true" />
-            <element signature="e#479#480#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/resources/database/SCRIPT.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="124" column="34" lean-forward="true" selection-start-line="124" selection-start-column="34" selection-end-line="124" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/utils/XmlDocument.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/MainForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="26" column="21" lean-forward="true" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/MainProgram.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="43" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#303#304#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -481,44 +492,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/utils/Values.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" column="44" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/QuanLyNhanVienTabbed.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/LoginForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="17" column="52" lean-forward="true" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.desktop/java/awt/Polygon.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="146" column="11" selection-start-line="146" selection-start-column="11" selection-end-line="146" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.desktop/java/awt/Polygon.java" />
     <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/TabbedPanelModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="109" column="22" lean-forward="true" selection-start-line="109" selection-start-column="22" selection-end-line="109" selection-end-column="22" />
+        <state relative-caret-position="1598">
+          <caret line="109" column="22" selection-start-line="109" selection-start-column="22" selection-end-line="109" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#installDefaults#0;class#TabbedPanelModel#0" />
@@ -531,13 +509,169 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/DemoComponent/DemoTabbedPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
+        <state relative-caret-position="204">
           <caret line="12" column="40" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#871#872#0" expanded="true" />
-            <element signature="e#907#908#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/LoginForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/MainForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/utils/Values.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/utils/PasswordEncryption.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/utils/XmlDocument.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/EmployeeModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/resources/database/INSERTDATA.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/QuanLyNhanVienTabbed.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/MainProgram.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="37" selection-start-line="2" selection-end-line="2" selection-end-column="37" />
+          <folding>
+            <element signature="e#272#273#0" expanded="true" />
+            <element signature="e#303#304#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/resources/database/SCRIPT.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2108">
+          <caret line="124" column="34" selection-start-line="124" selection-start-column="34" selection-end-line="124" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/DiscModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2040">
+          <caret line="145" selection-start-line="145" selection-end-line="145" />
+          <folding>
+            <element signature="method#DiscModel#0;class#DiscModel#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/CustomerModelList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="24" selection-start-line="5" selection-start-column="3" selection-end-line="7" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/CustomerModelListIMP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-153">
+          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/EmployeeModelListIMP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+          <folding>
+            <element signature="e#240#241#0" expanded="true" />
+            <element signature="e#268#269#0" expanded="true" />
+            <element signature="e#349#350#0" expanded="true" />
+            <element signature="e#377#378#0" expanded="true" />
+            <element signature="e#436#437#0" expanded="true" />
+            <element signature="e#464#465#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/DiscModelList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="41" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/DiscModelListIMP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="21" />
+          <folding>
+            <element signature="e#220#221#0" expanded="true" />
+            <element signature="e#248#249#0" expanded="true" />
+            <element signature="e#322#323#0" expanded="true" />
+            <element signature="e#350#351#0" expanded="true" />
+            <element signature="e#406#407#0" expanded="true" />
+            <element signature="e#434#435#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/CustomerModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+          <folding>
+            <element signature="e#451#452#0" expanded="true" />
+            <element signature="e#479#480#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/DemoList/EmployeeModelList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
         </state>
       </provider>
     </entry>
