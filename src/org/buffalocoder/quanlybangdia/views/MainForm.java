@@ -4,8 +4,8 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import org.buffalocoder.quanlybangdia.components.UIComponent;
 import org.buffalocoder.quanlybangdia.utils.Values;
+import org.buffalocoder.quanlybangdia.views.tabbed.*;
 
 public class MainForm extends JFrame {
     //========== CONSTANT ==========//
@@ -81,7 +81,7 @@ public class MainForm extends JFrame {
         menuTabbed.addTab("Quản lý khách hàng", new QuanLyKhachHangTabbed());
         menuTabbed.addTab("Quản lý nhân viên", new QuanLyNhanVienTabbed());
         menuTabbed.addTab("Thống kê", new ThongKeTabbed());
-        menuTabbed.addTab("Cài đặt", new CaiDatPanel());
+        menuTabbed.addTab("Cài đặtt", new CaiDatPanel());
         contentPanel.add(menuTabbed);
     }
 

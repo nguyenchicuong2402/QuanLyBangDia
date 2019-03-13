@@ -1,4 +1,7 @@
-package org.buffalocoder.quanlybangdia.views;
+package org.buffalocoder.quanlybangdia.views.tabbed;
+
+import org.buffalocoder.quanlybangdia.views.panelAdd;
+import org.buffalocoder.quanlybangdia.views.panelListHired;
 
 import javax.swing.*;
 import java.awt.*;

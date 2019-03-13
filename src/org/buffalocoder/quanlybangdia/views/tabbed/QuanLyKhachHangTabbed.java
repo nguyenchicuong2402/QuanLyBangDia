@@ -1,4 +1,4 @@
-package org.buffalocoder.quanlybangdia.views;
+package org.buffalocoder.quanlybangdia.views.tabbed;
 
 import javax.swing.*;
 import java.awt.*;
