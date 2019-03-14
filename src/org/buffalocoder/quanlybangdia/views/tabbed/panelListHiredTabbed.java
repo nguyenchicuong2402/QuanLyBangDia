@@ -1,23 +1,26 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
-import org.buffalocoder.quanlybangdia.models.BangDia;
-import org.buffalocoder.quanlybangdia.models.BangDiaTableModel;
+
+import org.buffalocoder.quanlybangdia.models.HiredCustomer;
+import org.buffalocoder.quanlybangdia.models.HiredCustomerTableModel;
 import org.buffalocoder.quanlybangdia.utils.Values;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class QuanLyBangDiaTabbed extends JPanel {
-    private JTable tblBangDia;
+public class panelListHiredTabbed extends JPanel {
+    private JTable tblHired;
     private JPanel topPanel, funcPanel, searchPanel;
-    private JButton btnThem, btnXoa, btnSua, btnTimKiem;
+    private JButton btnThem, btnXoa, btnSua, btnTimKiem, btnInfo;
     private JTextField txtTuKhoa;
     private TableRowSorter<TableModel> sorter;
-
-    public QuanLyBangDiaTabbed(){
+    public panelListHiredTabbed() {
         this.setLayout(new BorderLayout());
         this.setFont(Values.FONT_PLAIN_DEFAULT);
         this.setBorder(BorderFactory.createEmptyBorder());
@@ -54,12 +57,19 @@ public class QuanLyBangDiaTabbed extends JPanel {
         btnXoa.setPreferredSize(btnThem.getPreferredSize());
         funcPanel.add(btnXoa);
 
-        // tìm kiếm
+        btnInfo = new JButton("Xem thông tin");
+        btnInfo.setBackground(Values.COLOR_PRIMARY);
+        btnInfo.setForeground(Values.COLOR_TEXT);
+        btnInfo.setBorder(BorderFactory.createEmptyBorder());
+        btnInfo.setPreferredSize(btnThem.getPreferredSize());
+        funcPanel.add(btnInfo);
+//      Tìm kiếm
         searchPanel = new JPanel();
         searchPanel.setBackground(Values.COLOR_BACKGROUND);
         topPanel.add(searchPanel, BorderLayout.EAST);
 
         txtTuKhoa = new JTextField();
+        txtTuKhoa.getDocument().addDocumentListener(btnTimUpdate());
         txtTuKhoa.setPreferredSize(new Dimension(300, 40));
         txtTuKhoa.setFont(Values.FONT_PLAIN_DEFAULT);
         txtTuKhoa.setBackground(Values.COLOR_BACKGROUND);
@@ -74,51 +84,56 @@ public class QuanLyBangDiaTabbed extends JPanel {
         btnTimKiem.setPreferredSize(btnThem.getPreferredSize());
         searchPanel.add(btnTimKiem);
 
-        // table
-        JComboBox<String> cbTinhTrang = new JComboBox<>(new String[]{"Mới", "Hư hỏng"});
-        DefaultCellEditor defaultCellEditor = new DefaultCellEditor(cbTinhTrang);
+        this.add(topPanel, BorderLayout.NORTH);
 
-        ArrayList<BangDia> bangDiaList = new ArrayList<BangDia>();
-        BangDiaTableModel bangDiaTableModel = new BangDiaTableModel(bangDiaList);
-        tblBangDia = new JTable(bangDiaTableModel);
-        tblBangDia.setRowHeight(30);
-        tblBangDia.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tblBangDia.setAutoscrolls(true);
-        tblBangDia.getColumnModel().getColumn(3).setCellEditor(defaultCellEditor);
-        this.add(new JScrollPane(tblBangDia), BorderLayout.CENTER);
+        ArrayList<HiredCustomer> hiredList = new ArrayList<HiredCustomer>();
 
-        sorter = new TableRowSorter<TableModel>(tblBangDia.getModel());
-        tblBangDia.setRowSorter(sorter);
+        HiredCustomerTableModel hiredTableModel = new HiredCustomerTableModel(hiredList);
+        tblHired = new JTable(hiredTableModel );
+        tblHired.setRowHeight(30);
+        tblHired.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tblHired.setAutoscrolls(true);
+        this.add(new JScrollPane(tblHired), BorderLayout.CENTER);
 
-        bangDiaList.add(new BangDia("111", "ab", "sd", true, "asda", "dsa", 10000.0));
-        bangDiaList.add(new BangDia("112", "ab", "sd", true, "asda", "dsa", 10000.0));
-        bangDiaList.add(new BangDia("113", "ab", "sd", true, "asda", "dsa", 10000.0));
-        bangDiaList.add(new BangDia("114", "ab", "sd", true, "asda", "dsa", 10000.0));
-        bangDiaList.add(new BangDia("115", "ab", "sd", true, "asda", "dsa", 10000.0));
-        bangDiaList.add(new BangDia("116z", "ab", "sd", true, "asda", "dsa", 10000.0));
+        sorter = new TableRowSorter<TableModel>(tblHired.getModel());
+        tblHired.setRowSorter(sorter);
+
+        hiredList.add(new HiredCustomer("112", "Trường", 12, "12", "13"));
+        hiredList.add(new HiredCustomer("1123", "Trường", 13, "1", "11"));
+        hiredList.add(new HiredCustomer("11212", "Trường", 22, "2", "43"));
+        hiredList.add(new HiredCustomer("212", "Trường", 1, "20", "33"));
     }
+    public DocumentListener btnTimUpdate() {
+        return new DocumentListener() {
 
-    private void filterTableNhanVien(String key_word) {
-        if (key_word.isEmpty())
-            sorter.setRowFilter(null);
-        else {
-            try{
-                RowFilter<Object, Object> filter = new RowFilter<Object, Object>() {
-                    @Override
-                    public boolean include(Entry<?, ?> entry) {
-                        return  entry.getValue(0).equals(key_word.trim());
-                    }
-                };
-                sorter.setRowFilter(filter);
-            }catch (NumberFormatException e){
-                JOptionPane.showMessageDialog(QuanLyBangDiaTabbed.this,
-                        "Vui lòng nhập số",
-                        "Thông báo",
-                        JOptionPane.ERROR_MESSAGE);
-
-                txtTuKhoa.selectAll();
+            @Override
+            public void removeUpdate(DocumentEvent arg0) {
+                // TODO Auto-generated method stub
+                update(arg0);
             }
 
-        }
+            @Override
+            public void insertUpdate(DocumentEvent arg0) {
+                // TODO Auto-generated method stub
+                update(arg0);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent arg0) {
+                // TODO Auto-generated method stub
+                update(arg0);
+            }
+
+            private void update(DocumentEvent arg0) {
+                filterTableNhanVien(txtTuKhoa.getText());
+            }
+        };
     }
+    private void filterTableNhanVien(String key_word){
+        if (key_word.isEmpty())
+            sorter.setRowFilter(null);
+        else
+            sorter.setRowFilter(RowFilter.regexFilter(key_word));
+    }
+
 }

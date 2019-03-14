@@ -3,6 +3,8 @@ package org.buffalocoder.quanlybangdia.views;
 import java.awt.*;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 
 import org.buffalocoder.quanlybangdia.utils.Values;
 import org.buffalocoder.quanlybangdia.views.tabbed.*;
@@ -33,7 +35,7 @@ public class MainForm extends JFrame {
 
         /*========== TOP PANEL ==========*/
         topPanel = new JPanel(new BorderLayout());
-        topPanel.setPreferredSize(new Dimension(this.getWidth(), 40));
+        topPanel.setPreferredSize(new Dimension(this.getWidth(), 45));
         mainPanel.add(topPanel, BorderLayout.NORTH);
 
         // menu panel
@@ -41,7 +43,7 @@ public class MainForm extends JFrame {
         topPanel.add(menuPanel);
 
         menuBar = new JMenuBar();
-        menuBar.setBackground(Values.COLOR_PRIMARY);
+        menuBar.setBackground(Values.COLOR_DARK);
         topPanel.add(menuBar);
 
         menuFile = new JMenu("File");
@@ -68,8 +70,8 @@ public class MainForm extends JFrame {
         customTabbedPanelUI.setWidth(120);
         customTabbedPanelUI.setHeight(80);
         customTabbedPanelUI.setMargin(10, 0);
-        customTabbedPanelUI.setColorSelected(Values.COLOR_PRIMARY);
-        customTabbedPanelUI.setColorDeselected(Values.COLOR_DARK);
+        customTabbedPanelUI.setColorSelected(Values.COLOR_DARK);
+        customTabbedPanelUI.setColorDeselected(Values.COLOR_PRIMARY);
 
         // tabbed panel
         menuTabbed = new JTabbedPane(JTabbedPane.LEFT);
@@ -95,9 +97,9 @@ public class MainForm extends JFrame {
                 prepareUI();
                 setSize(WIDTH, HEIGHT);
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
+                setUndecorated(true);
                 setLocationRelativeTo(null);
                 setTitle(TITLE);
-//                setUndecorated(true);
                 setVisible(true);
             }
         });
