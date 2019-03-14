@@ -42,6 +42,7 @@ public class MainForm extends JFrame {
 
         menuBar = new JMenuBar();
         menuBar.setBackground(Values.COLOR_PRIMARY);
+        menuBar.setBorder(BorderFactory.createEmptyBorder());
         topPanel.add(menuBar);
 
         menuFile = new JMenu("File");
@@ -73,6 +74,7 @@ public class MainForm extends JFrame {
 
         // tabbed panel
         menuTabbed = new JTabbedPane(JTabbedPane.LEFT);
+        menuTabbed.setBorder(BorderFactory.createEmptyBorder());
         menuTabbed.setUI(customTabbedPanelUI);
         menuTabbed.setFont(Values.FONT_PLAIN_DEFAULT);
         menuTabbed.addTab("Trang chủ", new TrangChuTabbed());
@@ -81,7 +83,7 @@ public class MainForm extends JFrame {
         menuTabbed.addTab("Quản lý khách hàng", new QuanLyKhachHangTabbed());
         menuTabbed.addTab("Quản lý nhân viên", new QuanLyNhanVienTabbed());
         menuTabbed.addTab("Thống kê", new ThongKeTabbed());
-        menuTabbed.addTab("Cài đặtt", new CaiDatTabbed());
+        menuTabbed.addTab("Cài đặt", new CaiDatTabbed());
         contentPanel.add(menuTabbed);
     }
 

@@ -1,4 +1,4 @@
 package org.buffalocoder.quanlybangdia.models;
 
-public class KhachHangTableModel {
+public class NhanVien {
 }

@@ -1,4 +1,6 @@
-package org.buffalocoder.quanlybangdia.models;
+package org.buffalocoder.quanlybangdia.models.tablemodel;
+
+import org.buffalocoder.quanlybangdia.models.BangDia;
 
 import javax.swing.table.AbstractTableModel;
 import java.text.NumberFormat;

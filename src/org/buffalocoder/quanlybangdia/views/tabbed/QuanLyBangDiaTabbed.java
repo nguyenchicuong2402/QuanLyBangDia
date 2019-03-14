@@ -1,7 +1,7 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
 import org.buffalocoder.quanlybangdia.models.BangDia;
-import org.buffalocoder.quanlybangdia.models.BangDiaTableModel;
+import org.buffalocoder.quanlybangdia.models.tablemodel.BangDiaTableModel;
 import org.buffalocoder.quanlybangdia.utils.Values;
 
 import javax.swing.*;
