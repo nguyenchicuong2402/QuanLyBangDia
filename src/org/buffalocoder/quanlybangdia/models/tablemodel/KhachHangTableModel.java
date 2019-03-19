@@ -2,11 +2,9 @@ package org.buffalocoder.quanlybangdia.models.tablemodel;
 
 import org.buffalocoder.quanlybangdia.models.KhachHang;
 import javax.swing.table.AbstractTableModel;
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class KhachHangTableModel extends AbstractTableModel {
     private final ArrayList<KhachHang> khachHangs;

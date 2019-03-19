@@ -1,21 +1,30 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
+import com.sun.jdi.Value;
+import org.buffalocoder.quanlybangdia.models.BangDia;
+import org.buffalocoder.quanlybangdia.models.HoaDon;
+import org.buffalocoder.quanlybangdia.models.tablemodel.BangDiaTableModel;
+import org.buffalocoder.quanlybangdia.models.tablemodel.HoaDonTableModel;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.utils.Values;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
+import java.util.ArrayList;
 
-public class QuanLyKhachHangTabbed extends JPanel {
-    private JTable tblKhachHang;
+public class QuanLyChoThueTabbed extends JPanel {
+
+    private JTable tblChoThue;
     private JPanel topPanel, funcPanel, searchPanel;
     private JButton btnThem, btnXoa, btnSua, btnTimKiem;
     private JTextField txtTuKhoa;
     private TableRowSorter<TableModel> sorter;
+    private DefaultTableModel hoaDonTableModel;
 
-    public QuanLyKhachHangTabbed(){
+    public QuanLyChoThueTabbed(){
         this.setLayout(new BorderLayout());
         this.setFont(Values.FONT_PLAIN_DEFAULT);
         this.setBorder(BorderFactory.createEmptyBorder());

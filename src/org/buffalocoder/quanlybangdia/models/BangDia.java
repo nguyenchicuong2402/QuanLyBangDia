@@ -3,12 +3,12 @@ package org.buffalocoder.quanlybangdia.models;
 import java.util.Objects;
 
 public class BangDia {
-    private String maBangDia;                // id - khoá chính
-    private String tenBangDia;            // tên đĩa
-    private String theLoai;            // thể loại
-    private boolean tinhTrang;         // tình trạng
-    private String hangSanXuat;        // nhà sản xuất
-    private String ghiChu;            // ghi chú
+    private String maBangDia;
+    private String tenBangDia;
+    private String theLoai;
+    private boolean tinhTrang;
+    private String hangSanXuat;
+    private String ghiChu;
     private Double donGia;
 
     public BangDia() {

@@ -1,29 +1,32 @@
-package org.buffalocoder.quanlybangdia.models;
+package org.buffalocoder.quanlybangdia.models.tablemodel;
+
+import org.buffalocoder.quanlybangdia.models.HoaDon;
 
 import javax.swing.table.AbstractTableModel;
+import java.sql.Date;
 import java.util.ArrayList;
 
-public class HiredCustomerTableModel extends AbstractTableModel {
-    private final ArrayList<HiredCustomer> hiredList;
+public class HoaDonTableModel extends AbstractTableModel {
+    private final ArrayList<HoaDon> hoaDons;
 
     private final String[] columnNames = new String[] {
-            "ID", "Họ và tên", "Số lượng thuê hiện tại", "Ngày thuê gần nhất", "Ngày hết hạn gần nhất"
+            "Mã HD", "Tên khách hàng", "Tên băng đĩa", "Số lượng", "Ngày thuê", "Số ngày được thuê"
     };
 
     private final Class[] columnClass = new Class[] {
-            String.class, String.class, Integer.class, String.class, String.class
+            String.class, String.class, String.class, Integer.class, String.class, Integer.class
     };
 
     private boolean[] canEdit = new boolean[]{
-            false, true, true, true, true, true, true
+            false, true, true, true, true, true
     };
 
     public void setCanEdit(boolean[] canEdit) {
         this.canEdit = canEdit;
     }
 
-    public HiredCustomerTableModel(ArrayList<HiredCustomer> hiredList) {
-        this.hiredList = hiredList;
+    public HoaDonTableModel(ArrayList<HoaDon> hoaDons) {
+        this.hoaDons = hoaDons;
     }
 
     @Override
@@ -47,21 +50,21 @@ public class HiredCustomerTableModel extends AbstractTableModel {
     @Override
     public int getRowCount()
     {
-        return hiredList.size();
+        return hoaDons.size();
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex)
     {
-        HiredCustomer row = hiredList.get(rowIndex);
+        HoaDon row = hoaDons.get(rowIndex);
 
         switch (columnIndex){
-            case 0: return row.getID();
-            case 1: return row.getHoTen();
-            case 2: return row.getSoLuongThueHT();
-            case 3: return row.getNgayThueGN();
-            case 4: return row.getNgayHHGN();
-
+            case 0: return row.getMaHoaDon();
+            case 1: return row.getKhachHang().getHoTen();
+            case 2: return row.getBangDia().getTenBangDia();
+            case 3: return row.getSoLuong();
+            case 4: return row.getNgayLap();
+            case 5: return row.getSoNgayDuocMuon();
         }
 
         return null;
@@ -74,22 +77,25 @@ public class HiredCustomerTableModel extends AbstractTableModel {
 
     @Override
     public void setValueAt(Object value, int rowIndex, int columnIndex) {
-        HiredCustomer row = hiredList.get(rowIndex);
+        HoaDon row = hoaDons.get(rowIndex);
 
         switch (columnIndex) {
             case 0:
                 break;
             case 1:
-                row.setHoTen((String) value);
+                row.getKhachHang().setHoTen((String)value);
                 break;
             case 2:
-                row.setSoLuongThueHT((Integer) value);
+                row.getBangDia().setTenBangDia((String)value);
                 break;
             case 3:
-                row.setNgayThueGN((String) value);
+                row.setSoLuong((Integer)value);
                 break;
             case 4:
-                row.setNgayHHGN(((String) value));
+                row.setNgayLap((Date)value);
+                break;
+            case 5:
+                row.setSoNgayDuocMuon((Integer)value);
                 break;
         }
     }

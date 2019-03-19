@@ -4,18 +4,18 @@ import java.sql.Date;
 import java.util.Objects;
 
 public class ThongTinCaNhan {
-    private long cMND;
+    private String cMND;
     private String hoTen;
     private boolean gioiTinh;
     private String soDienThoai;
     private String diaChi;
     private Date ngaySinh;
 
-    public long getcMND() {
+    public String getcMND() {
         return cMND;
     }
 
-    public void setcMND(long cMND) {
+    public void setcMND(String cMND) {
         this.cMND = cMND;
     }
 
@@ -62,7 +62,7 @@ public class ThongTinCaNhan {
     public ThongTinCaNhan() {
     }
 
-    public ThongTinCaNhan(long cMND, String hoTen, boolean gioiTinh, String soDienThoai, String diaChi, Date ngaySinh) {
+    public ThongTinCaNhan(String cMND, String hoTen, boolean gioiTinh, String soDienThoai, String diaChi, Date ngaySinh) {
         this.cMND = cMND;
         this.hoTen = hoTen;
         this.gioiTinh = gioiTinh;

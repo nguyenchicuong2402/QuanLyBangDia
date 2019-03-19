@@ -76,12 +76,12 @@ public class MainForm extends JFrame {
         menuTabbed.setUI(customTabbedPanelUI);
         menuTabbed.setFont(Values.FONT_PLAIN_DEFAULT);
         menuTabbed.addTab("Trang chủ", new TrangChuTabbed());
-        menuTabbed.addTab("Cho thuê", new ChoThueTabbed())  ;
+        menuTabbed.addTab("Cho thuê", new QuanLyChoThueTabbed())  ;
         menuTabbed.addTab("Quản lý băng đĩa", new QuanLyBangDiaTabbed());
         menuTabbed.addTab("Quản lý khách hàng", new QuanLyKhachHangTabbed());
         menuTabbed.addTab("Quản lý nhân viên", new QuanLyNhanVienTabbed());
         menuTabbed.addTab("Thống kê", new ThongKeTabbed());
-        menuTabbed.addTab("Cài đặtt", new CaiDatTabbed());
+        menuTabbed.addTab("Cài đặt", new CaiDatTabbed());
         contentPanel.add(menuTabbed);
     }
 

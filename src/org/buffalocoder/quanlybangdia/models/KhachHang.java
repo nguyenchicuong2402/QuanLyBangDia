@@ -4,14 +4,14 @@ import java.sql.Date;
 import java.util.Objects;
 
 public class KhachHang extends ThongTinCaNhan{
-    private long maKH;
+    private String maKH;
     private Date ngayHetHan;
 
-    public long getMaKH() {
+    public String getMaKH() {
         return maKH;
     }
 
-    public void setMaKH(long maKH) {
+    public void setMaKH(String maKH) {
         this.maKH = maKH;
     }
 
@@ -23,11 +23,11 @@ public class KhachHang extends ThongTinCaNhan{
         this.ngayHetHan = ngayHetHan;
     }
 
-    public KhachHang(long cMND, String hoTen, boolean gioiTinh, String soDienThoai, String diaChi, Date ngaySinh) {
+    public KhachHang(String cMND, String hoTen, boolean gioiTinh, String soDienThoai, String diaChi, Date ngaySinh) {
         super(cMND, hoTen, gioiTinh, soDienThoai, diaChi, ngaySinh);
     }
 
-    public KhachHang(long cMND, String hoTen, boolean gioiTinh, String soDienThoai, String diaChi, Date ngaySinh, long maKH, Date ngayHetHan) {
+    public KhachHang(String cMND, String hoTen, boolean gioiTinh, String soDienThoai, String diaChi, Date ngaySinh, String maKH, Date ngayHetHan) {
         super(cMND, hoTen, gioiTinh, soDienThoai, diaChi, ngaySinh);
         this.maKH = maKH;
         this.ngayHetHan = ngayHetHan;
