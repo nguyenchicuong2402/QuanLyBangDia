@@ -1,6 +1,7 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
 import org.buffalocoder.quanlybangdia.models.BangDia;
+import org.buffalocoder.quanlybangdia.models.NhanVien;
 import org.buffalocoder.quanlybangdia.models.tablemodel.BangDiaTableModel;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.utils.Values;
@@ -17,6 +18,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
     private JButton btnThem, btnXoa, btnSua, btnTimKiem;
     private JTextField txtTuKhoa;
     private TableRowSorter<TableModel> sorter;
+    private BangDiaTableModel bangDiaTableModel;
 
     public QuanLyBangDiaTabbed(){
         this.setLayout(new BorderLayout());
@@ -35,15 +37,18 @@ public class QuanLyBangDiaTabbed extends JPanel {
         topPanel.add(funcPanel, BorderLayout.WEST);
 
         btnThem = new JButton("Thêm");
-        MaterialDesign.materialButton(btnThem, new Dimension(90, 40));
+        btnThem.setPreferredSize(new Dimension(90, 40));
+        MaterialDesign.materialButton(btnThem);
         funcPanel.add(btnThem);
 
         btnSua = new JButton("Sửa");
-        MaterialDesign.materialButton(btnSua, btnThem.getPreferredSize());
+        btnSua.setPreferredSize(btnThem.getPreferredSize());
+        MaterialDesign.materialButton(btnSua);
         funcPanel.add(btnSua);
 
         btnXoa = new JButton("Xoá");
-        MaterialDesign.materialButton(btnXoa, btnThem.getPreferredSize());
+        btnXoa.setPreferredSize(btnThem.getPreferredSize());
+        MaterialDesign.materialButton(btnXoa);
         funcPanel.add(btnXoa);
 
         // tìm kiếm
@@ -52,35 +57,30 @@ public class QuanLyBangDiaTabbed extends JPanel {
         topPanel.add(searchPanel, BorderLayout.EAST);
 
         txtTuKhoa = new JTextField();
-        MaterialDesign.materialTextField(txtTuKhoa, new Dimension(300, 40));
+        txtTuKhoa.setPreferredSize(new Dimension(300, 40));
+        MaterialDesign.materialTextField(txtTuKhoa);
         searchPanel.add(txtTuKhoa);
 
         btnTimKiem = new JButton("Tìm kiếm");
-        MaterialDesign.materialButton(btnTimKiem, btnThem.getPreferredSize());
+        btnTimKiem.setPreferredSize(btnThem.getPreferredSize());
+        MaterialDesign.materialButton(btnTimKiem);
         searchPanel.add(btnTimKiem);
-    }
 
-    private void filterTableNhanVien(String key_word) {
-        if (key_word.isEmpty())
-            sorter.setRowFilter(null);
-        else {
-            try{
-                RowFilter<Object, Object> filter = new RowFilter<Object, Object>() {
-                    @Override
-                    public boolean include(Entry<?, ?> entry) {
-                        return  entry.getValue(0).equals(key_word.trim());
-                    }
-                };
-                sorter.setRowFilter(filter);
-            }catch (NumberFormatException e){
-                JOptionPane.showMessageDialog(QuanLyBangDiaTabbed.this,
-                        "Vui lòng nhập số",
-                        "Thông báo",
-                        JOptionPane.ERROR_MESSAGE);
+        //table
+        Box box = Box.createVerticalBox();
+        box.add(Box.createVerticalStrut(10));
+        this.add(box, BorderLayout.CENTER);
 
-                txtTuKhoa.selectAll();
-            }
+        ArrayList<BangDia> bangDias = new ArrayList<>();
+        bangDias.add(new BangDia("001", "ABDC", "ABC", true, "ABC", "ABC", 10000.0));
+        bangDias.add(new BangDia("001", "ABDC", "ABC", true, "ABC", "ABC", 10000.0));
+        bangDias.add(new BangDia("001", "ABDC", "ABC", true, "ABC", "ABC", 10000.0));
+        bangDias.add(new BangDia("001", "ABDC", "ABC", true, "ABC", "ABC", 10000.0));
 
-        }
+        bangDiaTableModel = new BangDiaTableModel(bangDias);
+
+        tblBangDia = new JTable(bangDiaTableModel);
+        MaterialDesign.materialTable(tblBangDia);
+        box.add(new JScrollPane(tblBangDia), BorderLayout.CENTER);
     }
 }

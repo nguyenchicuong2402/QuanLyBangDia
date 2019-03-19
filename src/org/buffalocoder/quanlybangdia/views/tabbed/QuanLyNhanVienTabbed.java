@@ -35,15 +35,18 @@ public class QuanLyNhanVienTabbed extends JPanel {
         topPanel.add(funcPanel, BorderLayout.WEST);
 
         btnThem = new JButton("Thêm");
-        MaterialDesign.materialButton(btnThem, new Dimension(90, 40));
+        btnThem.setPreferredSize(new Dimension(90, 40));
+        MaterialDesign.materialButton(btnThem);
         funcPanel.add(btnThem);
 
         btnSua = new JButton("Sửa");
-        MaterialDesign.materialButton(btnSua, btnThem.getPreferredSize());
+        btnSua.setPreferredSize(btnThem.getPreferredSize());
+        MaterialDesign.materialButton(btnSua);
         funcPanel.add(btnSua);
 
         btnXoa = new JButton("Xoá");
-        MaterialDesign.materialButton(btnXoa, btnThem.getPreferredSize());
+        btnXoa.setPreferredSize(btnThem.getPreferredSize());
+        MaterialDesign.materialButton(btnXoa);
         funcPanel.add(btnXoa);
 
         // tìm kiếm
@@ -52,12 +55,13 @@ public class QuanLyNhanVienTabbed extends JPanel {
         topPanel.add(searchPanel, BorderLayout.EAST);
 
         txtTuKhoa = new JTextField();
-        MaterialDesign.materialTextField(txtTuKhoa, new Dimension(300, 40));
+        txtTuKhoa.setPreferredSize(new Dimension(300, 40));
+        MaterialDesign.materialTextField(txtTuKhoa);
         searchPanel.add(txtTuKhoa);
 
         btnTimKiem = new JButton("Tìm kiếm");
-        MaterialDesign.materialButton(btnTimKiem, btnThem.getPreferredSize());
+        btnTimKiem.setPreferredSize(btnThem.getPreferredSize());
+        MaterialDesign.materialButton(btnTimKiem);
         searchPanel.add(btnTimKiem);
-
     }
 }
