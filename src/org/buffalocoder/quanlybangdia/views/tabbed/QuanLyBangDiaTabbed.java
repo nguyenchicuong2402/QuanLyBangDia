@@ -23,8 +23,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
     private JTextField txtTuKhoa;
     private TableRowSorter<TableModel> sorter;
     private BangDiaTableModel bangDiaTableModel;
-    private DanhSachBangDia obj;
-    private BangDiaDB bdDB = new BangDiaDB();
+    private DanhSachBangDia danhSachBangDia;
 
     public QuanLyBangDiaTabbed(){
         this.setLayout(new BorderLayout());
@@ -78,10 +77,8 @@ public class QuanLyBangDiaTabbed extends JPanel {
         box.add(Box.createVerticalStrut(10));
         this.add(box, BorderLayout.CENTER);
 
-//      render db từ arraylist qua bảng
-        obj = new DanhSachBangDia();
-//        System.out.println(obj.getAll());
-        bangDiaTableModel = new BangDiaTableModel(bdDB.getAllBangDia());
+        danhSachBangDia = new DanhSachBangDia();
+        bangDiaTableModel = new BangDiaTableModel(danhSachBangDia.getAll());
 
         tblBangDia = new JTable(bangDiaTableModel);
         MaterialDesign.materialTable(tblBangDia);

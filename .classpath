@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/QuanLyBangDia/src"/>
+	<classpathentry exported="true" kind="lib" path="/QuanLyBangDia/src/org/buffalocoder/quanlybangdia/resources/lib/mssql-jdbc-7.2.1.jre8.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

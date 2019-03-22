@@ -3,28 +3,74 @@ package org.buffalocoder.quanlybangdia.models;
 import java.util.ArrayList;
 
 public class DanhSachBangDia {
-    private ArrayList<BangDia> dsBangDia;
+    private ArrayList<BangDia> bangDias;
+
     public DanhSachBangDia(){
-        dsBangDia = new ArrayList<BangDia>();
-    }
-    public ArrayList<BangDia> getAll(){
-        return  dsBangDia;
+        bangDias = new ArrayList<BangDia>();
     }
 
-    public boolean themBD(BangDia bd){
-        if(dsBangDia.contains(bd))
+    public void loadDb(){
+        // load danh sách băng đĩa trong db
+    }
+
+    public ArrayList<BangDia> getAll(){
+        return  bangDias;
+    }
+
+    public boolean them(BangDia bangDia){
+        if(bangDia != null && bangDias.contains(bangDia))
             return false;
-        else
-        {
-            dsBangDia.add(bd);
+
+        if (bangDias.add(bangDia)){
+            // thêm băng đĩa vào db
             return true;
         }
+
+        return false;
     }
 
-    public BangDia timBD(String maBD){
-        for (BangDia bd: dsBangDia) {
-            if(bd.getMaBangDia().equals(maBD))
-                return bd;
+    public boolean xoa(String maBangDia){
+        BangDia bangDia = tim(maBangDia);
+
+        if (bangDia == null)
+            return false;
+
+        if (bangDias.remove(bangDia)){
+            // xoá băng đĩa trong db
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean sua(BangDia bangDia){
+        if (bangDia != null){
+            int index = timVitri(bangDia.getMaBangDia());
+
+            if (index == -1)
+                return false;
+
+            if (bangDias.set(index, bangDia) != null){
+                // update thông tin băng đĩa trong db
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private int timVitri(String maBangDia){
+        for (int i = 0; i < bangDias.size(); i++)
+            if (bangDias.get(i).getMaBangDia().equals(maBangDia))
+                return i;
+
+        return -1;
+    }
+
+    public BangDia tim(String maBangDia){
+        for (BangDia bangDia: bangDias) {
+            if(bangDia.getMaBangDia().equals(maBangDia))
+                return bangDia;
         }
         return  null;
     }
