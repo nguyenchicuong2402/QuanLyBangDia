@@ -1,6 +1,8 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
+import org.buffalocoder.quanlybangdia.dao.BangDiaDB;
 import org.buffalocoder.quanlybangdia.models.BangDia;
+import org.buffalocoder.quanlybangdia.models.DanhSachBangDia;
 import org.buffalocoder.quanlybangdia.models.NhanVien;
 import org.buffalocoder.quanlybangdia.models.tablemodel.BangDiaTableModel;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
@@ -10,6 +12,8 @@ import javax.swing.*;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class QuanLyBangDiaTabbed extends JPanel {
@@ -19,6 +23,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
     private JTextField txtTuKhoa;
     private TableRowSorter<TableModel> sorter;
     private BangDiaTableModel bangDiaTableModel;
+    private DanhSachBangDia danhSachBangDia;
 
     public QuanLyBangDiaTabbed(){
         this.setLayout(new BorderLayout());
@@ -37,6 +42,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
         topPanel.add(funcPanel, BorderLayout.WEST);
 
         btnThem = new JButton("Thêm");
+
         btnThem.setPreferredSize(new Dimension(90, 40));
         MaterialDesign.materialButton(btnThem);
         funcPanel.add(btnThem);
@@ -71,16 +77,13 @@ public class QuanLyBangDiaTabbed extends JPanel {
         box.add(Box.createVerticalStrut(10));
         this.add(box, BorderLayout.CENTER);
 
-        ArrayList<BangDia> bangDias = new ArrayList<>();
-        bangDias.add(new BangDia("001", "ABDC", "ABC", true, "ABC", "ABC", 10000.0));
-        bangDias.add(new BangDia("001", "ABDC", "ABC", true, "ABC", "ABC", 10000.0));
-        bangDias.add(new BangDia("001", "ABDC", "ABC", true, "ABC", "ABC", 10000.0));
-        bangDias.add(new BangDia("001", "ABDC", "ABC", true, "ABC", "ABC", 10000.0));
-
-        bangDiaTableModel = new BangDiaTableModel(bangDias);
+        danhSachBangDia = new DanhSachBangDia();
+        bangDiaTableModel = new BangDiaTableModel(danhSachBangDia.getAll());
 
         tblBangDia = new JTable(bangDiaTableModel);
         MaterialDesign.materialTable(tblBangDia);
         box.add(new JScrollPane(tblBangDia), BorderLayout.CENTER);
     }
+
+
 }
