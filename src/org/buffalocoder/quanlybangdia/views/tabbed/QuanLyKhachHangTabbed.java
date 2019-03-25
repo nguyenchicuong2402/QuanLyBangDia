@@ -66,6 +66,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
         searchPanel.add(btnTimKiem);
 
         danhSachKhachHang = new DanhSachKhachHang();
+        danhSachKhachHang.loadData();
         khachHangTableModel = new KhachHangTableModel(danhSachKhachHang.getAll());
 
         Box box = Box.createVerticalBox();

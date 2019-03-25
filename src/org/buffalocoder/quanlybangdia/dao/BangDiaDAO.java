@@ -6,31 +6,69 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class BangDiaDAO {
-    public ArrayList<BangDia> getAllBangDia() {
-        ArrayList<BangDia> dsBangDia = new ArrayList<BangDia>();
+    private static BangDiaDAO _instance;
 
-        Connection conn = DBConnection.getConnection();
-        try {
-            System.out.println("Kết nối thành công DB");
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM BANGDIA");
-            while(rs.next()) {
-                String maBD = rs.getString("MABD");
-                String tenBD = rs.getString("TENBD");
-                String hangSX = rs.getString("HANGSANXUAT");
-                String ghiChu = rs.getString("GHICHU");
-                double donGia = rs.getDouble("DONGIA");
-                boolean tinhTrang = rs.getBoolean("TINHTRANG");
-                String theLoai = rs.getString("THELOAI");
-
-                BangDia bd = new BangDia(maBD, tenBD, theLoai, tinhTrang, hangSX, ghiChu, donGia);
-                dsBangDia.add(bd);
+    public static BangDiaDAO getInstance() {
+        if(_instance == null) {
+            synchronized(BangDiaDAO.class) {
+                if(null == _instance) {
+                    _instance  = new BangDiaDAO();
+                }
             }
-            return  dsBangDia;
-        } catch (SQLException e) {
-            // TODO: handle exception
         }
-        return null;
+        return _instance;
+    }
+
+    public ArrayList<BangDia> getBangDias() {
+        ArrayList<BangDia> bangDias = new ArrayList<BangDia>();
+
+        String sql = "SELECT * FROM BANGDIA";
+
+        try {
+            ResultSet resultSet = DataBaseUtils.getInstance().excuteQueryRead(sql);
+
+            while(resultSet.next()) {
+                BangDia bangDia = new BangDia(
+                        resultSet.getString("MABD") ,
+                        resultSet.getString("TENBD"),
+                        resultSet.getString("THELOAI"),
+                        resultSet.getBoolean("TINHTRANG"),
+                        resultSet.getString("HANGSANXUAT"),
+                        resultSet.getString("GHICHU"),
+                        resultSet.getDouble("DONGIA")
+                );
+
+                bangDias.add(bangDia);
+            }
+        } catch (SQLException e) {
+        }
+
+        return bangDias;
+    }
+
+    public BangDia getBangDia(String maBangDia){
+        BangDia bangDia = null;
+
+        String sql = String.format("SELECT * FROM BANGDIA WHERE MABD = '%s'", maBangDia);
+
+        try {
+            ResultSet resultSet = DataBaseUtils.getInstance().excuteQueryRead(sql);
+
+            while(resultSet.next()) {
+                bangDia = new BangDia(
+                        resultSet.getString("MABD") ,
+                        resultSet.getString("TENBD"),
+                        resultSet.getString("THELOAI"),
+                        resultSet.getBoolean("TINHTRANG"),
+                        resultSet.getString("HANGSANXUAT"),
+                        resultSet.getString("GHICHU"),
+                        resultSet.getDouble("DONGIA")
+                );
+            }
+        } catch (SQLException e) {
+        }
+
+        return bangDia;
     }
 
     public boolean themDataBase(BangDia bd){

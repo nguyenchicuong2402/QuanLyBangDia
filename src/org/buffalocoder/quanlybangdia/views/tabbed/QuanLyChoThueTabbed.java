@@ -72,6 +72,7 @@ public class QuanLyChoThueTabbed extends JPanel {
         this.add(box, BorderLayout.CENTER);
 
         danhSachHoaDon = new DanhSachChoThue();
+        danhSachHoaDon.loadData();
         choThueTableModel = new ChoThueTableModel(danhSachHoaDon.getAll());
 
         tblChoThue = new JTable(choThueTableModel);

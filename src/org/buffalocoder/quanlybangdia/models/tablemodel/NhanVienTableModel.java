@@ -14,8 +14,8 @@ public class NhanVienTableModel extends AbstractTableModel {
             "Mã NV", "Họ tên", "Giới tính", "Ngày sinh", "CMND", "Số điện thoại", "Địa chỉ", "Mô tả"
     };
 
-    public NhanVienTableModel() {
-        nhanViens = new ArrayList<>();
+    public NhanVienTableModel(ArrayList<NhanVien> nhanViens) {
+        this.nhanViens = nhanViens;
     }
 
     @Override

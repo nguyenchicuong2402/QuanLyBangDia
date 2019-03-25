@@ -70,7 +70,8 @@ public class QuanLyNhanVienTabbed extends JPanel {
         this.add(box, BorderLayout.CENTER);
 
         danhSachNhanVien = new DanhSachNhanVien();
-        nhanVienTableModel = new NhanVienTableModel();
+        danhSachNhanVien.loadData();
+        nhanVienTableModel = new NhanVienTableModel(danhSachNhanVien.getAll());
 
         tblChoThue = new JTable(nhanVienTableModel);
         MaterialDesign.materialTable(tblChoThue);

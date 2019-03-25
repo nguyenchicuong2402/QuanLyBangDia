@@ -13,6 +13,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class DangNhap extends JFrame {
+    public static TaiKhoan taiKhoan;
+
     private JPanel mainPanel, headerPanel, contentPanel, bottomPanel;
     private JLabel lblTieuDe, lblTenNguoiDung, lblMatKhau, lblBanQuyen, lblLoi;
     private JTextField txtTenNguoiDung;
@@ -126,6 +128,10 @@ public class DangNhap extends JFrame {
         lblLoi.setText(message);
     }
 
+    private void thongBao(String message){
+        JOptionPane.showMessageDialog(rootComponent, message, "Thông báo", JOptionPane.WARNING_MESSAGE);
+    }
+
     private ActionListener btnThoat_Click(){
         return new ActionListener() {
             @Override
@@ -160,11 +166,13 @@ public class DangNhap extends JFrame {
                     return;
                 }
 
-                TaiKhoan taiKhoan = TaiKhoanDAO.getInstance().getTaiKhoan(tenTaiKhoan);
+                taiKhoan = TaiKhoanDAO.getInstance().getTaiKhoan(tenTaiKhoan);
 
                 if (tenTaiKhoan.equals(taiKhoan.getTenTaiKhoan()) && matKhau.equals(taiKhoan.getMatKhau())){
                     rootComponent.setVisible(false);
                     new MainForm();
+                }else{
+                    thongBao("Sai tên đăng nhập hoặc mật khẩu");
                 }
             }
         };

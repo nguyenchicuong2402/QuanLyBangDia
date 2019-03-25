@@ -4,6 +4,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import org.buffalocoder.quanlybangdia.models.TaiKhoan;
 import org.buffalocoder.quanlybangdia.utils.Values;
 import org.buffalocoder.quanlybangdia.views.tabbed.*;
 
@@ -20,8 +21,7 @@ public class MainForm extends JFrame {
     private CustomTabbedPanelUI customTabbedPanelUI;
     private JMenuBar menuBar;
     private JMenu menuFile, menuEdit, menuView;
-    
-    
+
 
     /**
      * Tạo GUI
@@ -82,6 +82,7 @@ public class MainForm extends JFrame {
         menuTabbed.addTab("Quản lý nhân viên", new QuanLyNhanVienTabbed());
         menuTabbed.addTab("Thống kê", new ThongKeTabbed());
         menuTabbed.addTab("Cài đặt", new CaiDatTabbed());
+
         contentPanel.add(menuTabbed);
     }
 

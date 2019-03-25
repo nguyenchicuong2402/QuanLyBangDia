@@ -1,5 +1,7 @@
 package org.buffalocoder.quanlybangdia.models;
 
+import org.buffalocoder.quanlybangdia.dao.ChoThueDAO;
+
 import java.util.ArrayList;
 
 public class DanhSachChoThue {
@@ -11,5 +13,9 @@ public class DanhSachChoThue {
 
     public ArrayList<HoaDon> getAll(){
         return hoaDons;
+    }
+
+    public void loadData(){
+        hoaDons = ChoThueDAO.getInstance().getHoaDons();
     }
 }

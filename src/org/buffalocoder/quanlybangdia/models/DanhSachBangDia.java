@@ -1,5 +1,7 @@
 package org.buffalocoder.quanlybangdia.models;
 
+import org.buffalocoder.quanlybangdia.dao.BangDiaDAO;
+
 import java.util.ArrayList;
 
 public class DanhSachBangDia {
@@ -9,8 +11,8 @@ public class DanhSachBangDia {
         bangDias = new ArrayList<BangDia>();
     }
 
-    public void loadDb(){
-        // load danh sách băng đĩa trong db
+    public void loadData(){
+        bangDias = BangDiaDAO.getInstance().getBangDias();
     }
 
     public ArrayList<BangDia> getAll(){

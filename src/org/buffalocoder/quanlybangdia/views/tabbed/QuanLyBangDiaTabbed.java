@@ -72,6 +72,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
         this.add(box, BorderLayout.CENTER);
 
         danhSachBangDia = new DanhSachBangDia();
+        danhSachBangDia.loadData();
         bangDiaTableModel = new BangDiaTableModel(danhSachBangDia.getAll());
 
         tblBangDia = new JTable(bangDiaTableModel);

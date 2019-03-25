@@ -14,17 +14,16 @@ public class TaiKhoanDAO {
 
         String sql = String.format("SELECT * FROM TAIKHOAN WHERE TENTAIKHOAN = '%s'", tenTaiKhoan);
 
-        ResultSet rs = DataBaseUtils.getInstance().excuteQueryRead(sql);
-
         try {
-            while (rs.next()){
-                taiKhoan.setTenTaiKhoan(rs.getString("TENTAIKHOAN"));
-                taiKhoan.setMatKhau(rs.getString("MATKHAU"));
-                taiKhoan.setLoaiTaiKhoan(rs.getInt("LOAITK"));
-            }
+            ResultSet rs = DataBaseUtils.getInstance().excuteQueryRead(sql);
+            rs.next();
+
+            taiKhoan.setTenTaiKhoan(rs.getString("TENTAIKHOAN"));
+            taiKhoan.setMatKhau(rs.getString("MATKHAU"));
+            taiKhoan.setLoaiTaiKhoan(rs.getInt("LOAITK"));
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Lỗi đọc database");
         }
 
         return taiKhoan;
@@ -32,7 +31,7 @@ public class TaiKhoanDAO {
 
     public static TaiKhoanDAO getInstance() {
         if(_instance == null) {
-            synchronized(DataBaseUtils.class) {
+            synchronized(TaiKhoanDAO.class) {
                 if(null == _instance) {
                     _instance  = new TaiKhoanDAO();
                 }

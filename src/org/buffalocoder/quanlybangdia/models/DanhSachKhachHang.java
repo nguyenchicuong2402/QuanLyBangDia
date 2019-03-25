@@ -1,5 +1,7 @@
 package org.buffalocoder.quanlybangdia.models;
 
+import org.buffalocoder.quanlybangdia.dao.KhachHangDAO;
+
 import java.util.ArrayList;
 
 public class DanhSachKhachHang {
@@ -11,5 +13,9 @@ public class DanhSachKhachHang {
 
     public ArrayList<KhachHang> getAll(){
         return khachHangs;
+    }
+
+    public void loadData(){
+        khachHangs = KhachHangDAO.getInstance().getKhachHangs();
     }
 }
