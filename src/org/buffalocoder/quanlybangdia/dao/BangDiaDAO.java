@@ -42,6 +42,7 @@ public class BangDiaDAO {
                 bangDias.add(bangDia);
             }
         } catch (SQLException e) {
+            System.out.println("Lấy danh sách băng đĩa lỗi");
         }
 
         return bangDias;
@@ -68,13 +69,14 @@ public class BangDiaDAO {
                 );
             }
         } catch (SQLException e) {
+            System.out.println("Lấy băng đĩa lỗi");
         }
 
         return bangDia;
     }
 
     public boolean themBangDia(BangDia bangDia){
-        String sql = "INSERT INTO BANGDIA (MABD, TENBD, HANGSANXUAT, GHICHU, DONGIA, TINHTRANG, THELOAI, SOLUONGTON)" + "VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO BANGDIA (MABD, TENBD, HANGSANXUAT, GHICHU, DONGIA, TINHTRANG, THELOAI, SOLUONGTON)" + "VALUES (?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
 
@@ -89,9 +91,9 @@ public class BangDiaDAO {
 
             return ps.executeUpdate()>0;
         }catch (Exception e){
-
+            System.out.println("Thêm băng đĩa lỗi");
+            return false;
         }
-        return false;
     }
 
     public boolean xoaBangDia(String maBangDia){
@@ -102,8 +104,8 @@ public class BangDiaDAO {
 
             return ps.executeUpdate()>0;
         }catch (Exception e){
-
+            System.out.println("Xoá băng đĩa lỗi");
+            return false;
         }
-        return false;
     }
 }

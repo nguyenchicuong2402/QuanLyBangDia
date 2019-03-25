@@ -16,11 +16,10 @@ public class DanhSachBangDia {
     }
 
     public boolean them(BangDia bangDia){
-        if(bangDia != null && bangDias.contains(bangDia))
+        if(bangDia == null || bangDias.contains(bangDia))
             return false;
 
-        if (bangDias.add(bangDia)){
-            BangDiaDAO.getInstance().themBangDia(bangDia);
+        if (bangDias.add(bangDia) && BangDiaDAO.getInstance().themBangDia(bangDia)){
             return true;
         }
 
@@ -33,8 +32,7 @@ public class DanhSachBangDia {
         if (bangDia == null)
             return false;
 
-        if (bangDias.remove(bangDia)){
-            BangDiaDAO.getInstance().xoaBangDia(maBangDia);
+        if (bangDias.remove(bangDia) && BangDiaDAO.getInstance().xoaBangDia(maBangDia)){
             return true;
         }
 

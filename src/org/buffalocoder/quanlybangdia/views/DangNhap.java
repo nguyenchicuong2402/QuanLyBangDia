@@ -121,6 +121,10 @@ public class DangNhap extends JFrame {
 
         JRootPane rootPane = SwingUtilities.getRootPane(rootComponent);
         rootPane.setDefaultButton(btnDangNhap);
+
+        // TODO xoá dòng này khi nộp
+        txtTenNguoiDung.setText("admin");
+        txtMatKhau.setText("123456");
     }
 
     private void inputError(JTextField txt, String message){

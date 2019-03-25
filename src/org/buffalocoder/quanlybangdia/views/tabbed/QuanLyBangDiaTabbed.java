@@ -12,6 +12,8 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class QuanLyBangDiaTabbed extends JPanel {
     private JTable tblBangDia;
@@ -64,6 +66,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
         txtTuKhoa = new JTextField();
         txtTuKhoa.setPreferredSize(new Dimension(300, 40));
+        txtTuKhoa.addKeyListener(txtTuKhoa_Changed());
         MaterialDesign.materialTextField(txtTuKhoa);
         searchPanel.add(txtTuKhoa);
 
@@ -80,7 +83,10 @@ public class QuanLyBangDiaTabbed extends JPanel {
         danhSachBangDia = new DanhSachBangDia();
         bangDiaTableModel = new BangDiaTableModel(danhSachBangDia.getAll());
 
+        sorter = new TableRowSorter<>(bangDiaTableModel);
+
         tblBangDia = new JTable(bangDiaTableModel);
+        tblBangDia.setRowSorter(sorter);
         MaterialDesign.materialTable(tblBangDia);
         box.add(new JScrollPane(tblBangDia), BorderLayout.CENTER);
     }
@@ -92,6 +98,22 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
     private void thongBao(String message){
         JOptionPane.showMessageDialog(rootComponent, message, "Thông báo", JOptionPane.WARNING_MESSAGE);
+    }
+
+    private void filterTableBangDia(String word) {
+        if (word.isEmpty())
+            sorter.setRowFilter(null);
+        else {
+            try{
+                RowFilter<Object, Object> filter = new RowFilter<Object, Object>() {
+                    @Override
+                    public boolean include(Entry<?, ?> entry) {
+                        return ((String)entry.getValue(1)).equalsIgnoreCase(word);
+                    }
+                };
+                sorter.setRowFilter(filter);
+            }catch (NumberFormatException e){}
+        }
     }
 
     private ActionListener btnThem_Click(){
@@ -149,6 +171,23 @@ public class QuanLyBangDiaTabbed extends JPanel {
                     danhSachBangDia.xoa(maBangDia);
                     refreshTable();
                 }
+            }
+        };
+    }
+
+    private KeyListener txtTuKhoa_Changed(){
+        return new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                filterTableBangDia(txtTuKhoa.getText());
             }
         };
     }

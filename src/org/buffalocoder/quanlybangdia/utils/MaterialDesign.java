@@ -25,6 +25,7 @@ public class MaterialDesign {
         table.setFont(Values.FONT_PLAIN_DEFAULT);
         table.setRowHeight(45);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        table.setAutoCreateRowSorter(true);
 
         // không cho người dùng thay đổi cột
         table.getTableHeader().setReorderingAllowed(false);
