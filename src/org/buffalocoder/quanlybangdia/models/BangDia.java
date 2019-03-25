@@ -10,11 +10,20 @@ public class BangDia {
     private String hangSanXuat;
     private String ghiChu;
     private Double donGia;
+    private int soLuongTon;
+
+    public int getSoLuongTon() {
+        return soLuongTon;
+    }
+
+    public void setSoLuongTon(int soLuongTon) {
+        this.soLuongTon = soLuongTon;
+    }
 
     public BangDia() {
     }
 
-    public BangDia(String maBangDia, String tenBangDia, String theLoai, boolean tinhTrang, String hangSanXuat, String ghiChu, Double donGia) {
+    public BangDia(String maBangDia, String tenBangDia, String theLoai, boolean tinhTrang, String hangSanXuat, String ghiChu, Double donGia, int soLuongTon) {
         this.maBangDia = maBangDia;
         this.tenBangDia = tenBangDia;
         this.theLoai = theLoai;
@@ -22,6 +31,7 @@ public class BangDia {
         this.hangSanXuat = hangSanXuat;
         this.ghiChu = ghiChu;
         this.donGia = donGia;
+        this.soLuongTon = soLuongTon;
     }
 
     public String getMaBangDia() {
@@ -96,13 +106,14 @@ public class BangDia {
     @Override
     public String toString() {
         return "BangDia{" +
-                "maBangDia=" + maBangDia +
+                "maBangDia='" + maBangDia + '\'' +
                 ", tenBangDia='" + tenBangDia + '\'' +
                 ", theLoai='" + theLoai + '\'' +
                 ", tinhTrang=" + tinhTrang +
                 ", hangSanXuat='" + hangSanXuat + '\'' +
                 ", ghiChu='" + ghiChu + '\'' +
                 ", donGia=" + donGia +
+                ", soLuongTon=" + soLuongTon +
                 '}';
     }
 }

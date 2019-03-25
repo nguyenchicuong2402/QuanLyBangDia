@@ -108,7 +108,8 @@ public class QuanLyBangDiaTabbed extends JPanel {
                         true,
                         "ABC",
                         "ABC",
-                        5000.0
+                        5000.0,
+                        10
                 );
 
                 if (danhSachBangDia.them(bangDia)){

@@ -35,7 +35,8 @@ public class BangDiaDAO {
                         resultSet.getBoolean("TINHTRANG"),
                         resultSet.getString("HANGSANXUAT"),
                         resultSet.getString("GHICHU"),
-                        resultSet.getDouble("DONGIA")
+                        resultSet.getDouble("DONGIA"),
+                        resultSet.getInt("SOLUONGTON")
                 );
 
                 bangDias.add(bangDia);
@@ -62,7 +63,8 @@ public class BangDiaDAO {
                         resultSet.getBoolean("TINHTRANG"),
                         resultSet.getString("HANGSANXUAT"),
                         resultSet.getString("GHICHU"),
-                        resultSet.getDouble("DONGIA")
+                        resultSet.getDouble("DONGIA"),
+                        resultSet.getInt("SOLUONGTON")
                 );
             }
         } catch (SQLException e) {
@@ -71,18 +73,19 @@ public class BangDiaDAO {
         return bangDia;
     }
 
-    public boolean themBangDia(BangDia bd){
-        String sql = "INSERT INTO BANGDIA (MABD, TENBD, HANGSANXUAT, GHICHU, DONGIA, TINHTRANG, THELOAI)" + "VALUES (?,?,?,?,?,?,?)";
+    public boolean themBangDia(BangDia bangDia){
+        String sql = "INSERT INTO BANGDIA (MABD, TENBD, HANGSANXUAT, GHICHU, DONGIA, TINHTRANG, THELOAI, SOLUONGTON)" + "VALUES (?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
 
-            ps.setString(1, bd.getMaBangDia());
-            ps.setString(2, bd.getTenBangDia());
-            ps.setString(3, bd.getHangSanXuat());
-            ps.setString(4, bd.getGhiChu());
-            ps.setDouble(5, bd.getDonGia());
-            ps.setBoolean(6, bd.isTinhTrang());
-            ps.setString(7, bd.getTheLoai());
+            ps.setString(1, bangDia.getMaBangDia());
+            ps.setString(2, bangDia.getTenBangDia());
+            ps.setString(3, bangDia.getHangSanXuat());
+            ps.setString(4, bangDia.getGhiChu());
+            ps.setDouble(5, bangDia.getDonGia());
+            ps.setBoolean(6, bangDia.isTinhTrang());
+            ps.setString(7, bangDia.getTheLoai());
+            ps.setInt(8, bangDia.getSoLuongTon());
 
             return ps.executeUpdate()>0;
         }catch (Exception e){
