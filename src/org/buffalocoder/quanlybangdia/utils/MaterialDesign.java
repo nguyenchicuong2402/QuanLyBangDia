@@ -13,6 +13,7 @@ public class MaterialDesign {
     public static void materialTextField(JTextField textField){
         textField.setFont(Values.FONT_PLAIN_DEFAULT);
         textField.setBackground(Values.COLOR_BACKGROUND);
+        textField.setBorder(BorderFactory.createMatteBorder(0, 1, 2, 0, Values.COLOR_PRIMARY));
     }
 
     public static void materialTable(JTable table){

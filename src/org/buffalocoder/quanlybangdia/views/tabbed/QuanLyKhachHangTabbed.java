@@ -1,5 +1,7 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
+import org.buffalocoder.quanlybangdia.models.DanhSachKhachHang;
+import org.buffalocoder.quanlybangdia.models.tablemodel.KhachHangTableModel;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.utils.Values;
 
@@ -14,6 +16,8 @@ public class QuanLyKhachHangTabbed extends JPanel {
     private JButton btnThem, btnXoa, btnSua, btnTimKiem;
     private JTextField txtTuKhoa;
     private TableRowSorter<TableModel> sorter;
+    private KhachHangTableModel khachHangTableModel;
+    private DanhSachKhachHang danhSachKhachHang;
 
     public QuanLyKhachHangTabbed(){
         this.setLayout(new BorderLayout());
@@ -60,5 +64,17 @@ public class QuanLyKhachHangTabbed extends JPanel {
         btnTimKiem.setPreferredSize(btnThem.getPreferredSize());
         MaterialDesign.materialButton(btnTimKiem);
         searchPanel.add(btnTimKiem);
+
+        danhSachKhachHang = new DanhSachKhachHang();
+        khachHangTableModel = new KhachHangTableModel(danhSachKhachHang.getAll());
+
+        Box box = Box.createVerticalBox();
+        box.add(Box.createVerticalStrut(10));
+
+        tblKhachHang = new JTable(khachHangTableModel);
+        MaterialDesign.materialTable(tblKhachHang);
+        box.add(new JScrollPane(tblKhachHang));
+
+        this.add(box, BorderLayout.CENTER);
     }
 }

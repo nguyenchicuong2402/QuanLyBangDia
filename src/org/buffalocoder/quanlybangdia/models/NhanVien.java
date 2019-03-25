@@ -5,7 +5,6 @@ import java.sql.Date;
 public class NhanVien extends ThongTinCaNhan{
     private String maNhanVien;
     private String moTa;
-    private String loaiNV;
 
     public String getMaNhanVien() {
         return maNhanVien;
@@ -23,23 +22,14 @@ public class NhanVien extends ThongTinCaNhan{
         this.moTa = moTa;
     }
 
-    public String getLoaiNV() {
-        return loaiNV;
-    }
-
-    public void setLoaiNV(String loaiNV) {
-        this.loaiNV = loaiNV;
-    }
-
     public NhanVien(String cMND, String hoTen, boolean gioiTinh, String soDienThoai, String diaChi, Date ngaySinh) {
         super(cMND, hoTen, gioiTinh, soDienThoai, diaChi, ngaySinh);
     }
 
-    public NhanVien(String cMND, String hoTen, boolean gioiTinh, String soDienThoai, String diaChi, Date ngaySinh, String maNhanVien, String moTa, String loaiNV) {
+    public NhanVien(String cMND, String hoTen, boolean gioiTinh, String soDienThoai, String diaChi, Date ngaySinh, String maNhanVien, String moTa) {
         super(cMND, hoTen, gioiTinh, soDienThoai, diaChi, ngaySinh);
         this.maNhanVien = maNhanVien;
         this.moTa = moTa;
-        this.loaiNV = loaiNV;
     }
 
     @Override
@@ -47,7 +37,6 @@ public class NhanVien extends ThongTinCaNhan{
         return "NhanVien{" +
                 "maNhanVien='" + maNhanVien + '\'' +
                 ", moTa='" + moTa + '\'' +
-                ", loaiNV='" + loaiNV + '\'' +
                 "} " + super.toString();
     }
 }

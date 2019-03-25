@@ -16,5 +16,6 @@ public class Values {
     /*========= FONT =========*/
     private static final String FONT_NAME = "Times New Roman";
     public static final Font FONT_PLAIN_DEFAULT = new Font(FONT_NAME, Font.PLAIN, 18);
-    public static final Font FONT_TABLE_HEADER = new Font(FONT_NAME, Font.PLAIN, 20);
+    public static final Font FONT_TABLE_HEADER = new Font(FONT_NAME, Font.PLAIN, 18);
+    public static final Font FONT_TITLE= new Font(FONT_NAME, Font.PLAIN, 30);
 }

@@ -14,18 +14,6 @@ public class BangDiaTableModel extends AbstractTableModel {
             "Mã BĐ", "Tên băng đĩa", "Thể loại", "Tình trạng", "Đơn giá", "Hãng sản xuất", "Ghi chú"
     };
 
-    private final Class[] columnClass = new Class[] {
-            String.class, String.class, String.class, String.class, String.class, String.class, String.class
-    };
-
-    private boolean[] canEdit = new boolean[]{
-            false, true, true, true, true, true, true
-    };
-
-    public void setCanEdit(boolean[] canEdit) {
-        this.canEdit = canEdit;
-    }
-
     public BangDiaTableModel(ArrayList<BangDia> bangDiaList) {
         this.bangDiaList = bangDiaList;
     }
@@ -34,12 +22,6 @@ public class BangDiaTableModel extends AbstractTableModel {
     public String getColumnName(int column)
     {
         return columnNames[column];
-    }
-
-    @Override
-    public Class<?> getColumnClass(int columnIndex)
-    {
-        return columnClass[columnIndex];
     }
 
     @Override
@@ -73,41 +55,5 @@ public class BangDiaTableModel extends AbstractTableModel {
         }
 
         return null;
-    }
-
-    @Override
-    public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return canEdit[columnIndex];
-    }
-
-    @Override
-    public void setValueAt(Object value, int rowIndex, int columnIndex){
-        BangDia row = bangDiaList.get(rowIndex);
-
-        switch (columnIndex){
-            case 0: break;
-            case 1: row.setTenBangDia((String)value); break;
-            case 2: row.setTheLoai((String)value); break;
-            case 3:
-                String gioiTinh = value.toString();
-                row.setTinhTrang(gioiTinh.equalsIgnoreCase("Mới"));
-                break;
-            case 4:
-                try {
-                    Locale locale = new Locale("vi", "VN");
-                    NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale);
-                    row.setDonGia((Double)numberFormat.parse((String)value));
-                }catch (Exception e) {
-                    try{
-                        row.setDonGia(Double.parseDouble((String)value));
-                    }catch (NumberFormatException ex){
-                        return;
-                    }
-                }
-                break;
-            case 5: row.setHangSanXuat((String)value); break;
-            case 6: row.setGhiChu((String)value); break;
-
-        }
     }
 }

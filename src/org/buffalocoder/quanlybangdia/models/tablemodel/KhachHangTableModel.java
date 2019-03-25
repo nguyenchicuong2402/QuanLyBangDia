@@ -13,18 +13,6 @@ public class KhachHangTableModel extends AbstractTableModel {
             "Mã KH", "Tên khách hàng", "Giới tính", "Ngày sinh", "CMND", "Số điện thoại", "Địa chỉ", "Ngày hết hạn"
     };
 
-    private final Class[] columnClass = new Class[] {
-            Long.class, String.class, String.class, String.class, Long.class, String.class, String.class
-    };
-
-    private boolean[] canEdit = new boolean[]{
-            false, true, true, true, false, true, true
-    };
-
-    public void setCanEdit(boolean[] canEdit) {
-        this.canEdit = canEdit;
-    }
-
     public KhachHangTableModel(ArrayList<KhachHang> khachHangs) {
         this.khachHangs = khachHangs;
     }
@@ -33,12 +21,6 @@ public class KhachHangTableModel extends AbstractTableModel {
     public String getColumnName(int column)
     {
         return columnNames[column];
-    }
-
-    @Override
-    public Class<?> getColumnClass(int columnIndex)
-    {
-        return columnClass[columnIndex];
     }
 
     @Override
@@ -82,29 +64,5 @@ public class KhachHangTableModel extends AbstractTableModel {
         }
 
         return null;
-    }
-
-    @Override
-    public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return canEdit[columnIndex];
-    }
-
-    @Override
-    public void setValueAt(Object value, int rowIndex, int columnIndex){
-        KhachHang row = khachHangs.get(rowIndex);
-
-        switch (columnIndex){
-            case 0: break;
-            case 1: row.setHoTen((String)value); break;
-            case 2:
-                String gioiTinh = value.toString();
-                row.setGioiTinh(gioiTinh.equalsIgnoreCase("Nam"));
-                break;
-            case 3: break;
-            case 4: break;
-            case 5: row.setSoDienThoai((String)value); break;
-            case 6: row.setDiaChi((String)value); break;
-            case 7: break;
-        }
     }
 }

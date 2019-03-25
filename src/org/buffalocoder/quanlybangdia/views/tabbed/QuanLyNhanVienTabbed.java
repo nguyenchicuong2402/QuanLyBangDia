@@ -1,7 +1,7 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
-import org.buffalocoder.quanlybangdia.models.HoaDon;
-import org.buffalocoder.quanlybangdia.models.tablemodel.HoaDonTableModel;
+import org.buffalocoder.quanlybangdia.models.DanhSachNhanVien;
+import org.buffalocoder.quanlybangdia.models.tablemodel.NhanVienTableModel;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.utils.Values;
 
@@ -9,7 +9,6 @@ import javax.swing.*;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class QuanLyNhanVienTabbed extends JPanel {
     private JTable tblChoThue;
@@ -17,6 +16,8 @@ public class QuanLyNhanVienTabbed extends JPanel {
     private JButton btnThem, btnXoa, btnSua, btnTimKiem;
     private JTextField txtTuKhoa;
     private TableRowSorter<TableModel> sorter;
+    private DanhSachNhanVien danhSachNhanVien;
+    private NhanVienTableModel nhanVienTableModel;
 
     public QuanLyNhanVienTabbed(){
         this.setLayout(new BorderLayout());
@@ -63,5 +64,17 @@ public class QuanLyNhanVienTabbed extends JPanel {
         btnTimKiem.setPreferredSize(btnThem.getPreferredSize());
         MaterialDesign.materialButton(btnTimKiem);
         searchPanel.add(btnTimKiem);
+
+        Box box = Box.createVerticalBox();
+        box.add(Box.createVerticalStrut(10));
+        this.add(box, BorderLayout.CENTER);
+
+        danhSachNhanVien = new DanhSachNhanVien();
+        nhanVienTableModel = new NhanVienTableModel();
+
+        tblChoThue = new JTable(nhanVienTableModel);
+        MaterialDesign.materialTable(tblChoThue);
+        box.add(new JScrollPane(tblChoThue));
+
     }
 }

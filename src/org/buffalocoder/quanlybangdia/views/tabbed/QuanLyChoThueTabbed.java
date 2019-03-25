@@ -1,10 +1,7 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
-import com.sun.jdi.Value;
-import org.buffalocoder.quanlybangdia.models.BangDia;
-import org.buffalocoder.quanlybangdia.models.HoaDon;
-import org.buffalocoder.quanlybangdia.models.tablemodel.BangDiaTableModel;
-import org.buffalocoder.quanlybangdia.models.tablemodel.HoaDonTableModel;
+import org.buffalocoder.quanlybangdia.models.DanhSachChoThue;
+import org.buffalocoder.quanlybangdia.models.tablemodel.ChoThueTableModel;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.utils.Values;
 
@@ -13,7 +10,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class QuanLyChoThueTabbed extends JPanel {
 
@@ -22,7 +18,8 @@ public class QuanLyChoThueTabbed extends JPanel {
     private JButton btnThem, btnXoa, btnSua, btnTimKiem;
     private JTextField txtTuKhoa;
     private TableRowSorter<TableModel> sorter;
-    private DefaultTableModel hoaDonTableModel;
+    private ChoThueTableModel choThueTableModel;
+    private DanhSachChoThue danhSachHoaDon;
 
     public QuanLyChoThueTabbed(){
         this.setLayout(new BorderLayout());
@@ -69,5 +66,16 @@ public class QuanLyChoThueTabbed extends JPanel {
         btnTimKiem.setPreferredSize(btnThem.getPreferredSize());
         MaterialDesign.materialButton(btnTimKiem);
         searchPanel.add(btnTimKiem);
+
+        Box box = Box.createVerticalBox();
+        box.add(Box.createVerticalStrut(10));
+        this.add(box, BorderLayout.CENTER);
+
+        danhSachHoaDon = new DanhSachChoThue();
+        choThueTableModel = new ChoThueTableModel(danhSachHoaDon.getAll());
+
+        tblChoThue = new JTable(choThueTableModel);
+        MaterialDesign.materialTable(tblChoThue);
+        box.add(new JScrollPane(tblChoThue));
     }
 }
