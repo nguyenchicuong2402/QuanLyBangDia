@@ -71,11 +71,11 @@ public class BangDiaDAO {
         return bangDia;
     }
 
-    public boolean themDataBase(BangDia bd){
-        Connection conn = DBConnection.getConnection();
+    public boolean themBangDia(BangDia bd){
         String sql = "INSERT INTO BANGDIA (MABD, TENBD, HANGSANXUAT, GHICHU, DONGIA, TINHTRANG, THELOAI)" + "VALUES (?,?,?,?,?,?,?)";
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
+
             ps.setString(1, bd.getMaBangDia());
             ps.setString(2, bd.getTenBangDia());
             ps.setString(3, bd.getHangSanXuat());
@@ -91,11 +91,11 @@ public class BangDiaDAO {
         return false;
     }
 
-    public boolean xoaDatabase(String maBD){
-        Connection conn = DBConnection.getConnection();
-        String sql = "DELETE FROM BANGDIA WHERE MABD =" + maBD;
+    public boolean xoaBangDia(String maBangDia){
+        String sql = String.format("DELETE FROM BANGDIA WHERE MABD = '%s'", maBangDia);
+
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
 
             return ps.executeUpdate()>0;
         }catch (Exception e){

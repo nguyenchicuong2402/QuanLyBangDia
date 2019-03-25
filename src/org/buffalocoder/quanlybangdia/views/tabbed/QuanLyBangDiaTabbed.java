@@ -1,5 +1,6 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
+import org.buffalocoder.quanlybangdia.models.BangDia;
 import org.buffalocoder.quanlybangdia.models.DanhSachBangDia;
 import org.buffalocoder.quanlybangdia.models.tablemodel.BangDiaTableModel;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
@@ -9,6 +10,8 @@ import javax.swing.*;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class QuanLyBangDiaTabbed extends JPanel {
     private JTable tblBangDia;
@@ -18,6 +21,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
     private TableRowSorter<TableModel> sorter;
     private BangDiaTableModel bangDiaTableModel;
     private DanhSachBangDia danhSachBangDia;
+    private final Component rootComponent = this;
 
     public QuanLyBangDiaTabbed(){
         this.setLayout(new BorderLayout());
@@ -36,18 +40,20 @@ public class QuanLyBangDiaTabbed extends JPanel {
         topPanel.add(funcPanel, BorderLayout.WEST);
 
         btnThem = new JButton("Thêm");
-
         btnThem.setPreferredSize(new Dimension(90, 40));
+        btnThem.addActionListener(btnThem_Click());
         MaterialDesign.materialButton(btnThem);
         funcPanel.add(btnThem);
 
         btnSua = new JButton("Sửa");
         btnSua.setPreferredSize(btnThem.getPreferredSize());
+        btnSua.addActionListener(btnSua_Click());
         MaterialDesign.materialButton(btnSua);
         funcPanel.add(btnSua);
 
         btnXoa = new JButton("Xoá");
         btnXoa.setPreferredSize(btnThem.getPreferredSize());
+        btnXoa.addActionListener(btnXoa_Click());
         MaterialDesign.materialButton(btnXoa);
         funcPanel.add(btnXoa);
 
@@ -72,7 +78,6 @@ public class QuanLyBangDiaTabbed extends JPanel {
         this.add(box, BorderLayout.CENTER);
 
         danhSachBangDia = new DanhSachBangDia();
-        danhSachBangDia.loadData();
         bangDiaTableModel = new BangDiaTableModel(danhSachBangDia.getAll());
 
         tblBangDia = new JTable(bangDiaTableModel);
@@ -80,5 +85,70 @@ public class QuanLyBangDiaTabbed extends JPanel {
         box.add(new JScrollPane(tblBangDia), BorderLayout.CENTER);
     }
 
+    private void refreshTable(){
+        tblBangDia.revalidate();
+        tblBangDia.repaint();
+    }
 
+    private void thongBao(String message){
+        JOptionPane.showMessageDialog(rootComponent, message, "Thông báo", JOptionPane.WARNING_MESSAGE);
+    }
+
+    private ActionListener btnThem_Click(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO lấy dữ liệu từ popup
+
+
+                BangDia bangDia = new BangDia(
+                        "d02",
+                        "Nhạc trẻ",
+                        "Nhạc",
+                        true,
+                        "ABC",
+                        "ABC",
+                        5000.0
+                );
+
+                if (danhSachBangDia.them(bangDia)){
+                    refreshTable();
+                }else{
+                    thongBao("Thêm băng đĩa không thành công");
+                }
+            }
+        };
+    }
+
+    private ActionListener btnSua_Click(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        };
+    }
+
+    private ActionListener btnXoa_Click(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String maBangDia = bangDiaTableModel.getValueAt(tblBangDia.getSelectedRow(), 0).toString();
+                String tenBangDia = bangDiaTableModel.getValueAt(tblBangDia.getSelectedRow(), 1).toString();
+
+                int selected = JOptionPane.showConfirmDialog(
+                        rootComponent,
+                        String.format("Bạn có muốn xoá băng đĩa này không?\nTên băng đĩa: %s", tenBangDia),
+                        "Cảnh báo",
+                        JOptionPane.WARNING_MESSAGE,
+                        JOptionPane.OK_CANCEL_OPTION
+                );
+
+                if (selected == JOptionPane.OK_OPTION){
+                    danhSachBangDia.xoa(maBangDia);
+                    refreshTable();
+                }
+            }
+        };
+    }
 }

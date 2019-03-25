@@ -118,6 +118,9 @@ public class DangNhap extends JFrame {
         lblBanQuyen.setForeground(Values.COLOR_TEXT);
         lblBanQuyen.setHorizontalAlignment(SwingConstants.CENTER);
         bottomPanel.add(lblBanQuyen, BorderLayout.CENTER);
+
+        JRootPane rootPane = SwingUtilities.getRootPane(rootComponent);
+        rootPane.setDefaultButton(btnDangNhap);
     }
 
     private void inputError(JTextField txt, String message){
@@ -173,6 +176,8 @@ public class DangNhap extends JFrame {
                     new MainForm();
                 }else{
                     thongBao("Sai tên đăng nhập hoặc mật khẩu");
+                    txtTenNguoiDung.requestFocus();
+                    txtTenNguoiDung.selectAll();
                 }
             }
         };

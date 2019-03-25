@@ -14,14 +14,14 @@ public class DataBaseUtils {
 
     private Connection _connection;
 
-    public Object excuteQueryWrite(String sql){
+    public PreparedStatement excuteQueryWrite(String sql){
         try {
             PreparedStatement ps = _connection.prepareStatement(sql);
-            return ps.executeUpdate()>0;
+            return ps;
         }catch (Exception e){
 
         }
-        return false;
+        return null;
     }
 
     public ResultSet excuteQueryRead(String sql){

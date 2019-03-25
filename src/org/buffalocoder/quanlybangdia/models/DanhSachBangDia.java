@@ -8,10 +8,6 @@ public class DanhSachBangDia {
     private ArrayList<BangDia> bangDias;
 
     public DanhSachBangDia(){
-        bangDias = new ArrayList<BangDia>();
-    }
-
-    public void loadData(){
         bangDias = BangDiaDAO.getInstance().getBangDias();
     }
 
@@ -24,7 +20,7 @@ public class DanhSachBangDia {
             return false;
 
         if (bangDias.add(bangDia)){
-            // thêm băng đĩa vào db
+            BangDiaDAO.getInstance().themBangDia(bangDia);
             return true;
         }
 
@@ -38,7 +34,7 @@ public class DanhSachBangDia {
             return false;
 
         if (bangDias.remove(bangDia)){
-            // xoá băng đĩa trong db
+            BangDiaDAO.getInstance().xoaBangDia(maBangDia);
             return true;
         }
 
