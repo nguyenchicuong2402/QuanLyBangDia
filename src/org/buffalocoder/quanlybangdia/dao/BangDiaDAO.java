@@ -5,7 +5,7 @@ import org.buffalocoder.quanlybangdia.models.BangDia;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class BangDiaDB {
+public class BangDiaDAO {
     public ArrayList<BangDia> getAllBangDia() {
         ArrayList<BangDia> dsBangDia = new ArrayList<BangDia>();
 
@@ -22,7 +22,7 @@ public class BangDiaDB {
                 double donGia = rs.getDouble("DONGIA");
                 boolean tinhTrang = rs.getBoolean("TINHTRANG");
                 String theLoai = rs.getString("THELOAI");
-// BangDia(String maBangDia, String tenBangDia, String theLoai, boolean tinhTrang, String hangSanXuat, String ghiChu, Double donGia)
+
                 BangDia bd = new BangDia(maBD, tenBD, theLoai, tinhTrang, hangSX, ghiChu, donGia);
                 dsBangDia.add(bd);
             }
@@ -52,6 +52,7 @@ public class BangDiaDB {
         }
         return false;
     }
+
     public boolean xoaDatabase(String maBD){
         Connection conn = DBConnection.getConnection();
         String sql = "DELETE FROM BANGDIA WHERE MABD =" + maBD;

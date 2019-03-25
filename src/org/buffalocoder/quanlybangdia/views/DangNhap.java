@@ -1,5 +1,7 @@
 package org.buffalocoder.quanlybangdia.views;
 
+import org.buffalocoder.quanlybangdia.dao.TaiKhoanDAO;
+import org.buffalocoder.quanlybangdia.models.TaiKhoan;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.utils.Values;
 
@@ -147,19 +149,20 @@ public class DangNhap extends JFrame {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String username = txtTenNguoiDung.getText().trim();
-                String password = txtMatKhau.getText().trim();
+                String tenTaiKhoan = txtTenNguoiDung.getText().trim();
+                String matKhau = txtMatKhau.getText().trim();
 
-                if (username.isEmpty()){
+                if (tenTaiKhoan.isEmpty()){
                     inputError(txtTenNguoiDung, "Vui lòng nhập tên người dùng");
                     return;
-                }else if (password.isEmpty()){
+                }else if (matKhau.isEmpty()){
                     inputError(txtMatKhau, "Vui lòng nhập mật khẩu");
                     return;
                 }
 
-                // TODO kiểm tra đăng nhập
-                if (username.equals("admin") && password.equals("123")){
+                TaiKhoan taiKhoan = TaiKhoanDAO.getInstance().getTaiKhoan(tenTaiKhoan);
+
+                if (tenTaiKhoan.equals(taiKhoan.getTenTaiKhoan()) && matKhau.equals(taiKhoan.getMatKhau())){
                     rootComponent.setVisible(false);
                     new MainForm();
                 }
