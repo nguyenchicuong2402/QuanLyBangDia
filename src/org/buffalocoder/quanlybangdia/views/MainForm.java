@@ -10,9 +10,10 @@ import org.buffalocoder.quanlybangdia.views.tabbed.*;
 
 public class MainForm extends JFrame {
     //========== CONSTANT ==========//
-    final int WIDTH = 1200;
-    final int HEIGHT = 800;
-    final String TITLE = "Quản lý băng đĩa";
+    private final int WIDTH = 1200;
+    private final int HEIGHT = 800;
+    private final String TITLE = "Quản lý băng đĩa";
+    private final boolean IS_ADMIN = DangNhap.taiKhoan.getLoaiTaiKhoan() == 1;
 
     //========= UI ===========//
     private JPanel mainPanel, topPanel, contentPanel, userPanel, menuPanel;
@@ -38,6 +39,7 @@ public class MainForm extends JFrame {
 
         // menu panel
         menuPanel = new JPanel();
+        menuPanel.setBorder(BorderFactory.createEmptyBorder());
         topPanel.add(menuPanel);
 
         menuBar = new JMenuBar();
@@ -61,6 +63,8 @@ public class MainForm extends JFrame {
 
         /*========== MENU PANEL =========*/
         contentPanel = new JPanel(new BorderLayout());
+        contentPanel.setBackground(Values.COLOR_SECONDARY);
+        contentPanel.setBorder(BorderFactory.createEmptyBorder());
         mainPanel.add(contentPanel, BorderLayout.CENTER);
 
         // custom tabbed panel
@@ -77,9 +81,12 @@ public class MainForm extends JFrame {
         menuTabbed.setFont(Values.FONT_PLAIN_DEFAULT);
         menuTabbed.addTab("Trang chủ", new TrangChuTabbed());
         menuTabbed.addTab("Cho thuê", new QuanLyChoThueTabbed())  ;
-        menuTabbed.addTab("Quản lý băng đĩa", new QuanLyBangDiaTabbed());
+        menuTabbed.addTab(IS_ADMIN ? "Quản lý băng đĩa" : "Danh sách băng đĩa", new QuanLyBangDiaTabbed());
         menuTabbed.addTab("Quản lý khách hàng", new QuanLyKhachHangTabbed());
-        menuTabbed.addTab("Quản lý nhân viên", new QuanLyNhanVienTabbed());
+
+        if (IS_ADMIN)
+            menuTabbed.addTab("Quản lý nhân viên", new QuanLyNhanVienTabbed());
+
         menuTabbed.addTab("Thống kê", new ThongKeTabbed());
         menuTabbed.addTab("Cài đặt", new CaiDatTabbed());
 

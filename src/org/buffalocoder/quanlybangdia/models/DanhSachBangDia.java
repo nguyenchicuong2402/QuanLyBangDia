@@ -5,9 +5,13 @@ import org.buffalocoder.quanlybangdia.dao.BangDiaDAO;
 import java.util.ArrayList;
 
 public class DanhSachBangDia {
-    private ArrayList<BangDia> bangDias;
+    private ArrayList<BangDia> bangDias = null;
 
     public DanhSachBangDia(){
+        loadData();
+    }
+
+    private void loadData(){
         bangDias = BangDiaDAO.getInstance().getBangDias();
     }
 
@@ -46,10 +50,8 @@ public class DanhSachBangDia {
             if (index == -1)
                 return false;
 
-            if (bangDias.set(index, bangDia) != null){
-                // update thông tin băng đĩa trong db
-                return true;
-            }
+            if (BangDiaDAO.getInstance().suaBangDia(bangDia))
+                bangDias.set(index, bangDia);
         }
 
         return false;

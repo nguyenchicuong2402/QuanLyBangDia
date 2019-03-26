@@ -5,6 +5,7 @@ import org.buffalocoder.quanlybangdia.models.DanhSachBangDia;
 import org.buffalocoder.quanlybangdia.models.tablemodel.BangDiaTableModel;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.utils.Values;
+import org.buffalocoder.quanlybangdia.views.DangNhap;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
@@ -16,11 +17,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class QuanLyBangDiaTabbed extends JPanel {
+    private final boolean IS_ADMIN = DangNhap.taiKhoan.getLoaiTaiKhoan() == 1;
+
     private JTable tblBangDia;
     private JPanel topPanel, funcPanel, searchPanel;
     private JButton btnThem, btnXoa, btnSua, btnTimKiem;
     private JTextField txtTuKhoa;
-    private TableRowSorter<TableModel> sorter;
     private BangDiaTableModel bangDiaTableModel;
     private DanhSachBangDia danhSachBangDia;
     private final Component rootComponent = this;
@@ -39,7 +41,8 @@ public class QuanLyBangDiaTabbed extends JPanel {
         // chức năng
         funcPanel = new JPanel();
         funcPanel.setBackground(Values.COLOR_BACKGROUND);
-        topPanel.add(funcPanel, BorderLayout.WEST);
+        if (IS_ADMIN)
+            topPanel.add(funcPanel, BorderLayout.WEST);
 
         btnThem = new JButton("Thêm");
         btnThem.setPreferredSize(new Dimension(90, 40));
@@ -66,14 +69,13 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
         txtTuKhoa = new JTextField();
         txtTuKhoa.setPreferredSize(new Dimension(300, 40));
-        txtTuKhoa.addKeyListener(txtTuKhoa_Changed());
         MaterialDesign.materialTextField(txtTuKhoa);
-        searchPanel.add(txtTuKhoa);
+        searchPanel.add(txtTuKhoa, BorderLayout.CENTER);
 
         btnTimKiem = new JButton("Tìm kiếm");
         btnTimKiem.setPreferredSize(btnThem.getPreferredSize());
         MaterialDesign.materialButton(btnTimKiem);
-        searchPanel.add(btnTimKiem);
+        searchPanel.add(btnTimKiem, BorderLayout.EAST);
 
         //table
         Box box = Box.createVerticalBox();
@@ -83,12 +85,12 @@ public class QuanLyBangDiaTabbed extends JPanel {
         danhSachBangDia = new DanhSachBangDia();
         bangDiaTableModel = new BangDiaTableModel(danhSachBangDia.getAll());
 
-        sorter = new TableRowSorter<>(bangDiaTableModel);
-
         tblBangDia = new JTable(bangDiaTableModel);
-        tblBangDia.setRowSorter(sorter);
         MaterialDesign.materialTable(tblBangDia);
         box.add(new JScrollPane(tblBangDia), BorderLayout.CENTER);
+
+        // phân quyền
+
     }
 
     private void refreshTable(){
@@ -100,22 +102,6 @@ public class QuanLyBangDiaTabbed extends JPanel {
         JOptionPane.showMessageDialog(rootComponent, message, "Thông báo", JOptionPane.WARNING_MESSAGE);
     }
 
-    private void filterTableBangDia(String word) {
-        if (word.isEmpty())
-            sorter.setRowFilter(null);
-        else {
-            try{
-                RowFilter<Object, Object> filter = new RowFilter<Object, Object>() {
-                    @Override
-                    public boolean include(Entry<?, ?> entry) {
-                        return ((String)entry.getValue(1)).equalsIgnoreCase(word);
-                    }
-                };
-                sorter.setRowFilter(filter);
-            }catch (NumberFormatException e){}
-        }
-    }
-
     private ActionListener btnThem_Click(){
         return new ActionListener() {
             @Override
@@ -124,7 +110,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
 
                 BangDia bangDia = new BangDia(
-                        "d02",
+                        "BD00010",
                         "Nhạc trẻ",
                         "Nhạc",
                         true,
@@ -147,7 +133,31 @@ public class QuanLyBangDiaTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int index = tblBangDia.getSelectedRow();
 
+                if (index == -1){
+                    thongBao("Vui lòng chọn băng đĩa cần sửa");
+                    return;
+                }
+
+                // TODO lấy dữ liệu từ popup
+
+                BangDia bangDia = new BangDia(
+                        "BD00010",
+                        "Nhạc Sơn Tùng",
+                        "Nhạc",
+                        true,
+                        "ABC",
+                        "ABC",
+                        5000.0,
+                        10
+                );
+
+                if (danhSachBangDia.sua(bangDia)){
+                    refreshTable();
+                }else{
+                    thongBao("Thay đổi băng đĩa không thành công");
+                }
             }
         };
     }
@@ -156,8 +166,15 @@ public class QuanLyBangDiaTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String maBangDia = bangDiaTableModel.getValueAt(tblBangDia.getSelectedRow(), 0).toString();
-                String tenBangDia = bangDiaTableModel.getValueAt(tblBangDia.getSelectedRow(), 1).toString();
+                int index = tblBangDia.getSelectedRow();
+
+                if (index == -1){
+                    thongBao("Vui lòng chọn băng đĩa cần xoá");
+                    return;
+                }
+
+                String maBangDia = bangDiaTableModel.getValueAt(index, 0).toString();
+                String tenBangDia = bangDiaTableModel.getValueAt(index, 1).toString();
 
                 int selected = JOptionPane.showConfirmDialog(
                         rootComponent,
@@ -167,27 +184,8 @@ public class QuanLyBangDiaTabbed extends JPanel {
                         JOptionPane.OK_CANCEL_OPTION
                 );
 
-                if (selected == JOptionPane.OK_OPTION){
-                    danhSachBangDia.xoa(maBangDia);
+                if ((selected == JOptionPane.OK_OPTION) && danhSachBangDia.xoa(maBangDia))
                     refreshTable();
-                }
-            }
-        };
-    }
-
-    private KeyListener txtTuKhoa_Changed(){
-        return new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                filterTableBangDia(txtTuKhoa.getText());
             }
         };
     }

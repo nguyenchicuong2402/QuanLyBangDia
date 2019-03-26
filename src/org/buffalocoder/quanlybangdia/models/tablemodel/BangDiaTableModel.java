@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class BangDiaTableModel extends AbstractTableModel {
-    private final ArrayList<BangDia> bangDiaList;
+    private final ArrayList<BangDia> bangDias;
 
     private final String[] columnNames = new String[] {
             "Mã BĐ", "Tên băng đĩa", "Thể loại", "Tình trạng", "Đơn giá", "Hãng sản xuất", "Ghi chú"
     };
 
-    public BangDiaTableModel(ArrayList<BangDia> bangDiaList) {
-        this.bangDiaList = bangDiaList;
+    public BangDiaTableModel(ArrayList<BangDia> bangDias) {
+        this.bangDias = bangDias;
     }
 
     @Override
@@ -33,13 +33,13 @@ public class BangDiaTableModel extends AbstractTableModel {
     @Override
     public int getRowCount()
     {
-        return bangDiaList.size();
+        return bangDias.size();
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex)
     {
-        BangDia row = bangDiaList.get(rowIndex);
+        BangDia row = bangDias.get(rowIndex);
 
         switch (columnIndex){
             case 0: return row.getMaBangDia();

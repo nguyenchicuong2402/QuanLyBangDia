@@ -108,4 +108,8 @@ public class BangDiaDAO {
             return false;
         }
     }
+
+    public boolean suaBangDia(BangDia bangDia){
+        return xoaBangDia(bangDia.getMaBangDia()) && themBangDia(bangDia);
+    }
 }
