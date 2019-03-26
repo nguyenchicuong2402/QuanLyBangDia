@@ -1,6 +1,7 @@
 package org.buffalocoder.quanlybangdia.utils;
 
 import java.awt.*;
+import java.text.SimpleDateFormat;
 
 public class Values {
     /*========== COLOR ==========*/
@@ -18,4 +19,6 @@ public class Values {
     public static final Font FONT_PLAIN_DEFAULT = new Font(FONT_NAME, Font.PLAIN, 18);
     public static final Font FONT_TABLE_HEADER = new Font(FONT_NAME, Font.PLAIN, 18);
     public static final Font FONT_TITLE= new Font(FONT_NAME, Font.PLAIN, 30);
+
+    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
 }

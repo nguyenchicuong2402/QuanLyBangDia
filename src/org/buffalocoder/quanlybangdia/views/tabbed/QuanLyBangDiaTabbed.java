@@ -88,9 +88,6 @@ public class QuanLyBangDiaTabbed extends JPanel {
         tblBangDia = new JTable(bangDiaTableModel);
         MaterialDesign.materialTable(tblBangDia);
         box.add(new JScrollPane(tblBangDia), BorderLayout.CENTER);
-
-        // phân quyền
-
     }
 
     private void refreshTable(){

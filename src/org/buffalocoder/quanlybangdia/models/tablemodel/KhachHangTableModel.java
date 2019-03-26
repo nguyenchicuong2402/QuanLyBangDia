@@ -1,6 +1,8 @@
 package org.buffalocoder.quanlybangdia.models.tablemodel;
 
 import org.buffalocoder.quanlybangdia.models.KhachHang;
+import org.buffalocoder.quanlybangdia.utils.Values;
+
 import javax.swing.table.AbstractTableModel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,27 +42,15 @@ public class KhachHangTableModel extends AbstractTableModel {
     {
         KhachHang row = khachHangs.get(rowIndex);
 
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-YYYY");
-
         switch (columnIndex){
             case 0: return row.getMaKH();
             case 1: return row.getHoTen();
             case 2: return row.isGioiTinh() ? "Nam" : "Nữ";
-            case 3:
-                try {
-                    return df.parse(row.getNgaySinh().toString());
-                } catch (ParseException e) {
-                    return "NaN";
-                }
+            case 3: return Values.DATE_FORMAT.format(row.getNgaySinh());
             case 4: return row.getcMND();
             case 5: return row.getSoDienThoai();
             case 6: return row.getDiaChi();
-            case 7:
-                try {
-                    return df.parse(row.getNgaySinh().toString());
-                } catch (ParseException e) {
-                    return "NaN";
-                }
+            case 7: return Values.DATE_FORMAT.format(row.getNgayHetHan());
         }
 
         return null;

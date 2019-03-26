@@ -39,6 +39,9 @@ public class BangDiaTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex)
     {
+        if (rowIndex > getRowCount())
+            return null;
+
         BangDia row = bangDias.get(rowIndex);
 
         switch (columnIndex){

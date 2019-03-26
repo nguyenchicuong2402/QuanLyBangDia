@@ -8,7 +8,7 @@ public class DanhSachKhachHang {
     private ArrayList<KhachHang> khachHangs;
 
     public DanhSachKhachHang(){
-        khachHangs = new ArrayList<>();
+        loadData();
     }
 
     public ArrayList<KhachHang> getAll(){
@@ -17,5 +17,12 @@ public class DanhSachKhachHang {
 
     public void loadData(){
         khachHangs = KhachHangDAO.getInstance().getKhachHangs();
+    }
+
+    public boolean them(KhachHang khachHang){
+        if (khachHang == null && khachHangs.contains(khachHang))
+            return false;
+
+        return (khachHangs.add(khachHang)) && (KhachHangDAO.getInstance().themKhachHang(khachHang));
     }
 }

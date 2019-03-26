@@ -23,11 +23,7 @@ public class DanhSachBangDia {
         if(bangDia == null || bangDias.contains(bangDia))
             return false;
 
-        if (bangDias.add(bangDia) && BangDiaDAO.getInstance().themBangDia(bangDia)){
-            return true;
-        }
-
-        return false;
+        return  (bangDias.add(bangDia) && BangDiaDAO.getInstance().themBangDia(bangDia));
     }
 
     public boolean xoa(String maBangDia){
@@ -36,11 +32,7 @@ public class DanhSachBangDia {
         if (bangDia == null)
             return false;
 
-        if (bangDias.remove(bangDia) && BangDiaDAO.getInstance().xoaBangDia(maBangDia)){
-            return true;
-        }
-
-        return false;
+        return (bangDias.remove(bangDia) && BangDiaDAO.getInstance().xoaBangDia(maBangDia));
     }
 
     public boolean sua(BangDia bangDia){
@@ -51,7 +43,7 @@ public class DanhSachBangDia {
                 return false;
 
             if (BangDiaDAO.getInstance().suaBangDia(bangDia))
-                bangDias.set(index, bangDia);
+                return bangDias.set(index, bangDia) != null;
         }
 
         return false;

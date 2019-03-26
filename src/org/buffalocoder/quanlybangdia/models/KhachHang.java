@@ -36,6 +36,11 @@ public class KhachHang extends ThongTinCaNhan{
         this.ngayHetHan = ngayHetHan;
     }
 
+    public KhachHang(String cMND, String hoTen, boolean gioiTinh, String soDienThoai, String diaChi, Date ngaySinh, String maKH) {
+        super(cMND, hoTen, gioiTinh, soDienThoai, diaChi, ngaySinh);
+        this.maKH = maKH;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

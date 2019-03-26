@@ -110,6 +110,6 @@ public class BangDiaDAO {
     }
 
     public boolean suaBangDia(BangDia bangDia){
-        return xoaBangDia(bangDia.getMaBangDia()) && themBangDia(bangDia);
+       return xoaBangDia(bangDia.getMaBangDia()) && themBangDia(bangDia);
     }
 }

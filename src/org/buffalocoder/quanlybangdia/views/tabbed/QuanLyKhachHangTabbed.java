@@ -1,6 +1,7 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
 import org.buffalocoder.quanlybangdia.models.DanhSachKhachHang;
+import org.buffalocoder.quanlybangdia.models.KhachHang;
 import org.buffalocoder.quanlybangdia.models.tablemodel.KhachHangTableModel;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.utils.Values;
@@ -9,6 +10,9 @@ import javax.swing.*;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Date;
 
 public class QuanLyKhachHangTabbed extends JPanel {
     private JTable tblKhachHang;
@@ -18,6 +22,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
     private TableRowSorter<TableModel> sorter;
     private KhachHangTableModel khachHangTableModel;
     private DanhSachKhachHang danhSachKhachHang;
+    private Component rootComponent = this;
 
     public QuanLyKhachHangTabbed(){
         this.setLayout(new BorderLayout());
@@ -37,6 +42,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
 
         btnThem = new JButton("Thêm");
         btnThem.setPreferredSize(new Dimension(90, 40));
+        btnThem.addActionListener(btnThem_Click());
         MaterialDesign.materialButton(btnThem);
         funcPanel.add(btnThem);
 
@@ -77,5 +83,36 @@ public class QuanLyKhachHangTabbed extends JPanel {
         box.add(new JScrollPane(tblKhachHang));
 
         this.add(box, BorderLayout.CENTER);
+    }
+
+    private void refreshTable(){
+        tblKhachHang.revalidate();
+        tblKhachHang.repaint();
+    }
+
+    private void thongBao(String message){
+        JOptionPane.showMessageDialog(rootComponent, message, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private ActionListener btnThem_Click(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO lấy dữ liệu nhập vào
+
+                KhachHang khachHang = new KhachHang(
+                        "222222222",
+                        "Nguyễn Văn A",
+                        true,
+                        "0123456789",
+                        "IUH",
+                        Date.valueOf("1999-12-12"),
+                        "222222222"
+                );
+
+                if (danhSachKhachHang.them(khachHang))
+                    refreshTable();
+            }
+        };
     }
 }

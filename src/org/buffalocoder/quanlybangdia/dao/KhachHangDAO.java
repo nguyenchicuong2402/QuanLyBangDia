@@ -2,6 +2,7 @@ package org.buffalocoder.quanlybangdia.dao;
 
 import org.buffalocoder.quanlybangdia.models.KhachHang;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -63,6 +64,43 @@ public class KhachHangDAO {
 
         return khachHangs;
     }
+
+    public boolean themKhachHang(KhachHang khachHang){
+        String sql = "INSERT INTO VIEW_THONGTINKHACHHANG (CMND, MAKH, HOTEN, DIENTHOAI, DIACHI, GIOITINH, NGAYSINH) VALUES (?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
+
+            ps.setString(1, khachHang.getcMND());
+            ps.setString(2, khachHang.getMaKH());
+            ps.setString(3, khachHang.getHoTen());
+            ps.setString(4, khachHang.getSoDienThoai());
+            ps.setString(5, khachHang.getDiaChi());
+            ps.setInt(6, khachHang.isGioiTinh() ? 1 : 0);
+            ps.setDate(7, khachHang.getNgaySinh());
+
+            return ps.executeUpdate()>0;
+        }catch (Exception e){
+            System.out.println("[ERROR]: Thêm khách hàng vào DB");
+            return false;
+        }
+    }
+
+    public boolean xoaKhachHang(String maKhachHang){
+        String sql = String.format("DELETE FROM VIEW_THONGTINKHACHHANG WHERE CMND = ?");
+
+        try {
+            PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
+
+            ps.setString(1, maKhachHang);
+
+            return ps.executeUpdate()>0;
+        }catch (Exception e){
+            System.out.println("[ERROR]: Xoá Khách hàng trong DB");
+            return false;
+        }
+    }
+
+
 
     public static KhachHangDAO getInstance() {
         if(_instance == null) {
