@@ -1,7 +1,7 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
 import org.buffalocoder.quanlybangdia.models.HoaDon;
-import org.buffalocoder.quanlybangdia.models.tablemodel.HoaDonTableModel;
+//import org.buffalocoder.quanlybangdia.models.tablemodel.HoaDonTableModel;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.utils.Values;
 
@@ -53,10 +53,9 @@ public class QuanLyNhanVienTabbed extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 FromThemNhanVien panelthem= new FromThemNhanVien();
-                panelthem.setVisible(true);
+                panelthem.isShowing();
 
-                panelthem.repaint();
-                add(panelthem,BorderLayout.CENTER);
+
             }
 
             @Override

@@ -7,6 +7,8 @@ import javax.swing.*;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class QuanLyKhachHangTabbed extends JPanel {
     private JTable tblKhachHang;
@@ -35,6 +37,33 @@ public class QuanLyKhachHangTabbed extends JPanel {
         btnThem.setPreferredSize(new Dimension(90, 40));
         MaterialDesign.materialButton(btnThem);
         funcPanel.add(btnThem);
+        btnThem.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                fromkhachHang themkh = new fromkhachHang();
+                themkh.isShowing();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
 
         btnSua = new JButton("Sửa");
         btnSua.setPreferredSize(btnThem.getPreferredSize());

@@ -14,7 +14,7 @@ public class FromThemNhanVien extends JFrame {
     JLabel ngaySinh,maNV,mota,loaiNV;
     JTextField txtcMND,txthoTen,txtsoDienThoai,txtdiaChi,txtngaySinh,txtmaNV,txtMoTa,txtLoaiNV;
     JButton btnthêm;
-    JRadioButton gioitinh;
+    JRadioButton sex;
     public FromThemNhanVien(){
         setLayout(null);
         //setBackground();
@@ -28,7 +28,8 @@ public class FromThemNhanVien extends JFrame {
         mota=new JLabel("nhập mô tả");
         loaiNV=new JLabel("loại nhân viên");
         btnthêm= new JButton("thêm");
-
+        gioiTinh=new JLabel("giới tính");
+        sex= new JRadioButton("nữ");
 
         cMND.setBounds(20,20,100,25);
         add(cMND);
@@ -89,8 +90,14 @@ public class FromThemNhanVien extends JFrame {
         txtLoaiNV.setBounds(150,300,250,25);
         add(txtLoaiNV);
 
+
+        gioiTinh.setBounds(10,340,150,25);
+        add(gioiTinh);
+        sex.setBounds(150,340,250,25);
+        add(sex);
+
         MaterialDesign.materialButton(btnthêm);
-        btnthêm.setBounds(150,360,120,40);
+        btnthêm.setBounds(150,380,120,40);
         add(btnthêm);
 
 

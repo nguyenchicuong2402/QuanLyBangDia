@@ -11,10 +11,7 @@ import javax.swing.*;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 
 public class QuanLyBangDiaTabbed extends JPanel {
     private final boolean IS_ADMIN = DangNhap.taiKhoan.getLoaiTaiKhoan() == 1;
@@ -50,6 +47,33 @@ public class QuanLyBangDiaTabbed extends JPanel {
         btnThem.addActionListener(btnThem_Click());
         MaterialDesign.materialButton(btnThem);
         funcPanel.add(btnThem);
+        btnThem.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                FromThemBangDia frombd= new FromThemBangDia();
+                frombd.isShowing();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
 
         btnSua = new JButton("Sửa");
         btnSua.setPreferredSize(btnThem.getPreferredSize());
