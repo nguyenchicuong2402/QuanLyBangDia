@@ -1,6 +1,7 @@
 package org.buffalocoder.quanlybangdia.dao;
 
 import org.buffalocoder.quanlybangdia.models.KhachHang;
+import org.buffalocoder.quanlybangdia.models.ThongTinCaNhan;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,19 +14,22 @@ public class KhachHangDAO {
     public KhachHang getKhachHang(String maKhachHang){
         KhachHang khachHang = null;
 
-        String sql = String.format("SELECT * FROM VIEW_THONGTINKHACHHANG WHERE MAKH = '%s'", maKhachHang);
+        String sql = String.format("SELECT * FROM KHACHHANG WHERE MAKH = '%s'", maKhachHang);
 
         try {
+
             ResultSet resultSet = DataBaseUtils.getInstance().excuteQueryRead(sql);
             resultSet.next();
 
+            ThongTinCaNhan thongTinCaNhan = ThongTinCaNhanDAO.getInstance().getThongTinCaNhan(resultSet.getString("CMND"));
+
             khachHang = new KhachHang(
-                    resultSet.getString("CMND"),
-                    resultSet.getString("HOTEN"),
-                    resultSet.getBoolean("GIOITINH"),
-                    resultSet.getString("DIENTHOAI"),
-                    resultSet.getString("DIACHI"),
-                    resultSet.getDate("NGAYSINH"),
+                    thongTinCaNhan.getcMND(),
+                    thongTinCaNhan.getHoTen(),
+                    thongTinCaNhan.isGioiTinh(),
+                    thongTinCaNhan.getSoDienThoai(),
+                    thongTinCaNhan.getDiaChi(),
+                    thongTinCaNhan.getNgaySinh(),
                     resultSet.getString("MAKH"),
                     resultSet.getDate("NGAYHETHAN")
             );
@@ -66,17 +70,24 @@ public class KhachHangDAO {
     }
 
     public boolean themKhachHang(KhachHang khachHang){
-        String sql = "INSERT INTO VIEW_THONGTINKHACHHANG (CMND, MAKH, HOTEN, DIENTHOAI, DIACHI, GIOITINH, NGAYSINH) VALUES (?,?,?,?,?,?,?)";
+        ThongTinCaNhan thongTinCaNhan = new ThongTinCaNhan(
+                khachHang.getcMND(),
+                khachHang.getHoTen(),
+                khachHang.isGioiTinh(),
+                khachHang.getSoDienThoai(),
+                khachHang.getDiaChi(),
+                khachHang.getNgaySinh()
+        );
+
+        if (!ThongTinCaNhanDAO.getInstance().themThongTinCaNhan(thongTinCaNhan))
+            return false;
+
+        String sql = "INSERT INTO KHACHHANG (MAKH, CMND) VALUES (?,?)";
         try {
             PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
 
-            ps.setString(1, khachHang.getcMND());
-            ps.setString(2, khachHang.getMaKH());
-            ps.setString(3, khachHang.getHoTen());
-            ps.setString(4, khachHang.getSoDienThoai());
-            ps.setString(5, khachHang.getDiaChi());
-            ps.setInt(6, khachHang.isGioiTinh() ? 1 : 0);
-            ps.setDate(7, khachHang.getNgaySinh());
+            ps.setString(1, khachHang.getMaKH());
+            ps.setString(2, khachHang.getcMND());
 
             return ps.executeUpdate()>0;
         }catch (Exception e){
@@ -86,21 +97,22 @@ public class KhachHangDAO {
     }
 
     public boolean xoaKhachHang(String maKhachHang){
-        String sql = String.format("DELETE FROM VIEW_THONGTINKHACHHANG WHERE CMND = ?");
+        String cmnd = getKhachHang(maKhachHang).getcMND();
+        String sql = "DELETE FROM KHACHHANG WHERE MAKH = ?";
 
         try {
             PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
 
             ps.setString(1, maKhachHang);
 
-            return ps.executeUpdate()>0;
+            if (ps.executeUpdate() > 0)
+                return ThongTinCaNhanDAO.getInstance().xoaThongTinCaNhan(cmnd);
+            else return false;
         }catch (Exception e){
             System.out.println("[ERROR]: Xoá Khách hàng trong DB");
             return false;
         }
     }
-
-
 
     public static KhachHangDAO getInstance() {
         if(_instance == null) {

@@ -3,13 +3,10 @@ package org.buffalocoder.quanlybangdia.models;
 import java.sql.Date;
 import java.util.Objects;
 
-public class HoaDon {
+public class HoaDon extends ChiTietHoaDon{
     private String maHoaDon;
     private KhachHang khachHang;
     private Date ngayLap;
-    private BangDia bangDia;
-    private int soNgayDuocMuon;
-    private int soLuong;
 
     public String getMaHoaDon() {
         return maHoaDon;
@@ -35,40 +32,24 @@ public class HoaDon {
         this.ngayLap = ngayLap;
     }
 
-    public BangDia getBangDia() {
-        return bangDia;
-    }
-
-    public void setBangDia(BangDia bangDia) {
-        this.bangDia = bangDia;
-    }
-
-    public int getSoNgayDuocMuon() {
-        return soNgayDuocMuon;
-    }
-
-    public void setSoNgayDuocMuon(int soNgayDuocMuon) {
-        this.soNgayDuocMuon = soNgayDuocMuon;
-    }
-
-    public int getSoLuong() {
-        return soLuong;
-    }
-
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
-    }
-
     public HoaDon() {
     }
 
-    public HoaDon(String maHoaDon, KhachHang khachHang, Date ngayLap, BangDia bangDia, int soNgayDuocMuon, int soLuong) {
+    public HoaDon(BangDia bangDia, int soNgayDuocMuon, int soLuong) {
+        super(bangDia, soNgayDuocMuon, soLuong);
+    }
+
+    public HoaDon(BangDia bangDia, int soNgayDuocMuon, int soLuong, String maHoaDon, KhachHang khachHang, Date ngayLap) {
+        super(bangDia, soNgayDuocMuon, soLuong);
         this.maHoaDon = maHoaDon;
         this.khachHang = khachHang;
         this.ngayLap = ngayLap;
-        this.bangDia = bangDia;
-        this.soNgayDuocMuon = soNgayDuocMuon;
-        this.soLuong = soLuong;
+    }
+
+    public HoaDon(BangDia bangDia, int soNgayDuocMuon, int soLuong, String maHoaDon, KhachHang khachHang) {
+        super(bangDia, soNgayDuocMuon, soLuong);
+        this.maHoaDon = maHoaDon;
+        this.khachHang = khachHang;
     }
 
     @Override
@@ -87,12 +68,9 @@ public class HoaDon {
     @Override
     public String toString() {
         return "HoaDon{" +
-                "maHoaDon=" + maHoaDon +
+                "maHoaDon='" + maHoaDon + '\'' +
                 ", khachHang=" + khachHang +
                 ", ngayLap=" + ngayLap +
-                ", bangDia=" + bangDia +
-                ", soNgayDuocMuon=" + soNgayDuocMuon +
-                ", soLuong=" + soLuong +
-                '}';
+                "} " + super.toString();
     }
 }

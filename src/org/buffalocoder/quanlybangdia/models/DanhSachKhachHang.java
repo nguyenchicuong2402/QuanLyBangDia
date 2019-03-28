@@ -23,6 +23,30 @@ public class DanhSachKhachHang {
         if (khachHang == null && khachHangs.contains(khachHang))
             return false;
 
-        return (khachHangs.add(khachHang)) && (KhachHangDAO.getInstance().themKhachHang(khachHang));
+        return (KhachHangDAO.getInstance().themKhachHang(khachHang)) && khachHangs.add(KhachHangDAO.getInstance().getKhachHang(khachHang.getMaKH()));
+    }
+
+    public boolean xoa(String maKhachHang){
+        KhachHang khachHang = khachHangs.get(tim(maKhachHang));
+
+        if (khachHang == null)
+            return false;
+
+        return KhachHangDAO.getInstance().xoaKhachHang(maKhachHang) && khachHangs.remove(khachHang);
+    }
+
+    public boolean sua(KhachHang khachHang){
+        if (khachHang == null && !khachHangs.contains(khachHang))
+            return false;
+
+        return xoa(khachHang.getMaKH()) && them(khachHang);
+    }
+
+    public int tim (String maKhachHang){
+        for (int i = 0; i < khachHangs.size(); i++)
+            if (khachHangs.get(i).getMaKH().equals(maKhachHang))
+                return i;
+
+        return -1;
     }
 }

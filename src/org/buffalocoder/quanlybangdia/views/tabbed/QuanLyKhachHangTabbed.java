@@ -48,11 +48,13 @@ public class QuanLyKhachHangTabbed extends JPanel {
 
         btnSua = new JButton("Sửa");
         btnSua.setPreferredSize(btnThem.getPreferredSize());
+        btnSua.addActionListener(btnSua_Click());
         MaterialDesign.materialButton(btnSua);
         funcPanel.add(btnSua);
 
         btnXoa = new JButton("Xoá");
         btnXoa.setPreferredSize(btnThem.getPreferredSize());
+        btnXoa.addActionListener(btnXoa_Click());
         MaterialDesign.materialButton(btnXoa);
         funcPanel.add(btnXoa);
 
@@ -72,7 +74,6 @@ public class QuanLyKhachHangTabbed extends JPanel {
         searchPanel.add(btnTimKiem);
 
         danhSachKhachHang = new DanhSachKhachHang();
-        danhSachKhachHang.loadData();
         khachHangTableModel = new KhachHangTableModel(danhSachKhachHang.getAll());
 
         Box box = Box.createVerticalBox();
@@ -107,11 +108,72 @@ public class QuanLyKhachHangTabbed extends JPanel {
                         "0123456789",
                         "IUH",
                         Date.valueOf("1999-12-12"),
-                        "222222222"
+                        "KH00002"
                 );
 
-                if (danhSachKhachHang.them(khachHang))
+                if (danhSachKhachHang.them(khachHang)){
                     refreshTable();
+                }else thongBao("Thêm khách hàng không thành công");
+            }
+        };
+    }
+
+    private ActionListener btnXoa_Click(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = tblKhachHang.getSelectedRow();
+
+                if (index == -1){
+                    thongBao("Vui lòng chọn khách hàng cần xoá");
+                    return;
+                }
+
+                String maKhachHang = khachHangTableModel.getValueAt(index, 0).toString();
+                String tenKhachHang = khachHangTableModel.getValueAt(index, 1).toString();
+
+                int selected = JOptionPane.showConfirmDialog(
+                        rootComponent,
+                        String.format("Bạn có muốn xoá khách hàng này không?\nTên khách hàng: %s", tenKhachHang),
+                        "Cảnh báo",
+                        JOptionPane.WARNING_MESSAGE,
+                        JOptionPane.OK_CANCEL_OPTION
+                );
+
+                if ((selected == JOptionPane.OK_OPTION) && danhSachKhachHang.xoa(maKhachHang))
+                    refreshTable();
+            }
+        };
+    }
+
+    private ActionListener btnSua_Click(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = tblKhachHang.getSelectedRow();
+
+                if (index == -1){
+                    thongBao("Vui lòng chọn khách hàng cần sửa");
+                    return;
+                }
+
+                // TODO lấy dữ liệu từ popup
+
+                KhachHang khachHang = new KhachHang(
+                        "222222222",
+                        "IUH",
+                        true,
+                        "0123456789",
+                        "IUH",
+                        Date.valueOf("1999-12-12"),
+                        "KH00002"
+                );
+
+                if (danhSachKhachHang.sua(khachHang)){
+                    refreshTable();
+                }else{
+                    thongBao("Thay đổi thông tin khách hàng không thành công");
+                }
             }
         };
     }

@@ -25,6 +25,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
     private JTextField txtTuKhoa;
     private BangDiaTableModel bangDiaTableModel;
     private DanhSachBangDia danhSachBangDia;
+    private TableRowSorter<TableModel> sorter;
     private final Component rootComponent = this;
 
     public QuanLyBangDiaTabbed(){
@@ -69,11 +70,13 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
         txtTuKhoa = new JTextField();
         txtTuKhoa.setPreferredSize(new Dimension(300, 40));
+        txtTuKhoa.addKeyListener(txtTuKhoa_Change());
         MaterialDesign.materialTextField(txtTuKhoa);
         searchPanel.add(txtTuKhoa, BorderLayout.CENTER);
 
         btnTimKiem = new JButton("Tìm kiếm");
         btnTimKiem.setPreferredSize(btnThem.getPreferredSize());
+        btnTimKiem.addActionListener(btnTimKiem_Click());
         MaterialDesign.materialButton(btnTimKiem);
         searchPanel.add(btnTimKiem, BorderLayout.EAST);
 
@@ -86,6 +89,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
         bangDiaTableModel = new BangDiaTableModel(danhSachBangDia.getAll());
 
         tblBangDia = new JTable(bangDiaTableModel);
+        tblBangDia.setRowSorter(sorter = new TableRowSorter<>(tblBangDia.getModel()));
         MaterialDesign.materialTable(tblBangDia);
         box.add(new JScrollPane(tblBangDia), BorderLayout.CENTER);
     }
@@ -93,6 +97,14 @@ public class QuanLyBangDiaTabbed extends JPanel {
     private void refreshTable(){
         tblBangDia.revalidate();
         tblBangDia.repaint();
+    }
+
+    private void filterTable(String filterText){
+        if (filterText.isEmpty())
+            sorter.setRowFilter(null);
+        else{
+            sorter.setRowFilter(RowFilter.regexFilter(filterText));
+        }
     }
 
     private void thongBao(String message){
@@ -183,6 +195,34 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
                 if ((selected == JOptionPane.OK_OPTION) && danhSachBangDia.xoa(maBangDia))
                     refreshTable();
+            }
+        };
+    }
+
+    private ActionListener btnTimKiem_Click(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                filterTable(txtTuKhoa.getText().trim());
+            }
+        };
+    }
+
+    private KeyListener txtTuKhoa_Change(){
+        return new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                filterTable(txtTuKhoa.getText().trim());
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                filterTable(txtTuKhoa.getText().trim());
             }
         };
     }

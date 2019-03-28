@@ -9,10 +9,10 @@ public class BangDiaDAO {
     private static BangDiaDAO _instance;
 
     public static BangDiaDAO getInstance() {
-        if(_instance == null) {
-            synchronized(BangDiaDAO.class) {
-                if(null == _instance) {
-                    _instance  = new BangDiaDAO();
+        if (_instance == null) {
+            synchronized (BangDiaDAO.class) {
+                if (null == _instance) {
+                    _instance = new BangDiaDAO();
                 }
             }
         }
@@ -27,9 +27,9 @@ public class BangDiaDAO {
         try {
             ResultSet resultSet = DataBaseUtils.getInstance().excuteQueryRead(sql);
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 BangDia bangDia = new BangDia(
-                        resultSet.getString("MABD") ,
+                        resultSet.getString("MABD"),
                         resultSet.getString("TENBD"),
                         resultSet.getString("THELOAI"),
                         resultSet.getBoolean("TINHTRANG"),
@@ -48,7 +48,7 @@ public class BangDiaDAO {
         return bangDias;
     }
 
-    public BangDia getBangDia(String maBangDia){
+    public BangDia getBangDia(String maBangDia) {
         BangDia bangDia = null;
 
         String sql = String.format("SELECT * FROM BANGDIA WHERE MABD = '%s'", maBangDia);
@@ -56,9 +56,9 @@ public class BangDiaDAO {
         try {
             ResultSet resultSet = DataBaseUtils.getInstance().excuteQueryRead(sql);
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 bangDia = new BangDia(
-                        resultSet.getString("MABD") ,
+                        resultSet.getString("MABD"),
                         resultSet.getString("TENBD"),
                         resultSet.getString("THELOAI"),
                         resultSet.getBoolean("TINHTRANG"),
@@ -75,7 +75,7 @@ public class BangDiaDAO {
         return bangDia;
     }
 
-    public boolean themBangDia(BangDia bangDia){
+    public boolean themBangDia(BangDia bangDia) {
         String sql = "INSERT INTO BANGDIA (MABD, TENBD, HANGSANXUAT, GHICHU, DONGIA, TINHTRANG, THELOAI, SOLUONGTON)" + "VALUES (?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
@@ -89,27 +89,25 @@ public class BangDiaDAO {
             ps.setString(7, bangDia.getTheLoai());
             ps.setInt(8, bangDia.getSoLuongTon());
 
-            return ps.executeUpdate()>0;
-        }catch (Exception e){
-            System.out.println("Thêm băng đĩa lỗi");
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.out.println("[ERROR]Thêm băng đĩa");
             return false;
         }
     }
 
-    public boolean xoaBangDia(String maBangDia){
-        String sql = String.format("DELETE FROM BANGDIA WHERE MABD = '%s'", maBangDia);
+    public boolean xoaBangDia(String maBangDia) {
+        String sql = "DELETE FROM BANGDIA WHERE MABD = ?";
 
         try {
             PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
 
-            return ps.executeUpdate()>0;
-        }catch (Exception e){
-            System.out.println("Xoá băng đĩa lỗi");
+            ps.setString(1, maBangDia);
+
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.out.println("[ERROR]: Xoá băng đĩa");
             return false;
         }
-    }
-
-    public boolean suaBangDia(BangDia bangDia){
-       return xoaBangDia(bangDia.getMaBangDia()) && themBangDia(bangDia);
     }
 }

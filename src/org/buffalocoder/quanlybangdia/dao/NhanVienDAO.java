@@ -1,8 +1,9 @@
 package org.buffalocoder.quanlybangdia.dao;
 
-import jdk.swing.interop.SwingInterOpUtils;
 import org.buffalocoder.quanlybangdia.models.NhanVien;
+import org.buffalocoder.quanlybangdia.models.ThongTinCaNhan;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -63,6 +64,52 @@ public class NhanVienDAO {
         }
 
         return nhanViens;
+    }
+
+    public boolean themNhanVien(NhanVien nhanVien){
+        ThongTinCaNhan thongTinCaNhan = new ThongTinCaNhan(
+                nhanVien.getcMND(),
+                nhanVien.getHoTen(),
+                nhanVien.isGioiTinh(),
+                nhanVien.getSoDienThoai(),
+                nhanVien.getDiaChi(),
+                nhanVien.getNgaySinh()
+        );
+
+        if (!ThongTinCaNhanDAO.getInstance().themThongTinCaNhan(thongTinCaNhan))
+            return false;
+
+        String sql = "INSERT INTO NHANVIEN (MANV, CMND, MOTA) VALUES (?,?,?)";
+        try {
+            PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
+
+            ps.setString(1, nhanVien.getMaNhanVien());
+            ps.setString(2, nhanVien.getcMND());
+            ps.setString(3, nhanVien.getMoTa());
+
+            return ps.executeUpdate()>0;
+        }catch (Exception e){
+            System.out.println("[ERROR]: Thêm nhân viên");
+            return false;
+        }
+    }
+
+    public boolean xoaNhanVien(String maNhanVien){
+        String cmnd = getNhanVien(maNhanVien).getcMND();
+        String sql = "DELETE FROM NHANVIEN WHERE MANV = ?";
+
+        try {
+            PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
+
+            ps.setString(1, maNhanVien);
+
+            if (ps.executeUpdate() > 0)
+                return ThongTinCaNhanDAO.getInstance().xoaThongTinCaNhan(cmnd);
+            else return false;
+        }catch (Exception e){
+            System.out.println("[ERROR]: Xoá nhân viên");
+            return false;
+        }
     }
 
     public static NhanVienDAO getInstance() {

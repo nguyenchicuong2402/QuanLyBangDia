@@ -27,7 +27,7 @@ public class DanhSachBangDia {
     }
 
     public boolean xoa(String maBangDia){
-        BangDia bangDia = tim(maBangDia);
+        BangDia bangDia = bangDias.get(tim(maBangDia));
 
         if (bangDia == null)
             return false;
@@ -36,32 +36,14 @@ public class DanhSachBangDia {
     }
 
     public boolean sua(BangDia bangDia){
-        if (bangDia != null){
-            int index = timVitri(bangDia.getMaBangDia());
-
-            if (index == -1)
-                return false;
-
-            if (BangDiaDAO.getInstance().suaBangDia(bangDia))
-                return bangDias.set(index, bangDia) != null;
-        }
-
-        return false;
+        return xoa(bangDia.getMaBangDia()) && them(bangDia);
     }
 
-    private int timVitri(String maBangDia){
+    private int tim(String maBangDia){
         for (int i = 0; i < bangDias.size(); i++)
             if (bangDias.get(i).getMaBangDia().equals(maBangDia))
                 return i;
 
         return -1;
-    }
-
-    public BangDia tim(String maBangDia){
-        for (BangDia bangDia: bangDias) {
-            if(bangDia.getMaBangDia().equals(maBangDia))
-                return bangDia;
-        }
-        return  null;
     }
 }

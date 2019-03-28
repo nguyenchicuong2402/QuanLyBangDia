@@ -7,6 +7,7 @@ public class MaterialDesign {
     public static void materialButton(JButton button){
         button.setBackground(Values.COLOR_PRIMARY);
         button.setForeground(Values.COLOR_TEXT);
+        button.setFont(Fonts.DEFAULT);
         button.setBorder(BorderFactory.createEmptyBorder());
     }
 
@@ -17,17 +18,22 @@ public class MaterialDesign {
     }
 
     public static void materialTable(JTable table){
-        table.setSelectionBackground(Values.COLOR_SECONDARY);
-        table.setSelectionForeground(Values.COLOR_TEXT);
-        table.getTableHeader().setBackground(Values.COLOR_PRIMARY);
-        table.getTableHeader().setForeground(Values.COLOR_TEXT);
-        table.getTableHeader().setFont(Values.FONT_TABLE_HEADER);
-        table.setFont(Values.FONT_PLAIN_DEFAULT);
-        table.setRowHeight(45);
+        table.setSelectionBackground(Colors.SECONDARY);
+        table.setSelectionForeground(Color.WHITE);
+
+        table.getTableHeader().setBackground(Colors.PRIMARY);
+        table.getTableHeader().setForeground(Color.WHITE);
+        table.getTableHeader().setFont(Fonts.TABLE_HEADER);
+
+        table.setFont(Fonts.DEFAULT);
+        table.setRowHeight(35);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.setAutoCreateRowSorter(true);
-
-        // không cho người dùng thay đổi cột
         table.getTableHeader().setReorderingAllowed(false);
+    }
+
+    public static void materialLabel (JLabel label){
+        label.setFont(Fonts.DEFAULT);
+        label.setForeground(Colors.TEXT);
     }
 }

@@ -2,6 +2,7 @@ package org.buffalocoder.quanlybangdia.views;
 
 import org.buffalocoder.quanlybangdia.dao.TaiKhoanDAO;
 import org.buffalocoder.quanlybangdia.models.TaiKhoan;
+import org.buffalocoder.quanlybangdia.utils.Fonts;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.utils.Values;
 
@@ -32,8 +33,9 @@ public class DangNhap extends JFrame {
         mainPanel.add(headerPanel, BorderLayout.NORTH);
 
         lblTieuDe = new JLabel("Đăng nhập");
-        lblTieuDe.setFont(Values.FONT_TITLE);
-        lblTieuDe.setForeground(Values.COLOR_TEXT);
+        MaterialDesign.materialLabel(lblTieuDe);
+        lblTieuDe.setFont(Fonts.TITLE);
+        lblTieuDe.setForeground(Color.WHITE);
         lblTieuDe.setHorizontalAlignment(SwingConstants.CENTER);
         headerPanel.add(lblTieuDe, BorderLayout.CENTER);
 
@@ -59,17 +61,20 @@ public class DangNhap extends JFrame {
         box.add(bx2);
         box.add(Box.createVerticalStrut(50));
 
-        JPanel panel = new JPanel(new GridLayout(1, 2, 10, 10));
-        Box bx3 = Box.createHorizontalBox();
+        Box bx3 = Box.createVerticalBox();
         box.add(bx3);
+
+        JPanel panel = new JPanel(new GridLayout(1, 2, 10, 10));
+        Box bx4 = Box.createHorizontalBox();
+        box.add(bx4);
         box.add(Box.createVerticalStrut(20));
         bx3.add(panel);
 
-        Box bx4 = Box.createVerticalBox();
-        box.add(bx4);
+        Box bx5 = Box.createVerticalBox();
+        box.add(bx5);
 
         lblTenNguoiDung = new JLabel("Tên người dùng");
-        lblTenNguoiDung.setFont(Values.FONT_PLAIN_DEFAULT);
+        MaterialDesign.materialLabel(lblTenNguoiDung);
         bx1.add(lblTenNguoiDung);
         bx1.add(Box.createVerticalStrut(10));
 
@@ -79,7 +84,7 @@ public class DangNhap extends JFrame {
         bx1.add(txtTenNguoiDung);
 
         lblMatKhau = new JLabel("Mật khẩu");
-        lblMatKhau.setFont(Values.FONT_PLAIN_DEFAULT);
+        MaterialDesign.materialLabel(lblMatKhau);
         bx2.add(lblMatKhau);
         bx2.add(Box.createVerticalStrut(10));
 
@@ -101,21 +106,20 @@ public class DangNhap extends JFrame {
         panel.add(btnDangNhap);
 
         lblLoi = new JLabel("");
+        MaterialDesign.materialLabel(lblLoi);
         lblLoi.setForeground(Values.COLOR_ERROR);
-        lblLoi.setFont(Values.FONT_PLAIN_DEFAULT);
         lblLoi.setPreferredSize(new Dimension(this.getWidth(), 30));
         lblLoi.setHorizontalAlignment(SwingConstants.CENTER);
         bx4.add(lblLoi);
 
         bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.setBackground(Values.COLOR_PRIMARY);
-        bottomPanel.setPreferredSize(new Dimension(100, 30));
+        bottomPanel.setPreferredSize(new Dimension(100, 40));
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
         lblBanQuyen = new JLabel("Copyright Buffalo Coder");
-        lblBanQuyen.setBorder(BorderFactory.createEmptyBorder());
-        lblBanQuyen.setFont(Values.FONT_PLAIN_DEFAULT);
-        lblBanQuyen.setForeground(Values.COLOR_TEXT);
+        MaterialDesign.materialLabel(lblBanQuyen);
+        lblBanQuyen.setForeground(Color.WHITE);
         lblBanQuyen.setHorizontalAlignment(SwingConstants.CENTER);
         bottomPanel.add(lblBanQuyen, BorderLayout.CENTER);
 
