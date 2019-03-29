@@ -110,4 +110,28 @@ public class BangDiaDAO {
             return false;
         }
     }
+
+    public boolean suaBangDia(BangDia bangDia){
+        String sql = "UPDATE BANGDIA SET " +
+                "TENBD = ?, HANGSANXUAT = ?, GHICHU = ?, DONGIA = ?, " +
+                "TINHTRANG = ?, THELOAI = ?, SOLUONGTON = ? WHERE MABD = ?";
+        try {
+            PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
+
+            ps.setString(1, bangDia.getTenBangDia());
+            ps.setString(2, bangDia.getHangSanXuat());
+            ps.setString(3, bangDia.getGhiChu());
+            ps.setDouble(4, bangDia.getDonGia());
+            ps.setBoolean(5, bangDia.isTinhTrang());
+            ps.setString(6, bangDia.getTheLoai());
+            ps.setInt(7, bangDia.getSoLuongTon());
+            ps.setString(8, bangDia.getMaBangDia());
+
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.out.println("[ERROR]Sửa băng đĩa");
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

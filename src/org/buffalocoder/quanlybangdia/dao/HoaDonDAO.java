@@ -39,8 +39,6 @@ public class HoaDonDAO {
                         resultSet.getDate("NGAYLAP")
                 );
 
-                System.out.println(hoaDon);
-
                 hoaDons.add(hoaDon);
             }
         } catch (SQLException e) {

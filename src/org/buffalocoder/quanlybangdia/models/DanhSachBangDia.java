@@ -36,7 +36,8 @@ public class DanhSachBangDia {
     }
 
     public boolean sua(BangDia bangDia){
-        return xoa(bangDia.getMaBangDia()) && them(bangDia);
+        return BangDiaDAO.getInstance().suaBangDia(bangDia)
+                && (bangDias.set(tim(bangDia.getMaBangDia()), bangDia) != null);
     }
 
     private int tim(String maBangDia){

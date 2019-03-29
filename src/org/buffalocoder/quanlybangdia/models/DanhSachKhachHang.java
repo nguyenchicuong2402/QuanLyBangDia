@@ -36,10 +36,8 @@ public class DanhSachKhachHang {
     }
 
     public boolean sua(KhachHang khachHang){
-        if (khachHang == null && !khachHangs.contains(khachHang))
-            return false;
-
-        return xoa(khachHang.getMaKH()) && them(khachHang);
+        return KhachHangDAO.getInstance().suaKhachHang(khachHang)
+                && (khachHangs.set(tim(khachHang.getMaKH()), khachHang) != null);
     }
 
     public int tim (String maKhachHang){

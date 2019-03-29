@@ -17,6 +17,12 @@ public class MaterialDesign {
         textField.setBorder(BorderFactory.createMatteBorder(0, 1, 2, 0, Values.COLOR_PRIMARY));
     }
 
+    public static void materialTextArea(JTextArea textArea){
+        textArea.setFont(Values.FONT_PLAIN_DEFAULT);
+        textArea.setBackground(Values.COLOR_BACKGROUND);
+        textArea.setBorder(BorderFactory.createMatteBorder(0, 1, 2, 0, Values.COLOR_PRIMARY));
+    }
+
     public static void materialTable(JTable table){
         table.setSelectionBackground(Colors.SECONDARY);
         table.setSelectionForeground(Color.WHITE);
@@ -35,5 +41,9 @@ public class MaterialDesign {
     public static void materialLabel (JLabel label){
         label.setFont(Fonts.DEFAULT);
         label.setForeground(Colors.TEXT);
+    }
+
+    public static void materialCheckBox(JCheckBox checkBox){
+        checkBox.setFont(Fonts.DEFAULT);
     }
 }

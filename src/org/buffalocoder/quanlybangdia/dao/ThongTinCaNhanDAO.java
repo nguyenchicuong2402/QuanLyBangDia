@@ -66,6 +66,27 @@ public class ThongTinCaNhanDAO {
         }
     }
 
+    public boolean suaThongTinCaNhan(ThongTinCaNhan thongTinCaNhan){
+        String sql = "UPDATE THONGTINCANHAN SET " +
+                "HOTEN = ?, DIENTHOAI = ?, DIACHI = ?, GIOITINH = ?, NGAYSINH = ? " +
+                "WHERE CMND = ?";
+        try {
+            PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
+
+            ps.setString(1, thongTinCaNhan.getHoTen());
+            ps.setString(2, thongTinCaNhan.getSoDienThoai());
+            ps.setString(3, thongTinCaNhan.getDiaChi());
+            ps.setInt(4, thongTinCaNhan.isGioiTinh() ? 1 : 0);
+            ps.setDate(5, thongTinCaNhan.getNgaySinh());
+            ps.setString(6, thongTinCaNhan.getcMND());
+
+            return ps.executeUpdate()>0;
+        }catch (Exception e){
+            System.out.println("[ERROR]: Sửa thông tin cá nhân");
+            return false;
+        }
+    }
+
     public static ThongTinCaNhanDAO getInstance() {
         if(_instance == null) {
             synchronized(ThongTinCaNhanDAO.class) {

@@ -112,6 +112,32 @@ public class NhanVienDAO {
         }
     }
 
+    public boolean suaNhanVien(NhanVien nhanVien){
+        ThongTinCaNhan thongTinCaNhan = new ThongTinCaNhan(
+                nhanVien.getcMND(),
+                nhanVien.getHoTen(),
+                nhanVien.isGioiTinh(),
+                nhanVien.getSoDienThoai(),
+                nhanVien.getDiaChi(),
+                nhanVien.getNgaySinh()
+        );
+
+        if (!ThongTinCaNhanDAO.getInstance().themThongTinCaNhan(thongTinCaNhan))
+            return false;
+
+        String sql = "UPDATE NHANVIEN SET MOTA = ?";
+        try {
+            PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
+
+            ps.setString(1, nhanVien.getMoTa());
+
+            return ps.executeUpdate()>0;
+        }catch (Exception e){
+            System.out.println("[ERROR]: Sửa nhân viên");
+            return false;
+        }
+    }
+
     public static NhanVienDAO getInstance() {
         if(_instance == null) {
             synchronized(NhanVienDAO.class) {

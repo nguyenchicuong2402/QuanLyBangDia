@@ -114,6 +114,22 @@ public class KhachHangDAO {
         }
     }
 
+    public boolean suaKhachHang(KhachHang khachHang){
+        ThongTinCaNhan thongTinCaNhan = new ThongTinCaNhan(
+                khachHang.getcMND(),
+                khachHang.getHoTen(),
+                khachHang.isGioiTinh(),
+                khachHang.getSoDienThoai(),
+                khachHang.getDiaChi(),
+                khachHang.getNgaySinh()
+        );
+
+        if (!ThongTinCaNhanDAO.getInstance().suaThongTinCaNhan(thongTinCaNhan))
+            return false;
+
+        return true;
+    }
+
     public static KhachHangDAO getInstance() {
         if(_instance == null) {
             synchronized(KhachHangDAO.class) {

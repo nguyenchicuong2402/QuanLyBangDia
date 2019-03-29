@@ -21,6 +21,7 @@ public class DangNhap extends JFrame {
     private JTextField txtTenNguoiDung;
     private JPasswordField txtMatKhau;
     private JButton btnDangNhap, btnThoat;
+    private JCheckBox cbGhiNho;
     private Component rootComponent = this;
 
     private void prepareUI(){
@@ -34,7 +35,7 @@ public class DangNhap extends JFrame {
 
         lblTieuDe = new JLabel("Đăng nhập");
         MaterialDesign.materialLabel(lblTieuDe);
-        lblTieuDe.setFont(Fonts.TITLE);
+        lblTieuDe.setFont(Fonts.TITLE_1);
         lblTieuDe.setForeground(Color.WHITE);
         lblTieuDe.setHorizontalAlignment(SwingConstants.CENTER);
         headerPanel.add(lblTieuDe, BorderLayout.CENTER);
@@ -59,16 +60,17 @@ public class DangNhap extends JFrame {
 
         Box bx2 = Box.createVerticalBox();
         box.add(bx2);
-        box.add(Box.createVerticalStrut(50));
+        box.add(Box.createVerticalStrut(10));
 
-        Box bx3 = Box.createVerticalBox();
+        Box bx3 = Box.createHorizontalBox();
         box.add(bx3);
+        box.add(Box.createVerticalStrut(30));
 
         JPanel panel = new JPanel(new GridLayout(1, 2, 10, 10));
         Box bx4 = Box.createHorizontalBox();
         box.add(bx4);
         box.add(Box.createVerticalStrut(20));
-        bx3.add(panel);
+        bx4.add(panel);
 
         Box bx5 = Box.createVerticalBox();
         box.add(bx5);
@@ -92,6 +94,11 @@ public class DangNhap extends JFrame {
         txtMatKhau.addKeyListener(txtMatKhau_Changed());
         MaterialDesign.materialTextField(txtMatKhau);
         bx2.add(txtMatKhau);
+
+        cbGhiNho = new JCheckBox("Ghi nhớ đăng nhập");
+        MaterialDesign.materialCheckBox(cbGhiNho);
+        bx3.add(cbGhiNho);
+        bx3.add(Box.createHorizontalGlue());
 
         btnThoat = new JButton("Thoát");
         btnThoat.setPreferredSize(new Dimension(100, 50));

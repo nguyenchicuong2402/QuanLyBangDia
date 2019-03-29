@@ -7,7 +7,7 @@ public class DanhSachNhanVien {
     private ArrayList<NhanVien> nhanViens;
 
     public DanhSachNhanVien(){
-        nhanViens = new ArrayList<>();
+        loadData();
     }
 
     public ArrayList<NhanVien> getAll(){
@@ -35,10 +35,8 @@ public class DanhSachNhanVien {
     }
 
     public boolean sua(NhanVien nhanVien){
-        if (nhanVien == null && !nhanViens.contains(nhanVien))
-            return false;
-
-        return xoa(nhanVien.getMaNhanVien()) && them(nhanVien);
+        return NhanVienDAO.getInstance().suaNhanVien(nhanVien)
+                && (nhanViens.set(tim(nhanVien.getMaNhanVien()), nhanVien) != null);
     }
 
     public int tim (String maNhanVien){

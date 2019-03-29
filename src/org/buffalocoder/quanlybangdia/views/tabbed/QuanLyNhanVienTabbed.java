@@ -1,7 +1,9 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
+import org.buffalocoder.quanlybangdia.models.DanhSachNhanVien;
 import org.buffalocoder.quanlybangdia.models.HoaDon;
 //import org.buffalocoder.quanlybangdia.models.tablemodel.HoaDonTableModel;
+import org.buffalocoder.quanlybangdia.models.tablemodel.NhanVienTableModel;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.utils.Values;
 
@@ -16,11 +18,12 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class QuanLyNhanVienTabbed extends JPanel {
-    private JTable tblChoThue;
+    private JTable tblNhanVien;
     private JPanel topPanel, funcPanel, searchPanel;
     private JButton btnThem, btnXoa, btnSua, btnTimKiem;
     private JTextField txtTuKhoa;
-    private TableRowSorter<TableModel> sorter;
+    private DanhSachNhanVien danhSachNhanVien;
+    private NhanVienTableModel nhanVienTableModel;
 
     public QuanLyNhanVienTabbed(){
         this.setLayout(new BorderLayout());
@@ -42,42 +45,6 @@ public class QuanLyNhanVienTabbed extends JPanel {
         btnThem.setPreferredSize(new Dimension(90, 40));
         MaterialDesign.materialButton(btnThem);
         funcPanel.add(btnThem);
-//        btnThem.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                FromThemNhanVien panelthem= new FromThemNhanVien();
-//                add(panelthem,BorderLayout.CENTER);
-//            }
-//        });
-        btnThem.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                FromThemNhanVien panelthem= new FromThemNhanVien();
-                panelthem.isShowing();
-
-
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
 
         btnSua = new JButton("Sửa");
         btnSua.setPreferredSize(btnThem.getPreferredSize());
@@ -103,5 +70,17 @@ public class QuanLyNhanVienTabbed extends JPanel {
         btnTimKiem.setPreferredSize(btnThem.getPreferredSize());
         MaterialDesign.materialButton(btnTimKiem);
         searchPanel.add(btnTimKiem);
+
+        //table
+        Box box = Box.createVerticalBox();
+        box.add(Box.createVerticalStrut(10));
+        this.add(box, BorderLayout.CENTER);
+
+        danhSachNhanVien = new DanhSachNhanVien();
+        nhanVienTableModel = new NhanVienTableModel(danhSachNhanVien.getAll());
+
+        tblNhanVien = new JTable(nhanVienTableModel);
+        MaterialDesign.materialTable(tblNhanVien);
+        box.add(new JScrollPane(tblNhanVien), BorderLayout.CENTER);
     }
 }

@@ -6,6 +6,7 @@ import org.buffalocoder.quanlybangdia.models.tablemodel.BangDiaTableModel;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.utils.Values;
 import org.buffalocoder.quanlybangdia.views.DangNhap;
+import org.buffalocoder.quanlybangdia.views.dialog.BangDiaDialog;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
@@ -47,33 +48,6 @@ public class QuanLyBangDiaTabbed extends JPanel {
         btnThem.addActionListener(btnThem_Click());
         MaterialDesign.materialButton(btnThem);
         funcPanel.add(btnThem);
-        btnThem.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                FromThemBangDia frombd= new FromThemBangDia();
-                frombd.isShowing();
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
 
         btnSua = new JButton("Sửa");
         btnSua.setPreferredSize(btnThem.getPreferredSize());
@@ -94,13 +68,11 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
         txtTuKhoa = new JTextField();
         txtTuKhoa.setPreferredSize(new Dimension(300, 40));
-        txtTuKhoa.addKeyListener(txtTuKhoa_Change());
         MaterialDesign.materialTextField(txtTuKhoa);
         searchPanel.add(txtTuKhoa, BorderLayout.CENTER);
 
         btnTimKiem = new JButton("Tìm kiếm");
         btnTimKiem.setPreferredSize(btnThem.getPreferredSize());
-        btnTimKiem.addActionListener(btnTimKiem_Click());
         MaterialDesign.materialButton(btnTimKiem);
         searchPanel.add(btnTimKiem, BorderLayout.EAST);
 
@@ -123,14 +95,6 @@ public class QuanLyBangDiaTabbed extends JPanel {
         tblBangDia.repaint();
     }
 
-    private void filterTable(String filterText){
-        if (filterText.isEmpty())
-            sorter.setRowFilter(null);
-        else{
-            sorter.setRowFilter(RowFilter.regexFilter(filterText));
-        }
-    }
-
     private void thongBao(String message){
         JOptionPane.showMessageDialog(rootComponent, message, "Thông báo", JOptionPane.WARNING_MESSAGE);
     }
@@ -139,21 +103,13 @@ public class QuanLyBangDiaTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO lấy dữ liệu từ popup
+                BangDiaDialog bangDiaDialog = new BangDiaDialog(new JFrame(), null);
 
+                BangDia bangDia = bangDiaDialog.getBangDia();
+                if (bangDia == null)
+                    return;
 
-                BangDia bangDia = new BangDia(
-                        "BD00010",
-                        "Nhạc trẻ",
-                        "Nhạc",
-                        true,
-                        "ABC",
-                        "ABC",
-                        5000.0,
-                        10
-                );
-
-                if (danhSachBangDia.them(bangDia)){
+                if (danhSachBangDia.them(bangDiaDialog.getBangDia())){
                     refreshTable();
                 }else{
                     thongBao("Thêm băng đĩa không thành công");
@@ -173,20 +129,10 @@ public class QuanLyBangDiaTabbed extends JPanel {
                     return;
                 }
 
-                // TODO lấy dữ liệu từ popup
+                BangDiaDialog bangDiaDialog = new BangDiaDialog(new JFrame(),
+                        danhSachBangDia.getAll().get(index));
 
-                BangDia bangDia = new BangDia(
-                        "BD00010",
-                        "Nhạc Sơn Tùng",
-                        "Nhạc",
-                        true,
-                        "ABC",
-                        "ABC",
-                        5000.0,
-                        10
-                );
-
-                if (danhSachBangDia.sua(bangDia)){
+                if (danhSachBangDia.sua(bangDiaDialog.getBangDia())){
                     refreshTable();
                 }else{
                     thongBao("Thay đổi băng đĩa không thành công");
@@ -219,34 +165,6 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
                 if ((selected == JOptionPane.OK_OPTION) && danhSachBangDia.xoa(maBangDia))
                     refreshTable();
-            }
-        };
-    }
-
-    private ActionListener btnTimKiem_Click(){
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                filterTable(txtTuKhoa.getText().trim());
-            }
-        };
-    }
-
-    private KeyListener txtTuKhoa_Change(){
-        return new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                filterTable(txtTuKhoa.getText().trim());
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                filterTable(txtTuKhoa.getText().trim());
             }
         };
     }
