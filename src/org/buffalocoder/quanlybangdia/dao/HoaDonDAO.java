@@ -47,7 +47,51 @@ public class HoaDonDAO {
         return hoaDons;
     }
 
-    public boolean themHoaDon(HoaDon hoaDon){
+    public HoaDon getHoaDon (String maHoaDon){
+        HoaDon hoaDon = null;
+        String sql = String.format("SELECT * FROM VIEW_HOADON WHERE MAHD = '%s'", maHoaDon);
+
+        try {
+            ResultSet resultSet = DataBaseUtils.getInstance().excuteQueryRead(sql);
+            resultSet.next();
+
+            hoaDon = new HoaDon(
+                    BangDiaDAO.getInstance().getBangDia(resultSet.getString("MABD")),
+                    resultSet.getInt("SONGAYDUOCMUON"),
+                    resultSet.getInt("SOLUONG"),
+                    resultSet.getString("MAHD"),
+                    KhachHangDAO.getInstance().getKhachHang(resultSet.getString("MAKH")),
+                    resultSet.getDate("NGAYLAP")
+            );
+        } catch (SQLException e) {
+        }
+
+        return hoaDon;
+    }
+
+    public HoaDon suaHoaDon(HoaDon hoaDon){
+        String sql = "UPDATE CHITIETHOADON SET " +
+                    "MABD = ?, SONGAYDUOCMUON = ?, SOLUONG = ? WHERE MAHD = ?";
+        try {
+            PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
+
+            ps.setString(1, hoaDon.getBangDia().getMaBangDia());
+            ps.setInt(2, hoaDon.getSoNgayDuocMuon());
+            ps.setInt(3, hoaDon.getSoLuong());
+            ps.setString(4, hoaDon.getMaHoaDon());
+
+            if (ps.executeUpdate() > 0)
+                return getHoaDon(hoaDon.getMaHoaDon());
+
+        }catch (Exception e){
+            System.out.println("[ERROR]: Thêm hoá đơn");
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public HoaDon themHoaDon(HoaDon hoaDon){
         String sql = "INSERT INTO HOADON (MAHD, MAKH) VALUES (?,?)";
         try {
             PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
@@ -65,15 +109,15 @@ public class HoaDonDAO {
                 ps.setInt(3, hoaDon.getSoNgayDuocMuon());
                 ps.setInt(4, hoaDon.getSoLuong());
 
-                return ps.executeUpdate() > 0;
+                if (ps.executeUpdate() > 0)
+                    return getHoaDon(hoaDon.getMaHoaDon());
             }
         }catch (Exception e){
             System.out.println("[ERROR]: Thêm hoá đơn");
             e.printStackTrace();
-            return false;
         }
 
-        return false;
+        return null;
     }
 
     public boolean xoaHoaDon(String maHoaDon){

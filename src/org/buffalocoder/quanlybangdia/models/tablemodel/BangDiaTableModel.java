@@ -11,7 +11,7 @@ public class BangDiaTableModel extends AbstractTableModel {
     private ArrayList<BangDia> bangDias;
 
     private final String[] columnNames = new String[] {
-            "Mã BĐ", "Tên băng đĩa", "Thể loại", "Tình trạng", "Đơn giá", "Hãng sản xuất", "Ghi chú"
+            "Mã BĐ", "Tên băng đĩa", "Thể loại", "Tình trạng", "Đơn giá", "Số lượng tồn", "Hãng sản xuất", "Ghi chú"
     };
 
     public BangDiaTableModel(ArrayList<BangDia> bangDias) {
@@ -60,8 +60,9 @@ public class BangDiaTableModel extends AbstractTableModel {
                 Locale locale = new Locale("vi", "VN");
                 NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale);
                 return numberFormat.format(bangDia.getDonGia());
-            case 5: return bangDia.getHangSanXuat();
-            case 6: return bangDia.getGhiChu();
+            case 5: return bangDia.getSoLuongTon();
+            case 6: return bangDia.getHangSanXuat();
+            case 7: return bangDia.getGhiChu();
         }
 
         return null;

@@ -116,7 +116,10 @@ public class KhachHangDialog extends JDialog {
 
         txtCMND = new JTextField();
         MaterialDesign.materialTextField(txtCMND);
-        if (isEdit) txtCMND.setText(khachHang.getcMND());
+        if (isEdit) {
+            txtCMND.setText(khachHang.getcMND());
+            txtCMND.setEditable(false);
+        }
         bx3.add(txtCMND);
         bx3.add(Box.createHorizontalStrut(20));
 
@@ -192,14 +195,21 @@ public class KhachHangDialog extends JDialog {
         };
     }
 
+    private boolean validateData(){
+        return true;
+    }
+
     private ActionListener btnLuu_Click(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (!validateData())
+                    return;
+
                 khachHang = new KhachHang(
                         txtCMND.getText().trim(),
                         txtHoTen.getText().trim(),
-                        cbGioiTinh.getSelectedItem().toString().equalsIgnoreCase("Nam"),
+                        cbGioiTinh.getSelectedItem().equals("Nam"),
                         txtSoDienThoai.getText().trim(),
                         txtDiaChi.getText().trim(),
                         Date.valueOf(txtNgaySinh.getText().trim()),

@@ -1,6 +1,7 @@
 package org.buffalocoder.quanlybangdia.models.tablemodel;
 
 import org.buffalocoder.quanlybangdia.models.KhachHang;
+import org.buffalocoder.quanlybangdia.utils.Utils;
 import org.buffalocoder.quanlybangdia.utils.Values;
 
 import javax.swing.table.AbstractTableModel;
@@ -45,14 +46,13 @@ public class KhachHangTableModel extends AbstractTableModel {
                 case 0: return row.getMaKH();
                 case 1: return row.getHoTen();
                 case 2: return row.isGioiTinh() ? "Nam" : "Nữ";
-                case 3: return Values.DATE_FORMAT.format(row.getNgaySinh());
+                case 3: return Utils.DATE_FORMAT.format(row.getNgaySinh());
                 case 4: return row.getcMND();
                 case 5: return row.getSoDienThoai();
                 case 6: return row.getDiaChi();
-                case 7: return Values.DATE_FORMAT.format(row.getNgayHetHan());
+                case 7: return Utils.DATE_FORMAT.format(row.getNgayHetHan());
             }
-        }catch (IndexOutOfBoundsException e){
-
+        }catch (Exception e){
         }
 
 

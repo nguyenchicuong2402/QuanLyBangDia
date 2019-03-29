@@ -75,7 +75,7 @@ public class BangDiaDAO {
         return bangDia;
     }
 
-    public boolean themBangDia(BangDia bangDia) {
+    public BangDia themBangDia(BangDia bangDia) {
         String sql = "INSERT INTO BANGDIA (MABD, TENBD, HANGSANXUAT, GHICHU, DONGIA, TINHTRANG, THELOAI, SOLUONGTON)" + "VALUES (?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
@@ -89,11 +89,12 @@ public class BangDiaDAO {
             ps.setString(7, bangDia.getTheLoai());
             ps.setInt(8, bangDia.getSoLuongTon());
 
-            return ps.executeUpdate() > 0;
+            if (ps.executeUpdate() > 0)
+                return getBangDia(bangDia.getMaBangDia());
         } catch (Exception e) {
-            System.out.println("[ERROR]Thêm băng đĩa");
-            return false;
+            System.out.println("[ERROR] Thêm băng đĩa");
         }
+        return null;
     }
 
     public boolean xoaBangDia(String maBangDia) {
@@ -111,7 +112,7 @@ public class BangDiaDAO {
         }
     }
 
-    public boolean suaBangDia(BangDia bangDia){
+    public BangDia suaBangDia(BangDia bangDia){
         String sql = "UPDATE BANGDIA SET " +
                 "TENBD = ?, HANGSANXUAT = ?, GHICHU = ?, DONGIA = ?, " +
                 "TINHTRANG = ?, THELOAI = ?, SOLUONGTON = ? WHERE MABD = ?";
@@ -127,11 +128,13 @@ public class BangDiaDAO {
             ps.setInt(7, bangDia.getSoLuongTon());
             ps.setString(8, bangDia.getMaBangDia());
 
-            return ps.executeUpdate() > 0;
+            if (ps.executeUpdate() > 0)
+                return getBangDia(bangDia.getMaBangDia());
         } catch (Exception e) {
             System.out.println("[ERROR]Sửa băng đĩa");
             e.printStackTrace();
-            return false;
         }
+
+        return null;
     }
 }

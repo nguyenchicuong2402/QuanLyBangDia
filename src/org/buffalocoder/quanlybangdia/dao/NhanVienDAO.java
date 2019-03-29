@@ -66,7 +66,7 @@ public class NhanVienDAO {
         return nhanViens;
     }
 
-    public boolean themNhanVien(NhanVien nhanVien){
+    public NhanVien themNhanVien(NhanVien nhanVien){
         ThongTinCaNhan thongTinCaNhan = new ThongTinCaNhan(
                 nhanVien.getcMND(),
                 nhanVien.getHoTen(),
@@ -76,8 +76,8 @@ public class NhanVienDAO {
                 nhanVien.getNgaySinh()
         );
 
-        if (!ThongTinCaNhanDAO.getInstance().themThongTinCaNhan(thongTinCaNhan))
-            return false;
+        if (ThongTinCaNhanDAO.getInstance().themThongTinCaNhan(thongTinCaNhan) == null)
+            return null;
 
         String sql = "INSERT INTO NHANVIEN (MANV, CMND, MOTA) VALUES (?,?,?)";
         try {
@@ -87,11 +87,13 @@ public class NhanVienDAO {
             ps.setString(2, nhanVien.getcMND());
             ps.setString(3, nhanVien.getMoTa());
 
-            return ps.executeUpdate()>0;
+            if (ps.executeUpdate()>0)
+                return getNhanVien(nhanVien.getMaNhanVien());
         }catch (Exception e){
             System.out.println("[ERROR]: Thêm nhân viên");
-            return false;
         }
+
+        return null;
     }
 
     public boolean xoaNhanVien(String maNhanVien){
@@ -112,7 +114,7 @@ public class NhanVienDAO {
         }
     }
 
-    public boolean suaNhanVien(NhanVien nhanVien){
+    public NhanVien suaNhanVien(NhanVien nhanVien){
         ThongTinCaNhan thongTinCaNhan = new ThongTinCaNhan(
                 nhanVien.getcMND(),
                 nhanVien.getHoTen(),
@@ -122,20 +124,23 @@ public class NhanVienDAO {
                 nhanVien.getNgaySinh()
         );
 
-        if (!ThongTinCaNhanDAO.getInstance().themThongTinCaNhan(thongTinCaNhan))
-            return false;
+        if (ThongTinCaNhanDAO.getInstance().suaThongTinCaNhan(thongTinCaNhan) == null)
+            return null;
 
-        String sql = "UPDATE NHANVIEN SET MOTA = ?";
+        String sql = "UPDATE NHANVIEN SET MOTA = ? WHERE MANV = ?";
         try {
             PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
 
             ps.setString(1, nhanVien.getMoTa());
+            ps.setString(2, nhanVien.getMaNhanVien());
 
-            return ps.executeUpdate()>0;
+            if (ps.executeUpdate()>0)
+                return getNhanVien(nhanVien.getMaNhanVien());
         }catch (Exception e){
             System.out.println("[ERROR]: Sửa nhân viên");
-            return false;
         }
+
+        return null;
     }
 
     public static NhanVienDAO getInstance() {

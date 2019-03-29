@@ -22,7 +22,7 @@ public class DanhSachNhanVien {
         if (nhanVien == null && nhanViens.contains(nhanVien))
             return false;
 
-        return (NhanVienDAO.getInstance().themNhanVien(nhanVien)) && nhanViens.add(NhanVienDAO.getInstance().getNhanVien(nhanVien.getMaNhanVien()));
+        return nhanViens.add(NhanVienDAO.getInstance().themNhanVien(nhanVien));
     }
 
     public boolean xoa(String maNhanVien){
@@ -35,8 +35,8 @@ public class DanhSachNhanVien {
     }
 
     public boolean sua(NhanVien nhanVien){
-        return NhanVienDAO.getInstance().suaNhanVien(nhanVien)
-                && (nhanViens.set(tim(nhanVien.getMaNhanVien()), nhanVien) != null);
+        return nhanViens.set(tim(nhanVien.getMaNhanVien()),
+                NhanVienDAO.getInstance().suaNhanVien(nhanVien)) != null;
     }
 
     public int tim (String maNhanVien){

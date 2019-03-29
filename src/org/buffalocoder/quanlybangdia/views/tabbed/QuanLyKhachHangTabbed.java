@@ -22,7 +22,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
     private JButton btnThem, btnXoa, btnSua, btnTimKiem;
     private JTextField txtTuKhoa;
     private KhachHangTableModel khachHangTableModel;
-    private DanhSachKhachHang danhSachKhachHang;
+    protected static DanhSachKhachHang danhSachKhachHang;
     private Component rootComponent = this;
 
     public QuanLyKhachHangTabbed(){

@@ -32,8 +32,9 @@ public class ThongTinCaNhanDAO {
         return thongTinCaNhan;
     }
 
-    public boolean themThongTinCaNhan(ThongTinCaNhan thongTinCaNhan){
-        String sql = "INSERT INTO THONGTINCANHAN (CMND, HOTEN, DIENTHOAI, DIACHI, GIOITINH, NGAYSINH) VALUES (?,?,?,?,?,?)";
+    public ThongTinCaNhan themThongTinCaNhan(ThongTinCaNhan thongTinCaNhan){
+        String sql = "INSERT INTO THONGTINCANHAN (CMND, HOTEN, DIENTHOAI, DIACHI, GIOITINH, NGAYSINH) " +
+                "VALUES (?,?,?,?,?,?)";
         try {
             PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
 
@@ -44,11 +45,14 @@ public class ThongTinCaNhanDAO {
             ps.setInt(5, thongTinCaNhan.isGioiTinh() ? 1 : 0);
             ps.setDate(6, thongTinCaNhan.getNgaySinh());
 
-            return ps.executeUpdate()>0;
+            if (ps.executeUpdate() > 0){
+                System.out.println(getThongTinCaNhan(thongTinCaNhan.getcMND()));
+                return getThongTinCaNhan(thongTinCaNhan.getcMND());
+            }
         }catch (Exception e){
             System.out.println("[ERROR]: Thêm thông tin cá nhân");
-            return false;
         }
+        return null;
     }
 
     public boolean xoaThongTinCaNhan(String CMND){
@@ -66,7 +70,7 @@ public class ThongTinCaNhanDAO {
         }
     }
 
-    public boolean suaThongTinCaNhan(ThongTinCaNhan thongTinCaNhan){
+    public ThongTinCaNhan suaThongTinCaNhan(ThongTinCaNhan thongTinCaNhan){
         String sql = "UPDATE THONGTINCANHAN SET " +
                 "HOTEN = ?, DIENTHOAI = ?, DIACHI = ?, GIOITINH = ?, NGAYSINH = ? " +
                 "WHERE CMND = ?";
@@ -80,11 +84,13 @@ public class ThongTinCaNhanDAO {
             ps.setDate(5, thongTinCaNhan.getNgaySinh());
             ps.setString(6, thongTinCaNhan.getcMND());
 
-            return ps.executeUpdate()>0;
+            if(ps.executeUpdate()>0)
+                return getThongTinCaNhan(thongTinCaNhan.getcMND());
         }catch (Exception e){
             System.out.println("[ERROR]: Sửa thông tin cá nhân");
-            return false;
         }
+
+        return null;
     }
 
     public static ThongTinCaNhanDAO getInstance() {

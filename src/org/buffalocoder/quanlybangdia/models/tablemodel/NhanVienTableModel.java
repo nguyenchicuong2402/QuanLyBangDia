@@ -1,6 +1,7 @@
 package org.buffalocoder.quanlybangdia.models.tablemodel;
 
 import org.buffalocoder.quanlybangdia.models.NhanVien;
+import org.buffalocoder.quanlybangdia.utils.Utils;
 
 import javax.swing.table.AbstractTableModel;
 import java.text.ParseException;
@@ -35,30 +36,21 @@ public class NhanVienTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        NhanVien nhanVien = nhanViens.get(rowIndex);
+        try{
+            NhanVien nhanVien = nhanViens.get(rowIndex);
 
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-YYYY");
+            switch (columnIndex){
+                case 0: return nhanVien.getMaNhanVien();
+                case 1: return nhanVien.getHoTen();
+                case 2: return nhanVien.isGioiTinh() ? "Nam" : "Nữ";
+                case 3: return Utils.DATE_FORMAT.format(nhanVien.getNgaySinh());
+                case 4: return nhanVien.getcMND();
+                case 5: return nhanVien.getSoDienThoai();
+                case 6: return nhanVien.getDiaChi();
+                case 7: return nhanVien.getMoTa();
+            }
+        }catch (Exception e){
 
-        switch (columnIndex){
-            case 0: return nhanVien.getMaNhanVien();
-            case 1: return nhanVien.getHoTen();
-            case 2: return nhanVien.isGioiTinh() ? "Nam" : "Nữ";
-            case 3:
-                try {
-                    return df.parse(nhanVien.getNgaySinh().toString());
-                } catch (ParseException e) {
-                    return "NaN";
-                }
-            case 4: return nhanVien.getcMND();
-            case 5: return nhanVien.getSoDienThoai();
-            case 6: return nhanVien.getDiaChi();
-            case 7:
-                try {
-                    return df.parse(nhanVien.getNgaySinh().toString());
-                } catch (ParseException e) {
-                    return "NaN";
-                }
-            case 8: return nhanVien.getMoTa();
         }
 
         return null;

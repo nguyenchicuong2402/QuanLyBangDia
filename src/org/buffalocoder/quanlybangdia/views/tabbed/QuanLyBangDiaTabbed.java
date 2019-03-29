@@ -22,7 +22,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
     private JButton btnThem, btnXoa, btnSua, btnTimKiem;
     private JTextField txtTuKhoa;
     private BangDiaTableModel bangDiaTableModel;
-    private DanhSachBangDia danhSachBangDia;
+    protected static DanhSachBangDia danhSachBangDia;
     private TableRowSorter<TableModel> sorter;
     private final Component rootComponent = this;
 
@@ -109,7 +109,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
                 if (bangDia == null)
                     return;
 
-                if (danhSachBangDia.them(bangDiaDialog.getBangDia())){
+                if (danhSachBangDia.them(bangDia)){
                     refreshTable();
                 }else{
                     thongBao("Thêm băng đĩa không thành công");

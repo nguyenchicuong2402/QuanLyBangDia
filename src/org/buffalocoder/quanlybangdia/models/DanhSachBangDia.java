@@ -11,7 +11,7 @@ public class DanhSachBangDia {
         loadData();
     }
 
-    private void loadData(){
+    public void loadData(){
         bangDias = BangDiaDAO.getInstance().getBangDias();
     }
 
@@ -23,7 +23,7 @@ public class DanhSachBangDia {
         if(bangDia == null || bangDias.contains(bangDia))
             return false;
 
-        return  (bangDias.add(bangDia) && BangDiaDAO.getInstance().themBangDia(bangDia));
+        return  (bangDias.add(BangDiaDAO.getInstance().themBangDia(bangDia)));
     }
 
     public boolean xoa(String maBangDia){
@@ -36,8 +36,7 @@ public class DanhSachBangDia {
     }
 
     public boolean sua(BangDia bangDia){
-        return BangDiaDAO.getInstance().suaBangDia(bangDia)
-                && (bangDias.set(tim(bangDia.getMaBangDia()), bangDia) != null);
+        return bangDias.set(tim(bangDia.getMaBangDia()), BangDiaDAO.getInstance().suaBangDia(bangDia)) != null;
     }
 
     private int tim(String maBangDia){

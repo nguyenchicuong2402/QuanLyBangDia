@@ -69,7 +69,7 @@ public class KhachHangDAO {
         return khachHangs;
     }
 
-    public boolean themKhachHang(KhachHang khachHang){
+    public KhachHang themKhachHang(KhachHang khachHang){
         ThongTinCaNhan thongTinCaNhan = new ThongTinCaNhan(
                 khachHang.getcMND(),
                 khachHang.getHoTen(),
@@ -79,8 +79,8 @@ public class KhachHangDAO {
                 khachHang.getNgaySinh()
         );
 
-        if (!ThongTinCaNhanDAO.getInstance().themThongTinCaNhan(thongTinCaNhan))
-            return false;
+        if (ThongTinCaNhanDAO.getInstance().themThongTinCaNhan(thongTinCaNhan) == null)
+            return null;
 
         String sql = "INSERT INTO KHACHHANG (MAKH, CMND) VALUES (?,?)";
         try {
@@ -89,11 +89,13 @@ public class KhachHangDAO {
             ps.setString(1, khachHang.getMaKH());
             ps.setString(2, khachHang.getcMND());
 
-            return ps.executeUpdate()>0;
+            if (ps.executeUpdate()>0)
+                return getKhachHang(khachHang.getMaKH());
         }catch (Exception e){
             System.out.println("[ERROR]: Thêm khách hàng vào DB");
-            return false;
         }
+
+        return null;
     }
 
     public boolean xoaKhachHang(String maKhachHang){
@@ -114,7 +116,7 @@ public class KhachHangDAO {
         }
     }
 
-    public boolean suaKhachHang(KhachHang khachHang){
+    public KhachHang suaKhachHang(KhachHang khachHang){
         ThongTinCaNhan thongTinCaNhan = new ThongTinCaNhan(
                 khachHang.getcMND(),
                 khachHang.getHoTen(),
@@ -124,10 +126,10 @@ public class KhachHangDAO {
                 khachHang.getNgaySinh()
         );
 
-        if (!ThongTinCaNhanDAO.getInstance().suaThongTinCaNhan(thongTinCaNhan))
-            return false;
+        if (ThongTinCaNhanDAO.getInstance().suaThongTinCaNhan(thongTinCaNhan) == null)
+            return null;
 
-        return true;
+        return getKhachHang(khachHang.getMaKH());
     }
 
     public static KhachHangDAO getInstance() {

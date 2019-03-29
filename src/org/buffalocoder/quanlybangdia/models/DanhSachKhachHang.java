@@ -23,7 +23,7 @@ public class DanhSachKhachHang {
         if (khachHang == null && khachHangs.contains(khachHang))
             return false;
 
-        return (KhachHangDAO.getInstance().themKhachHang(khachHang)) && khachHangs.add(KhachHangDAO.getInstance().getKhachHang(khachHang.getMaKH()));
+        return khachHangs.add(KhachHangDAO.getInstance().themKhachHang(khachHang));
     }
 
     public boolean xoa(String maKhachHang){
@@ -36,8 +36,7 @@ public class DanhSachKhachHang {
     }
 
     public boolean sua(KhachHang khachHang){
-        return KhachHangDAO.getInstance().suaKhachHang(khachHang)
-                && (khachHangs.set(tim(khachHang.getMaKH()), khachHang) != null);
+        return khachHangs.set(tim(khachHang.getMaKH()), KhachHangDAO.getInstance().suaKhachHang(khachHang)) != null;
     }
 
     public int tim (String maKhachHang){

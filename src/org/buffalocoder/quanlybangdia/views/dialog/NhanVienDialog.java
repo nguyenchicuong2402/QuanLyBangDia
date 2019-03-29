@@ -88,7 +88,7 @@ public class NhanVienDialog extends JDialog {
         bx1.add(Box.createHorizontalStrut(20));
         bx1.add(lblMaNV);
 
-        txtMaNV = new JTextField("NV00011");
+        txtMaNV = new JTextField("NV00015");
         MaterialDesign.materialTextField(txtMaNV);
         txtMaNV.setEditable(false);
         if (isEdit) txtMaNV.setText(nhanVien.getMaNhanVien());
@@ -115,7 +115,10 @@ public class NhanVienDialog extends JDialog {
 
         txtCMND = new JTextField();
         MaterialDesign.materialTextField(txtCMND);
-        if (isEdit) txtCMND.setText(nhanVien.getcMND());
+        if (isEdit) {
+            txtCMND.setText(nhanVien.getcMND());
+            txtCMND.setEditable(false);
+        }
         bx3.add(txtCMND);
         bx3.add(Box.createHorizontalStrut(20));
 
@@ -175,8 +178,8 @@ public class NhanVienDialog extends JDialog {
         txtMoTa = new JTextField();
         MaterialDesign.materialTextField(txtMoTa);
         if (isEdit) txtMoTa.setText(nhanVien.getMoTa());
-        bx7.add(txtMoTa);
-        bx7.add(Box.createHorizontalStrut(20));
+        bx8.add(txtMoTa);
+        bx8.add(Box.createHorizontalStrut(20));
 
         // BOTTOM PANEL
         bottomPanel = new JPanel(new GridLayout(1, 2, 1, 10));
@@ -198,6 +201,7 @@ public class NhanVienDialog extends JDialog {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                nhanVien = null;
                 NhanVienDialog.this.dispose();
             }
         };
@@ -210,7 +214,7 @@ public class NhanVienDialog extends JDialog {
                 nhanVien = new NhanVien(
                         txtCMND.getText().trim(),
                         txtHoTen.getText().trim(),
-                        cbGioiTinh.getSelectedItem().toString().equalsIgnoreCase("Nam"),
+                        cbGioiTinh.getSelectedItem().equals("Nam"),
                         txtSoDienThoai.getText().trim(),
                         txtDiaChi.getText().trim(),
                         Date.valueOf(txtNgaySinh.getText().trim()),

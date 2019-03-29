@@ -31,7 +31,7 @@ public class DanhSachChoThue {
         if(hoaDon == null || hoaDons.contains(hoaDon))
             return false;
 
-        return  (hoaDons.add(hoaDon) && HoaDonDAO.getInstance().themHoaDon(hoaDon));
+        return  hoaDons.add(HoaDonDAO.getInstance().themHoaDon(hoaDon));
     }
 
     public boolean xoa(String maHoaDon){
@@ -40,7 +40,7 @@ public class DanhSachChoThue {
         if (hoaDon == null)
             return false;
 
-        return (hoaDons.remove(hoaDon) && HoaDonDAO.getInstance().xoaHoaDon(maHoaDon));
+        return HoaDonDAO.getInstance().xoaHoaDon(maHoaDon) && hoaDons.remove(hoaDon);
     }
 
     public boolean sua(HoaDon hoaDon){

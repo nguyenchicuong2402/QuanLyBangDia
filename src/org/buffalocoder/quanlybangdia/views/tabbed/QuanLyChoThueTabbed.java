@@ -105,32 +105,13 @@ public class QuanLyChoThueTabbed extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 // TODO lấy dữ liệu từ popup
 
-                BangDia bangDia = new BangDia(
-                        "BD00010",
-                        "Nhạc trẻ",
-                        "Nhạc",
-                        true,
-                        "ABC",
-                        "ABC",
-                        5000.0,
-                        10
-                );
-
-                KhachHang khachHang = new KhachHang(
-                        "222222222",
-                        "Nguyễn Văn A",
-                        true,
-                        "0123456789",
-                        "IUH",
-                        Date.valueOf("1999-12-12"),
-                        "KH00002"
-                );
-
+                BangDia bangDia = QuanLyBangDiaTabbed.danhSachBangDia.getAll().get(2);
+                KhachHang khachHang = QuanLyKhachHangTabbed.danhSachKhachHang.getAll().get(1);
                 HoaDon hoaDon = new HoaDon(
                         bangDia,
                         10,
                         1,
-                        "HD00005",
+                        "HD00003",
                         khachHang
                 );
 

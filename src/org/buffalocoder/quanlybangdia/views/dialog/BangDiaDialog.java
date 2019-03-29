@@ -89,7 +89,7 @@ public class BangDiaDialog extends JDialog{
         bx1.add(Box.createHorizontalStrut(20));
         bx1.add(lblMaBangDia);
 
-        txtMaBangDia = new JTextField("BD00011");
+        txtMaBangDia = new JTextField("BD00006");
         MaterialDesign.materialTextField(txtMaBangDia);
         txtMaBangDia.setEditable(false);
         if (isEdit) txtMaBangDia.setText(bangDia.getMaBangDia());
@@ -204,10 +204,17 @@ public class BangDiaDialog extends JDialog{
         };
     }
 
+    private boolean validateData(){
+        return true;
+    }
+
     private ActionListener btnLuu_Click(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (!validateData())
+                    return;
+
                 bangDia = new BangDia(
                         txtMaBangDia.getText().trim(),
                         txtTenBangDia.getText().trim(),
