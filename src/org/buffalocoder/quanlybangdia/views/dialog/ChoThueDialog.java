@@ -161,6 +161,9 @@ public class ChoThueDialog extends JDialog {
     }
 
     private boolean validateData(){
+
+        //String regex="";
+
         return true;
     }
 

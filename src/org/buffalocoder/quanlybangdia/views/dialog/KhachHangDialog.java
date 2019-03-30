@@ -9,9 +9,12 @@ import org.buffalocoder.quanlybangdia.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.datatransfer.DataFlavor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class KhachHangDialog extends JDialog {
     private String tieuDe;
@@ -196,7 +199,15 @@ public class KhachHangDialog extends JDialog {
     }
 
     private boolean validateData(){
-        return true;
+
+        String regex="\\d{1,2}-\\d{1,2}-\\d{4}";
+        String kiemtra=txtNgaySinh.getText();
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(kiemtra);
+        if(matcher.matches())
+         return true;
+        return false;
+        //return  true;
     }
 
     private ActionListener btnLuu_Click(){
