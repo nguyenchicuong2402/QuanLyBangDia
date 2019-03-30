@@ -81,7 +81,12 @@ public class QuanLyBangDiaTabbed extends JPanel {
         box.add(Box.createVerticalStrut(10));
         this.add(box, BorderLayout.CENTER);
 
-        danhSachBangDia = new DanhSachBangDia();
+        try{
+            danhSachBangDia = new DanhSachBangDia();
+        }catch (Exception e){
+            thongBaoLoi(e.getMessage());
+        }
+
         bangDiaTableModel = new BangDiaTableModel(danhSachBangDia.getAll());
 
         tblBangDia = new JTable(bangDiaTableModel);
@@ -99,6 +104,10 @@ public class QuanLyBangDiaTabbed extends JPanel {
         JOptionPane.showMessageDialog(rootComponent, message, "Thông báo", JOptionPane.WARNING_MESSAGE);
     }
 
+    private void thongBaoLoi(String message){
+        JOptionPane.showMessageDialog(rootComponent, message, "Lỗi", JOptionPane.ERROR_MESSAGE);
+    }
+
     private ActionListener btnThem_Click(){
         return new ActionListener() {
             @Override
@@ -109,10 +118,11 @@ public class QuanLyBangDiaTabbed extends JPanel {
                 if (bangDia == null)
                     return;
 
-                if (danhSachBangDia.them(bangDia)){
+                try{
+                    danhSachBangDia.them(bangDia);
                     refreshTable();
-                }else{
-                    thongBao("Thêm băng đĩa không thành công");
+                }catch (Exception e1){
+                    thongBaoLoi(e1.getMessage());
                 }
             }
         };
@@ -132,10 +142,11 @@ public class QuanLyBangDiaTabbed extends JPanel {
                 BangDiaDialog bangDiaDialog = new BangDiaDialog(new JFrame(),
                         danhSachBangDia.getAll().get(index));
 
-                if (danhSachBangDia.sua(bangDiaDialog.getBangDia())){
+                try{
+                    danhSachBangDia.sua(bangDiaDialog.getBangDia());
                     refreshTable();
-                }else{
-                    thongBao("Thay đổi băng đĩa không thành công");
+                }catch (Exception e1){
+                    thongBaoLoi(e1.getMessage());
                 }
             }
         };
@@ -163,8 +174,14 @@ public class QuanLyBangDiaTabbed extends JPanel {
                         JOptionPane.OK_CANCEL_OPTION
                 );
 
-                if ((selected == JOptionPane.OK_OPTION) && danhSachBangDia.xoa(maBangDia))
-                    refreshTable();
+                if (selected == JOptionPane.OK_OPTION){
+                    try{
+                        danhSachBangDia.xoa(maBangDia);
+                        refreshTable();
+                    }catch (Exception e1){
+                        thongBaoLoi(e1.getMessage());
+                    }
+                }
             }
         };
     }

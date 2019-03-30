@@ -10,43 +10,43 @@ import java.util.ArrayList;
 
 public class KhachHangDAO {
     private static KhachHangDAO _instance;
+    private static DataBaseUtils dataBaseUtils;
+    private static ThongTinCaNhanDAO thongTinCaNhanDAO;
 
-    public KhachHang getKhachHang(String maKhachHang){
+    public KhachHang getKhachHang(String maKhachHang) throws Exception {
         KhachHang khachHang = null;
 
-        String sql = String.format("SELECT * FROM KHACHHANG WHERE MAKH = '%s'", maKhachHang);
+        String sql = String.format("SELECT * FROM VIEW_THONGTINKHACHHANG WHERE MAKH = '%s'", maKhachHang);
 
         try {
-
-            ResultSet resultSet = DataBaseUtils.getInstance().excuteQueryRead(sql);
+            ResultSet resultSet = dataBaseUtils.excuteQueryRead(sql);
             resultSet.next();
 
-            ThongTinCaNhan thongTinCaNhan = ThongTinCaNhanDAO.getInstance().getThongTinCaNhan(resultSet.getString("CMND"));
-
             khachHang = new KhachHang(
-                    thongTinCaNhan.getcMND(),
-                    thongTinCaNhan.getHoTen(),
-                    thongTinCaNhan.isGioiTinh(),
-                    thongTinCaNhan.getSoDienThoai(),
-                    thongTinCaNhan.getDiaChi(),
-                    thongTinCaNhan.getNgaySinh(),
+                    resultSet.getString("CMND"),
+                    resultSet.getString("HOTEN"),
+                    resultSet.getBoolean("GIOITINH"),
+                    resultSet.getString("DIENTHOAI"),
+                    resultSet.getString("DIACHI"),
+                    resultSet.getDate("NGAYSINH"),
                     resultSet.getString("MAKH"),
                     resultSet.getDate("NGAYHETHAN")
             );
+
         } catch (SQLException e) {
-            System.out.println("Lỗi đọc database");
+            throw new Exception("Lỗi lấy thông tin khách hàng");
         }
 
         return khachHang;
     }
 
-    public ArrayList<KhachHang> getKhachHangs(){
+    public ArrayList<KhachHang> getKhachHangs() throws Exception {
         ArrayList<KhachHang> khachHangs = new ArrayList<>();
 
         String sql = String.format("SELECT * FROM VIEW_THONGTINKHACHHANG");
 
         try {
-            ResultSet resultSet = DataBaseUtils.getInstance().excuteQueryRead(sql);
+            ResultSet resultSet = dataBaseUtils.excuteQueryRead(sql);
 
             while (resultSet.next()){
                 KhachHang khachHang = new KhachHang(
@@ -63,13 +63,13 @@ public class KhachHangDAO {
                 khachHangs.add(khachHang);
             }
         } catch (SQLException e) {
-            System.out.println("Lỗi đọc database");
+            throw new Exception("Lỗi lấy danh sách khách hàng");
         }
 
         return khachHangs;
     }
 
-    public KhachHang themKhachHang(KhachHang khachHang){
+    public KhachHang themKhachHang(KhachHang khachHang) throws Exception {
         ThongTinCaNhan thongTinCaNhan = new ThongTinCaNhan(
                 khachHang.getcMND(),
                 khachHang.getHoTen(),
@@ -79,26 +79,30 @@ public class KhachHangDAO {
                 khachHang.getNgaySinh()
         );
 
-        if (ThongTinCaNhanDAO.getInstance().themThongTinCaNhan(thongTinCaNhan) == null)
+        if (thongTinCaNhanDAO.themThongTinCaNhan(thongTinCaNhan) == null)
             return null;
 
         String sql = "INSERT INTO KHACHHANG (MAKH, CMND) VALUES (?,?)";
         try {
-            PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
+            PreparedStatement ps = dataBaseUtils.excuteQueryWrite(sql);
 
             ps.setString(1, khachHang.getMaKH());
             ps.setString(2, khachHang.getcMND());
 
-            if (ps.executeUpdate()>0)
+            if (ps.executeUpdate()>0){
+                dataBaseUtils.commitQuery();
                 return getKhachHang(khachHang.getMaKH());
+            }
+
         }catch (Exception e){
-            System.out.println("[ERROR]: Thêm khách hàng vào DB");
+            dataBaseUtils.rollbackQuery();
+            throw new Exception("Lỗi thêm khách hàng");
         }
 
         return null;
     }
 
-    public boolean xoaKhachHang(String maKhachHang){
+    public boolean xoaKhachHang(String maKhachHang) throws Exception {
         String cmnd = getKhachHang(maKhachHang).getcMND();
         String sql = "DELETE FROM KHACHHANG WHERE MAKH = ?";
 
@@ -107,16 +111,19 @@ public class KhachHangDAO {
 
             ps.setString(1, maKhachHang);
 
-            if (ps.executeUpdate() > 0)
-                return ThongTinCaNhanDAO.getInstance().xoaThongTinCaNhan(cmnd);
-            else return false;
+            if (ps.executeUpdate() > 0){
+                dataBaseUtils.commitQuery();
+                return thongTinCaNhanDAO.xoaThongTinCaNhan(cmnd);
+            }
         }catch (Exception e){
-            System.out.println("[ERROR]: Xoá Khách hàng trong DB");
-            return false;
+            dataBaseUtils.rollbackQuery();
+            throw new Exception("Lỗi xoá khách hàng");
         }
+
+        return false;
     }
 
-    public KhachHang suaKhachHang(KhachHang khachHang){
+    public KhachHang suaKhachHang(KhachHang khachHang) throws Exception {
         ThongTinCaNhan thongTinCaNhan = new ThongTinCaNhan(
                 khachHang.getcMND(),
                 khachHang.getHoTen(),
@@ -126,13 +133,18 @@ public class KhachHangDAO {
                 khachHang.getNgaySinh()
         );
 
-        if (ThongTinCaNhanDAO.getInstance().suaThongTinCaNhan(thongTinCaNhan) == null)
+        if (thongTinCaNhanDAO.suaThongTinCaNhan(thongTinCaNhan) == null)
             return null;
 
         return getKhachHang(khachHang.getMaKH());
     }
 
-    public static KhachHangDAO getInstance() {
+    private KhachHangDAO() throws Exception {
+        dataBaseUtils = DataBaseUtils.getInstance();
+        thongTinCaNhanDAO = ThongTinCaNhanDAO.getInstance();
+    }
+
+    public static KhachHangDAO getInstance() throws Exception {
         if(_instance == null) {
             synchronized(KhachHangDAO.class) {
                 if(null == _instance) {

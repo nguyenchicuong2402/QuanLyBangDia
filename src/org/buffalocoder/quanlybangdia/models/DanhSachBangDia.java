@@ -6,37 +6,39 @@ import java.util.ArrayList;
 
 public class DanhSachBangDia {
     private ArrayList<BangDia> bangDias = null;
+    private static BangDiaDAO bangDiaDAO;
 
-    public DanhSachBangDia(){
+    public DanhSachBangDia() throws Exception {
+        bangDiaDAO = BangDiaDAO.getInstance();
         loadData();
     }
 
-    public void loadData(){
-        bangDias = BangDiaDAO.getInstance().getBangDias();
+    public void loadData() throws Exception {
+        bangDias = bangDiaDAO.getBangDias();
     }
 
     public ArrayList<BangDia> getAll(){
         return  bangDias;
     }
 
-    public boolean them(BangDia bangDia){
+    public boolean them(BangDia bangDia) throws Exception {
         if(bangDia == null || bangDias.contains(bangDia))
             return false;
 
-        return  (bangDias.add(BangDiaDAO.getInstance().themBangDia(bangDia)));
+        return  (bangDias.add(bangDiaDAO.themBangDia(bangDia)));
     }
 
-    public boolean xoa(String maBangDia){
+    public boolean xoa(String maBangDia) throws Exception {
         BangDia bangDia = bangDias.get(tim(maBangDia));
 
         if (bangDia == null)
             return false;
 
-        return (bangDias.remove(bangDia) && BangDiaDAO.getInstance().xoaBangDia(maBangDia));
+        return (bangDias.remove(bangDia) && bangDiaDAO.xoaBangDia(maBangDia));
     }
 
-    public boolean sua(BangDia bangDia){
-        return bangDias.set(tim(bangDia.getMaBangDia()), BangDiaDAO.getInstance().suaBangDia(bangDia)) != null;
+    public boolean sua(BangDia bangDia) throws Exception {
+        return bangDias.set(tim(bangDia.getMaBangDia()), bangDiaDAO.suaBangDia(bangDia)) != null;
     }
 
     private int tim(String maBangDia){

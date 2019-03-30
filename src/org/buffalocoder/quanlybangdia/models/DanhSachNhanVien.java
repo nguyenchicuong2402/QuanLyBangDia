@@ -5,8 +5,10 @@ import java.util.ArrayList;
 
 public class DanhSachNhanVien {
     private ArrayList<NhanVien> nhanViens;
+    private static NhanVienDAO nhanVienDAO;
 
-    public DanhSachNhanVien(){
+    public DanhSachNhanVien() throws Exception {
+        nhanVienDAO = NhanVienDAO.getInstance();
         loadData();
     }
 
@@ -14,29 +16,29 @@ public class DanhSachNhanVien {
         return nhanViens;
     }
 
-    public void loadData(){
-        nhanViens = NhanVienDAO.getInstance().getNhanViens();
+    public void loadData() throws Exception {
+        nhanViens = nhanVienDAO.getNhanViens();
     }
 
-    public boolean them(NhanVien nhanVien){
+    public boolean them(NhanVien nhanVien) throws Exception {
         if (nhanVien == null && nhanViens.contains(nhanVien))
             return false;
 
-        return nhanViens.add(NhanVienDAO.getInstance().themNhanVien(nhanVien));
+        return nhanViens.add(nhanVienDAO.themNhanVien(nhanVien));
     }
 
-    public boolean xoa(String maNhanVien){
+    public boolean xoa(String maNhanVien) throws Exception {
         NhanVien nhanVien = nhanViens.get(tim(maNhanVien));
 
         if (nhanVien == null)
             return false;
 
-        return NhanVienDAO.getInstance().xoaNhanVien(maNhanVien) && nhanViens.remove(nhanVien);
+        return nhanVienDAO.xoaNhanVien(maNhanVien) && nhanViens.remove(nhanVien);
     }
 
-    public boolean sua(NhanVien nhanVien){
+    public boolean sua(NhanVien nhanVien) throws Exception {
         return nhanViens.set(tim(nhanVien.getMaNhanVien()),
-                NhanVienDAO.getInstance().suaNhanVien(nhanVien)) != null;
+                nhanVienDAO.suaNhanVien(nhanVien)) != null;
     }
 
     public int tim (String maNhanVien){

@@ -6,8 +6,10 @@ import java.util.ArrayList;
 
 public class DanhSachKhachHang {
     private ArrayList<KhachHang> khachHangs;
+    private static KhachHangDAO khachHangDAO;
 
-    public DanhSachKhachHang(){
+    public DanhSachKhachHang() throws Exception {
+        khachHangDAO = KhachHangDAO.getInstance();
         loadData();
     }
 
@@ -15,28 +17,28 @@ public class DanhSachKhachHang {
         return khachHangs;
     }
 
-    public void loadData(){
-        khachHangs = KhachHangDAO.getInstance().getKhachHangs();
+    public void loadData() throws Exception {
+        khachHangs = khachHangDAO.getKhachHangs();
     }
 
-    public boolean them(KhachHang khachHang){
+    public boolean them(KhachHang khachHang) throws Exception {
         if (khachHang == null && khachHangs.contains(khachHang))
             return false;
 
-        return khachHangs.add(KhachHangDAO.getInstance().themKhachHang(khachHang));
+        return khachHangs.add(khachHangDAO.themKhachHang(khachHang));
     }
 
-    public boolean xoa(String maKhachHang){
+    public boolean xoa(String maKhachHang) throws Exception {
         KhachHang khachHang = khachHangs.get(tim(maKhachHang));
 
         if (khachHang == null)
             return false;
 
-        return KhachHangDAO.getInstance().xoaKhachHang(maKhachHang) && khachHangs.remove(khachHang);
+        return khachHangDAO.xoaKhachHang(maKhachHang) && khachHangs.remove(khachHang);
     }
 
-    public boolean sua(KhachHang khachHang){
-        return khachHangs.set(tim(khachHang.getMaKH()), KhachHangDAO.getInstance().suaKhachHang(khachHang)) != null;
+    public boolean sua(KhachHang khachHang) throws Exception {
+        return khachHangs.set(tim(khachHang.getMaKH()), khachHangDAO.suaKhachHang(khachHang)) != null;
     }
 
     public int tim (String maKhachHang){

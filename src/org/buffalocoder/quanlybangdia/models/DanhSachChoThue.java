@@ -6,8 +6,10 @@ import java.util.ArrayList;
 
 public class DanhSachChoThue {
     private ArrayList<HoaDon> hoaDons;
+    private static HoaDonDAO hoaDonDAO;
 
-    public DanhSachChoThue(){
+    public DanhSachChoThue() throws Exception {
+        hoaDonDAO = HoaDonDAO.getInstance();
         hoaDons = new ArrayList<>();
     }
 
@@ -15,8 +17,8 @@ public class DanhSachChoThue {
         return hoaDons;
     }
 
-    public void loadData(){
-        hoaDons = HoaDonDAO.getInstance().getHoaDons();
+    public void loadData() throws Exception {
+        hoaDons = hoaDonDAO.getHoaDons();
     }
 
     public int tim (String maHoaDon){
@@ -27,23 +29,23 @@ public class DanhSachChoThue {
         return -1;
     }
 
-    public boolean them(HoaDon hoaDon){
+    public boolean them(HoaDon hoaDon) throws Exception {
         if(hoaDon == null || hoaDons.contains(hoaDon))
             return false;
 
-        return  hoaDons.add(HoaDonDAO.getInstance().themHoaDon(hoaDon));
+        return  hoaDons.add(hoaDonDAO.themHoaDon(hoaDon));
     }
 
-    public boolean xoa(String maHoaDon){
+    public boolean xoa(String maHoaDon) throws Exception {
         HoaDon hoaDon = hoaDons.get(tim(maHoaDon));
 
         if (hoaDon == null)
             return false;
 
-        return HoaDonDAO.getInstance().xoaHoaDon(maHoaDon) && hoaDons.remove(hoaDon);
+        return hoaDonDAO.xoaHoaDon(maHoaDon) && hoaDons.remove(hoaDon);
     }
 
-    public boolean sua(HoaDon hoaDon){
-        return xoa(hoaDon.getMaHoaDon()) && them(hoaDon);
+    public boolean sua(HoaDon hoaDon) throws Exception {
+        return hoaDons.set(tim(hoaDon.getMaHoaDon()), hoaDonDAO.suaHoaDon(hoaDon)) != null;
     }
 }

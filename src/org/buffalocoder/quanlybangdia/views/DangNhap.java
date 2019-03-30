@@ -150,6 +150,10 @@ public class DangNhap extends JFrame {
         JOptionPane.showMessageDialog(rootComponent, message, "Thông báo", JOptionPane.WARNING_MESSAGE);
     }
 
+    private void thongBaoLoi(String message){
+        JOptionPane.showMessageDialog(rootComponent, message, "Lỗi", JOptionPane.ERROR_MESSAGE);
+    }
+
     private ActionListener btnThoat_Click(){
         return new ActionListener() {
             @Override
@@ -184,7 +188,12 @@ public class DangNhap extends JFrame {
                     return;
                 }
 
-                taiKhoan = TaiKhoanDAO.getInstance().getTaiKhoan(tenTaiKhoan);
+                try{
+                    taiKhoan = TaiKhoanDAO.getInstance().getTaiKhoan(tenTaiKhoan);
+                }catch (Exception e1){
+                    thongBaoLoi(e1.getMessage());
+                    return;
+                }
 
                 if (tenTaiKhoan.equals(taiKhoan.getTenTaiKhoan()) && matKhau.equals(taiKhoan.getMatKhau())){
                     rootComponent.setVisible(false);

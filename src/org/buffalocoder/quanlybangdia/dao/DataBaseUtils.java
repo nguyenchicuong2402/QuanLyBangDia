@@ -38,24 +38,39 @@ public class DataBaseUtils {
         return rs;
     }
 
-    private Connection getConnection() {
+    public void commitQuery() throws Exception {
+        try {
+            _connection.commit();
+        } catch (SQLException e) {
+            throw new Exception("Lỗi commit query");
+        }
+    }
+
+    public void rollbackQuery() throws Exception {
+        try {
+            _connection.rollback();
+        } catch (SQLException e) {
+            throw new Exception("Lỗi rollback query");
+        }
+    }
+
+    private Connection getConnection() throws Exception {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            System.out.println("Kết nối thành công");
             return DriverManager.getConnection(URL);
         } catch (ClassNotFoundException e) {
-            System.out.println("Không tìm thấy thư viện JDBC");
+            throw new Exception("Không tìm thấy thư viện JDBC");
         } catch (SQLException e) {
-            System.out.println("Lỗi kết nối database");
+            throw new Exception("Kết nối database thất bại");
         }
-        return null;
     }
 
-    private DataBaseUtils() {
+    private DataBaseUtils() throws Exception {
         _connection = getConnection();
+        _connection.setAutoCommit(false);
     }
 
-    public static DataBaseUtils getInstance() {
+    public static DataBaseUtils getInstance() throws Exception {
         if(_instance == null) {
             synchronized(DataBaseUtils.class) {
                 if(null == _instance) {

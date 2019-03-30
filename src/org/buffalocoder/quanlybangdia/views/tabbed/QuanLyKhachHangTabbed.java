@@ -79,7 +79,11 @@ public class QuanLyKhachHangTabbed extends JPanel {
         box.add(Box.createVerticalStrut(10));
         this.add(box, BorderLayout.CENTER);
 
-        danhSachKhachHang = new DanhSachKhachHang();
+        try{
+            danhSachKhachHang = new DanhSachKhachHang();
+        }catch (Exception e){
+            thongBaoLoi(e.getMessage());
+        }
         khachHangTableModel = new KhachHangTableModel(danhSachKhachHang.getAll());
 
         tblKhachHang = new JTable(khachHangTableModel);
@@ -96,6 +100,10 @@ public class QuanLyKhachHangTabbed extends JPanel {
         JOptionPane.showMessageDialog(rootComponent, message, "Thông báo", JOptionPane.WARNING_MESSAGE);
     }
 
+    private void thongBaoLoi(String message){
+        JOptionPane.showMessageDialog(rootComponent, message, "Lỗi", JOptionPane.ERROR_MESSAGE);
+    }
+
     private ActionListener btnThem_Click(){
         return new ActionListener() {
             @Override
@@ -106,10 +114,11 @@ public class QuanLyKhachHangTabbed extends JPanel {
                 if (khachHang == null)
                     return;
 
-                if (danhSachKhachHang.them(khachHang)){
+                try{
+                    danhSachKhachHang.them(khachHang);
                     refreshTable();
-                }else{
-                    thongBao("Thêm khách hàng không thành công");
+                }catch (Exception e1){
+                    thongBaoLoi(e1.getMessage());
                 }
             }
         };
@@ -129,10 +138,11 @@ public class QuanLyKhachHangTabbed extends JPanel {
                 KhachHangDialog khachHangDialog = new KhachHangDialog(new JFrame(),
                         danhSachKhachHang.getAll().get(index));
 
-                if (danhSachKhachHang.sua(khachHangDialog.getKhachHang())){
+                try{
+                    danhSachKhachHang.sua(khachHangDialog.getKhachHang());
                     refreshTable();
-                }else{
-                    thongBao("Thay đổi khách hàng không thành công");
+                }catch (Exception e1){
+                    thongBaoLoi(e1.getMessage());
                 }
             }
         };
@@ -160,8 +170,15 @@ public class QuanLyKhachHangTabbed extends JPanel {
                         JOptionPane.OK_CANCEL_OPTION
                 );
 
-                if ((selected == JOptionPane.OK_OPTION) && danhSachKhachHang.xoa(maKhachHang))
-                    refreshTable();
+                if (selected == JOptionPane.OK_OPTION){
+                    try{
+                        danhSachKhachHang.xoa(maKhachHang);
+                        refreshTable();
+                    }catch (Exception e1){
+                        thongBaoLoi(e1.getMessage());
+                    }
+                }
+
             }
         };
     }

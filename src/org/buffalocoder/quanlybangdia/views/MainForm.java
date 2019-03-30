@@ -3,8 +3,12 @@ package org.buffalocoder.quanlybangdia.views;
 import java.awt.*;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
+import org.buffalocoder.quanlybangdia.models.DanhSachBangDia;
 import org.buffalocoder.quanlybangdia.models.TaiKhoan;
+import org.buffalocoder.quanlybangdia.utils.Fonts;
 import org.buffalocoder.quanlybangdia.utils.Values;
 import org.buffalocoder.quanlybangdia.views.tabbed.*;
 
@@ -23,10 +27,14 @@ public class MainForm extends JFrame {
     private JMenuBar menuBar;
     private JMenu menuFile, menuEdit, menuView;
 
+    private TrangChuTabbed trangChuTabbed;
+    private QuanLyChoThueTabbed quanLyChoThueTabbed;
+    private QuanLyBangDiaTabbed quanLyBangDiaTabbed;
+    private QuanLyKhachHangTabbed quanLyKhachHangTabbed;
+    private QuanLyNhanVienTabbed quanLyNhanVienTabbed;
+    private ThongKeTabbed thongKeTabbed;
+    private CaiDatTabbed caiDatTabbed;
 
-    /**
-     * Tạo GUI
-     */
     private void prepareUI(){
         /*========== MAIN PANEL =========*/
         mainPanel = new JPanel(new BorderLayout());
@@ -76,26 +84,38 @@ public class MainForm extends JFrame {
         customTabbedPanelUI.setColorDeselected(Values.COLOR_DARK);
 
         // tabbed panel
+
+
         menuTabbed = new JTabbedPane(JTabbedPane.LEFT);
         menuTabbed.setUI(customTabbedPanelUI);
-        menuTabbed.setFont(Values.FONT_PLAIN_DEFAULT);
-        menuTabbed.addTab("Trang chủ", new TrangChuTabbed());
-        menuTabbed.addTab("Cho thuê", new QuanLyChoThueTabbed())  ;
-        menuTabbed.addTab(IS_ADMIN ? "Quản lý băng đĩa" : "Danh sách băng đĩa", new QuanLyBangDiaTabbed());
-        menuTabbed.addTab("Quản lý khách hàng", new QuanLyKhachHangTabbed());
+        menuTabbed.setFont(Fonts.DEFAULT);
+        menuTabbed.addTab("Trang chủ", trangChuTabbed = new TrangChuTabbed());
+        menuTabbed.addTab("Cho thuê", quanLyChoThueTabbed = new QuanLyChoThueTabbed())  ;
+        menuTabbed.addTab(IS_ADMIN ? "Quản lý băng đĩa" : "Danh sách băng đĩa",
+                quanLyBangDiaTabbed = new QuanLyBangDiaTabbed());
+        menuTabbed.addTab("Quản lý khách hàng",
+                quanLyKhachHangTabbed = new QuanLyKhachHangTabbed());
 
         if (IS_ADMIN)
-            menuTabbed.addTab("Quản lý nhân viên", new QuanLyNhanVienTabbed());
+            menuTabbed.addTab("Quản lý nhân viên",
+                    quanLyNhanVienTabbed = new QuanLyNhanVienTabbed());
 
-        menuTabbed.addTab("Thống kê", new ThongKeTabbed());
-        menuTabbed.addTab("Cài đặt", new CaiDatTabbed());
+        menuTabbed.addTab("Thống kê", thongKeTabbed = new ThongKeTabbed());
+        menuTabbed.addTab("Cài đặt", caiDatTabbed = new CaiDatTabbed());
+        menuTabbed.addChangeListener(menuTabbed_Change());
 
         contentPanel.add(menuTabbed);
     }
 
-    /**
-     * Constructor empty
-     */
+    private ChangeListener menuTabbed_Change(){
+        return new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+
+            }
+        };
+    }
+
     public MainForm(){
         SwingUtilities.invokeLater(new Runnable() {
             @Override

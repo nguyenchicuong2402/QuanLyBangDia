@@ -7,14 +7,15 @@ import java.sql.SQLException;
 
 public class ThongTinCaNhanDAO {
     private static ThongTinCaNhanDAO _instance;
+    private static DataBaseUtils dataBaseUtils;
 
-    public ThongTinCaNhan getThongTinCaNhan(String CMND){
+    public ThongTinCaNhan getThongTinCaNhan(String CMND) throws Exception {
         ThongTinCaNhan thongTinCaNhan = null;
 
         String sql = String.format("SELECT * FROM THONGTINCANHAN WHERE CMND = '%s'", CMND);
 
         try {
-            ResultSet resultSet = DataBaseUtils.getInstance().excuteQueryRead(sql);
+            ResultSet resultSet = dataBaseUtils.excuteQueryRead(sql);
             resultSet.next();
 
             thongTinCaNhan = new ThongTinCaNhan(
@@ -26,17 +27,17 @@ public class ThongTinCaNhanDAO {
                     resultSet.getDate("NGAYSINH")
             );
         } catch (SQLException e) {
-            System.out.println("Lỗi đọc database");
+            throw new Exception("Lỗi lấy thông tin cá nhân");
         }
 
         return thongTinCaNhan;
     }
 
-    public ThongTinCaNhan themThongTinCaNhan(ThongTinCaNhan thongTinCaNhan){
+    public ThongTinCaNhan themThongTinCaNhan(ThongTinCaNhan thongTinCaNhan) throws Exception {
         String sql = "INSERT INTO THONGTINCANHAN (CMND, HOTEN, DIENTHOAI, DIACHI, GIOITINH, NGAYSINH) " +
                 "VALUES (?,?,?,?,?,?)";
         try {
-            PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
+            PreparedStatement ps = dataBaseUtils.excuteQueryWrite(sql);
 
             ps.setString(1, thongTinCaNhan.getcMND());
             ps.setString(2, thongTinCaNhan.getHoTen());
@@ -46,31 +47,37 @@ public class ThongTinCaNhanDAO {
             ps.setDate(6, thongTinCaNhan.getNgaySinh());
 
             if (ps.executeUpdate() > 0){
-                System.out.println(getThongTinCaNhan(thongTinCaNhan.getcMND()));
+                dataBaseUtils.commitQuery();
                 return getThongTinCaNhan(thongTinCaNhan.getcMND());
             }
         }catch (Exception e){
-            System.out.println("[ERROR]: Thêm thông tin cá nhân");
+            dataBaseUtils.rollbackQuery();
+            throw new Exception("Lỗi thêm thông tin cá nhân");
         }
         return null;
     }
 
-    public boolean xoaThongTinCaNhan(String CMND){
+    public boolean xoaThongTinCaNhan(String CMND) throws Exception {
         String sql = "DELETE FROM THONGTINCANHAN WHERE CMND = ?";
 
         try {
-            PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
+            PreparedStatement ps = dataBaseUtils.excuteQueryWrite(sql);
 
             ps.setString(1, CMND);
 
-            return ps.executeUpdate()>0;
+            if (ps.executeUpdate()>0){
+                dataBaseUtils.commitQuery();
+                return true;
+            }
         }catch (Exception e){
-            System.out.println("[ERROR]: Xoá thông tin cá nhân");
-            return false;
+            dataBaseUtils.rollbackQuery();
+            throw new Exception("Lỗi xoá thông tin cá nhân");
         }
+
+        return false;
     }
 
-    public ThongTinCaNhan suaThongTinCaNhan(ThongTinCaNhan thongTinCaNhan){
+    public ThongTinCaNhan suaThongTinCaNhan(ThongTinCaNhan thongTinCaNhan) throws Exception {
         String sql = "UPDATE THONGTINCANHAN SET " +
                 "HOTEN = ?, DIENTHOAI = ?, DIACHI = ?, GIOITINH = ?, NGAYSINH = ? " +
                 "WHERE CMND = ?";
@@ -84,16 +91,23 @@ public class ThongTinCaNhanDAO {
             ps.setDate(5, thongTinCaNhan.getNgaySinh());
             ps.setString(6, thongTinCaNhan.getcMND());
 
-            if(ps.executeUpdate()>0)
+            if(ps.executeUpdate() > 0){
+                dataBaseUtils.commitQuery();
                 return getThongTinCaNhan(thongTinCaNhan.getcMND());
+            }
         }catch (Exception e){
-            System.out.println("[ERROR]: Sửa thông tin cá nhân");
+            dataBaseUtils.rollbackQuery();
+            throw new Exception("Lỗi cập nhật thông tin cá nhân");
         }
 
         return null;
     }
 
-    public static ThongTinCaNhanDAO getInstance() {
+    private ThongTinCaNhanDAO() throws Exception {
+        dataBaseUtils = DataBaseUtils.getInstance();
+    }
+
+    public static ThongTinCaNhanDAO getInstance() throws Exception {
         if(_instance == null) {
             synchronized(ThongTinCaNhanDAO.class) {
                 if(null == _instance) {

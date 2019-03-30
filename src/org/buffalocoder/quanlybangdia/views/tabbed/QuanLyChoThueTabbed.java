@@ -81,8 +81,13 @@ public class QuanLyChoThueTabbed extends JPanel {
         box.add(Box.createVerticalStrut(10));
         this.add(box, BorderLayout.CENTER);
 
-        danhSachHoaDon = new DanhSachChoThue();
-        danhSachHoaDon.loadData();
+        try{
+            danhSachHoaDon = new DanhSachChoThue();
+            danhSachHoaDon.loadData();
+        }catch (Exception e){
+            thongBaoLoi(e.getMessage());
+        }
+
         choThueTableModel = new ChoThueTableModel(danhSachHoaDon.getAll());
 
         tblChoThue = new JTable(choThueTableModel);
@@ -92,6 +97,10 @@ public class QuanLyChoThueTabbed extends JPanel {
 
     private void thongBao(String message){
         JOptionPane.showMessageDialog(rootComponent, message, "Thông báo", JOptionPane.WARNING_MESSAGE);
+    }
+
+    private void thongBaoLoi(String message){
+        JOptionPane.showMessageDialog(rootComponent, message, "Lỗi", JOptionPane.ERROR_MESSAGE);
     }
 
     private void refreshTable(){
@@ -115,10 +124,11 @@ public class QuanLyChoThueTabbed extends JPanel {
                         khachHang
                 );
 
-                if (danhSachHoaDon.them(hoaDon)){
+                try{
+                    danhSachHoaDon.them(hoaDon);
                     refreshTable();
-                }else{
-                    thongBao("Thêm hoá đơn không thành công");
+                }catch (Exception e1){
+                    thongBaoLoi(e1.getMessage());
                 }
             }
         };
@@ -137,27 +147,8 @@ public class QuanLyChoThueTabbed extends JPanel {
 
                 // TODO lấy dữ liệu từ popup
 
-                BangDia bangDia = new BangDia(
-                        "BD00010",
-                        "Nhạc trẻ",
-                        "Nhạc",
-                        true,
-                        "ABC",
-                        "ABC",
-                        5000.0,
-                        10
-                );
-
-                KhachHang khachHang = new KhachHang(
-                        "222222222",
-                        "Nguyễn Văn A",
-                        true,
-                        "0123456789",
-                        "IUH",
-                        Date.valueOf("1999-12-12"),
-                        "KH00002"
-                );
-
+                BangDia bangDia = QuanLyBangDiaTabbed.danhSachBangDia.getAll().get(2);
+                KhachHang khachHang = QuanLyKhachHangTabbed.danhSachKhachHang.getAll().get(1);
                 HoaDon hoaDon = new HoaDon(
                         bangDia,
                         20,
@@ -166,10 +157,11 @@ public class QuanLyChoThueTabbed extends JPanel {
                         khachHang
                 );
 
-                if (danhSachHoaDon.sua(hoaDon)){
+                try{
+                    danhSachHoaDon.sua(hoaDon);
                     refreshTable();
-                }else{
-                    thongBao("Thay đổi hoá đơn không thành công");
+                }catch (Exception e1){
+                    thongBaoLoi(e1.getMessage());
                 }
             }
         };
@@ -198,10 +190,15 @@ public class QuanLyChoThueTabbed extends JPanel {
                         JOptionPane.OK_CANCEL_OPTION
                 );
 
-                if ((selected == JOptionPane.OK_OPTION) && danhSachHoaDon.xoa(maHoaDon))
-                    refreshTable();
+                if (selected == JOptionPane.OK_OPTION){
+                    try{
+                        danhSachHoaDon.xoa(maHoaDon);
+                        refreshTable();
+                    }catch (Exception e1){
+                        thongBaoLoi(e1.getMessage());
+                    }
+                }
             }
         };
     }
-
 }

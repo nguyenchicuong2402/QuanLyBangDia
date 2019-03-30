@@ -82,7 +82,12 @@ public class QuanLyNhanVienTabbed extends JPanel {
         box.add(Box.createVerticalStrut(10));
         this.add(box, BorderLayout.CENTER);
 
-        danhSachNhanVien = new DanhSachNhanVien();
+        try{
+            danhSachNhanVien = new DanhSachNhanVien();
+        }catch (Exception e){
+            thongBaoLoi(e.getMessage());
+        }
+
         nhanVienTableModel = new NhanVienTableModel(danhSachNhanVien.getAll());
 
         tblNhanVien = new JTable(nhanVienTableModel);
@@ -99,6 +104,10 @@ public class QuanLyNhanVienTabbed extends JPanel {
         JOptionPane.showMessageDialog(rootComponent, message, "Thông báo", JOptionPane.WARNING_MESSAGE);
     }
 
+    private void thongBaoLoi(String message){
+        JOptionPane.showMessageDialog(rootComponent, message, "Lỗi", JOptionPane.ERROR_MESSAGE);
+    }
+
     private ActionListener btnThem_Click(){
         return new ActionListener() {
             @Override
@@ -109,10 +118,11 @@ public class QuanLyNhanVienTabbed extends JPanel {
                 if (nhanVien == null)
                     return;
 
-                if (danhSachNhanVien.them(nhanVien)){
+                try{
+                    danhSachNhanVien.them(nhanVien);
                     refreshTable();
-                }else{
-                    thongBao("Thêm nhân viên không thành công");
+                }catch (Exception e1){
+                    thongBaoLoi(e1.getMessage());
                 }
             }
         };
@@ -136,10 +146,11 @@ public class QuanLyNhanVienTabbed extends JPanel {
                 if (nhanVien == null)
                     return;
 
-                if (danhSachNhanVien.sua(nhanVien)){
+                try{
+                    danhSachNhanVien.sua(nhanVien);
                     refreshTable();
-                }else{
-                    thongBao("Thay đổi nhân viên không thành công");
+                }catch (Exception e1){
+                    thongBaoLoi(e1.getMessage());
                 }
             }
         };
@@ -167,8 +178,14 @@ public class QuanLyNhanVienTabbed extends JPanel {
                         JOptionPane.OK_CANCEL_OPTION
                 );
 
-                if ((selected == JOptionPane.OK_OPTION) && danhSachNhanVien.xoa(maKhachHang))
-                    refreshTable();
+                if (selected == JOptionPane.OK_OPTION){
+                    try{
+                        danhSachNhanVien.xoa(maKhachHang);
+                        refreshTable();
+                    }catch (Exception e1){
+                        thongBaoLoi(e1.getMessage());
+                    }
+                }
             }
         };
     }
