@@ -23,6 +23,28 @@ public class TaiKhoanDAO {
             taiKhoan.setTenTaiKhoan(rs.getString("TENTAIKHOAN"));
             taiKhoan.setMatKhau(rs.getString("MATKHAU"));
             taiKhoan.setLoaiTaiKhoan(rs.getInt("LOAITK"));
+            taiKhoan.setMaNhanVien(rs.getString("MANV"));
+
+        } catch (SQLException e) {
+            throw new Exception("Lỗi đọc tài khoản");
+        }
+
+        return taiKhoan;
+    }
+
+    public TaiKhoan getTaiKhoanByMaNhanVien (String maNhanVien) throws Exception {
+        TaiKhoan taiKhoan = new TaiKhoan();
+
+        String sql = String.format("SELECT * FROM TAIKHOAN WHERE MANV = '%s'", maNhanVien);
+
+        try {
+            ResultSet rs = dataBaseUtils.excuteQueryRead(sql);
+            rs.next();
+
+            taiKhoan.setTenTaiKhoan(rs.getString("TENTAIKHOAN"));
+            taiKhoan.setMatKhau(rs.getString("MATKHAU"));
+            taiKhoan.setLoaiTaiKhoan(rs.getInt("LOAITK"));
+            taiKhoan.setMaNhanVien(rs.getString("MANV"));
 
         } catch (SQLException e) {
             throw new Exception("Lỗi đọc tài khoản");
@@ -43,7 +65,7 @@ public class TaiKhoanDAO {
             ps.setString(1, taiKhoan.getTenTaiKhoan());
             ps.setString(2, taiKhoan.getMatKhau());
             ps.setInt(3, taiKhoan.getLoaiTaiKhoan());
-            ps.setString(4, taiKhoan.getNhanVien().getMaNhanVien());
+            ps.setString(4, taiKhoan.getMaNhanVien());
 
             if (ps.executeUpdate() > 0){
                 dataBaseUtils.commitQuery();

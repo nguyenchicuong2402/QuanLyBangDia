@@ -2,11 +2,11 @@ package org.buffalocoder.quanlybangdia.models;
 
 import java.util.Objects;
 
-public class TaiKhoan {
+public class TaiKhoan{
     private String tenTaiKhoan;
     private String matKhau;
     private int loaiTaiKhoan;
-    private NhanVien nhanVien;
+    private String maNhanVien;
 
     public String getTenTaiKhoan() {
         return tenTaiKhoan;
@@ -32,22 +32,22 @@ public class TaiKhoan {
         this.loaiTaiKhoan = loaiTaiKhoan;
     }
 
-    public NhanVien getNhanVien() {
-        return nhanVien;
+    public String getMaNhanVien() {
+        return maNhanVien;
     }
 
-    public void setNhanVien(NhanVien nhanVien) {
-        this.nhanVien = nhanVien;
+    public void setMaNhanVien(String maNhanVien) {
+        this.maNhanVien = maNhanVien;
     }
 
     public TaiKhoan() {
     }
 
-    public TaiKhoan(String tenTaiKhoan, String matKhau, int loaiTaiKhoan, NhanVien nhanVien) {
+    public TaiKhoan(String tenTaiKhoan, String matKhau, int loaiTaiKhoan, String maNhanVien) {
         this.tenTaiKhoan = tenTaiKhoan;
         this.matKhau = matKhau;
         this.loaiTaiKhoan = loaiTaiKhoan;
-        this.nhanVien = nhanVien;
+        this.maNhanVien = maNhanVien;
     }
 
     @Override
@@ -69,7 +69,7 @@ public class TaiKhoan {
                 "tenTaiKhoan='" + tenTaiKhoan + '\'' +
                 ", matKhau='" + matKhau + '\'' +
                 ", loaiTaiKhoan=" + loaiTaiKhoan +
-                ", nhanVien=" + nhanVien +
+                ", maNhanVien=" + maNhanVien+
                 '}';
     }
 }

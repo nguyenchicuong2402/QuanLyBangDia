@@ -1,9 +1,11 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
+import org.buffalocoder.quanlybangdia.dao.TaiKhoanDAO;
 import org.buffalocoder.quanlybangdia.models.DanhSachNhanVien;
 import org.buffalocoder.quanlybangdia.models.HoaDon;
 //import org.buffalocoder.quanlybangdia.models.tablemodel.HoaDonTableModel;
 import org.buffalocoder.quanlybangdia.models.NhanVien;
+import org.buffalocoder.quanlybangdia.models.TaiKhoan;
 import org.buffalocoder.quanlybangdia.models.tablemodel.NhanVienTableModel;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.utils.Values;
@@ -26,9 +28,16 @@ public class QuanLyNhanVienTabbed extends JPanel {
     private JTextField txtTuKhoa;
     private DanhSachNhanVien danhSachNhanVien;
     private NhanVienTableModel nhanVienTableModel;
+    private TaiKhoanDAO taiKhoanDAO;
     private final Component rootComponent = this;
 
     public QuanLyNhanVienTabbed(){
+        try{
+            taiKhoanDAO = TaiKhoanDAO.getInstance();
+        }catch (Exception e){
+            thongBaoLoi(e.getMessage());
+        }
+
         this.setLayout(new BorderLayout());
         this.setFont(Values.FONT_PLAIN_DEFAULT);
         this.setBorder(BorderFactory.createEmptyBorder());
@@ -112,7 +121,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                NhanVienDialog nhanVienDialog = new NhanVienDialog(new JFrame(), null);
+                NhanVienDialog nhanVienDialog = new NhanVienDialog(new JFrame(), null, null);
 
                 NhanVien nhanVien = nhanVienDialog.getNhanVien();
                 if (nhanVien == null)
@@ -139,15 +148,23 @@ public class QuanLyNhanVienTabbed extends JPanel {
                     return;
                 }
 
-                NhanVienDialog nhanVienDialog = new NhanVienDialog(new JFrame(),
-                        danhSachNhanVien.getAll().get(index));
+                NhanVien nhanVien = danhSachNhanVien.getAll().get(index);
+                TaiKhoan taiKhoan = null;
+                try {
+                    taiKhoan = taiKhoanDAO.getTaiKhoanByMaNhanVien(nhanVien.getMaNhanVien());
+                } catch (Exception e1) {
+                    thongBaoLoi(e1.getMessage());
+                }
+                NhanVienDialog nhanVienDialog = new NhanVienDialog(new JFrame(), nhanVien, taiKhoan);
 
-                NhanVien nhanVien = nhanVienDialog.getNhanVien();
-                if (nhanVien == null)
+                nhanVien = nhanVienDialog.getNhanVien();
+                taiKhoan = nhanVienDialog.getTaiKhoan();
+                if (nhanVien == null && taiKhoan == null)
                     return;
 
                 try{
                     danhSachNhanVien.sua(nhanVien);
+                    taiKhoanDAO.suaTaiKhoan(taiKhoan);
                     refreshTable();
                 }catch (Exception e1){
                     thongBaoLoi(e1.getMessage());

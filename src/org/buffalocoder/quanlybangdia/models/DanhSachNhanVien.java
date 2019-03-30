@@ -1,14 +1,19 @@
 package org.buffalocoder.quanlybangdia.models;
 
 import org.buffalocoder.quanlybangdia.dao.NhanVienDAO;
+import org.buffalocoder.quanlybangdia.dao.TaiKhoanDAO;
+
 import java.util.ArrayList;
 
 public class DanhSachNhanVien {
     private ArrayList<NhanVien> nhanViens;
+    private ArrayList<TaiKhoan> taiKhoans;
     private static NhanVienDAO nhanVienDAO;
+    private static TaiKhoanDAO taiKhoanDAO;
 
     public DanhSachNhanVien() throws Exception {
         nhanVienDAO = NhanVienDAO.getInstance();
+        taiKhoanDAO = TaiKhoanDAO.getInstance();
         loadData();
     }
 
