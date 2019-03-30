@@ -1,11 +1,12 @@
 package org.buffalocoder.quanlybangdia.views.dialog;
 
+import com.toedter.calendar.JDateChooser;
 import org.buffalocoder.quanlybangdia.models.BangDia;
 import org.buffalocoder.quanlybangdia.models.KhachHang;
 import org.buffalocoder.quanlybangdia.utils.Colors;
 import org.buffalocoder.quanlybangdia.utils.Fonts;
+import org.buffalocoder.quanlybangdia.utils.Formats;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
-import org.buffalocoder.quanlybangdia.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,15 +28,17 @@ public class KhachHangDialog extends JDialog {
     private JButton btnThoat, btnLuu;
     private JTextField txtMaKH, txtCMND, txtHoTen, txtSoDienThoai, txtDiaChi, txtNgaySinh;
     private JComboBox<String> cbGioiTinh;
+    private JDateChooser dateChooser;
 
     private void prepareDialog(){
         mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBorder(BorderFactory.createLineBorder(Colors.PRIMARY, 2));
         getContentPane().add(mainPanel);
 
         // HEADER PANEL
         headerPanel = new JPanel(new BorderLayout());
         headerPanel.setPreferredSize(new Dimension(mainPanel.getWidth(), 60));
-        headerPanel.setBackground(Colors.COLOR_PRIMARY);
+        headerPanel.setBackground(Colors.PRIMARY);
         mainPanel.add(headerPanel, BorderLayout.NORTH);
 
         lblTieuDe = new JLabel(tieuDe);
@@ -143,10 +146,11 @@ public class KhachHangDialog extends JDialog {
         bx5.add(Box.createHorizontalStrut(20));
         bx5.add(lblNgaySinh);
 
-        txtNgaySinh = new JTextField();
-        MaterialDesign.materialTextField(txtNgaySinh);
-        if (isEdit) txtNgaySinh.setText(Utils.DATE_FORMAT.format(khachHang.getNgaySinh()));
-        bx5.add(txtNgaySinh);
+        dateChooser = new JDateChooser(Formats.DATE_FORMAT.toPattern(), "##/##/####", '_');
+        MaterialDesign.materialDateChooser(dateChooser);
+        if (isEdit) dateChooser.setDate(khachHang.getNgaySinh());
+        else dateChooser.setDate(new java.util.Date());
+        bx5.add(dateChooser);
         bx5.add(Box.createHorizontalStrut(20));
 
         lblSoDienThoai = new JLabel("Số điện thoại");
@@ -214,8 +218,10 @@ public class KhachHangDialog extends JDialog {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!validateData())
-                    return;
+//                if (!validateData())
+//                    return;
+
+                System.out.println();
 
                 khachHang = new KhachHang(
                         txtCMND.getText().trim(),
@@ -223,7 +229,7 @@ public class KhachHangDialog extends JDialog {
                         cbGioiTinh.getSelectedItem().equals("Nam"),
                         txtSoDienThoai.getText().trim(),
                         txtDiaChi.getText().trim(),
-                        Date.valueOf(txtNgaySinh.getText().trim()),
+                        Date.valueOf(Formats.DATE_FORMAT_SQL.format(dateChooser.getDate())),
                         txtMaKH.getText().trim()
                 );
 
@@ -253,6 +259,7 @@ public class KhachHangDialog extends JDialog {
         setSize(600, 550);
         setAlwaysOnTop(true);
         setLocationRelativeTo(null);
+        setUndecorated(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
     }

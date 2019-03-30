@@ -7,8 +7,9 @@ import org.buffalocoder.quanlybangdia.models.HoaDon;
 import org.buffalocoder.quanlybangdia.models.NhanVien;
 import org.buffalocoder.quanlybangdia.models.TaiKhoan;
 import org.buffalocoder.quanlybangdia.models.tablemodel.NhanVienTableModel;
+import org.buffalocoder.quanlybangdia.utils.Colors;
+import org.buffalocoder.quanlybangdia.utils.Fonts;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
-import org.buffalocoder.quanlybangdia.utils.Values;
 import org.buffalocoder.quanlybangdia.views.dialog.NhanVienDialog;
 
 import javax.swing.*;
@@ -30,6 +31,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
     private NhanVienTableModel nhanVienTableModel;
     private TaiKhoanDAO taiKhoanDAO;
     private final Component rootComponent = this;
+    private JScrollPane scrollPane;
 
     public QuanLyNhanVienTabbed(){
         try{
@@ -39,18 +41,18 @@ public class QuanLyNhanVienTabbed extends JPanel {
         }
 
         this.setLayout(new BorderLayout());
-        this.setFont(Values.FONT_PLAIN_DEFAULT);
+        this.setFont(Fonts.DEFAULT);
         this.setBorder(BorderFactory.createEmptyBorder());
-        this.setBackground(Values.COLOR_BACKGROUND);
+        this.setBackground(Colors.BACKGROUND);
 
         /*========== TOP PANEL ==========*/
         topPanel = new JPanel(new BorderLayout());
-        topPanel.setBackground(Values.COLOR_BACKGROUND);
+        MaterialDesign.materialPanel(topPanel);
         this.add(topPanel, BorderLayout.NORTH);
 
         // chức năng
         funcPanel = new JPanel();
-        funcPanel.setBackground(Values.COLOR_BACKGROUND);
+        MaterialDesign.materialPanel(funcPanel);
         topPanel.add(funcPanel, BorderLayout.WEST);
 
         btnThem = new JButton("Thêm");
@@ -73,7 +75,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
 
         // tìm kiếm
         searchPanel = new JPanel();
-        searchPanel.setBackground(Values.COLOR_BACKGROUND);
+        MaterialDesign.materialPanel(searchPanel);
         topPanel.add(searchPanel, BorderLayout.EAST);
 
         txtTuKhoa = new JTextField();
@@ -101,7 +103,10 @@ public class QuanLyNhanVienTabbed extends JPanel {
 
         tblNhanVien = new JTable(nhanVienTableModel);
         MaterialDesign.materialTable(tblNhanVien);
-        box.add(new JScrollPane(tblNhanVien), BorderLayout.CENTER);
+
+        scrollPane = new JScrollPane(tblNhanVien);
+        MaterialDesign.materialScrollPane(scrollPane);
+        box.add(scrollPane, BorderLayout.CENTER);
     }
 
     private void refreshTable(){
@@ -124,11 +129,14 @@ public class QuanLyNhanVienTabbed extends JPanel {
                 NhanVienDialog nhanVienDialog = new NhanVienDialog(new JFrame(), null, null);
 
                 NhanVien nhanVien = nhanVienDialog.getNhanVien();
+                TaiKhoan taiKhoan = nhanVienDialog.getTaiKhoan();
                 if (nhanVien == null)
                     return;
 
                 try{
                     danhSachNhanVien.them(nhanVien);
+                    taiKhoanDAO.themTaiKhoan(taiKhoan);
+
                     refreshTable();
                 }catch (Exception e1){
                     thongBaoLoi(e1.getMessage());
@@ -154,6 +162,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
                     taiKhoan = taiKhoanDAO.getTaiKhoanByMaNhanVien(nhanVien.getMaNhanVien());
                 } catch (Exception e1) {
                     thongBaoLoi(e1.getMessage());
+                    return;
                 }
                 NhanVienDialog nhanVienDialog = new NhanVienDialog(new JFrame(), nhanVien, taiKhoan);
 
@@ -180,16 +189,16 @@ public class QuanLyNhanVienTabbed extends JPanel {
                 int index = tblNhanVien.getSelectedRow();
 
                 if (index == -1){
-                    thongBao("Vui lòng chọn khách hàng cần xoá");
+                    thongBao("Vui lòng chọn nhân viên cần xoá");
                     return;
                 }
 
-                String maKhachHang = nhanVienTableModel.getValueAt(index, 0).toString();
-                String tenKhachHang = nhanVienTableModel.getValueAt(index, 1).toString();
+                String maNhanVien = nhanVienTableModel.getValueAt(index, 0).toString();
+                String tenNhanVien = nhanVienTableModel.getValueAt(index, 1).toString();
 
                 int selected = JOptionPane.showConfirmDialog(
                         rootComponent,
-                        String.format("Bạn có muốn xoá khách hàng này không?\nTên khách hàng: %s", tenKhachHang),
+                        String.format("Bạn có muốn xoá nhân viên này không?\nTên nhân viên: %s", tenNhanVien),
                         "Cảnh báo",
                         JOptionPane.WARNING_MESSAGE,
                         JOptionPane.OK_CANCEL_OPTION
@@ -197,7 +206,8 @@ public class QuanLyNhanVienTabbed extends JPanel {
 
                 if (selected == JOptionPane.OK_OPTION){
                     try{
-                        danhSachNhanVien.xoa(maKhachHang);
+                        taiKhoanDAO.xoaTaiKhoan(taiKhoanDAO.getTaiKhoanByMaNhanVien(maNhanVien).getTenTaiKhoan());
+                        danhSachNhanVien.xoa(maNhanVien);
                         refreshTable();
                     }catch (Exception e1){
                         thongBaoLoi(e1.getMessage());

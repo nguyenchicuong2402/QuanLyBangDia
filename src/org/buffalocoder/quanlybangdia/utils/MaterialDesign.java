@@ -1,34 +1,37 @@
 package org.buffalocoder.quanlybangdia.utils;
 
+import com.toedter.calendar.JDateChooser;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class MaterialDesign {
     public static void materialButton(JButton button){
-        button.setBackground(Values.COLOR_PRIMARY);
-        button.setForeground(Values.COLOR_TEXT);
+        button.setBackground(Colors.PRIMARY);
+        button.setForeground(Colors.TEXT);
         button.setFont(Fonts.DEFAULT);
         button.setBorder(BorderFactory.createEmptyBorder());
     }
 
     public static void materialTextField(JTextField textField){
-        textField.setFont(Values.FONT_PLAIN_DEFAULT);
+        textField.setFont(Fonts.DEFAULT);
         textField.setForeground(Color.BLACK);
         textField.setBorder(BorderFactory.createMatteBorder(0, 1
-                , 2, 0, Values.COLOR_PRIMARY));
+                , 2, 0, Colors.PRIMARY));
     }
 
     public static void materialTextArea(JTextArea textArea){
-        textArea.setFont(Values.FONT_PLAIN_DEFAULT);
-        textArea.setBackground(Values.COLOR_BACKGROUND);
-        textArea.setBorder(BorderFactory.createMatteBorder(0, 1, 2, 0, Values.COLOR_PRIMARY));
+        textArea.setFont(Fonts.DEFAULT);
+        textArea.setForeground(Color.BLACK);
+        textArea.setBorder(BorderFactory.createMatteBorder(0, 1
+                , 2, 0, Colors.PRIMARY));
     }
 
     public static void materialTable(JTable table){
-        table.setSelectionBackground(Values.COLOR_DARK);
+        table.setSelectionBackground(Colors.DARK);
         table.setSelectionForeground(Color.WHITE);
         table.getTableHeader().setForeground(Color.BLACK);
-        table.getTableHeader().setBackground(Values.COLOR_TEXT);
+        table.getTableHeader().setBackground(Colors.TEXT);
         table.getTableHeader().setFont(Fonts.TABLE_HEADER);
 
         table.setFont(Fonts.DEFAULT);
@@ -36,6 +39,11 @@ public class MaterialDesign {
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.setAutoCreateRowSorter(true);
         table.getTableHeader().setReorderingAllowed(false);
+    }
+
+    public static void materialScrollPane (JScrollPane scrollPane){
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        scrollPane.getViewport().setBackground(Colors.BACKGROUND);
     }
 
     public static void materialLabel (JLabel label){
@@ -48,5 +56,14 @@ public class MaterialDesign {
     }
 
     public static void materialComboBox (JComboBox comboBox){
+    }
+
+    public static void materialPanel (JPanel panel){
+        panel.setBackground(Colors.BACKGROUND);
+    }
+
+    public static void materialDateChooser (JDateChooser dateChooser){
+        dateChooser.setFont(Fonts.DEFAULT);
+        dateChooser.setForeground(Color.BLACK);
     }
 }

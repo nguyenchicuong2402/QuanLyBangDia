@@ -1,16 +1,15 @@
 package org.buffalocoder.quanlybangdia.views.dialog;
 
+import com.toedter.calendar.JDateChooser;
 import org.buffalocoder.quanlybangdia.models.*;
-import org.buffalocoder.quanlybangdia.utils.Colors;
-import org.buffalocoder.quanlybangdia.utils.Fonts;
-import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
-import org.buffalocoder.quanlybangdia.utils.PatternRegexs;
+import org.buffalocoder.quanlybangdia.utils.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,19 +22,22 @@ public class ChoThueDialog extends JDialog {
 
     private JPanel mainPanel, headerPanel, contentPanel, bottomPanel;
     private JButton btnThoat, btnLuu;
-    private JLabel lblTieuDe, lblMaHoaDon, lblMaKhachHang, lblMaBangDia, lblSoNgayDuocMuon, lblSoLuong;
+    private JLabel lblTieuDe, lblMaHoaDon, lblMaKhachHang, lblMaBangDia, lblSoNgayDuocMuon, lblSoLuong,
+                        lblNgayThue;
     private JTextField txtMaHoaDon, txtSoNgayDuocMuon, txtSoLuong;
     private JComboBox<String> cbMaKhachHang, cbMaBangDia;
+    private JDateChooser dateChooser;
 
 
     private void prepareDialog(){
         mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBorder(BorderFactory.createLineBorder(Colors.PRIMARY, 2));
         getContentPane().add(mainPanel);
 
         // HEADER PANEL
         headerPanel = new JPanel(new BorderLayout());
         headerPanel.setPreferredSize(new Dimension(mainPanel.getWidth(), 60));
-        headerPanel.setBackground(Colors.COLOR_PRIMARY);
+        headerPanel.setBackground(Colors.PRIMARY);
         mainPanel.add(headerPanel, BorderLayout.NORTH);
 
         lblTieuDe = new JLabel(tieuDe);
@@ -72,6 +74,10 @@ public class ChoThueDialog extends JDialog {
 
         Box bx5 = Box.createHorizontalBox();
         box.add(bx5);
+        box.add(Box.createVerticalStrut(10));
+
+        Box bx6 = Box.createHorizontalBox();
+        box.add(bx6);
         box.add(Box.createVerticalStrut(50));
 
         lblMaHoaDon = new JLabel("Mã hoá đơn");
@@ -120,29 +126,42 @@ public class ChoThueDialog extends JDialog {
         bx3.add(cbMaBangDia);
         bx3.add(Box.createHorizontalStrut(20));
 
+        lblNgayThue = new JLabel("Ngày thuê");
+        lblNgayThue.setPreferredSize(lblMaHoaDon.getPreferredSize());
+        MaterialDesign.materialLabel(lblNgayThue);
+        bx4.add(Box.createHorizontalStrut(20));
+        bx4.add(lblNgayThue);
+
+        dateChooser = new JDateChooser(Formats.DATE_FORMAT.toPattern(), "##/##/####", '_');
+        MaterialDesign.materialDateChooser(dateChooser);
+        if (isEdit) dateChooser.setDate(hoaDon.getNgayLap());
+        else dateChooser.setDate(new Date());
+        bx4.add(dateChooser);
+        bx4.add(Box.createHorizontalStrut(20));
+
         lblSoLuong = new JLabel("Số lượng");
         lblSoLuong.setPreferredSize(lblMaHoaDon.getPreferredSize());
         MaterialDesign.materialLabel(lblSoLuong);
-        bx4.add(Box.createHorizontalStrut(20));
-        bx4.add(lblSoLuong);
+        bx5.add(Box.createHorizontalStrut(20));
+        bx5.add(lblSoLuong);
 
         txtSoLuong = new JTextField();
         MaterialDesign.materialTextField(txtSoLuong);
         if (isEdit) txtSoLuong.setText(String.valueOf(hoaDon.getSoLuong()));
-        bx4.add(txtSoLuong);
-        bx4.add(Box.createHorizontalStrut(20));
+        bx5.add(txtSoLuong);
+        bx5.add(Box.createHorizontalStrut(20));
 
         lblSoNgayDuocMuon = new JLabel("Số ngày mượn");
         lblSoNgayDuocMuon.setPreferredSize(lblMaHoaDon.getPreferredSize());
         MaterialDesign.materialLabel(lblSoNgayDuocMuon);
-        bx5.add(Box.createHorizontalStrut(20));
-        bx5.add(lblSoNgayDuocMuon);
+        bx6.add(Box.createHorizontalStrut(20));
+        bx6.add(lblSoNgayDuocMuon);
 
         txtSoNgayDuocMuon = new JTextField();
         MaterialDesign.materialTextField(txtSoNgayDuocMuon);
         if (isEdit) txtSoNgayDuocMuon.setText(String.valueOf(hoaDon.getSoNgayDuocMuon()));
-        bx5.add(txtSoNgayDuocMuon);
-        bx5.add(Box.createHorizontalStrut(20));
+        bx6.add(txtSoNgayDuocMuon);
+        bx6.add(Box.createHorizontalStrut(20));
 
         // BOTTOM PANEL
         bottomPanel = new JPanel(new GridLayout(1, 2, 1, 10));
@@ -247,6 +266,7 @@ public class ChoThueDialog extends JDialog {
         setSize(600, 500);
         setAlwaysOnTop(true);
         setLocationRelativeTo(null);
+        setUndecorated(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
     }

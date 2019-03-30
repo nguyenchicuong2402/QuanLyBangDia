@@ -1,7 +1,7 @@
 package org.buffalocoder.quanlybangdia.models.tablemodel;
 
 import org.buffalocoder.quanlybangdia.models.HoaDon;
-import org.buffalocoder.quanlybangdia.utils.Utils;
+import org.buffalocoder.quanlybangdia.utils.Formats;
 
 import javax.swing.table.AbstractTableModel;
 import java.sql.Date;
@@ -44,7 +44,7 @@ public class ChoThueTableModel extends AbstractTableModel {
                 case 1: return row.getKhachHang().getHoTen();
                 case 2: return row.getBangDia().getTenBangDia();
                 case 3: return row.getSoLuong();
-                case 4: return Utils.DATE_FORMAT.format(row.getNgayLap());
+                case 4: return Formats.DATE_FORMAT.format(row.getNgayLap());
                 case 5: return row.getSoNgayDuocMuon();
             }
         }catch (Exception e){

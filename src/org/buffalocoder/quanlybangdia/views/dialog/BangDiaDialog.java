@@ -27,12 +27,13 @@ public class BangDiaDialog extends JDialog{
 
     private void prepareDialog(){
         mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBorder(BorderFactory.createLineBorder(Colors.PRIMARY, 2));
         getContentPane().add(mainPanel);
 
         // HEADER PANEL
         headerPanel = new JPanel(new BorderLayout());
         headerPanel.setPreferredSize(new Dimension(mainPanel.getWidth(), 60));
-        headerPanel.setBackground(Colors.COLOR_PRIMARY);
+        headerPanel.setBackground(Colors.PRIMARY);
         mainPanel.add(headerPanel, BorderLayout.NORTH);
 
         lblTieuDe = new JLabel(tieuDe);
@@ -252,6 +253,7 @@ public class BangDiaDialog extends JDialog{
         setSize(600, 680);
         setAlwaysOnTop(true);
         setLocationRelativeTo(null);
+        setUndecorated(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
     }

@@ -1,5 +1,6 @@
 package org.buffalocoder.quanlybangdia.views.dialog;
 
+import com.toedter.calendar.JDateChooser;
 import org.buffalocoder.quanlybangdia.models.NhanVien;
 import org.buffalocoder.quanlybangdia.models.TaiKhoan;
 import org.buffalocoder.quanlybangdia.utils.*;
@@ -25,15 +26,17 @@ public class NhanVienDialog extends JDialog {
                         txtTenTaiKhoan;
     private JPasswordField txtMatKhau, txtNhapLaiMatKhau;
     private JComboBox<String> cbGioiTinh, cbLoaiTaiKhoan;
+    private JDateChooser dateChooser;
 
     private void prepareDialog(){
         mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBorder(BorderFactory.createLineBorder(Colors.PRIMARY, 2));
         getContentPane().add(mainPanel);
 
         // HEADER PANEL
         headerPanel = new JPanel(new BorderLayout());
         headerPanel.setPreferredSize(new Dimension(mainPanel.getWidth(), 60));
-        headerPanel.setBackground(Colors.COLOR_PRIMARY);
+        headerPanel.setBackground(Colors.PRIMARY);
         mainPanel.add(headerPanel, BorderLayout.NORTH);
 
         lblTieuDe = new JLabel(tieuDe);
@@ -205,10 +208,11 @@ public class NhanVienDialog extends JDialog {
         bx9.add(Box.createHorizontalStrut(20));
         bx9.add(lblNgaySinh);
 
-        txtNgaySinh = new JTextField();
-        MaterialDesign.materialTextField(txtNgaySinh);
-        if (isEdit) txtNgaySinh.setText(Utils.DATE_FORMAT.format(nhanVien.getNgaySinh()));
-        bx9.add(txtNgaySinh);
+        dateChooser = new JDateChooser(Formats.DATE_FORMAT.toPattern(), "##/##/####", '_');
+        MaterialDesign.materialDateChooser(dateChooser);
+        if (isEdit) dateChooser.setDate(nhanVien.getNgaySinh());
+        else dateChooser.setDate(new java.util.Date());
+        bx9.add(dateChooser);
         bx9.add(Box.createHorizontalStrut(20));
 
         lblSoDienThoai = new JLabel("Số điện thoại");
@@ -283,7 +287,7 @@ public class NhanVienDialog extends JDialog {
                         cbGioiTinh.getSelectedItem().equals("Nam"),
                         txtSoDienThoai.getText().trim(),
                         txtDiaChi.getText().trim(),
-                        Date.valueOf(txtNgaySinh.getText().trim()),
+                        Date.valueOf(Formats.DATE_FORMAT_SQL.format(dateChooser.getDate())),
                         txtMaNV.getText().trim(),
                         txtMoTa.getText().trim()
                 );
@@ -322,6 +326,7 @@ public class NhanVienDialog extends JDialog {
         setSize(600, 750);
         setAlwaysOnTop(true);
         setLocationRelativeTo(null);
+        setUndecorated(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
     }

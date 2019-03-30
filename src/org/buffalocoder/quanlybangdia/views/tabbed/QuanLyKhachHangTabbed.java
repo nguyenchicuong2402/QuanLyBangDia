@@ -3,8 +3,9 @@ package org.buffalocoder.quanlybangdia.views.tabbed;
 import org.buffalocoder.quanlybangdia.models.DanhSachKhachHang;
 import org.buffalocoder.quanlybangdia.models.KhachHang;
 import org.buffalocoder.quanlybangdia.models.tablemodel.KhachHangTableModel;
+import org.buffalocoder.quanlybangdia.utils.Colors;
+import org.buffalocoder.quanlybangdia.utils.Fonts;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
-import org.buffalocoder.quanlybangdia.utils.Values;
 import org.buffalocoder.quanlybangdia.views.dialog.KhachHangDialog;
 
 import javax.swing.*;
@@ -24,21 +25,22 @@ public class QuanLyKhachHangTabbed extends JPanel {
     private KhachHangTableModel khachHangTableModel;
     protected static DanhSachKhachHang danhSachKhachHang;
     private Component rootComponent = this;
+    private JScrollPane scrollPane;
 
     public QuanLyKhachHangTabbed(){
         this.setLayout(new BorderLayout());
-        this.setFont(Values.FONT_PLAIN_DEFAULT);
+        this.setFont(Fonts.DEFAULT);
         this.setBorder(BorderFactory.createEmptyBorder());
-        this.setBackground(Values.COLOR_BACKGROUND);
+        this.setBackground(Colors.BACKGROUND);
 
         /*========== TOP PANEL ==========*/
         topPanel = new JPanel(new BorderLayout());
-        topPanel.setBackground(Values.COLOR_BACKGROUND);
+        MaterialDesign.materialPanel(topPanel);
         this.add(topPanel, BorderLayout.NORTH);
 
         // chức năng
         funcPanel = new JPanel();
-        funcPanel.setBackground(Values.COLOR_BACKGROUND);
+        MaterialDesign.materialPanel(funcPanel);
         topPanel.add(funcPanel, BorderLayout.WEST);
 
         btnThem = new JButton("Thêm");
@@ -61,7 +63,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
 
         // tìm kiếm
         searchPanel = new JPanel();
-        searchPanel.setBackground(Values.COLOR_BACKGROUND);
+        MaterialDesign.materialPanel(searchPanel);
         topPanel.add(searchPanel, BorderLayout.EAST);
 
         txtTuKhoa = new JTextField();
@@ -88,7 +90,10 @@ public class QuanLyKhachHangTabbed extends JPanel {
 
         tblKhachHang = new JTable(khachHangTableModel);
         MaterialDesign.materialTable(tblKhachHang);
-        box.add(new JScrollPane(tblKhachHang), BorderLayout.CENTER);
+
+        scrollPane = new JScrollPane(tblKhachHang);
+        MaterialDesign.materialScrollPane(scrollPane);
+        box.add(scrollPane, BorderLayout.CENTER);
     }
 
     private void refreshTable(){

@@ -107,7 +107,7 @@ public class KhachHangDAO {
         String sql = "DELETE FROM KHACHHANG WHERE MAKH = ?";
 
         try {
-            PreparedStatement ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
+            PreparedStatement ps = dataBaseUtils.excuteQueryWrite(sql);
 
             ps.setString(1, maKhachHang);
 

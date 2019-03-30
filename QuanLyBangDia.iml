@@ -16,6 +16,14 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="sqljdbc4-3.0" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/org/buffalocoder/quanlybangdia/resources/lib/jcalendar-1.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

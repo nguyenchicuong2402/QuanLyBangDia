@@ -12,6 +12,7 @@ public class NhanVienDAO {
     private static NhanVienDAO _instance;
     private static DataBaseUtils dataBaseUtils;
     private static ThongTinCaNhanDAO thongTinCaNhanDAO;
+    private static TaiKhoanDAO taiKhoanDAO;
 
     public NhanVien getNhanVien(String maNhanVien) throws Exception {
         NhanVien nhanVien = null;
@@ -103,9 +104,15 @@ public class NhanVienDAO {
 
     public boolean xoaNhanVien(String maNhanVien) throws Exception {
         String cmnd = getNhanVien(maNhanVien).getcMND();
+        String tenTaiKhoan = taiKhoanDAO.getTaiKhoanByMaNhanVien(maNhanVien).getTenTaiKhoan();
         String sql = "DELETE FROM NHANVIEN WHERE MANV = ?";
 
         try {
+
+            if (!taiKhoanDAO.xoaTaiKhoan(tenTaiKhoan))
+                return false;
+
+
             PreparedStatement ps = dataBaseUtils.excuteQueryWrite(sql);
 
             ps.setString(1, maNhanVien);
@@ -116,7 +123,7 @@ public class NhanVienDAO {
             }
         }catch (Exception e){
             dataBaseUtils.rollbackQuery();
-            throw new Exception("Lỗi xoá thông tin cá nhân");
+            throw new Exception("Lỗi xoá nhân viên");
         }
 
         return false;
@@ -157,6 +164,7 @@ public class NhanVienDAO {
     private NhanVienDAO() throws Exception {
         dataBaseUtils = DataBaseUtils.getInstance();
         thongTinCaNhanDAO = ThongTinCaNhanDAO.getInstance();
+        taiKhoanDAO = TaiKhoanDAO.getInstance();
     }
 
     public static NhanVienDAO getInstance() throws Exception {

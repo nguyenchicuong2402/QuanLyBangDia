@@ -5,8 +5,9 @@ import org.buffalocoder.quanlybangdia.models.DanhSachChoThue;
 import org.buffalocoder.quanlybangdia.models.HoaDon;
 import org.buffalocoder.quanlybangdia.models.KhachHang;
 import org.buffalocoder.quanlybangdia.models.tablemodel.ChoThueTableModel;
+import org.buffalocoder.quanlybangdia.utils.Colors;
+import org.buffalocoder.quanlybangdia.utils.Fonts;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
-import org.buffalocoder.quanlybangdia.utils.Values;
 import org.buffalocoder.quanlybangdia.views.dialog.BangDiaDialog;
 import org.buffalocoder.quanlybangdia.views.dialog.ChoThueDialog;
 
@@ -29,21 +30,22 @@ public class QuanLyChoThueTabbed extends JPanel {
     private ChoThueTableModel choThueTableModel;
     private DanhSachChoThue danhSachHoaDon;
     private final Component rootComponent = this;
+    private JScrollPane scrollPane;
 
     public QuanLyChoThueTabbed(){
         this.setLayout(new BorderLayout());
-        this.setFont(Values.FONT_PLAIN_DEFAULT);
+        this.setFont(Fonts.DEFAULT);
         this.setBorder(BorderFactory.createEmptyBorder());
-        this.setBackground(Values.COLOR_BACKGROUND);
+        this.setBackground(Colors.BACKGROUND);
 
         /*========== TOP PANEL ==========*/
         topPanel = new JPanel(new BorderLayout());
-        topPanel.setBackground(Values.COLOR_BACKGROUND);
+        MaterialDesign.materialPanel(topPanel);
         this.add(topPanel, BorderLayout.NORTH);
 
         // chức năng
         funcPanel = new JPanel();
-        funcPanel.setBackground(Values.COLOR_BACKGROUND);
+        MaterialDesign.materialPanel(funcPanel);
         topPanel.add(funcPanel, BorderLayout.WEST);
 
         btnThem = new JButton("Thêm");
@@ -66,7 +68,7 @@ public class QuanLyChoThueTabbed extends JPanel {
 
         // tìm kiếm
         searchPanel = new JPanel();
-        searchPanel.setBackground(Values.COLOR_BACKGROUND);
+        MaterialDesign.materialPanel(searchPanel);
         topPanel.add(searchPanel, BorderLayout.EAST);
 
         txtTuKhoa = new JTextField();
@@ -94,7 +96,10 @@ public class QuanLyChoThueTabbed extends JPanel {
 
         tblChoThue = new JTable(choThueTableModel);
         MaterialDesign.materialTable(tblChoThue);
-        box.add(new JScrollPane(tblChoThue));
+
+        scrollPane = new JScrollPane(tblChoThue);
+        MaterialDesign.materialScrollPane(scrollPane);
+        box.add(scrollPane, BorderLayout.CENTER);
     }
 
     private void thongBao(String message){

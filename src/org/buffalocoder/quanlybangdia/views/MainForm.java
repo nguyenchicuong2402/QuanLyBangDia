@@ -49,7 +49,7 @@ public class MainForm extends JFrame {
         mainPanel.add(topPanel, BorderLayout.NORTH);
         //Exit Panel
         ExitPanel = new JPanel(null);
-        ExitPanel.setBackground(Colors.COLOR_DARK);
+        ExitPanel.setBackground(Colors.DARK);
         ExitPanel.setPreferredSize(new Dimension(50, 50));
         topPanel.add(ExitPanel, BorderLayout.EAST);
 //       lblExit
@@ -59,41 +59,45 @@ public class MainForm extends JFrame {
         lblExit.setBounds(9, 10, 30, 30);
         lblExit.addMouseListener(lblExit());
         ExitPanel.add(lblExit);
-//      lblTitle
+
+        // TITLE
         lblTitle = new JLabel("IUH CODER");
+        lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
         lblTitle.setPreferredSize(new Dimension(294, topPanel.getHeight()));
         lblTitle.setOpaque(true);
-        lblTitle.setBackground(Colors.COLOR_DARK);
+        lblTitle.setBackground(Colors.DARK);
         MaterialDesign.materialLabel(lblTitle);
-        lblTitle.setForeground(Colors.COLOR_TEXT);
+        lblTitle.setForeground(Colors.TEXT);
+        lblTitle.setFont(Fonts.TITLE_2);
         topPanel.add(lblTitle, BorderLayout.WEST);
+
         // menu panel
         menuPanel = new JPanel();
         menuPanel.setBorder(BorderFactory.createEmptyBorder());
         topPanel.add(menuPanel);
 
         menuBar = new JMenuBar();
-        menuBar.setBackground(Colors.COLOR_DARK);
+        menuBar.setBackground(Colors.DARK);
         topPanel.add(menuBar);
 
         menuFile = new JMenu("File");
-        menuFile.setForeground(Colors.COLOR_TEXT);
-        menuFile.setPreferredSize(new Dimension(60, topPanel.getHeight()));
+        menuFile.setForeground(Colors.TEXT);
+        menuFile.setPreferredSize(new Dimension(50, topPanel.getHeight()));
         menuBar.add(menuFile);
 
         menuEdit = new JMenu("Edit");
-        menuEdit.setForeground(Colors.COLOR_TEXT);
+        menuEdit.setForeground(Colors.TEXT);
         menuEdit.setPreferredSize(menuFile.getPreferredSize());
         menuBar.add(menuEdit);
 
         menuView = new JMenu("View");
-        menuView.setForeground(Colors.COLOR_TEXT);
+        menuView.setForeground(Colors.TEXT);
         menuView.setPreferredSize(menuFile.getPreferredSize());
         menuBar.add(menuView);
 
         /*========== MENU PANEL =========*/
         contentPanel = new JPanel(new BorderLayout());
-        contentPanel.setBackground(Colors.COLOR_DARK);
+        contentPanel.setBackground(Colors.DARK);
         contentPanel.setBorder(BorderFactory.createEmptyBorder());
         mainPanel.add(contentPanel, BorderLayout.CENTER);
 
@@ -102,12 +106,10 @@ public class MainForm extends JFrame {
         customTabbedPanelUI.setWidth(120);
         customTabbedPanelUI.setHeight(80);
         customTabbedPanelUI.setMargin(10, 0);
-        customTabbedPanelUI.setColorSelected(Colors.COLOR_SELECTED);
-        customTabbedPanelUI.setColorDeselected(Colors.COLOR_DARK);
+        customTabbedPanelUI.setColorSelected(Colors.SELECTED);
+        customTabbedPanelUI.setColorDeselected(Colors.DARK);
 
         // tabbed panel
-
-
         menuTabbed = new JTabbedPane(JTabbedPane.LEFT);
         menuTabbed.setUI(customTabbedPanelUI);
         menuTabbed.setFont(Fonts.DEFAULT);
