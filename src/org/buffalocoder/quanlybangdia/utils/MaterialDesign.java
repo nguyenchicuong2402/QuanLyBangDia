@@ -46,4 +46,7 @@ public class MaterialDesign {
     public static void materialCheckBox(JCheckBox checkBox){
         checkBox.setFont(Fonts.DEFAULT);
     }
+
+    public static void materialComboBox (JComboBox comboBox){
+    }
 }

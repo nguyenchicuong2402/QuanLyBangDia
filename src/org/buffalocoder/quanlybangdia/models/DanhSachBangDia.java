@@ -41,11 +41,20 @@ public class DanhSachBangDia {
         return bangDias.set(tim(bangDia.getMaBangDia()), bangDiaDAO.suaBangDia(bangDia)) != null;
     }
 
-    private int tim(String maBangDia){
+    public int tim(String maBangDia){
         for (int i = 0; i < bangDias.size(); i++)
             if (bangDias.get(i).getMaBangDia().equals(maBangDia))
                 return i;
 
         return -1;
+    }
+
+    public ArrayList<String> getMaBangDias(){
+        ArrayList<String> maBangDias = new ArrayList<>();
+
+        for (BangDia bangDia : bangDias)
+            maBangDias.add(bangDia.getMaBangDia());
+
+        return maBangDias;
     }
 }

@@ -48,4 +48,13 @@ public class DanhSachKhachHang {
 
         return -1;
     }
+
+    public ArrayList<String> getMaKhachHangs(){
+        ArrayList<String> maKhachHangs = new ArrayList<>();
+
+        for (KhachHang khachHang : khachHangs)
+            maKhachHangs.add(khachHang.getMaKH());
+
+        return maKhachHangs;
+    }
 }

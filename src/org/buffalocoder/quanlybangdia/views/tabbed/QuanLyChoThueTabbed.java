@@ -7,6 +7,8 @@ import org.buffalocoder.quanlybangdia.models.KhachHang;
 import org.buffalocoder.quanlybangdia.models.tablemodel.ChoThueTableModel;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.utils.Values;
+import org.buffalocoder.quanlybangdia.views.dialog.BangDiaDialog;
+import org.buffalocoder.quanlybangdia.views.dialog.ChoThueDialog;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -112,21 +114,14 @@ public class QuanLyChoThueTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO lấy dữ liệu từ popup
-
-                BangDia bangDia = QuanLyBangDiaTabbed.danhSachBangDia.getAll().get(2);
-                KhachHang khachHang = QuanLyKhachHangTabbed.danhSachKhachHang.getAll().get(1);
-                HoaDon hoaDon = new HoaDon(
-                        bangDia,
-                        10,
-                        1,
-                        "HD00003",
-                        khachHang
-                );
+                ChoThueDialog choThueDialog = new ChoThueDialog(new JFrame(), null);
+                HoaDon hoaDon = choThueDialog.getHoaDon();
 
                 try{
-                    danhSachHoaDon.them(hoaDon);
-                    refreshTable();
+                    if (hoaDon != null){
+                        danhSachHoaDon.them(hoaDon);
+                        refreshTable();
+                    }
                 }catch (Exception e1){
                     thongBaoLoi(e1.getMessage());
                 }
@@ -145,17 +140,9 @@ public class QuanLyChoThueTabbed extends JPanel {
                     return;
                 }
 
-                // TODO lấy dữ liệu từ popup
-
-                BangDia bangDia = QuanLyBangDiaTabbed.danhSachBangDia.getAll().get(2);
-                KhachHang khachHang = QuanLyKhachHangTabbed.danhSachKhachHang.getAll().get(1);
-                HoaDon hoaDon = new HoaDon(
-                        bangDia,
-                        20,
-                        1,
-                        "HD00005",
-                        khachHang
-                );
+                HoaDon hoaDon = danhSachHoaDon.getAll().get(index);
+                ChoThueDialog choThueDialog = new ChoThueDialog(new JFrame(), hoaDon);
+                hoaDon = choThueDialog.getHoaDon();
 
                 try{
                     danhSachHoaDon.sua(hoaDon);
