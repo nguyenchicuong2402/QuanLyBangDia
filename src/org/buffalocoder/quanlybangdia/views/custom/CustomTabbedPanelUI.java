@@ -1,5 +1,4 @@
-package org.buffalocoder.quanlybangdia.views;
-import org.buffalocoder.quanlybangdia.utils.Values;
+package org.buffalocoder.quanlybangdia.views.custom;
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
