@@ -1,13 +1,16 @@
 package org.buffalocoder.quanlybangdia.views;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.buffalocoder.quanlybangdia.utils.Colors;
 import org.buffalocoder.quanlybangdia.utils.Fonts;
-import org.buffalocoder.quanlybangdia.utils.Values;
+import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.views.custom.CustomTabbedPanelUI;
 import org.buffalocoder.quanlybangdia.views.tabbed.*;
 
@@ -19,12 +22,13 @@ public class MainForm extends JFrame {
     private final boolean IS_ADMIN = DangNhap.taiKhoan.getLoaiTaiKhoan() == 1;
 
     //========= UI ===========//
-    private JPanel mainPanel, topPanel, contentPanel, userPanel, menuPanel;
+    private JPanel mainPanel, topPanel, contentPanel, userPanel, menuPanel, ExitPanel;
     private JTabbedPane menuTabbed;
     private JTextField txtSearch;
     private CustomTabbedPanelUI customTabbedPanelUI;
     private JMenuBar menuBar;
     private JMenu menuFile, menuEdit, menuView;
+    private JLabel lblTitle, lblExit;
 
     private TrangChuTabbed trangChuTabbed;
     private QuanLyChoThueTabbed quanLyChoThueTabbed;
@@ -41,36 +45,55 @@ public class MainForm extends JFrame {
 
         /*========== TOP PANEL ==========*/
         topPanel = new JPanel(new BorderLayout());
-        topPanel.setPreferredSize(new Dimension(this.getWidth(), 40));
+        topPanel.setPreferredSize(new Dimension(this.getWidth(), 80));
         mainPanel.add(topPanel, BorderLayout.NORTH);
-
+        //Exit Panel
+        ExitPanel = new JPanel(null);
+        ExitPanel.setBackground(Colors.COLOR_DARK);
+        ExitPanel.setPreferredSize(new Dimension(50, 50));
+        topPanel.add(ExitPanel, BorderLayout.EAST);
+//       lblExit
+        lblExit = new JLabel("X");
+        MaterialDesign.materialLabel(lblExit);
+        lblExit.setForeground(Color.red);
+        lblExit.setBounds(9, 10, 30, 30);
+        lblExit.addMouseListener(lblExit());
+        ExitPanel.add(lblExit);
+//      lblTitle
+        lblTitle = new JLabel("IUH CODER");
+        lblTitle.setPreferredSize(new Dimension(294, topPanel.getHeight()));
+        lblTitle.setOpaque(true);
+        lblTitle.setBackground(Colors.COLOR_DARK);
+        MaterialDesign.materialLabel(lblTitle);
+        lblTitle.setForeground(Colors.COLOR_TEXT);
+        topPanel.add(lblTitle, BorderLayout.WEST);
         // menu panel
         menuPanel = new JPanel();
         menuPanel.setBorder(BorderFactory.createEmptyBorder());
         topPanel.add(menuPanel);
 
         menuBar = new JMenuBar();
-        menuBar.setBackground(Values.COLOR_PRIMARY);
+        menuBar.setBackground(Colors.COLOR_DARK);
         topPanel.add(menuBar);
 
         menuFile = new JMenu("File");
-        menuFile.setForeground(Values.COLOR_TEXT);
+        menuFile.setForeground(Colors.COLOR_TEXT);
         menuFile.setPreferredSize(new Dimension(60, topPanel.getHeight()));
         menuBar.add(menuFile);
 
         menuEdit = new JMenu("Edit");
-        menuEdit.setForeground(Values.COLOR_TEXT);
+        menuEdit.setForeground(Colors.COLOR_TEXT);
         menuEdit.setPreferredSize(menuFile.getPreferredSize());
         menuBar.add(menuEdit);
 
         menuView = new JMenu("View");
-        menuView.setForeground(Values.COLOR_TEXT);
+        menuView.setForeground(Colors.COLOR_TEXT);
         menuView.setPreferredSize(menuFile.getPreferredSize());
         menuBar.add(menuView);
 
         /*========== MENU PANEL =========*/
         contentPanel = new JPanel(new BorderLayout());
-        contentPanel.setBackground(Values.COLOR_SECONDARY);
+        contentPanel.setBackground(Colors.COLOR_DARK);
         contentPanel.setBorder(BorderFactory.createEmptyBorder());
         mainPanel.add(contentPanel, BorderLayout.CENTER);
 
@@ -79,8 +102,8 @@ public class MainForm extends JFrame {
         customTabbedPanelUI.setWidth(120);
         customTabbedPanelUI.setHeight(80);
         customTabbedPanelUI.setMargin(10, 0);
-        customTabbedPanelUI.setColorSelected(Values.COLOR_PRIMARY);
-        customTabbedPanelUI.setColorDeselected(Values.COLOR_DARK);
+        customTabbedPanelUI.setColorSelected(Colors.COLOR_SELECTED);
+        customTabbedPanelUI.setColorDeselected(Colors.COLOR_DARK);
 
         // tabbed panel
 
@@ -106,6 +129,34 @@ public class MainForm extends JFrame {
         contentPanel.add(menuTabbed);
     }
 
+    private MouseListener lblExit(){
+        return new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.exit(0);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        };
+    }
     private ChangeListener menuTabbed_Change(){
         return new ChangeListener() {
             @Override
@@ -120,6 +171,8 @@ public class MainForm extends JFrame {
             @Override
             public void run() {
                 prepareUI();
+
+                setUndecorated(true);
                 setSize(WIDTH, HEIGHT);
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
                 setLocationRelativeTo(null);
