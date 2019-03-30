@@ -33,7 +33,7 @@ public class NhanVienDialog extends JDialog {
         // HEADER PANEL
         headerPanel = new JPanel(new BorderLayout());
         headerPanel.setPreferredSize(new Dimension(mainPanel.getWidth(), 60));
-        headerPanel.setBackground(Colors.PRIMARY);
+        headerPanel.setBackground(Colors.COLOR_PRIMARY);
         mainPanel.add(headerPanel, BorderLayout.NORTH);
 
         lblTieuDe = new JLabel(tieuDe);

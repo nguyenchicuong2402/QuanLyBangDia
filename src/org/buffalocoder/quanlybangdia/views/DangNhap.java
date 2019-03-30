@@ -2,10 +2,9 @@ package org.buffalocoder.quanlybangdia.views;
 
 import org.buffalocoder.quanlybangdia.dao.TaiKhoanDAO;
 import org.buffalocoder.quanlybangdia.models.TaiKhoan;
+import org.buffalocoder.quanlybangdia.utils.Colors;
 import org.buffalocoder.quanlybangdia.utils.Fonts;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
-import org.buffalocoder.quanlybangdia.utils.Values;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -29,7 +28,7 @@ public class DangNhap extends JFrame {
         this.setContentPane(mainPanel);
 
         headerPanel = new JPanel(new BorderLayout());
-        headerPanel.setBackground(Values.COLOR_PRIMARY);
+        headerPanel.setBackground(Colors.COLOR_PRIMARY);
         headerPanel.setPreferredSize(new Dimension(this.getWidth(), 150));
         mainPanel.add(headerPanel, BorderLayout.NORTH);
 
@@ -46,7 +45,7 @@ public class DangNhap extends JFrame {
         mainPanel.add(contentPanel, BorderLayout.CENTER);
 
         Box box = Box.createVerticalBox();
-        box.setBackground(Values.COLOR_BACKGROUND);
+        box.setBackground(Colors.COLOR_BACKGROUND);
 
         contentPanel.add(Box.createHorizontalStrut(100));
         contentPanel.add(box);
@@ -114,13 +113,13 @@ public class DangNhap extends JFrame {
 
         lblLoi = new JLabel("");
         MaterialDesign.materialLabel(lblLoi);
-        lblLoi.setForeground(Values.COLOR_ERROR);
+        lblLoi.setForeground(Colors.COLOR_ERROR);
         lblLoi.setPreferredSize(new Dimension(this.getWidth(), 30));
         lblLoi.setHorizontalAlignment(SwingConstants.CENTER);
         bx4.add(lblLoi);
 
         bottomPanel = new JPanel(new BorderLayout());
-        bottomPanel.setBackground(Values.COLOR_PRIMARY);
+        bottomPanel.setBackground(Colors.COLOR_PRIMARY);
         bottomPanel.setPreferredSize(new Dimension(100, 40));
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
@@ -139,7 +138,7 @@ public class DangNhap extends JFrame {
     }
 
     private void inputError(JTextField txt, String message){
-        txt.setBorder(BorderFactory.createLineBorder(Values.COLOR_ERROR, 3));
+        txt.setBorder(BorderFactory.createLineBorder(Colors.COLOR_ERROR, 3));
         txt.requestFocus();
         txt.selectAll();
 
@@ -257,6 +256,7 @@ public class DangNhap extends JFrame {
             public void run() {
                 prepareUI();
 
+                setUndecorated(true);
                 setSize(600, 580);
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
                 setResizable(false);
