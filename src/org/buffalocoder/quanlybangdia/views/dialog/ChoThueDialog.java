@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -24,7 +26,7 @@ public class ChoThueDialog extends JDialog {
 
     private JPanel mainPanel, headerPanel, contentPanel, bottomPanel;
     private JButton btnThoat, btnLuu;
-    private JLabel lblTieuDe, lblMaHoaDon, lblMaKhachHang, lblMaBangDia, lblSoNgayDuocMuon, lblSoLuong,
+    private JLabel lblTieuDe, lblMaHoaDon, lblMaKhachHang, lblMaBangDia, lblSoNgayDuocMuon, lblSoLuong,lblLoi,
                         lblNgayThue;
     private JTextField txtMaHoaDon, txtSoNgayDuocMuon, txtSoLuong;
     private JComboBox<String> cbMaKhachHang, cbMaBangDia;
@@ -81,6 +83,12 @@ public class ChoThueDialog extends JDialog {
         Box bx6 = Box.createHorizontalBox();
         box.add(bx6);
         box.add(Box.createVerticalStrut(50));
+
+        Box bx7 = Box.createHorizontalBox();
+        box.add(bx7);
+        box.add(Box.createVerticalStrut(50));
+
+
 
         lblMaHoaDon = new JLabel("Mã hoá đơn");
         lblMaHoaDon.setPreferredSize(new Dimension(150, 30));
@@ -165,6 +173,13 @@ public class ChoThueDialog extends JDialog {
         bx6.add(txtSoNgayDuocMuon);
         bx6.add(Box.createHorizontalStrut(20));
 
+        lblLoi = new JLabel("      ");
+        MaterialDesign.materialLabel(lblLoi);
+        lblLoi.setForeground(Colors.ERROR);
+        bx7.add(Box.createHorizontalStrut(20));
+        bx7.add(lblLoi);
+        bx7.add(Box.createHorizontalGlue());
+
         // BOTTOM PANEL
         bottomPanel = new JPanel(new GridLayout(1, 2, 1, 10));
         contentPanel.add(bottomPanel, BorderLayout.SOUTH);
@@ -181,9 +196,22 @@ public class ChoThueDialog extends JDialog {
         bottomPanel.add(btnLuu);
     }
 
+
+    private void errorInput(JTextField textField, String message){
+        lblLoi.setText(message);
+        textField.setBorder(MaterialDesign.BORDER_ERROR);
+        textField.requestFocus();
+        textField.selectAll();
+    }
+
+    private void unErrorInput(JTextField textField){
+        MaterialDesign.materialTextField(textField);
+        lblLoi.setText("    ");
+    }
+
     private boolean validateData(){
 
-        String regex="\\d{1,2}-\\d{1,2}-\\d{4}";
+        //String regex="\\d{1,2}-\\d{1,2}-\\d{4}";
 //        String kiemtra=txtNgaySinh.getText();
 //        Pattern pattern = Pattern.compile(regex);
 //        Matcher matcher = pattern.matcher(kiemtra);
@@ -191,8 +219,71 @@ public class ChoThueDialog extends JDialog {
 //         return true;
 //        return false;
 
+
+        Pattern pattern = null;
+
+        pattern = pattern.compile(PatternRegexs.REGEX_SOLUONGHOADON);
+        if (txtSoLuong.getText().trim().isEmpty()){
+            errorInput(txtSoLuong, "Vui lòng nhập số lượng");
+            return false;
+        }else if (!pattern.matcher(txtSoLuong.getText().trim()).matches()){
+            errorInput(txtSoLuong, " số lượng phải là số (không quá 20 số)");
+            return false;
+        }
+
+
+        pattern = Pattern.compile(PatternRegexs.REGEX_NGAYMUON);
+        if (txtSoNgayDuocMuon.getText().trim().isEmpty()){
+            errorInput(txtSoNgayDuocMuon, "Vui lòng nhập số số ngày mượn");
+            return false;
+        }else if (!pattern.matcher(txtSoNgayDuocMuon.getText().trim()).matches()){
+            errorInput(txtSoNgayDuocMuon, "số ngày mượn phải là số (không quá 20 số)");
+            return false;
+        }
+
         return true;
     }
+
+    private KeyListener txtSoLuong_KeyListener(){
+        return new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                unErrorInput(txtSoLuong);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
+    }
+
+    private KeyListener txtSoNgayDuocMuon_KeyListener(){
+        return new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                unErrorInput(txtSoNgayDuocMuon);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
+    }
+
+
+
 
     private String getMaHoaDonMoi(){
         String lastID = "";
@@ -219,6 +310,9 @@ public class ChoThueDialog extends JDialog {
 
         return newID;
     }
+
+
+
 
     private ActionListener btnThoat_Click(){
         return new ActionListener() {

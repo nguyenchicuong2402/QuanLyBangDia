@@ -11,6 +11,8 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.Date;
 import java.text.ParseException;
 import java.util.regex.Matcher;
@@ -25,7 +27,7 @@ public class NhanVienDialog extends JDialog {
 
     private JPanel mainPanel, contentPanel, headerPanel, bottomPanel, infoPanel, accountPanel;
     private JLabel lblTieuDe, lblMaNV, lblCMND, lblHoTen, lblGioiTinh, lblSoDienThoai,
-            lblDiaChi, lblNgaySinh, lblMoTa, lblTenTaiKhoan, lblMatKhau, lblNhapLaiMatKhau, lblLoaiTaiKhoan;
+            lblDiaChi, lblNgaySinh, lblMoTa, lblTenTaiKhoan, lblMatKhau, lblNhapLaiMatKhau, lblLoaiTaiKhoan,lblLoi;
     private JButton btnThoat, btnLuu;
     private JTextField txtMaNV, txtCMND, txtHoTen, txtSoDienThoai, txtDiaChi, txtNgaySinh, txtMoTa,
                         txtTenTaiKhoan;
@@ -228,6 +230,11 @@ public class NhanVienDialog extends JDialog {
         box_account.add(bx12);
         box_account.add(Box.createVerticalStrut(20));
 
+
+        Box bx13 = Box.createHorizontalBox();
+        box_account.add(bx13);
+        box_account.add(Box.createVerticalStrut(20));
+
         lblTenTaiKhoan = new JLabel("Tên tài khoản");
         lblTenTaiKhoan.setPreferredSize(lblMaNV.getPreferredSize());
         MaterialDesign.materialLabel(lblTenTaiKhoan);
@@ -276,6 +283,14 @@ public class NhanVienDialog extends JDialog {
         bx12.add(cbLoaiTaiKhoan);
         bx12.add(Box.createHorizontalStrut(20));
 
+
+        lblLoi = new JLabel("      ");
+        MaterialDesign.materialLabel(lblLoi);
+        lblLoi.setForeground(Colors.ERROR);
+        bx13.add(Box.createHorizontalStrut(20));
+        bx13.add(lblLoi);
+        bx13.add(Box.createHorizontalGlue());
+
         // BOTTOM PANEL
         bottomPanel = new JPanel(new GridLayout(1, 2, 1, 10));
         contentPanel.add(bottomPanel, BorderLayout.SOUTH);
@@ -293,77 +308,285 @@ public class NhanVienDialog extends JDialog {
     }
 
 
+    private void errorInput(JTextField textField, String message){
+        lblLoi.setText(message);
+        textField.setBorder(MaterialDesign.BORDER_ERROR);
+        textField.requestFocus();
+        textField.selectAll();
+    }
+
+    private void unErrorInput(JTextField textField){
+        MaterialDesign.materialTextField(textField);
+        lblLoi.setText("    ");
+    }
+
+
     private boolean validateData(){
 
-        // tên
-        String regexten="[a-zA-Z_0-9]{1,50}";
-        String kiemtraten=txtHoTen.getText();
-        Pattern pattern = Pattern.compile(regexten);
-        Matcher matcherten = pattern.matcher(kiemtraten);
-
-        //CMND
-        String regexCMND="[0-9]{1,20}";
-        String kiemtraCMND=txtCMND.getText();
-        pattern = Pattern.compile(regexCMND);
-        Matcher matcherCMND = pattern.matcher(kiemtraCMND);
-
-        //SDT
-        String regexSDT="[0-9]{1,20}";
-        String kiemtraSDT=txtCMND.getText();
-        pattern = Pattern.compile(regexSDT);
-        Matcher matcherSDT = pattern.matcher(kiemtraSDT);
-
-
-        //địa chỉ
-        String regexdiachi="[a-zA-Z_0-9]{1,100}";
-        String kiemtradiachi=txtCMND.getText();
-        pattern = Pattern.compile(regexdiachi);
-        Matcher matcherdiachi = pattern.matcher(kiemtradiachi);
-
-        // mô tả
-        String regexmota="[a-zA-Z]{1,100}";
-        String kiemtramota=txtCMND.getText();
-        pattern = Pattern.compile(regexmota);
-        Matcher matchermota = pattern.matcher(kiemtramota);
-
-        // tên tài khoản
-        String regextentk="[a-zA-Z_0-9]{1,30}";
-        String kiemtratentk=txtTenTaiKhoan.getText();
-        pattern = Pattern.compile(regextentk);
-        Matcher matchertentk = pattern.matcher(kiemtratentk);
-
-        //password
-        String regextpass="[a-zA-Z_0-9]{1,128}";
-        String kiemtrapass=txtMatKhau.getText();
-        pattern = Pattern.compile(regextpass);
-        Matcher matcherpass = pattern.matcher(kiemtrapass);
-
-
-        String kiemtrarepass=txtNhapLaiMatKhau.getText();
-//        if(matcherten.matches()&&matcherCMND.matches()) {
+//        // tên
+//        String regexten="[a-zA-Z_0-9]{1,50}";
+//        String kiemtraten=txtHoTen.getText();
+//        Pattern pattern = Pattern.compile(regexten);
+//        Matcher matcherten = pattern.matcher(kiemtraten);
 //
-//            return true;
+//        //CMND
+//        String regexCMND="[0-9]{1,20}";
+//        String kiemtraCMND=txtCMND.getText();
+//        pattern = Pattern.compile(regexCMND);
+//        Matcher matcherCMND = pattern.matcher(kiemtraCMND);
 //
-//        }
-        if(!matcherten.matches())
-            return false;
+//        //SDT
+//        String regexSDT="[0-9]{1,20}";
+//        String kiemtraSDT=txtCMND.getText();
+//        pattern = Pattern.compile(regexSDT);
+//        Matcher matcherSDT = pattern.matcher(kiemtraSDT);
+//
+//
+//        //địa chỉ
+//        String regexdiachi="[a-zA-Z_0-9]{1,100}";
+//        String kiemtradiachi=txtCMND.getText();
+//        pattern = Pattern.compile(regexdiachi);
+//        Matcher matcherdiachi = pattern.matcher(kiemtradiachi);
+//
+//        // mô tả
+//        String regexmota="[a-zA-Z]{1,100}";
+//        String kiemtramota=txtCMND.getText();
+//        pattern = Pattern.compile(regexmota);
+//        Matcher matchermota = pattern.matcher(kiemtramota);
+//
+//        // tên tài khoản
+//        String regextentk="[a-zA-Z_0-9]{1,30}";
+//        String kiemtratentk=txtTenTaiKhoan.getText();
+//        pattern = Pattern.compile(regextentk);
+//        Matcher matchertentk = pattern.matcher(kiemtratentk);
+//
+//        //password
+//        String regextpass="[a-zA-Z_0-9]{1,128}";
+//        String kiemtrapass=txtMatKhau.getText();
+//        pattern = Pattern.compile(regextpass);
+//        Matcher matcherpass = pattern.matcher(kiemtrapass);
+//
+//
+//        String kiemtrarepass=txtNhapLaiMatKhau.getText();
+////        if(matcherten.matches()&&matcherCMND.matches()) {
+////
+////            return true;
+////
+////        }
+//        if(!matcherten.matches())
+//            return false;
+//
+//        if(!matcherCMND.matches())
+//            return false;
+//
+//        if(!matcherSDT.matches())
+//            return false;
+//
+//        if(!matcherdiachi.matches())
+//            return false;
+//        if(!matchermota.matches())
+//            return false;
+//        if(!matchertentk.matches())
+//            return false;
+//        if(!matcherpass.matches())
+//            return false;
 
-        if(!matcherCMND.matches())
-            return false;
 
-        if(!matcherSDT.matches())
-            return false;
 
-        if(!matcherdiachi.matches())
+
+        Pattern pattern = null;
+
+        // Kiểm tra họ tên
+        if (txtHoTen.getText().trim().isEmpty()){
+            errorInput(txtHoTen, "Vui lòng nhập họ tên");
             return false;
-        if(!matchermota.matches())
+        }else if (txtHoTen.getText().trim().length() > 50){
+            errorInput(txtHoTen, "Không nhập họ tên quá 50 kí tự");
             return false;
-        if(!matchertentk.matches())
+        }
+
+        // Kiểm tra CMND
+        pattern = pattern.compile(PatternRegexs.REGEX_CMND);
+        if (txtCMND.getText().trim().isEmpty()){
+            errorInput(txtCMND, "Vui lòng nhập CMND");
             return false;
-        if(!matcherpass.matches())
+        }else if (!pattern.matcher(txtCMND.getText().trim()).matches()){
+            errorInput(txtCMND, "CMND phải là số (không quá 20 số)");
             return false;
+        }
+
+        // Kiểm tra số diện thoại
+        pattern = Pattern.compile(PatternRegexs.REGEX_SODIENTHOAI);
+        if (txtSoDienThoai.getText().trim().isEmpty()){
+            errorInput(txtSoDienThoai, "Vui lòng nhập số điện thoại");
+            return false;
+        }else if (!pattern.matcher(txtSoDienThoai.getText().trim()).matches()){
+            errorInput(txtSoDienThoai, "Số điện thoại phải là số (không quá 20 số)");
+            return false;
+        }
+
+        // Kiểm tra địa chỉ
+        if (txtDiaChi.getText().trim().isEmpty()){
+            errorInput(txtDiaChi, "Vui lòng nhập địa chỉ");
+            return false;
+        }else if (txtDiaChi.getText().trim().length() > 100){
+            errorInput(txtDiaChi, "Địa chỉ không quá 100 kí tự");
+            return false;
+        }
+
+        if (txtMoTa.getText().trim().isEmpty()){
+            errorInput(txtMoTa, "Vui lòng nhập mô tả");
+            return false;
+        }else if (txtMoTa.getText().trim().length() > 100){
+            errorInput(txtMoTa, "mô tả không quá 100 kí tự");
+            return false;
+        }
+
+        if (txtMatKhau.getText().trim().isEmpty()){
+            errorInput(txtMatKhau, "Vui lòng nhập nhập mật khẩu");
+            return false;
+        }else if (txtMatKhau.getText().trim().length() > 128){
+            errorInput(txtMatKhau, "mật khẩu không quá 128 kí tự");
+            return false;
+        }
+
+        if (txtNhapLaiMatKhau.getText().trim().isEmpty()){
+            errorInput(txtNhapLaiMatKhau, "Vui lòng nhập nhập lại mật khẩu");
+
+        }else if (txtNhapLaiMatKhau.getText().trim().length() > 128){
+            errorInput(txtNhapLaiMatKhau, "mật khẩu không quá 128 kí tự");
+
+        }else if (!txtMatKhau.getText().equals(txtNhapLaiMatKhau.getText())){
+            errorInput(txtNhapLaiMatKhau, "mật khẩu không trùng với nhập lại");
+        }
+
+
         return true;
     }
+
+
+    private KeyListener txtHoTen_KeyListener(){
+        return new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                unErrorInput(txtHoTen);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
+    }
+
+    private KeyListener txtCMND_KeyListener(){
+        return new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                unErrorInput(txtCMND);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
+    }
+
+    private KeyListener txtSoDienThoai_KeyListener(){
+        return new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                unErrorInput(txtSoDienThoai);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
+    }
+    private  KeyListener txtMoTa_KeyListener(){
+        return new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                unErrorInput(txtMoTa);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
+    }
+
+  private  KeyListener txttxtMatKhau_KeyListener(){
+        return new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                unErrorInput(txtMatKhau);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
+  }
+
+
+    private  KeyListener txtNhapLaiMatKhau_KeyListener(){
+        return new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                unErrorInput(txtNhapLaiMatKhau);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
+    }
+
+
+
+
+
+
+
+
+
 
     private String getMaNhanVienMoi(){
         String lastID = "";
