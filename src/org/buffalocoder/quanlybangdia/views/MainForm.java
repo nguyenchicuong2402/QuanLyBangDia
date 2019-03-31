@@ -159,6 +159,7 @@ public class MainForm extends JFrame {
             }
         };
     }
+
     private ChangeListener menuTabbed_Change(){
         return new ChangeListener() {
             @Override

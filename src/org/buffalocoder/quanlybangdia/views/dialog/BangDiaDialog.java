@@ -181,7 +181,7 @@ public class BangDiaDialog extends JDialog{
         bx8.add(Box.createHorizontalStrut(20));
 
         // BOTTOM PANEL
-        bottomPanel = new JPanel(new GridLayout(1, 2, 1, 10));
+        bottomPanel = new JPanel(new GridLayout(1, 2));
         contentPanel.add(bottomPanel, BorderLayout.SOUTH);
 
         btnThoat = new JButton("Đóng");
