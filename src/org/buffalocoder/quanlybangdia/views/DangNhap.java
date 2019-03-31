@@ -27,6 +27,7 @@ public class DangNhap extends JFrame {
     private JCheckBox cbGhiNho;
     private Component rootComponent = this;
     QuanLyXML ql = new QuanLyXML();
+    private TaiKhoanDAO taiKhoanDAO;
 
     private void prepareUI(){
         mainPanel = new JPanel(new BorderLayout());
@@ -64,11 +65,11 @@ public class DangNhap extends JFrame {
 
         Box bx2 = Box.createVerticalBox();
         box.add(bx2);
-        box.add(Box.createVerticalStrut(10));
+        box.add(Box.createVerticalStrut(20));
 
         Box bx3 = Box.createHorizontalBox();
         box.add(bx3);
-        box.add(Box.createVerticalStrut(30));
+        box.add(Box.createVerticalStrut(40));
 
         JPanel panel = new JPanel(new GridLayout(1, 2, 10, 10));
         Box bx4 = Box.createHorizontalBox();
@@ -142,6 +143,7 @@ public class DangNhap extends JFrame {
         JRootPane rootPane = SwingUtilities.getRootPane(rootComponent);
         rootPane.setDefaultButton(btnDangNhap);
     }
+
     private void ghiNhoTK(){
         if(ql.getTrangThai()!=0)
         {
@@ -149,10 +151,8 @@ public class DangNhap extends JFrame {
             txtTenNguoiDung.setText(ql.getTextContentTK());
             txtMatKhau.setText(ql.getTextContentPW());
         }
-        else{
-
-        }
     }
+
     private ActionListener cbGhiNho() {
         return new ActionListener() {
             @Override
@@ -232,7 +232,7 @@ public class DangNhap extends JFrame {
                 }
 
                 try{
-                    taiKhoan = TaiKhoanDAO.getInstance().getTaiKhoan(tenTaiKhoan);
+                    taiKhoan = taiKhoanDAO.getTaiKhoan(tenTaiKhoan);
                 }catch (Exception e1){
                     thongBaoLoi(e1.getMessage());
                     return;
@@ -295,13 +295,20 @@ public class DangNhap extends JFrame {
     }
 
     public DangNhap(){
+        try{
+            taiKhoanDAO = TaiKhoanDAO.getInstance();
+        } catch (Exception e) {
+            thongBaoLoi(e.getMessage());
+            System.exit(1);
+        }
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 prepareUI();
 
                 setUndecorated(true);
-                setSize(600, 580);
+                setSize(600, 600);
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
                 setResizable(false);
                 setLocationRelativeTo(null);
