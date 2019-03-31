@@ -9,10 +9,6 @@ import java.awt.*;
 public class MaterialDesign {
     private static final String FONT_NAME = "Times New Roman";
 
-    //========== BORDER =========//
-    public static Border BORDER_ERROR = BorderFactory.createLineBorder(Colors.ERROR, 3);
-    public static Border BORDER_DIALOG = BorderFactory.createLineBorder(Colors.DARK, 2);
-
     //========== FONT ==========//
     public static final Font FONT_DEFAULT            = new Font(FONT_NAME, Font.PLAIN, 18);
     public static final Font FONT_SMALL              = new Font(FONT_NAME, Font.PLAIN, 16);
@@ -32,36 +28,40 @@ public class MaterialDesign {
     public static final Color COLOR_DARK            = Color.decode("#0D47A1");
     public static final Color COLOR_CARD            = Color.decode("#ffffff");
 
+    //========== BORDER =========//
+    public static Border BORDER_ERROR = BorderFactory.createLineBorder(COLOR_ERROR, 3);
+    public static Border BORDER_DIALOG = BorderFactory.createLineBorder(COLOR_DARK, 2);
+
     public static void materialButton(JButton button){
-        button.setBackground(Colors.PRIMARY);
-        button.setForeground(Colors.TEXT);
-        button.setFont(Fonts.DEFAULT);
+        button.setBackground(COLOR_PRIMARY);
+        button.setForeground(COLOR_TEXT);
+        button.setFont(FONT_DEFAULT);
         button.setBorder(BorderFactory.createEmptyBorder());
     }
 
     public static void materialTextField(JTextField textField){
-        textField.setFont(Fonts.DEFAULT);
+        textField.setFont(FONT_DEFAULT);
         textField.setForeground(Color.BLACK);
         textField.setBorder(BorderFactory.createMatteBorder(0, 1
-                , 2, 0, Colors.PRIMARY));
+                , 2, 0, COLOR_PRIMARY));
     }
 
     public static void materialTextArea(JTextArea textArea){
-        textArea.setFont(Fonts.DEFAULT);
+        textArea.setFont(FONT_DEFAULT);
         textArea.setForeground(Color.BLACK);
         textArea.setBorder(BorderFactory.createMatteBorder(0, 1
-                , 2, 0, Colors.PRIMARY));
+                , 2, 0, COLOR_PRIMARY));
     }
 
     public static void materialTable(JTable table){
-        table.setSelectionBackground(Colors.DARK);
+        table.setSelectionBackground(COLOR_DARK);
         table.setSelectionForeground(Color.WHITE);
 
         table.getTableHeader().setForeground(Color.BLACK);
-        table.getTableHeader().setBackground(Colors.TEXT);
-        table.getTableHeader().setFont(Fonts.TABLE_HEADER);
+        table.getTableHeader().setBackground(COLOR_TEXT);
+        table.getTableHeader().setFont(FONT_TABLE_HEADER);
 
-        table.setFont(Fonts.DEFAULT);
+        table.setFont(FONT_DEFAULT);
         table.setRowHeight(35);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.setAutoCreateRowSorter(false);
@@ -70,30 +70,30 @@ public class MaterialDesign {
 
     public static void materialScrollPane (JScrollPane scrollPane){
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
-        scrollPane.getViewport().setBackground(Colors.BACKGROUND);
+        scrollPane.getViewport().setBackground(COLOR_BACKGROUND);
     }
 
     public static void materialLabel (JLabel label){
-        label.setFont(Fonts.DEFAULT);
+        label.setFont(FONT_DEFAULT);
         label.setForeground(Color.BLACK);
     }
 
     public static void materialCheckBox(JCheckBox checkBox){
-        checkBox.setFont(Fonts.DEFAULT);
-        checkBox.setBackground(Colors.BACKGROUND);
+        checkBox.setFont(FONT_DEFAULT);
+        checkBox.setBackground(COLOR_BACKGROUND);
     }
 
     public static void materialComboBox (JComboBox comboBox){
-        comboBox.setBackground(Colors.BACKGROUND);
-        comboBox.setFont(Fonts.DEFAULT);
+        comboBox.setBackground(COLOR_BACKGROUND);
+        comboBox.setFont(FONT_DEFAULT);
     }
 
     public static void materialPanel (JPanel panel){
-        panel.setBackground(Colors.BACKGROUND);
+        panel.setBackground(COLOR_BACKGROUND);
     }
 
     public static void materialDateChooser (JDateChooser dateChooser){
-        dateChooser.setFont(Fonts.DEFAULT);
+        dateChooser.setFont(FONT_DEFAULT);
         dateChooser.setForeground(Color.BLACK);
     }
 }

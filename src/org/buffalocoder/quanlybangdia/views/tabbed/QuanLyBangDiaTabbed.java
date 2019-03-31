@@ -3,8 +3,6 @@ package org.buffalocoder.quanlybangdia.views.tabbed;
 import org.buffalocoder.quanlybangdia.models.BangDia;
 import org.buffalocoder.quanlybangdia.models.DanhSachBangDia;
 import org.buffalocoder.quanlybangdia.models.tablemodel.BangDiaTableModel;
-import org.buffalocoder.quanlybangdia.utils.Colors;
-import org.buffalocoder.quanlybangdia.utils.Fonts;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.views.DangNhap;
 import org.buffalocoder.quanlybangdia.views.dialog.BangDiaDialog;
@@ -31,9 +29,9 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
     public QuanLyBangDiaTabbed(){
         this.setLayout(new BorderLayout());
-        this.setFont(Fonts.DEFAULT);
+        this.setFont(MaterialDesign.FONT_DEFAULT);
         this.setBorder(BorderFactory.createEmptyBorder());
-        this.setBackground(Colors.BACKGROUND);
+        this.setBackground(MaterialDesign.COLOR_BACKGROUND);
 
         /*========== TOP PANEL ==========*/
         topPanel = new JPanel(new BorderLayout());
@@ -70,7 +68,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
         btnXoa.setMnemonic(KeyEvent.VK_X);
         btnXoa.setEnabled(false);
         MaterialDesign.materialButton(btnXoa);
-        btnXoa.setBackground(Colors.ERROR);
+        btnXoa.setBackground(MaterialDesign.COLOR_ERROR);
         funcPanel.add(btnXoa);
 
         // tìm kiếm

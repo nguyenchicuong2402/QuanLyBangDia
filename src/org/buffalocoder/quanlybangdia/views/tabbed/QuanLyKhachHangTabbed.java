@@ -3,8 +3,6 @@ package org.buffalocoder.quanlybangdia.views.tabbed;
 import org.buffalocoder.quanlybangdia.models.DanhSachKhachHang;
 import org.buffalocoder.quanlybangdia.models.KhachHang;
 import org.buffalocoder.quanlybangdia.models.tablemodel.KhachHangTableModel;
-import org.buffalocoder.quanlybangdia.utils.Colors;
-import org.buffalocoder.quanlybangdia.utils.Fonts;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.views.dialog.KhachHangDialog;
 import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
@@ -27,9 +25,9 @@ public class QuanLyKhachHangTabbed extends JPanel {
 
     public QuanLyKhachHangTabbed(){
         this.setLayout(new BorderLayout());
-        this.setFont(Fonts.DEFAULT);
+        this.setFont(MaterialDesign.FONT_DEFAULT);
         this.setBorder(BorderFactory.createEmptyBorder());
-        this.setBackground(Colors.BACKGROUND);
+        this.setBackground(MaterialDesign.COLOR_BACKGROUND);
 
         /*========== TOP PANEL ==========*/
         topPanel = new JPanel(new BorderLayout());
@@ -65,7 +63,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
         btnXoa.setToolTipText("Vui lòng chọn khách hàng cần xoá");
         btnXoa.setEnabled(false);
         btnXoa.setMnemonic(KeyEvent.VK_X);
-        btnXoa.setBackground(Colors.ERROR);
+        btnXoa.setBackground(MaterialDesign.COLOR_ERROR);
         funcPanel.add(btnXoa);
 
         // tìm kiếm

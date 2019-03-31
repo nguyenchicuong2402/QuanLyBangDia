@@ -1,11 +1,6 @@
 package org.buffalocoder.quanlybangdia.views.dialog;
 
-import org.buffalocoder.quanlybangdia.dao.BangDiaDAO;
-import org.buffalocoder.quanlybangdia.models.BangDia;
-import org.buffalocoder.quanlybangdia.utils.Colors;
-import org.buffalocoder.quanlybangdia.utils.Fonts;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
-import org.buffalocoder.quanlybangdia.utils.PatternRegexs;
 
 import javax.swing.*;
 import javax.swing.border.Border;

@@ -4,7 +4,6 @@ import org.buffalocoder.quanlybangdia.dao.DataBaseUtils;
 import org.buffalocoder.quanlybangdia.dao.KhachHangDAO;
 import org.buffalocoder.quanlybangdia.dao.NhanVienDAO;
 import org.buffalocoder.quanlybangdia.models.ThongTinCaNhan;
-import org.buffalocoder.quanlybangdia.utils.Colors;
 import org.buffalocoder.quanlybangdia.views.DangNhap;
 import org.buffalocoder.quanlybangdia.views.MainForm;
 

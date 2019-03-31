@@ -5,8 +5,6 @@ import org.buffalocoder.quanlybangdia.models.DanhSachChoThue;
 import org.buffalocoder.quanlybangdia.models.HoaDon;
 import org.buffalocoder.quanlybangdia.models.KhachHang;
 import org.buffalocoder.quanlybangdia.models.tablemodel.ChoThueTableModel;
-import org.buffalocoder.quanlybangdia.utils.Colors;
-import org.buffalocoder.quanlybangdia.utils.Fonts;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.views.dialog.BangDiaDialog;
 import org.buffalocoder.quanlybangdia.views.dialog.ChoThueDialog;
@@ -34,9 +32,9 @@ public class QuanLyChoThueTabbed extends JPanel {
 
     public QuanLyChoThueTabbed(){
         this.setLayout(new BorderLayout());
-        this.setFont(Fonts.DEFAULT);
+        this.setFont(MaterialDesign.FONT_DEFAULT);
         this.setBorder(BorderFactory.createEmptyBorder());
-        this.setBackground(Colors.BACKGROUND);
+        this.setBackground(MaterialDesign.COLOR_BACKGROUND);
 
         /*========== TOP PANEL ==========*/
         topPanel = new JPanel(new BorderLayout());
@@ -72,7 +70,7 @@ public class QuanLyChoThueTabbed extends JPanel {
         btnXoa.setEnabled(false);
         btnXoa.setMnemonic(KeyEvent.VK_X);
         MaterialDesign.materialButton(btnXoa);
-        btnXoa.setBackground(Colors.ERROR);
+        btnXoa.setBackground(MaterialDesign.COLOR_ERROR);
         funcPanel.add(btnXoa);
 
         // tìm kiếm

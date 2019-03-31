@@ -1,12 +1,5 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
-import com.toedter.calendar.JCalendar;
-import com.toedter.calendar.JDateChooser;
-import com.toedter.calendar.JDateChooserCellEditor;
-import com.toedter.plaf.JCalendarTheme;
-import org.buffalocoder.quanlybangdia.utils.Colors;
-import org.buffalocoder.quanlybangdia.utils.Fonts;
-import org.buffalocoder.quanlybangdia.utils.Formats;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 
 import javax.swing.*;
@@ -36,14 +29,14 @@ public class CaiDatTabbed extends JPanel {
         // chủ đề
         chuDePanel = new JPanel(new BorderLayout());
         MaterialDesign.materialPanel(chuDePanel);
-        chuDePanel.setBackground(Colors.CARD);
+        chuDePanel.setBackground(MaterialDesign.COLOR_CARD);
         contentPanel.add(chuDePanel);
         contentPanel.add(Box.createVerticalStrut(10));
 
         JPanel subChuDePanel = new JPanel();
         subChuDePanel.setLayout(new BoxLayout(subChuDePanel, BoxLayout.X_AXIS));
         MaterialDesign.materialPanel(subChuDePanel);
-        subChuDePanel.setBackground(Colors.CARD);
+        subChuDePanel.setBackground(MaterialDesign.COLOR_CARD);
         chuDePanel.add(subChuDePanel, BorderLayout.CENTER);
 
         Box boxSubChuDe = Box.createVerticalBox();
@@ -52,13 +45,13 @@ public class CaiDatTabbed extends JPanel {
 
         lblChuDe = new JLabel("Chủ đề");
         MaterialDesign.materialLabel(lblChuDe);
-        lblChuDe.setFont(Fonts.TITLE_2);
+        lblChuDe.setFont(MaterialDesign.FONT_TITLE_2);
         boxSubChuDe.add(Box.createVerticalStrut(20));
         boxSubChuDe.add(lblChuDe);
 
         lblSubChuDe = new JLabel("Thao tác này cần phải khởi động lại ứng dụng");
         MaterialDesign.materialLabel(lblSubChuDe);
-        lblSubChuDe.setFont(Fonts.SMALL_ITALIC);
+        lblSubChuDe.setFont(MaterialDesign.FONT_SMALL_ITALIC);
         boxSubChuDe.add(Box.createVerticalStrut(10));
         boxSubChuDe.add(lblSubChuDe);
 
@@ -82,7 +75,7 @@ public class CaiDatTabbed extends JPanel {
         doiMatKhauPanel = new JPanel();
         doiMatKhauPanel.setLayout(new BoxLayout(doiMatKhauPanel, BoxLayout.Y_AXIS));
         MaterialDesign.materialPanel(doiMatKhauPanel);
-        doiMatKhauPanel.setBackground(Colors.CARD);
+        doiMatKhauPanel.setBackground(MaterialDesign.COLOR_CARD);
         contentPanel.add(doiMatKhauPanel);
         contentPanel.add(Box.createVerticalStrut(10));
 
@@ -91,7 +84,7 @@ public class CaiDatTabbed extends JPanel {
 
         lblDoiMatKhau = new JLabel("Thay đổi mật khẩu");
         MaterialDesign.materialLabel(lblDoiMatKhau);
-        lblDoiMatKhau.setFont(Fonts.TITLE_2);
+        lblDoiMatKhau.setFont(MaterialDesign.FONT_TITLE_2);
         boxDoiMatKhau.add(Box.createHorizontalStrut(20));
         boxDoiMatKhau.add(lblDoiMatKhau);
         boxDoiMatKhau.add(Box.createHorizontalGlue());
@@ -151,20 +144,20 @@ public class CaiDatTabbed extends JPanel {
 
         lblLoiDoiMatKhau = new JLabel(" ");
         MaterialDesign.materialLabel(lblLoiDoiMatKhau);
-        lblLoiDoiMatKhau.setForeground(Colors.ERROR);
+        lblLoiDoiMatKhau.setForeground(MaterialDesign.COLOR_ERROR);
         boxLoi.add(lblLoiDoiMatKhau);
 
         // xoá database
         xoaDatabasePanel = new JPanel(new BorderLayout());
         MaterialDesign.materialPanel(xoaDatabasePanel);
-        xoaDatabasePanel.setBackground(Colors.CARD);
+        xoaDatabasePanel.setBackground(MaterialDesign.COLOR_CARD);
         contentPanel.add(xoaDatabasePanel);
         contentPanel.add(Box.createVerticalStrut(10));
 
         JPanel subXoaDatabasePanel = new JPanel();
         subXoaDatabasePanel.setLayout(new BoxLayout(subXoaDatabasePanel, BoxLayout.X_AXIS));
         MaterialDesign.materialPanel(subXoaDatabasePanel);
-        subXoaDatabasePanel.setBackground(Colors.CARD);
+        subXoaDatabasePanel.setBackground(MaterialDesign.COLOR_CARD);
         xoaDatabasePanel.add(subXoaDatabasePanel, BorderLayout.CENTER);
 
         Box boxXoaDatabase = Box.createVerticalBox();
@@ -173,19 +166,19 @@ public class CaiDatTabbed extends JPanel {
 
         lblXoaDatabase = new JLabel("Xoá database");
         MaterialDesign.materialLabel(lblXoaDatabase);
-        lblXoaDatabase.setFont(Fonts.TITLE_2);
+        lblXoaDatabase.setFont(MaterialDesign.FONT_TITLE_2);
         boxXoaDatabase.add(Box.createVerticalStrut(20));
         boxXoaDatabase.add(lblXoaDatabase);
 
         lblSubXoaDatabase = new JLabel("Thao tác này sẽ xoá tất cả dữ liệu của bạn");
         MaterialDesign.materialLabel(lblSubXoaDatabase);
-        lblSubXoaDatabase.setFont(Fonts.SMALL_ITALIC);
+        lblSubXoaDatabase.setFont(MaterialDesign.FONT_SMALL_ITALIC);
         boxXoaDatabase.add(Box.createVerticalStrut(10));
         boxXoaDatabase.add(lblSubXoaDatabase);
 
         btnXoaDatabase = new JButton("Xoá database");
         MaterialDesign.materialButton(btnXoaDatabase);
-        btnXoaDatabase.setBackground(Colors.ERROR);
+        btnXoaDatabase.setBackground(MaterialDesign.COLOR_ERROR);
         btnXoaDatabase.setPreferredSize(new Dimension(300, 30));
         xoaDatabasePanel.add(btnXoaDatabase, BorderLayout.EAST);
 

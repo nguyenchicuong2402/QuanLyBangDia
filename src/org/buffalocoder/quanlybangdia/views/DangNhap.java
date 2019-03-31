@@ -3,8 +3,6 @@ package org.buffalocoder.quanlybangdia.views;
 import org.buffalocoder.quanlybangdia.XML.QuanLyXML;
 import org.buffalocoder.quanlybangdia.dao.TaiKhoanDAO;
 import org.buffalocoder.quanlybangdia.models.TaiKhoan;
-import org.buffalocoder.quanlybangdia.utils.Colors;
-import org.buffalocoder.quanlybangdia.utils.Fonts;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
 
@@ -38,13 +36,13 @@ public class DangNhap extends JFrame {
 
         //========== HEADER PANEL ==========//
         headerPanel = new JPanel(new BorderLayout());
-        headerPanel.setBackground(Colors.PRIMARY);
+        headerPanel.setBackground(MaterialDesign.COLOR_PRIMARY);
         headerPanel.setPreferredSize(new Dimension(this.getWidth(), 180));
         mainPanel.add(headerPanel, BorderLayout.NORTH);
 
         lblTieuDe = new JLabel("Đăng nhập");
         MaterialDesign.materialLabel(lblTieuDe);
-        lblTieuDe.setFont(Fonts.TITLE_1);
+        lblTieuDe.setFont(MaterialDesign.FONT_TITLE_1);
         lblTieuDe.setForeground(Color.WHITE);
         lblTieuDe.setHorizontalAlignment(SwingConstants.CENTER);
         headerPanel.add(lblTieuDe, BorderLayout.CENTER);
@@ -58,7 +56,7 @@ public class DangNhap extends JFrame {
         mainPanel.add(contentPanel, BorderLayout.CENTER);
 
         Box box = Box.createVerticalBox();
-        box.setBackground(Colors.BACKGROUND);
+        box.setBackground(MaterialDesign.COLOR_BACKGROUND);
 
         contentPanel.add(Box.createHorizontalStrut(100));
         contentPanel.add(box);
@@ -116,7 +114,7 @@ public class DangNhap extends JFrame {
 
         lblLoi = new JLabel(" ");
         MaterialDesign.materialLabel(lblLoi);
-        lblLoi.setForeground(Colors.ERROR);
+        lblLoi.setForeground(MaterialDesign.COLOR_ERROR);
         lblLoi.setHorizontalAlignment(SwingConstants.CENTER);
         bx4.add(lblLoi);
 
@@ -124,7 +122,7 @@ public class DangNhap extends JFrame {
         btnThoat.setPreferredSize(new Dimension(100, 50));
         btnThoat.addActionListener(btnThoat_Click());
         MaterialDesign.materialButton(btnThoat);
-        btnThoat.setBackground(Colors.ERROR);
+        btnThoat.setBackground(MaterialDesign.COLOR_ERROR);
         panel.add(btnThoat);
 
         btnDangNhap = new JButton("Đăng nhập");
@@ -136,7 +134,7 @@ public class DangNhap extends JFrame {
 
         //========== BOTTOM PANEL ==========//
         bottomPanel = new JPanel(new BorderLayout());
-        bottomPanel.setBackground(Colors.PRIMARY);
+        bottomPanel.setBackground(MaterialDesign.COLOR_PRIMARY);
         bottomPanel.setPreferredSize(new Dimension(100, 40));
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 

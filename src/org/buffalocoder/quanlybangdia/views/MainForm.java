@@ -8,8 +8,6 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.buffalocoder.quanlybangdia.utils.Colors;
-import org.buffalocoder.quanlybangdia.utils.Fonts;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.views.custom.CustomTabbedPanelUI;
 import org.buffalocoder.quanlybangdia.views.tabbed.*;
@@ -49,7 +47,7 @@ public class MainForm extends JFrame {
         mainPanel.add(topPanel, BorderLayout.NORTH);
         //Exit Panel
         ExitPanel = new JPanel(null);
-        ExitPanel.setBackground(Colors.DARK);
+        ExitPanel.setBackground(MaterialDesign.COLOR_DARK);
         ExitPanel.setPreferredSize(new Dimension(50, 50));
         topPanel.add(ExitPanel, BorderLayout.EAST);
 //       lblExit
@@ -65,10 +63,10 @@ public class MainForm extends JFrame {
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
         lblTitle.setPreferredSize(new Dimension(294, topPanel.getHeight()));
         lblTitle.setOpaque(true);
-        lblTitle.setBackground(Colors.DARK);
+        lblTitle.setBackground(MaterialDesign.COLOR_DARK);
         MaterialDesign.materialLabel(lblTitle);
-        lblTitle.setForeground(Colors.TEXT);
-        lblTitle.setFont(Fonts.TITLE_2);
+        lblTitle.setForeground(MaterialDesign.COLOR_TEXT);
+        lblTitle.setFont(MaterialDesign.FONT_TITLE_2);
         topPanel.add(lblTitle, BorderLayout.WEST);
 
         // menu panel
@@ -77,27 +75,27 @@ public class MainForm extends JFrame {
         topPanel.add(menuPanel);
 
         menuBar = new JMenuBar();
-        menuBar.setBackground(Colors.DARK);
+        menuBar.setBackground(MaterialDesign.COLOR_DARK);
         topPanel.add(menuBar);
 
         menuFile = new JMenu("File");
-        menuFile.setForeground(Colors.TEXT);
+        menuFile.setForeground(MaterialDesign.COLOR_TEXT);
         menuFile.setPreferredSize(new Dimension(50, topPanel.getHeight()));
         menuBar.add(menuFile);
 
         menuEdit = new JMenu("Edit");
-        menuEdit.setForeground(Colors.TEXT);
+        menuEdit.setForeground(MaterialDesign.COLOR_TEXT);
         menuEdit.setPreferredSize(menuFile.getPreferredSize());
         menuBar.add(menuEdit);
 
         menuView = new JMenu("View");
-        menuView.setForeground(Colors.TEXT);
+        menuView.setForeground(MaterialDesign.COLOR_TEXT);
         menuView.setPreferredSize(menuFile.getPreferredSize());
         menuBar.add(menuView);
 
         /*========== MENU PANEL =========*/
         contentPanel = new JPanel(new BorderLayout());
-        contentPanel.setBackground(Colors.DARK);
+        contentPanel.setBackground(MaterialDesign.COLOR_DARK);
         contentPanel.setBorder(BorderFactory.createEmptyBorder());
         mainPanel.add(contentPanel, BorderLayout.CENTER);
 
@@ -106,13 +104,13 @@ public class MainForm extends JFrame {
         customTabbedPanelUI.setWidth(120);
         customTabbedPanelUI.setHeight(80);
         customTabbedPanelUI.setMargin(10, 0);
-        customTabbedPanelUI.setColorSelected(Colors.PRIMARY);
-        customTabbedPanelUI.setColorDeselected(Colors.DARK);
+        customTabbedPanelUI.setColorSelected(MaterialDesign.COLOR_PRIMARY);
+        customTabbedPanelUI.setColorDeselected(MaterialDesign.COLOR_DARK);
 
         // tabbed panel
         menuTabbed = new JTabbedPane(JTabbedPane.LEFT);
         menuTabbed.setUI(customTabbedPanelUI);
-        menuTabbed.setFont(Fonts.DEFAULT);
+        menuTabbed.setFont(MaterialDesign.FONT_DEFAULT);
         menuTabbed.addTab("Trang chủ", trangChuTabbed = new TrangChuTabbed());
         menuTabbed.addTab("Cho thuê", quanLyChoThueTabbed = new QuanLyChoThueTabbed())  ;
         menuTabbed.addTab(IS_ADMIN ? "Quản lý băng đĩa" : "Danh sách băng đĩa",

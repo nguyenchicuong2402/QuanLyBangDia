@@ -2,8 +2,6 @@ package org.buffalocoder.quanlybangdia.views.dialog;
 
 import org.buffalocoder.quanlybangdia.dao.BangDiaDAO;
 import org.buffalocoder.quanlybangdia.models.BangDia;
-import org.buffalocoder.quanlybangdia.utils.Colors;
-import org.buffalocoder.quanlybangdia.utils.Fonts;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.utils.PatternRegexs;
 
@@ -31,24 +29,26 @@ public class BangDiaDialog extends JDialog{
     private void prepareDialog(){
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(MaterialDesign.BORDER_DIALOG);
+        MaterialDesign.materialPanel(mainPanel);
         getContentPane().add(mainPanel);
 
         //========== HEADER PANEL ==========//
         headerPanel = new JPanel(new BorderLayout());
         headerPanel.setPreferredSize(new Dimension(mainPanel.getWidth(), 60));
-        headerPanel.setBackground(Colors.PRIMARY);
+        headerPanel.setBackground(MaterialDesign.COLOR_PRIMARY);
         mainPanel.add(headerPanel, BorderLayout.NORTH);
 
         lblTieuDe = new JLabel(tieuDe);
         MaterialDesign.materialLabel(lblTieuDe);
         lblTieuDe.setForeground(Color.WHITE);
         lblTieuDe.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTieuDe.setFont(Fonts.TITLE_2);
+        lblTieuDe.setFont(MaterialDesign.FONT_TITLE_2);
         headerPanel.add(lblTieuDe);
 
         //========== CONTENT PANEL ==========//
         contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+        contentPanel.setBackground(MaterialDesign.COLOR_BACKGROUND);
         mainPanel.add(contentPanel, BorderLayout.CENTER);
 
         Box box = Box.createVerticalBox();
@@ -194,7 +194,7 @@ public class BangDiaDialog extends JDialog{
 
         lblLoi = new JLabel(" ");
         MaterialDesign.materialLabel(lblLoi);
-        lblLoi.setForeground(Colors.ERROR);
+        lblLoi.setForeground(MaterialDesign.COLOR_ERROR);
         bx9.add(lblLoi);
 
 
@@ -206,7 +206,7 @@ public class BangDiaDialog extends JDialog{
         MaterialDesign.materialButton(btnThoat);
         btnThoat.setPreferredSize(new Dimension(250, 50));
         btnThoat.addActionListener(btnThoat_Click());
-        btnThoat.setBackground(Colors.ERROR);
+        btnThoat.setBackground(MaterialDesign.COLOR_ERROR);
         bottomPanel.add(btnThoat);
 
         btnLuu = new JButton(isEdit ? "Lưu" : "Thêm");

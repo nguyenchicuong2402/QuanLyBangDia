@@ -34,25 +34,27 @@ public class KhachHangDialog extends JDialog {
 
     private void prepareDialog(){
         mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBorder(BorderFactory.createLineBorder(Colors.PRIMARY, 2));
+        mainPanel.setBorder(MaterialDesign.BORDER_DIALOG);
+        MaterialDesign.materialPanel(mainPanel);
         getContentPane().add(mainPanel);
 
         // HEADER PANEL
         headerPanel = new JPanel(new BorderLayout());
         headerPanel.setPreferredSize(new Dimension(mainPanel.getWidth(), 60));
-        headerPanel.setBackground(Colors.PRIMARY);
+        headerPanel.setBackground(MaterialDesign.COLOR_PRIMARY);
         mainPanel.add(headerPanel, BorderLayout.NORTH);
 
         lblTieuDe = new JLabel(tieuDe);
         MaterialDesign.materialLabel(lblTieuDe);
         lblTieuDe.setForeground(Color.WHITE);
         lblTieuDe.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTieuDe.setFont(Fonts.TITLE_2);
+        lblTieuDe.setFont(MaterialDesign.FONT_TITLE_2);
         headerPanel.add(lblTieuDe);
 
         // CONTENT PANEL
         contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+        contentPanel.setBackground(MaterialDesign.COLOR_BACKGROUND);
         mainPanel.add(contentPanel, BorderLayout.CENTER);
 
         Box box = Box.createVerticalBox();
@@ -185,7 +187,7 @@ public class KhachHangDialog extends JDialog {
 
         lblLoi = new JLabel("      ");
         MaterialDesign.materialLabel(lblLoi);
-        lblLoi.setForeground(Colors.ERROR);
+        lblLoi.setForeground(MaterialDesign.COLOR_ERROR);
         bx8.add(Box.createHorizontalStrut(20));
         bx8.add(lblLoi);
         bx8.add(Box.createHorizontalGlue());
@@ -197,6 +199,7 @@ public class KhachHangDialog extends JDialog {
         btnThoat = new JButton("Đóng");
         MaterialDesign.materialButton(btnThoat);
         btnThoat.setPreferredSize(new Dimension(250, 50));
+        btnThoat.setBackground(MaterialDesign.COLOR_ERROR);
         btnThoat.addActionListener(btnThoat_Click());
         bottomPanel.add(btnThoat);
 
