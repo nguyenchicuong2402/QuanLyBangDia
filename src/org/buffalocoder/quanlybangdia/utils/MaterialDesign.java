@@ -9,6 +9,7 @@ import java.awt.*;
 public class MaterialDesign {
     public static Border BORDER_ERROR = BorderFactory.createLineBorder(Colors.ERROR, 3);
     public static Border BORDER_DIALOG = BorderFactory.createLineBorder(Colors.PRIMARY, 2);
+    public static Border BORDER_COMBOBOX = BorderFactory.createLineBorder(Colors.PRIMARY, 2);
 
     public static void materialButton(JButton button){
         button.setBackground(Colors.PRIMARY);
@@ -34,6 +35,7 @@ public class MaterialDesign {
     public static void materialTable(JTable table){
         table.setSelectionBackground(Colors.DARK);
         table.setSelectionForeground(Color.WHITE);
+
         table.getTableHeader().setForeground(Color.BLACK);
         table.getTableHeader().setBackground(Colors.TEXT);
         table.getTableHeader().setFont(Fonts.TABLE_HEADER);
@@ -41,7 +43,7 @@ public class MaterialDesign {
         table.setFont(Fonts.DEFAULT);
         table.setRowHeight(35);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        table.setAutoCreateRowSorter(true);
+        table.setAutoCreateRowSorter(false);
         table.getTableHeader().setReorderingAllowed(false);
     }
 
@@ -61,6 +63,8 @@ public class MaterialDesign {
     }
 
     public static void materialComboBox (JComboBox comboBox){
+        comboBox.setBackground(Colors.BACKGROUND);
+        comboBox.setFont(Fonts.DEFAULT);
     }
 
     public static void materialPanel (JPanel panel){

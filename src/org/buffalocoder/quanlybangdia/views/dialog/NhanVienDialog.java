@@ -396,6 +396,7 @@ public class NhanVienDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 nhanVien = null;
+                taiKhoan = null;
                 NhanVienDialog.this.dispose();
             }
         };

@@ -136,7 +136,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
 
                 NhanVien nhanVien = nhanVienDialog.getNhanVien();
                 TaiKhoan taiKhoan = nhanVienDialog.getTaiKhoan();
-                if (nhanVien == null)
+                if (nhanVien == null && taiKhoan == null)
                     return;
 
                 try{
@@ -174,6 +174,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
 
                 nhanVien = nhanVienDialog.getNhanVien();
                 taiKhoan = nhanVienDialog.getTaiKhoan();
+
                 if (nhanVien == null && taiKhoan == null)
                     return;
 
