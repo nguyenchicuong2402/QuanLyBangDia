@@ -182,7 +182,7 @@ public class DangNhap extends JFrame {
     }
 
     private void inputError(JTextField txt, String message){
-        txt.setBorder(BorderFactory.createLineBorder(Colors.ERROR, 3));
+        txt.setBorder(MaterialDesign.BORDER_ERROR);
         txt.requestFocus();
         txt.selectAll();
 

@@ -3,16 +3,16 @@ package org.buffalocoder.quanlybangdia.views.dialog;
 import com.toedter.calendar.JDateChooser;
 import org.buffalocoder.quanlybangdia.models.BangDia;
 import org.buffalocoder.quanlybangdia.models.KhachHang;
-import org.buffalocoder.quanlybangdia.utils.Colors;
-import org.buffalocoder.quanlybangdia.utils.Fonts;
-import org.buffalocoder.quanlybangdia.utils.Formats;
-import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
+import org.buffalocoder.quanlybangdia.utils.*;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,7 +24,7 @@ public class KhachHangDialog extends JDialog {
 
     private JPanel mainPanel, contentPanel, headerPanel, bottomPanel;
     private JLabel lblTieuDe, lblMaKH, lblCMND, lblHoTen, lblGioiTinh, lblSoDienThoai,
-            lblDiaChi, lblNgaySinh;
+            lblDiaChi, lblNgaySinh, lblLoi;
     private JButton btnThoat, btnLuu;
     private JTextField txtMaKH, txtCMND, txtHoTen, txtSoDienThoai, txtDiaChi, txtNgaySinh;
     private JComboBox<String> cbGioiTinh;
@@ -111,6 +111,7 @@ public class KhachHangDialog extends JDialog {
         txtHoTen = new JTextField();
         MaterialDesign.materialTextField(txtHoTen);
         if (isEdit) txtHoTen.setText(khachHang.getHoTen());
+        txtHoTen.addKeyListener(txtHoTen_KeyListener());
         bx2.add(txtHoTen);
         bx2.add(Box.createHorizontalStrut(20));
 
@@ -126,6 +127,7 @@ public class KhachHangDialog extends JDialog {
             txtCMND.setText(khachHang.getcMND());
             txtCMND.setEditable(false);
         }
+        txtCMND.addKeyListener(txtCMND_KeyListener());
         bx3.add(txtCMND);
         bx3.add(Box.createHorizontalStrut(20));
 
@@ -162,6 +164,7 @@ public class KhachHangDialog extends JDialog {
         txtSoDienThoai = new JTextField();
         MaterialDesign.materialTextField(txtSoDienThoai);
         if (isEdit) txtSoDienThoai.setText(khachHang.getSoDienThoai());
+        txtSoDienThoai.addKeyListener(txtSoDienThoai_KeyListener());
         bx6.add(txtSoDienThoai);
         bx6.add(Box.createHorizontalStrut(20));
 
@@ -174,8 +177,16 @@ public class KhachHangDialog extends JDialog {
         txtDiaChi = new JTextField();
         MaterialDesign.materialTextField(txtDiaChi);
         if (isEdit) txtDiaChi.setText(khachHang.getDiaChi());
+        txtDiaChi.addKeyListener(txtDiaChi_KeyListener());
         bx7.add(txtDiaChi);
         bx7.add(Box.createHorizontalStrut(20));
+
+        lblLoi = new JLabel("      ");
+        MaterialDesign.materialLabel(lblLoi);
+        lblLoi.setForeground(Colors.ERROR);
+        bx8.add(Box.createHorizontalStrut(20));
+        bx8.add(lblLoi);
+        bx8.add(Box.createHorizontalGlue());
 
         // BOTTOM PANEL
         bottomPanel = new JPanel(new GridLayout(1, 2, 1, 10));
@@ -193,6 +204,138 @@ public class KhachHangDialog extends JDialog {
         bottomPanel.add(btnLuu);
     }
 
+    private void errorInput(JTextField textField, String message){
+        lblLoi.setText(message);
+        textField.setBorder(MaterialDesign.BORDER_ERROR);
+        textField.requestFocus();
+        textField.selectAll();
+    }
+
+    private void unErrorInput(JTextField textField){
+        MaterialDesign.materialTextField(textField);
+        lblLoi.setText("    ");
+    }
+
+    private boolean validateData(){
+        Pattern pattern = null;
+
+        // Kiểm tra họ tên
+        if (txtHoTen.getText().trim().isEmpty()){
+            errorInput(txtHoTen, "Vui lòng nhập họ tên");
+            return false;
+        }else if (txtHoTen.getText().trim().length() > 50){
+            errorInput(txtHoTen, "Không nhập họ tên quá 50 kí tự");
+            return false;
+        }
+
+        // Kiểm tra CMND
+        pattern = pattern.compile(PatternRegexs.REGEX_CMND);
+        if (txtCMND.getText().trim().isEmpty()){
+            errorInput(txtCMND, "Vui lòng nhập CMND");
+            return false;
+        }else if (!pattern.matcher(txtCMND.getText().trim()).matches()){
+            errorInput(txtCMND, "CMND phải là số (không quá 20 số)");
+            return false;
+        }
+
+        // Kiểm tra số diện thoại
+        pattern = Pattern.compile(PatternRegexs.REGEX_SODIENTHOAI);
+        if (txtSoDienThoai.getText().trim().isEmpty()){
+            errorInput(txtSoDienThoai, "Vui lòng nhập số điện thoại");
+            return false;
+        }else if (!pattern.matcher(txtSoDienThoai.getText().trim()).matches()){
+            errorInput(txtSoDienThoai, "Số điện thoại phải là số (không quá 20 số)");
+            return false;
+        }
+
+        // Kiểm tra địa chỉ
+        if (txtDiaChi.getText().trim().isEmpty()){
+            errorInput(txtDiaChi, "Vui lòng nhập địa chỉ");
+            return false;
+        }else if (txtDiaChi.getText().trim().length() > 100){
+            errorInput(txtDiaChi, "Địa chỉ không quá 100 kí tự");
+            return false;
+        }
+
+        return true;
+    }
+
+    private KeyListener txtHoTen_KeyListener(){
+        return new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                unErrorInput(txtHoTen);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
+    }
+
+    private KeyListener txtCMND_KeyListener(){
+        return new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                unErrorInput(txtCMND);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
+    }
+
+    private KeyListener txtSoDienThoai_KeyListener(){
+        return new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                unErrorInput(txtSoDienThoai);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
+    }
+
+    private KeyListener txtDiaChi_KeyListener(){
+        return new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                unErrorInput(txtDiaChi);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
+    }
+
     private ActionListener btnThoat_Click(){
         return new ActionListener() {
             @Override
@@ -202,63 +345,12 @@ public class KhachHangDialog extends JDialog {
         };
     }
 
-    private boolean validateData(){
-
-        // tên
-        String regexten="[a-zA-Z_0-9]{1,50}";
-        String kiemtraten=txtHoTen.getText();
-        Pattern pattern = Pattern.compile(regexten);
-        Matcher matcherten = pattern.matcher(kiemtraten);
-
-         //CMND
-        String regexCMND="[0-9]{1,20}";
-        String kiemtraCMND=txtCMND.getText();
-        pattern = Pattern.compile(regexCMND);
-        Matcher matcherCMND = pattern.matcher(kiemtraCMND);
-
-        //SDT
-        String regexSDT="[0-9]{1,20}";
-        String kiemtraSDT=txtCMND.getText();
-        pattern = Pattern.compile(regexSDT);
-        Matcher matcherSDT = pattern.matcher(kiemtraSDT);
-
-
-        //địa chỉ
-        String regexdiachi="[a-zA-Z_0-9]{1,100}";
-        String kiemtradiachi=txtCMND.getText();
-        pattern = Pattern.compile(regexdiachi);
-        Matcher matcherdiachi = pattern.matcher(kiemtradiachi);
-
-
-//        if(matcherten.matches()&&matcherCMND.matches()) {
-//
-//            return true;
-//
-//        }
-        if(!matcherten.matches())
-            return false;
-
-        if(!matcherCMND.matches())
-           return false;
-
-        if(!matcherSDT.matches())
-            return false;
-
-        if(!matcherdiachi.matches())
-            return false;
-        return true;
-    }
-
     private ActionListener btnLuu_Click(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!validateData()){
-                    System.out.println("false");
+                if (!validateData())
                     return;
-                }
-
-                System.out.println();
 
                 khachHang = new KhachHang(
                         txtCMND.getText().trim(),

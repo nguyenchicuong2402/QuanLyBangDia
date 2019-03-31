@@ -3,9 +3,12 @@ package org.buffalocoder.quanlybangdia.utils;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 public class MaterialDesign {
+    public static Border BORDER_ERROR = BorderFactory.createLineBorder(Colors.ERROR, 3);
+
     public static void materialButton(JButton button){
         button.setBackground(Colors.PRIMARY);
         button.setForeground(Colors.TEXT);
