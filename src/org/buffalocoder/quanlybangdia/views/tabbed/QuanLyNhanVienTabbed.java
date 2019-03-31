@@ -16,10 +16,7 @@ import javax.swing.*;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 public class QuanLyNhanVienTabbed extends JPanel {
@@ -59,18 +56,26 @@ public class QuanLyNhanVienTabbed extends JPanel {
         btnThem.setPreferredSize(new Dimension(90, 40));
         MaterialDesign.materialButton(btnThem);
         btnThem.addActionListener(btnThem_Click());
+        btnThem.setToolTipText("[Alt + T] Thêm nhân viên mới");
+        btnThem.setMnemonic(KeyEvent.VK_T);
         funcPanel.add(btnThem);
 
         btnSua = new JButton("Sửa");
         btnSua.setPreferredSize(btnThem.getPreferredSize());
         MaterialDesign.materialButton(btnSua);
         btnSua.addActionListener(btnSua_Click());
+        btnSua.setToolTipText("Vui lòng chọn nhân viên cần cập nhật thông tin");
+        btnSua.setMnemonic(KeyEvent.VK_S);
+        btnSua.setEnabled(false);
         funcPanel.add(btnSua);
 
         btnXoa = new JButton("Xoá");
         btnXoa.setPreferredSize(btnThem.getPreferredSize());
         MaterialDesign.materialButton(btnXoa);
         btnXoa.addActionListener(btnXoa_Click());
+        btnXoa.setToolTipText("[Alt + X] Xoá nhân viên");
+        btnXoa.setMnemonic(KeyEvent.VK_X);
+        btnXoa.setBackground(Colors.ERROR);
         funcPanel.add(btnXoa);
 
         // tìm kiếm
@@ -103,6 +108,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
 
         tblNhanVien = new JTable(nhanVienTableModel);
         MaterialDesign.materialTable(tblNhanVien);
+        tblNhanVien.addMouseListener(tblNhanVien_MouseListener());
 
         scrollPane = new JScrollPane(tblNhanVien);
         MaterialDesign.materialScrollPane(scrollPane);
@@ -213,6 +219,36 @@ public class QuanLyNhanVienTabbed extends JPanel {
                         thongBaoLoi(e1.getMessage());
                     }
                 }
+            }
+        };
+    }
+
+    private MouseListener tblNhanVien_MouseListener(){
+        return new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                btnSua.setEnabled(true);
+                btnSua.setToolTipText("[Alt + S] Cập nhật thông tin nhân viên");
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
             }
         };
     }

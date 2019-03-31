@@ -16,8 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.sql.Date;
 
 public class QuanLyChoThueTabbed extends JPanel {
@@ -51,19 +50,27 @@ public class QuanLyChoThueTabbed extends JPanel {
         btnThem = new JButton("Thêm");
         btnThem.setPreferredSize(new Dimension(90, 40));
         btnThem.addActionListener(btnThem_Click());
+        btnThem.setToolTipText("[Alt + T] Thêm hoá đơn mới");
+        btnThem.setMnemonic(KeyEvent.VK_T);
         MaterialDesign.materialButton(btnThem);
         funcPanel.add(btnThem);
 
         btnSua = new JButton("Sửa");
         btnSua.setPreferredSize(btnThem.getPreferredSize());
         btnSua.addActionListener(btnSua_Click());
+        btnSua.setToolTipText("Vui lòng chọn hoá đơn cần cập nhật thông tin");
+        btnSua.setMnemonic(KeyEvent.VK_S);
         MaterialDesign.materialButton(btnSua);
+        btnSua.setEnabled(false);
         funcPanel.add(btnSua);
 
         btnXoa = new JButton("Xoá");
         btnXoa.setPreferredSize(btnThem.getPreferredSize());
         btnXoa.addActionListener(btnXoa_Click());
+        btnXoa.setToolTipText("[Alt + X] Xoá hoá đơn");
+        btnXoa.setMnemonic(KeyEvent.VK_X);
         MaterialDesign.materialButton(btnXoa);
+        btnXoa.setBackground(Colors.ERROR);
         funcPanel.add(btnXoa);
 
         // tìm kiếm
@@ -96,6 +103,7 @@ public class QuanLyChoThueTabbed extends JPanel {
 
         tblChoThue = new JTable(choThueTableModel);
         MaterialDesign.materialTable(tblChoThue);
+        tblChoThue.addMouseListener(tblChoThue_MouseListener());
 
         scrollPane = new JScrollPane(tblChoThue);
         MaterialDesign.materialScrollPane(scrollPane);
@@ -190,6 +198,36 @@ public class QuanLyChoThueTabbed extends JPanel {
                         thongBaoLoi(e1.getMessage());
                     }
                 }
+            }
+        };
+    }
+
+    private MouseListener tblChoThue_MouseListener(){
+        return new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                btnSua.setEnabled(true);
+                btnSua.setToolTipText("[Alt + S] Cập nhật thông tin hoá đơn");
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
             }
         };
     }

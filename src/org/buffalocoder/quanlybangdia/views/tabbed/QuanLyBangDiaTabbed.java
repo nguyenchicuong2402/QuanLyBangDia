@@ -48,19 +48,27 @@ public class QuanLyBangDiaTabbed extends JPanel {
         btnThem = new JButton("Thêm");
         btnThem.setPreferredSize(new Dimension(90, 40));
         btnThem.addActionListener(btnThem_Click());
+        btnThem.setToolTipText("[Alt + T] Thêm băng đĩa mới");
+        btnThem.setMnemonic(KeyEvent.VK_T);
         MaterialDesign.materialButton(btnThem);
         funcPanel.add(btnThem);
 
         btnSua = new JButton("Sửa");
         btnSua.setPreferredSize(btnThem.getPreferredSize());
         btnSua.addActionListener(btnSua_Click());
+        btnSua.setToolTipText("Vui lòng chọn băng đĩa cần cập nhật thông tin");
+        btnSua.setMnemonic(KeyEvent.VK_S);
+        btnSua.setEnabled(false);
         MaterialDesign.materialButton(btnSua);
         funcPanel.add(btnSua);
 
         btnXoa = new JButton("Xoá");
         btnXoa.setPreferredSize(btnThem.getPreferredSize());
         btnXoa.addActionListener(btnXoa_Click());
+        btnXoa.setToolTipText("[Alt + X] Xoá băng đĩa");
+        btnXoa.setMnemonic(KeyEvent.VK_X);
         MaterialDesign.materialButton(btnXoa);
+        btnXoa.setBackground(Colors.ERROR);
         funcPanel.add(btnXoa);
 
         // tìm kiếm
@@ -94,6 +102,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
         tblBangDia = new JTable(bangDiaTableModel);
         tblBangDia.setRowSorter(sorter = new TableRowSorter<>(tblBangDia.getModel()));
         MaterialDesign.materialTable(tblBangDia);
+        tblBangDia.addMouseListener(tblBangDia_MouseListener());
 
         scrollPane = new JScrollPane(tblBangDia);
         MaterialDesign.materialScrollPane(scrollPane);
@@ -187,6 +196,36 @@ public class QuanLyBangDiaTabbed extends JPanel {
                         thongBaoLoi(e1.getMessage());
                     }
                 }
+            }
+        };
+    }
+
+    private MouseListener tblBangDia_MouseListener(){
+        return new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                btnSua.setEnabled(true);
+                btnSua.setToolTipText("[Alt + S] Cập nhật thông tin băng đĩa");
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
             }
         };
     }

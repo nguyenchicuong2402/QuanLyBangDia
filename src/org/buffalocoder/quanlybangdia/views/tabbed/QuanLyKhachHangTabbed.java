@@ -12,10 +12,7 @@ import javax.swing.*;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 public class QuanLyKhachHangTabbed extends JPanel {
     private JTable tblKhachHang;
@@ -47,18 +44,26 @@ public class QuanLyKhachHangTabbed extends JPanel {
         btnThem.setPreferredSize(new Dimension(90, 40));
         MaterialDesign.materialButton(btnThem);
         btnThem.addActionListener(btnThem_Click());
+        btnThem.setToolTipText("[Alt + T] Thêm khách hàng mới");
+        btnThem.setMnemonic(KeyEvent.VK_T);
         funcPanel.add(btnThem);
 
         btnSua = new JButton("Sửa");
         btnSua.setPreferredSize(btnThem.getPreferredSize());
         MaterialDesign.materialButton(btnSua);
         btnSua.addActionListener(btnSua_Click());
+        btnSua.setToolTipText("Vui lòng chọn khách hàng cần cập nhật thông tin");
+        btnSua.setMnemonic(KeyEvent.VK_S);
+        btnSua.setEnabled(false);
         funcPanel.add(btnSua);
 
         btnXoa = new JButton("Xoá");
         btnXoa.setPreferredSize(btnThem.getPreferredSize());
         MaterialDesign.materialButton(btnXoa);
         btnXoa.addActionListener(btnXoa_Click());
+        btnXoa.setToolTipText("[Alt + X] Xoá khách hàng");
+        btnXoa.setMnemonic(KeyEvent.VK_X);
+        btnXoa.setBackground(Colors.ERROR);
         funcPanel.add(btnXoa);
 
         // tìm kiếm
@@ -90,6 +95,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
 
         tblKhachHang = new JTable(khachHangTableModel);
         MaterialDesign.materialTable(tblKhachHang);
+        tblKhachHang.addMouseListener(tblKhachHang_MouseListener());
 
         scrollPane = new JScrollPane(tblKhachHang);
         MaterialDesign.materialScrollPane(scrollPane);
@@ -183,6 +189,36 @@ public class QuanLyKhachHangTabbed extends JPanel {
                         thongBaoLoi(e1.getMessage());
                     }
                 }
+
+            }
+        };
+    }
+
+    private MouseListener tblKhachHang_MouseListener(){
+        return new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                btnSua.setEnabled(true);
+                btnSua.setToolTipText("[Alt + S] Cập nhật thông tin khách hàng");
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
 
             }
         };

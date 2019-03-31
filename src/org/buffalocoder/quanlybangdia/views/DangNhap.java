@@ -103,6 +103,7 @@ public class DangNhap extends JFrame {
         btnThoat.setPreferredSize(new Dimension(100, 50));
         btnThoat.addActionListener(btnThoat_Click());
         MaterialDesign.materialButton(btnThoat);
+        btnThoat.setBackground(Colors.ERROR);
         panel.add(btnThoat);
 
         btnDangNhap = new JButton("Đăng nhập");
