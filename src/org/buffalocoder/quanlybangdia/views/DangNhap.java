@@ -51,6 +51,7 @@ public class DangNhap extends JFrame {
         //========== CONTENT PANEL ==========//
         contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.LINE_AXIS));
+        MaterialDesign.materialPanel(contentPanel);
         contentPanel.setPreferredSize(new Dimension(300, 400));
         mainPanel.add(contentPanel, BorderLayout.CENTER);
 
@@ -80,6 +81,7 @@ public class DangNhap extends JFrame {
         box.add(Box.createVerticalStrut(10));
 
         JPanel panel = new JPanel(new GridLayout(1, 2, 10, 0));
+        MaterialDesign.materialPanel(panel);
         Box bx5 = Box.createVerticalBox();
         bx5.add(panel);
         box.add(bx5);
