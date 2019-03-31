@@ -106,7 +106,7 @@ public class MainForm extends JFrame {
         customTabbedPanelUI.setWidth(120);
         customTabbedPanelUI.setHeight(80);
         customTabbedPanelUI.setMargin(10, 0);
-        customTabbedPanelUI.setColorSelected(Colors.SELECTED);
+        customTabbedPanelUI.setColorSelected(Colors.PRIMARY);
         customTabbedPanelUI.setColorDeselected(Colors.DARK);
 
         // tabbed panel

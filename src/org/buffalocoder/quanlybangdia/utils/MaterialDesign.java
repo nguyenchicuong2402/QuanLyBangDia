@@ -8,6 +8,7 @@ import java.awt.*;
 
 public class MaterialDesign {
     public static Border BORDER_ERROR = BorderFactory.createLineBorder(Colors.ERROR, 3);
+    public static Border BORDER_DIALOG = BorderFactory.createLineBorder(Colors.PRIMARY, 2);
 
     public static void materialButton(JButton button){
         button.setBackground(Colors.PRIMARY);
@@ -56,6 +57,7 @@ public class MaterialDesign {
 
     public static void materialCheckBox(JCheckBox checkBox){
         checkBox.setFont(Fonts.DEFAULT);
+        checkBox.setBackground(Colors.BACKGROUND);
     }
 
     public static void materialComboBox (JComboBox comboBox){

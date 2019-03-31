@@ -8,9 +8,7 @@ import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
+import java.awt.event.*;
 
 public class BangDiaDialog extends JDialog{
     private String tieuDe;
@@ -19,7 +17,7 @@ public class BangDiaDialog extends JDialog{
 
     private JPanel mainPanel, contentPanel, headerPanel, bottomPanel;
     private JLabel lblTieuDe, lblMaBangDia, lblTenBangDia, lblTheLoai, lblTinhTrang, lblHangSanXuat,
-            lblGhiChu, lblDonGia, lblSoLuong;
+            lblGhiChu, lblDonGia, lblSoLuong, lblLoi;
     private JButton btnThoat, btnLuu;
     private JTextField txtMaBangDia, txtTenBangDia, txtTheLoai, txtHangSanXuat, txtDonGia, txtSoLuong;
     private JTextArea txtGhiChu;
@@ -27,10 +25,10 @@ public class BangDiaDialog extends JDialog{
 
     private void prepareDialog(){
         mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBorder(BorderFactory.createLineBorder(Colors.PRIMARY, 2));
+        mainPanel.setBorder(MaterialDesign.BORDER_DIALOG);
         getContentPane().add(mainPanel);
 
-        // HEADER PANEL
+        //========== HEADER PANEL ==========//
         headerPanel = new JPanel(new BorderLayout());
         headerPanel.setPreferredSize(new Dimension(mainPanel.getWidth(), 60));
         headerPanel.setBackground(Colors.PRIMARY);
@@ -43,7 +41,7 @@ public class BangDiaDialog extends JDialog{
         lblTieuDe.setFont(Fonts.TITLE_2);
         headerPanel.add(lblTieuDe);
 
-        // CONTENT PANEL
+        //========== CONTENT PANEL ==========//
         contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         mainPanel.add(contentPanel, BorderLayout.CENTER);
@@ -82,6 +80,10 @@ public class BangDiaDialog extends JDialog{
 
         Box bx8 = Box.createHorizontalBox();
         box.add(bx8);
+        box.add(Box.createVerticalStrut(10));
+
+        Box bx9 = Box.createHorizontalBox();
+        box.add(bx9);
         box.add(Box.createVerticalStrut(20));
 
         lblMaBangDia = new JLabel("Mã băng đĩa");
@@ -106,6 +108,7 @@ public class BangDiaDialog extends JDialog{
         txtTenBangDia = new JTextField();
         MaterialDesign.materialTextField(txtTenBangDia);
         if (isEdit) txtTenBangDia.setText(bangDia.getTenBangDia());
+        txtTenBangDia.addKeyListener(txtTenBangDia_KeyListener());
         bx2.add(txtTenBangDia);
         bx2.add(Box.createHorizontalStrut(20));
 
@@ -118,6 +121,7 @@ public class BangDiaDialog extends JDialog{
         txtTheLoai = new JTextField();
         MaterialDesign.materialTextField(txtTheLoai);
         if (isEdit) txtTheLoai.setText(bangDia.getTheLoai());
+        txtTheLoai.addKeyListener(txtTheLoai_KeyListener());
         bx3.add(txtTheLoai);
         bx3.add(Box.createHorizontalStrut(20));
 
@@ -141,6 +145,7 @@ public class BangDiaDialog extends JDialog{
         txtHangSanXuat = new JTextField();
         MaterialDesign.materialTextField(txtHangSanXuat);
         if (isEdit) txtHangSanXuat.setText(bangDia.getHangSanXuat());
+        txtHangSanXuat.addKeyListener(txtHangSanXuat_KeyListener());
         bx5.add(txtHangSanXuat);
         bx5.add(Box.createHorizontalStrut(20));
 
@@ -153,6 +158,7 @@ public class BangDiaDialog extends JDialog{
         txtDonGia = new JTextField();
         MaterialDesign.materialTextField(txtDonGia);
         if (isEdit) txtDonGia.setText(bangDia.getDonGia().toString());
+        txtDonGia.addKeyListener(txtDonGia_KeyListener());
         bx6.add(txtDonGia);
         bx6.add(Box.createHorizontalStrut(20));
 
@@ -165,6 +171,7 @@ public class BangDiaDialog extends JDialog{
         txtSoLuong = new JTextField();
         MaterialDesign.materialTextField(txtSoLuong);
         if (isEdit) txtSoLuong.setText(String.valueOf(bangDia.getSoLuongTon()));
+        txtSoLuong.addKeyListener(txtSoLuong_KeyListener());
         bx7.add(txtSoLuong);
         bx7.add(Box.createHorizontalStrut(20));
 
@@ -180,7 +187,13 @@ public class BangDiaDialog extends JDialog{
         bx8.add(txtGhiChu);
         bx8.add(Box.createHorizontalStrut(20));
 
-        // BOTTOM PANEL
+        lblLoi = new JLabel(" ");
+        MaterialDesign.materialLabel(lblLoi);
+        lblLoi.setForeground(Colors.ERROR);
+        bx9.add(lblLoi);
+
+
+        //========== BOTTOM PANEL ==========//
         bottomPanel = new JPanel(new GridLayout(1, 2));
         contentPanel.add(bottomPanel, BorderLayout.SOUTH);
 
@@ -188,12 +201,167 @@ public class BangDiaDialog extends JDialog{
         MaterialDesign.materialButton(btnThoat);
         btnThoat.setPreferredSize(new Dimension(250, 50));
         btnThoat.addActionListener(btnThoat_Click());
+        btnThoat.setBackground(Colors.ERROR);
         bottomPanel.add(btnThoat);
 
         btnLuu = new JButton(isEdit ? "Lưu" : "Thêm");
         MaterialDesign.materialButton(btnLuu);
         btnLuu.addActionListener(btnLuu_Click());
         bottomPanel.add(btnLuu);
+    }
+
+
+    private void errorInput(JTextField textField, String message){
+        textField.setBorder(MaterialDesign.BORDER_ERROR);
+        textField.requestFocus();
+        textField.selectAll();
+
+        lblLoi.setText(message);
+    }
+
+    private void unErrorInput(JTextField textField){
+        MaterialDesign.materialTextField(textField);
+        lblLoi.setText(" ");
+    }
+
+    private boolean validateData(){
+        // Kiểm tra tên băng đĩa
+        if (txtTenBangDia.getText().isEmpty()){
+            errorInput(txtTenBangDia, "Vui lòng nhập tên băng đĩa");
+            return false;
+        }else if (txtTenBangDia.getText().trim().length() > 50){
+            errorInput(txtTenBangDia, "Tên băng đĩa không quá 50 kí tự");
+            return false;
+        }
+
+        // Kiểm tra thể loại
+        if (txtTheLoai.getText().trim().isEmpty()){
+            errorInput(txtTheLoai, "Vui lòng nhập thể loại");
+            return false;
+        }else if (txtTheLoai.getText().trim().length() > 30){
+            errorInput(txtTheLoai, "Thể loại không quá 30 kí tự");
+            return false;
+        }
+
+        // Kiểm tra hãng sản xuất
+        if (txtHangSanXuat.getText().trim().isEmpty()){
+            errorInput(txtHangSanXuat, "Vui lòng nhập hãng sản xuất");
+            return false;
+        }else if (txtHangSanXuat.getText().trim().length() > 50){
+            errorInput(txtHangSanXuat, "Hãng sản xuất không vượt quá 50 kí tự");
+            return false;
+        }
+
+        //  TODO kiểm tra đơn giá bằng regex
+        // Kiểm tra đơn giá
+        if (txtDonGia.getText().trim().isEmpty()){
+            errorInput(txtDonGia, "Vui lòng nhập đơn giá");
+            return false;
+        }
+
+        // TODO kiểm tra số lượng bằng regex
+        // kiểm tra số lượng
+        if (txtSoLuong.getText().trim().isEmpty()){
+            errorInput(txtSoLuong, "Vui lòng nhập số lượng");
+            return false;
+        }
+
+        return true;
+    }
+
+    private KeyListener txtTenBangDia_KeyListener(){
+        return new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                unErrorInput(txtTenBangDia);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
+    }
+
+    private KeyListener txtTheLoai_KeyListener(){
+        return new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                unErrorInput(txtTheLoai);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
+    }
+
+    private KeyListener txtHangSanXuat_KeyListener(){
+        return new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                unErrorInput(txtHangSanXuat);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
+    }
+
+    private KeyListener txtDonGia_KeyListener(){
+        return new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                unErrorInput(txtDonGia);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
+    }
+
+    private KeyListener txtSoLuong_KeyListener(){
+        return new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                unErrorInput(txtSoLuong);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
     }
 
     private ActionListener btnThoat_Click(){
@@ -203,19 +371,6 @@ public class BangDiaDialog extends JDialog{
                 BangDiaDialog.this.dispose();
             }
         };
-    }
-
-    private boolean validateData(){
-
-
-       // String regex="\\d{1,2}-\\d{1,2}-\\d{4}";
-//        String kiemtra=txtNgaySinh.getText();
-//        Pattern pattern = Pattern.compile(regex);
-//        Matcher matcher = pattern.matcher(kiemtra);
-//        if(matcher.matches())
-//         return true;
-//        return false;
-        return true;
     }
 
     private ActionListener btnLuu_Click(){
@@ -259,7 +414,7 @@ public class BangDiaDialog extends JDialog{
         rootPane.setDefaultButton(btnLuu);
 
         setResizable(false);
-        setSize(600, 600);
+        setSize(600, 620);
         setAlwaysOnTop(true);
         setLocationRelativeTo(null);
         setUndecorated(true);
