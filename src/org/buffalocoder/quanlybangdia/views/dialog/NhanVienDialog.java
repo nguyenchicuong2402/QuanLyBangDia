@@ -12,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.text.ParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class NhanVienDialog extends JDialog {
     private String tieuDe;
@@ -297,11 +299,89 @@ public class NhanVienDialog extends JDialog {
             }
         };
     }
+    private boolean validateData(){
+
+        // tên
+        String regexten="[a-zA-Z_0-9]{1,50}";
+        String kiemtraten=txtHoTen.getText();
+        Pattern pattern = Pattern.compile(regexten);
+        Matcher matcherten = pattern.matcher(kiemtraten);
+
+        //CMND
+        String regexCMND="[0-9]{1,20}";
+        String kiemtraCMND=txtCMND.getText();
+        pattern = Pattern.compile(regexCMND);
+        Matcher matcherCMND = pattern.matcher(kiemtraCMND);
+
+        //SDT
+        String regexSDT="[0-9]{1,20}";
+        String kiemtraSDT=txtCMND.getText();
+        pattern = Pattern.compile(regexSDT);
+        Matcher matcherSDT = pattern.matcher(kiemtraSDT);
+
+
+        //địa chỉ
+        String regexdiachi="[a-zA-Z_0-9]{1,100}";
+        String kiemtradiachi=txtCMND.getText();
+        pattern = Pattern.compile(regexdiachi);
+        Matcher matcherdiachi = pattern.matcher(kiemtradiachi);
+
+        // mô tả
+        String regexmota="[a-zA-Z]{1,100}";
+        String kiemtramota=txtCMND.getText();
+        pattern = Pattern.compile(regexmota);
+        Matcher matchermota = pattern.matcher(kiemtramota);
+
+        // tên tài khoản
+        String regextentk="[a-zA-Z_0-9]{1,30}";
+        String kiemtratentk=txtTenTaiKhoan.getText();
+        pattern = Pattern.compile(regextentk);
+        Matcher matchertentk = pattern.matcher(kiemtratentk);
+
+        //password
+        String regextpass="[a-zA-Z_0-9]{1,128}";
+        String kiemtrapass=txtMatKhau.getText();
+        pattern = Pattern.compile(regextpass);
+        Matcher matcherpass = pattern.matcher(kiemtrapass);
+
+
+        String kiemtrarepass=txtNhapLaiMatKhau.getText();
+//        if(matcherten.matches()&&matcherCMND.matches()) {
+//
+//            return true;
+//
+//        }
+        if(!matcherten.matches())
+            return false;
+
+        if(!matcherCMND.matches())
+            return false;
+
+        if(!matcherSDT.matches())
+            return false;
+
+        if(!matcherdiachi.matches())
+            return false;
+        if(!matchermota.matches())
+            return false;
+        if(!matchertentk.matches())
+            return false;
+        if(!matcherpass.matches())
+            return false;
+        return true;
+    }
+
+
 
     private ActionListener btnLuu_Click(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (!validateData()){
+                    System.out.println("false");
+                    return;
+                }
+
                 nhanVien = new NhanVien(
                         txtCMND.getText().trim(),
                         txtHoTen.getText().trim(),
