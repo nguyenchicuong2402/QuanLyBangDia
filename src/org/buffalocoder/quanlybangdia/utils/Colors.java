@@ -10,4 +10,5 @@ public class Colors {
     public static final Color ERROR           = Color.decode("#ff1744");
     public static final Color ACCEPT          = Color.decode("#00e676");
     public static final Color DARK            = Color.decode("#0D47A1");
+    public static final Color CARD            = Color.decode("#ffffff");
 }
