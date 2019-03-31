@@ -1,19 +1,24 @@
 package org.buffalocoder.quanlybangdia.views.dialog;
 
+import org.buffalocoder.quanlybangdia.dao.BangDiaDAO;
 import org.buffalocoder.quanlybangdia.models.BangDia;
 import org.buffalocoder.quanlybangdia.utils.Colors;
 import org.buffalocoder.quanlybangdia.utils.Fonts;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
+import org.buffalocoder.quanlybangdia.utils.PatternRegexs;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class BangDiaDialog extends JDialog{
     private String tieuDe;
     private BangDia bangDia;
     private boolean isEdit;
+    private BangDiaDAO bangDiaDAO;
 
     private JPanel mainPanel, contentPanel, headerPanel, bottomPanel;
     private JLabel lblTieuDe, lblMaBangDia, lblTenBangDia, lblTheLoai, lblTinhTrang, lblHangSanXuat,
@@ -92,7 +97,7 @@ public class BangDiaDialog extends JDialog{
         bx1.add(Box.createHorizontalStrut(20));
         bx1.add(lblMaBangDia);
 
-        txtMaBangDia = new JTextField("BD00006");
+        txtMaBangDia = new JTextField(getMaBangDiaMoi());
         MaterialDesign.materialTextField(txtMaBangDia);
         txtMaBangDia.setEditable(false);
         if (isEdit) txtMaBangDia.setText(bangDia.getMaBangDia());
@@ -269,6 +274,32 @@ public class BangDiaDialog extends JDialog{
         return true;
     }
 
+    private String getMaBangDiaMoi(){
+        String lastID = "";
+        String newID = "";
+
+        try {
+            lastID = bangDiaDAO.getMaBangDiaCuoi();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (lastID.isEmpty()){
+            return "BD00001";
+        }
+
+        Pattern pattern = Pattern.compile(PatternRegexs.REGEX_MABANGDIA);
+        Matcher matcher = pattern.matcher(lastID);
+        if (matcher.find()){
+            int number = Integer.parseInt(matcher.group(1));
+            number++;
+
+            newID = String.format("BD%05d", number);
+        }
+
+        return newID;
+    }
+
     private KeyListener txtTenBangDia_KeyListener(){
         return new KeyListener() {
             @Override
@@ -399,6 +430,12 @@ public class BangDiaDialog extends JDialog{
     public BangDiaDialog(JFrame frame, BangDia bangDia){
         super(frame, true);
         this.bangDia = bangDia;
+
+        try{
+            bangDiaDAO = BangDiaDAO.getInstance();
+        }catch (Exception e){
+
+        }
 
         if (bangDia == null){
             tieuDe = "Thêm băng đĩa";

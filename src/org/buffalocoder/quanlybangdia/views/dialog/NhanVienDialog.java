@@ -1,6 +1,7 @@
 package org.buffalocoder.quanlybangdia.views.dialog;
 
 import com.toedter.calendar.JDateChooser;
+import org.buffalocoder.quanlybangdia.dao.NhanVienDAO;
 import org.buffalocoder.quanlybangdia.models.NhanVien;
 import org.buffalocoder.quanlybangdia.models.TaiKhoan;
 import org.buffalocoder.quanlybangdia.utils.*;
@@ -20,6 +21,7 @@ public class NhanVienDialog extends JDialog {
     private NhanVien nhanVien;
     private TaiKhoan taiKhoan;
     private boolean isEdit;
+    private NhanVienDAO nhanVienDAO;
 
     private JPanel mainPanel, contentPanel, headerPanel, bottomPanel, infoPanel, accountPanel;
     private JLabel lblTieuDe, lblMaNV, lblCMND, lblHoTen, lblGioiTinh, lblSoDienThoai,
@@ -104,7 +106,7 @@ public class NhanVienDialog extends JDialog {
         bx1.add(Box.createHorizontalStrut(20));
         bx1.add(lblMaNV);
 
-        txtMaNV = new JTextField("NV00015");
+        txtMaNV = new JTextField(getMaNhanVienMoi());
         MaterialDesign.materialTextField(txtMaNV);
         txtMaNV.setEditable(false);
         if (isEdit) txtMaNV.setText(nhanVien.getMaNhanVien());
@@ -290,15 +292,7 @@ public class NhanVienDialog extends JDialog {
         bottomPanel.add(btnLuu);
     }
 
-    private ActionListener btnThoat_Click(){
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                nhanVien = null;
-                NhanVienDialog.this.dispose();
-            }
-        };
-    }
+
     private boolean validateData(){
 
         // tên
@@ -371,7 +365,41 @@ public class NhanVienDialog extends JDialog {
         return true;
     }
 
+    private String getMaNhanVienMoi(){
+        String lastID = "";
+        String newID = "";
 
+        try {
+            lastID = nhanVienDAO.getMaNhanVienCuoi();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (lastID.isEmpty()){
+            return "NV00001";
+        }
+
+        Pattern pattern = Pattern.compile(PatternRegexs.REGEX_MANHANVIEN);
+        Matcher matcher = pattern.matcher(lastID);
+        if (matcher.find()){
+            int number = Integer.parseInt(matcher.group(1));
+            number++;
+
+            newID = String.format("NV%05d", number);
+        }
+
+        return newID;
+    }
+
+    private ActionListener btnThoat_Click(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                nhanVien = null;
+                NhanVienDialog.this.dispose();
+            }
+        };
+    }
 
     private ActionListener btnLuu_Click(){
         return new ActionListener() {
@@ -409,6 +437,12 @@ public class NhanVienDialog extends JDialog {
         super(frame, true);
         this.nhanVien = nhanVien;
         this.taiKhoan = taiKhoan;
+
+        try {
+            nhanVienDAO = NhanVienDAO.getInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         if (nhanVien == null){
             tieuDe = "Thêm Nhân viên";

@@ -139,6 +139,19 @@ public class KhachHangDAO {
         return getKhachHang(khachHang.getMaKH());
     }
 
+    public String getMaKhachHangCuoi() throws Exception {
+        String sql = "SELECT TOP 1 MAKH FROM KHACHHANG ORDER BY MAKH DESC";
+
+        try {
+            ResultSet resultSet = dataBaseUtils.excuteQueryRead(sql);
+            resultSet.next();
+
+            return resultSet.getString("MAKH");
+        } catch (SQLException e) {
+            throw new Exception("Đọc dữ liệu khách hàng lỗi");
+        }
+    }
+
     private KhachHangDAO() throws Exception {
         dataBaseUtils = DataBaseUtils.getInstance();
         thongTinCaNhanDAO = ThongTinCaNhanDAO.getInstance();

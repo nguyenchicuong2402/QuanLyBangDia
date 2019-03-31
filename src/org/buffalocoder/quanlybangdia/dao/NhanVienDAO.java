@@ -69,6 +69,19 @@ public class NhanVienDAO {
         return nhanViens;
     }
 
+    public String getMaNhanVienCuoi() throws Exception {
+        String sql = "SELECT TOP 1 MANV FROM NHANVIEN ORDER BY MANV DESC";
+
+        try {
+            ResultSet resultSet = dataBaseUtils.excuteQueryRead(sql);
+            resultSet.next();
+
+            return resultSet.getString("MANV");
+        } catch (SQLException e) {
+            throw new Exception("Đọc dữ liệu nhân viên lỗi");
+        }
+    }
+
     public NhanVien themNhanVien(NhanVien nhanVien) throws Exception {
         ThongTinCaNhan thongTinCaNhan = new ThongTinCaNhan(
                 nhanVien.getcMND(),

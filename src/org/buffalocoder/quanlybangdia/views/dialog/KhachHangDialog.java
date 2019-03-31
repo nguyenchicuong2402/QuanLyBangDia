@@ -1,6 +1,7 @@
 package org.buffalocoder.quanlybangdia.views.dialog;
 
 import com.toedter.calendar.JDateChooser;
+import org.buffalocoder.quanlybangdia.dao.KhachHangDAO;
 import org.buffalocoder.quanlybangdia.models.BangDia;
 import org.buffalocoder.quanlybangdia.models.KhachHang;
 import org.buffalocoder.quanlybangdia.utils.*;
@@ -21,6 +22,7 @@ public class KhachHangDialog extends JDialog {
     private String tieuDe;
     private KhachHang khachHang;
     private boolean isEdit;
+    private KhachHangDAO khachHangDAO;
 
     private JPanel mainPanel, contentPanel, headerPanel, bottomPanel;
     private JLabel lblTieuDe, lblMaKH, lblCMND, lblHoTen, lblGioiTinh, lblSoDienThoai,
@@ -95,7 +97,7 @@ public class KhachHangDialog extends JDialog {
         bx1.add(Box.createHorizontalStrut(20));
         bx1.add(lblMaKH);
 
-        txtMaKH = new JTextField("KH00011");
+        txtMaKH = new JTextField(getMaKhachHangMoi());
         MaterialDesign.materialTextField(txtMaKH);
         txtMaKH.setEditable(false);
         if (isEdit) txtMaKH.setText(khachHang.getMaKH());
@@ -214,6 +216,32 @@ public class KhachHangDialog extends JDialog {
     private void unErrorInput(JTextField textField){
         MaterialDesign.materialTextField(textField);
         lblLoi.setText("    ");
+    }
+
+    private String getMaKhachHangMoi(){
+        String lastID = "";
+        String newID = "";
+
+        try {
+            lastID = khachHangDAO.getMaKhachHangCuoi();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (lastID.isEmpty()){
+            return "KH00001";
+        }
+
+        Pattern pattern = Pattern.compile(PatternRegexs.REGEX_MAKHACHHANG);
+        Matcher matcher = pattern.matcher(lastID);
+        if (matcher.find()){
+            int number = Integer.parseInt(matcher.group(1));
+            number++;
+
+            newID = String.format("KH%05d", number);
+        }
+
+        return newID;
     }
 
     private boolean validateData(){
@@ -370,6 +398,12 @@ public class KhachHangDialog extends JDialog {
     public KhachHangDialog(JFrame frame, KhachHang khachHang){
         super(frame, true);
         this.khachHang = khachHang;
+
+        try {
+            khachHangDAO = KhachHangDAO.getInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         if (khachHang == null){
             tieuDe = "Thêm khách hàng";

@@ -162,4 +162,17 @@ public class BangDiaDAO {
 
         return null;
     }
+
+    public String getMaBangDiaCuoi() throws Exception {
+        String sql = "SELECT TOP 1 MABD FROM BANGDIA ORDER BY MABD DESC";
+
+        try {
+            ResultSet resultSet = dataBaseUtils.excuteQueryRead(sql);
+            resultSet.next();
+
+            return resultSet.getString("MABD");
+        } catch (SQLException e) {
+            throw new Exception("Đọc dữ liệu băng đĩa lỗi");
+        }
+    }
 }

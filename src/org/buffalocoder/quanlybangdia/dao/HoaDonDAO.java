@@ -55,6 +55,19 @@ public class HoaDonDAO {
         return hoaDons;
     }
 
+    public String getMaHoaDonCuoi () throws Exception {
+        String sql = "SELECT TOP 1 MAHD FROM HOADON ORDER BY MAHD DESC";
+
+        try {
+            ResultSet resultSet = dataBaseUtils.excuteQueryRead(sql);
+            resultSet.next();
+
+            return resultSet.getString("MAHD");
+        } catch (SQLException e) {
+            throw new Exception("Đọc dữ liệu hoá đơn lỗi");
+        }
+    }
+
     public HoaDon getHoaDon (String maHoaDon) throws Exception {
         HoaDon hoaDon = null;
         String sql = String.format("SELECT * FROM VIEW_HOADON WHERE MAHD = '%s'", maHoaDon);

@@ -1,6 +1,7 @@
 package org.buffalocoder.quanlybangdia.views.dialog;
 
 import com.toedter.calendar.JDateChooser;
+import org.buffalocoder.quanlybangdia.dao.HoaDonDAO;
 import org.buffalocoder.quanlybangdia.models.*;
 import org.buffalocoder.quanlybangdia.utils.*;
 
@@ -19,6 +20,7 @@ public class ChoThueDialog extends JDialog {
     private boolean isEdit;
     private DanhSachKhachHang danhSachKhachHang;
     private DanhSachBangDia danhSachBangDia;
+    private HoaDonDAO hoaDonDAO;
 
     private JPanel mainPanel, headerPanel, contentPanel, bottomPanel;
     private JButton btnThoat, btnLuu;
@@ -86,7 +88,7 @@ public class ChoThueDialog extends JDialog {
         bx1.add(Box.createHorizontalStrut(20));
         bx1.add(lblMaHoaDon);
 
-        txtMaHoaDon = new JTextField("HD00004");
+        txtMaHoaDon = new JTextField(getMaHoaDonMoi());
         MaterialDesign.materialTextField(txtMaHoaDon);
         txtMaHoaDon.setEditable(false);
         if (isEdit) txtMaHoaDon.setText(hoaDon.getMaHoaDon());
@@ -192,6 +194,32 @@ public class ChoThueDialog extends JDialog {
         return true;
     }
 
+    private String getMaHoaDonMoi(){
+        String lastID = "";
+        String newID = "";
+
+        try {
+            lastID = hoaDonDAO.getMaHoaDonCuoi();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (lastID.isEmpty()){
+            return "NV00001";
+        }
+
+        Pattern pattern = Pattern.compile(PatternRegexs.REGEX_MAHOADON);
+        Matcher matcher = pattern.matcher(lastID);
+        if (matcher.find()){
+            int number = Integer.parseInt(matcher.group(1));
+            number++;
+
+            newID = String.format("HD%05d", number);
+        }
+
+        return newID;
+    }
+
     private ActionListener btnThoat_Click(){
         return new ActionListener() {
             @Override
@@ -248,6 +276,12 @@ public class ChoThueDialog extends JDialog {
         super(frame, true);
         this.hoaDon = hoaDon;
 
+        try {
+            hoaDonDAO = HoaDonDAO.getInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         if (hoaDon == null){
             this.tieuDe = "Cho thuê";
             isEdit = false;
@@ -266,7 +300,7 @@ public class ChoThueDialog extends JDialog {
         prepareDialog();
 
         JRootPane rootPane = SwingUtilities.getRootPane(this);
-//        rootPane.setDefaultButton(btnLuu);
+        rootPane.setDefaultButton(btnLuu);
 
         setResizable(false);
         setSize(600, 500);
