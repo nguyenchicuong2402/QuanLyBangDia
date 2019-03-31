@@ -256,7 +256,7 @@ public class KhachHangDialog extends JDialog {
         rootPane.setDefaultButton(btnLuu);
 
         setResizable(false);
-        setSize(600, 550);
+        setSize(600, 500);
         setAlwaysOnTop(true);
         setLocationRelativeTo(null);
         setUndecorated(true);

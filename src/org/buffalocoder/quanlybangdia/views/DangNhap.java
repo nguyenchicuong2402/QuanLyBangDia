@@ -29,7 +29,7 @@ public class DangNhap extends JFrame {
 
         headerPanel = new JPanel(new BorderLayout());
         headerPanel.setBackground(Colors.PRIMARY);
-        headerPanel.setPreferredSize(new Dimension(this.getWidth(), 150));
+        headerPanel.setPreferredSize(new Dimension(this.getWidth(), 180));
         mainPanel.add(headerPanel, BorderLayout.NORTH);
 
         lblTieuDe = new JLabel("Đăng nhập");

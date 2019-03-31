@@ -6,6 +6,7 @@ import org.buffalocoder.quanlybangdia.models.TaiKhoan;
 import org.buffalocoder.quanlybangdia.utils.*;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +19,7 @@ public class NhanVienDialog extends JDialog {
     private TaiKhoan taiKhoan;
     private boolean isEdit;
 
-    private JPanel mainPanel, contentPanel, headerPanel, bottomPanel;
+    private JPanel mainPanel, contentPanel, headerPanel, bottomPanel, infoPanel, accountPanel;
     private JLabel lblTieuDe, lblMaNV, lblCMND, lblHoTen, lblGioiTinh, lblSoDienThoai,
             lblDiaChi, lblNgaySinh, lblMoTa, lblTenTaiKhoan, lblMatKhau, lblNhapLaiMatKhau, lblLoaiTaiKhoan;
     private JButton btnThoat, btnLuu;
@@ -51,57 +52,49 @@ public class NhanVienDialog extends JDialog {
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         mainPanel.add(contentPanel, BorderLayout.CENTER);
 
-        Box box = Box.createVerticalBox();
-        contentPanel.add(box);
-        box.add(Box.createVerticalStrut(20));
+        infoPanel = new JPanel();
+        infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
+        MaterialDesign.materialPanel(infoPanel);
+        infoPanel.setBorder(BorderFactory.createTitledBorder(
+                BorderFactory.createLineBorder(Colors.PRIMARY, 1),
+                "Thông tin nhân viên"));
+        contentPanel.add(infoPanel);
+
+        Box box_info = Box.createVerticalBox();
+        infoPanel.add(box_info);
+        box_info.add(Box.createVerticalStrut(20));
 
         Box bx1 = Box.createHorizontalBox();
-        box.add(bx1);
-        box.add(Box.createVerticalStrut(10));
+        box_info.add(bx1);
+        box_info.add(Box.createVerticalStrut(10));
 
         Box bx2 = Box.createHorizontalBox();
-        box.add(bx2);
-        box.add(Box.createVerticalStrut(10));
+        box_info.add(bx2);
+        box_info.add(Box.createVerticalStrut(10));
 
         Box bx3 = Box.createHorizontalBox();
-        box.add(bx3);
-        box.add(Box.createVerticalStrut(10));
+        box_info.add(bx3);
+        box_info.add(Box.createVerticalStrut(10));
 
         Box bx4 = Box.createHorizontalBox();
-        box.add(bx4);
-        box.add(Box.createVerticalStrut(10));
+        box_info.add(bx4);
+        box_info.add(Box.createVerticalStrut(10));
 
         Box bx5 = Box.createHorizontalBox();
-        box.add(bx5);
-        box.add(Box.createVerticalStrut(10));
+        box_info.add(bx5);
+        box_info.add(Box.createVerticalStrut(10));
 
         Box bx6 = Box.createHorizontalBox();
-        box.add(bx6);
-        box.add(Box.createVerticalStrut(10));
+        box_info.add(bx6);
+        box_info.add(Box.createVerticalStrut(10));
 
         Box bx7 = Box.createHorizontalBox();
-        box.add(bx7);
-        box.add(Box.createVerticalStrut(10));
+        box_info.add(bx7);
+        box_info.add(Box.createVerticalStrut(10));
 
         Box bx8 = Box.createHorizontalBox();
-        box.add(bx8);
-        box.add(Box.createVerticalStrut(10));
-
-        Box bx9 = Box.createHorizontalBox();
-        box.add(bx9);
-        box.add(Box.createVerticalStrut(10));
-
-        Box bx10 = Box.createHorizontalBox();
-        box.add(bx10);
-        box.add(Box.createVerticalStrut(10));
-
-        Box bx11 = Box.createHorizontalBox();
-        box.add(bx11);
-        box.add(Box.createVerticalStrut(10));
-
-        Box bx12= Box.createHorizontalBox();
-        box.add(bx12);
-        box.add(Box.createVerticalStrut(20));
+        box_info.add(bx8);
+        box_info.add(Box.createVerticalStrut(10));
 
         lblMaNV = new JLabel("Mã nhân viên");
         lblMaNV.setPreferredSize(new Dimension(150, 30));
@@ -116,71 +109,23 @@ public class NhanVienDialog extends JDialog {
         bx1.add(txtMaNV);
         bx1.add(Box.createHorizontalStrut(20));
 
-        lblTenTaiKhoan = new JLabel("Tên tài khoản");
-        lblTenTaiKhoan.setPreferredSize(lblMaNV.getPreferredSize());
-        MaterialDesign.materialLabel(lblTenTaiKhoan);
-        bx2.add(Box.createHorizontalStrut(20));
-        bx2.add(lblTenTaiKhoan);
-
-        txtTenTaiKhoan = new JTextField();
-        MaterialDesign.materialTextField(txtTenTaiKhoan);
-        if (isEdit) {
-            txtTenTaiKhoan.setText(taiKhoan.getTenTaiKhoan());
-            txtTenTaiKhoan.setEditable(false);
-        }
-        bx2.add(txtTenTaiKhoan);
-        bx2.add(Box.createHorizontalStrut(20));
-
-        lblMatKhau = new JLabel("Mật khẩu");
-        lblMatKhau.setPreferredSize(lblMaNV.getPreferredSize());
-        MaterialDesign.materialLabel(lblMatKhau);
-        bx3.add(Box.createHorizontalStrut(20));
-        bx3.add(lblMatKhau);
-
-        txtMatKhau = new JPasswordField();
-        MaterialDesign.materialTextField(txtMatKhau);
-        bx3.add(txtMatKhau);
-        bx3.add(Box.createHorizontalStrut(20));
-
-        lblNhapLaiMatKhau = new JLabel("Nhập lại mật khẩu");
-        lblNhapLaiMatKhau.setPreferredSize(lblMaNV.getPreferredSize());
-        MaterialDesign.materialLabel(lblNhapLaiMatKhau);
-        bx4.add(Box.createHorizontalStrut(20));
-        bx4.add(lblNhapLaiMatKhau);
-
-        txtNhapLaiMatKhau = new JPasswordField();
-        MaterialDesign.materialTextField(txtNhapLaiMatKhau);
-        bx4.add(txtNhapLaiMatKhau);
-        bx4.add(Box.createHorizontalStrut(20));
-
-        lblLoaiTaiKhoan = new JLabel("Loại tài khoản");
-        lblLoaiTaiKhoan.setPreferredSize(lblMaNV.getPreferredSize());
-        MaterialDesign.materialLabel(lblLoaiTaiKhoan);
-        bx5.add(Box.createHorizontalStrut(20));
-        bx5.add(lblLoaiTaiKhoan);
-
-        cbLoaiTaiKhoan = new JComboBox<>(new String[]{"ADMIN", "NHÂN VIÊN"});
-        if (isEdit) cbLoaiTaiKhoan.setSelectedItem(taiKhoan.getLoaiTaiKhoan() == 1 ? "ADMIN" : "NHÂN VIÊN");
-        bx5.add(cbLoaiTaiKhoan);
-        bx5.add(Box.createHorizontalStrut(20));
-
         lblHoTen = new JLabel("Họ và tên");
         lblHoTen.setPreferredSize(lblMaNV.getPreferredSize());
         MaterialDesign.materialLabel(lblHoTen);
-        bx6.add(Box.createHorizontalStrut(20));
-        bx6.add(lblHoTen);
+        bx2.add(Box.createHorizontalStrut(20));
+        bx2.add(lblHoTen);
 
         txtHoTen = new JTextField();
         MaterialDesign.materialTextField(txtHoTen);
         if (isEdit) txtHoTen.setText(nhanVien.getHoTen());
-        bx6.add(txtHoTen);
-        bx6.add(Box.createHorizontalStrut(20));
+        bx2.add(txtHoTen);
+        bx2.add(Box.createHorizontalStrut(20));
 
         lblCMND = new JLabel("Số CMND");
         lblCMND.setPreferredSize(lblMaNV.getPreferredSize());
         MaterialDesign.materialLabel(lblCMND);
-        bx7.add(Box.createHorizontalStrut(20));
-        bx7.add(lblCMND);
+        bx3.add(Box.createHorizontalStrut(20));
+        bx3.add(lblCMND);
 
         txtCMND = new JTextField();
         MaterialDesign.materialTextField(txtCMND);
@@ -188,67 +133,143 @@ public class NhanVienDialog extends JDialog {
             txtCMND.setText(nhanVien.getcMND());
             txtCMND.setEditable(false);
         }
-        bx7.add(txtCMND);
-        bx7.add(Box.createHorizontalStrut(20));
+        bx3.add(txtCMND);
+        bx3.add(Box.createHorizontalStrut(20));
 
         lblGioiTinh = new JLabel("Giới tính");
         lblGioiTinh.setPreferredSize(lblMaNV.getPreferredSize());
         MaterialDesign.materialLabel(lblGioiTinh);
-        bx8.add(Box.createHorizontalStrut(20));
-        bx8.add(lblGioiTinh);
+        bx4.add(Box.createHorizontalStrut(20));
+        bx4.add(lblGioiTinh);
 
         cbGioiTinh = new JComboBox<>(new String[]{"Nam", "Nữ"});
         if (isEdit) cbGioiTinh.setSelectedItem(nhanVien.isGioiTinh() ? "Nam" : "Nữ");
-        bx8.add(cbGioiTinh);
-        bx8.add(Box.createHorizontalStrut(20));
+        bx4.add(cbGioiTinh);
+        bx4.add(Box.createHorizontalStrut(20));
 
         lblNgaySinh = new JLabel("Ngày sinh");
         lblNgaySinh.setPreferredSize(lblMaNV.getPreferredSize());
         MaterialDesign.materialLabel(lblNgaySinh);
-        bx9.add(Box.createHorizontalStrut(20));
-        bx9.add(lblNgaySinh);
+        bx5.add(Box.createHorizontalStrut(20));
+        bx5.add(lblNgaySinh);
 
         dateChooser = new JDateChooser(Formats.DATE_FORMAT.toPattern(), "##/##/####", '_');
         MaterialDesign.materialDateChooser(dateChooser);
         if (isEdit) dateChooser.setDate(nhanVien.getNgaySinh());
         else dateChooser.setDate(new java.util.Date());
-        bx9.add(dateChooser);
-        bx9.add(Box.createHorizontalStrut(20));
+        bx5.add(dateChooser);
+        bx5.add(Box.createHorizontalStrut(20));
 
         lblSoDienThoai = new JLabel("Số điện thoại");
         lblSoDienThoai.setPreferredSize(lblMaNV.getPreferredSize());
         MaterialDesign.materialLabel(lblSoDienThoai);
-        bx10.add(Box.createHorizontalStrut(20));
-        bx10.add(lblSoDienThoai);
+        bx6.add(Box.createHorizontalStrut(20));
+        bx6.add(lblSoDienThoai);
 
         txtSoDienThoai = new JTextField();
         MaterialDesign.materialTextField(txtSoDienThoai);
         if (isEdit) txtSoDienThoai.setText(nhanVien.getSoDienThoai());
-        bx10.add(txtSoDienThoai);
-        bx10.add(Box.createHorizontalStrut(20));
+        bx6.add(txtSoDienThoai);
+        bx6.add(Box.createHorizontalStrut(20));
 
         lblDiaChi = new JLabel("Địa chỉ");
         lblDiaChi.setPreferredSize(lblMaNV.getPreferredSize());
         MaterialDesign.materialLabel(lblDiaChi);
-        bx11.add(Box.createHorizontalStrut(20));
-        bx11.add(lblDiaChi);
+        bx7.add(Box.createHorizontalStrut(20));
+        bx7.add(lblDiaChi);
 
         txtDiaChi = new JTextField();
         MaterialDesign.materialTextField(txtDiaChi);
         if (isEdit) txtDiaChi.setText(nhanVien.getDiaChi());
-        bx11.add(txtDiaChi);
-        bx11.add(Box.createHorizontalStrut(20));
+        bx7.add(txtDiaChi);
+        bx7.add(Box.createHorizontalStrut(20));
 
         lblMoTa = new JLabel("Mô tả");
         lblMoTa.setPreferredSize(lblMaNV.getPreferredSize());
         MaterialDesign.materialLabel(lblMoTa);
-        bx12.add(Box.createHorizontalStrut(20));
-        bx12.add(lblMoTa);
+        bx8.add(Box.createHorizontalStrut(20));
+        bx8.add(lblMoTa);
 
         txtMoTa = new JTextField();
         MaterialDesign.materialTextField(txtMoTa);
         if (isEdit) txtMoTa.setText(nhanVien.getMoTa());
-        bx12.add(txtMoTa);
+        bx8.add(txtMoTa);
+        bx8.add(Box.createHorizontalStrut(20));
+
+        accountPanel = new JPanel();
+        accountPanel.setLayout(new BoxLayout(accountPanel, BoxLayout.Y_AXIS));
+        MaterialDesign.materialPanel(accountPanel);
+        accountPanel.setBorder(BorderFactory.createTitledBorder(
+                BorderFactory.createLineBorder(Colors.PRIMARY, 1),
+                "Tài khoản"));
+        contentPanel.add(accountPanel);
+
+        Box box_account = Box.createVerticalBox();
+        accountPanel.add(box_account);
+        box_account.add(Box.createVerticalStrut(20));
+
+        Box bx9 = Box.createHorizontalBox();
+        box_account.add(bx9);
+        box_account.add(Box.createVerticalStrut(10));
+
+        Box bx10 = Box.createHorizontalBox();
+        box_account.add(bx10);
+        box_account.add(Box.createVerticalStrut(10));
+
+        Box bx11 = Box.createHorizontalBox();
+        box_account.add(bx11);
+        box_account.add(Box.createVerticalStrut(10));
+
+        Box bx12= Box.createHorizontalBox();
+        box_account.add(bx12);
+        box_account.add(Box.createVerticalStrut(20));
+
+        lblTenTaiKhoan = new JLabel("Tên tài khoản");
+        lblTenTaiKhoan.setPreferredSize(lblMaNV.getPreferredSize());
+        MaterialDesign.materialLabel(lblTenTaiKhoan);
+        bx9.add(Box.createHorizontalStrut(20));
+        bx9.add(lblTenTaiKhoan);
+
+        txtTenTaiKhoan = new JTextField();
+        MaterialDesign.materialTextField(txtTenTaiKhoan);
+        if (isEdit) {
+            txtTenTaiKhoan.setText(taiKhoan.getTenTaiKhoan());
+            txtTenTaiKhoan.setEditable(false);
+        }
+        bx9.add(txtTenTaiKhoan);
+        bx9.add(Box.createHorizontalStrut(20));
+
+        lblMatKhau = new JLabel("Mật khẩu");
+        lblMatKhau.setPreferredSize(lblMaNV.getPreferredSize());
+        MaterialDesign.materialLabel(lblMatKhau);
+        bx10.add(Box.createHorizontalStrut(20));
+        bx10.add(lblMatKhau);
+
+        txtMatKhau = new JPasswordField();
+        MaterialDesign.materialTextField(txtMatKhau);
+        bx10.add(txtMatKhau);
+        bx10.add(Box.createHorizontalStrut(20));
+
+        lblNhapLaiMatKhau = new JLabel("Nhập lại mật khẩu");
+        lblNhapLaiMatKhau.setPreferredSize(lblMaNV.getPreferredSize());
+        MaterialDesign.materialLabel(lblNhapLaiMatKhau);
+        bx11.add(Box.createHorizontalStrut(20));
+        bx11.add(lblNhapLaiMatKhau);
+
+        txtNhapLaiMatKhau = new JPasswordField();
+        MaterialDesign.materialTextField(txtNhapLaiMatKhau);
+        bx11.add(txtNhapLaiMatKhau);
+        bx11.add(Box.createHorizontalStrut(20));
+
+        lblLoaiTaiKhoan = new JLabel("Loại tài khoản");
+        lblLoaiTaiKhoan.setPreferredSize(lblMaNV.getPreferredSize());
+        MaterialDesign.materialLabel(lblLoaiTaiKhoan);
+        bx12.add(Box.createHorizontalStrut(20));
+        bx12.add(lblLoaiTaiKhoan);
+
+        cbLoaiTaiKhoan = new JComboBox<>(new String[]{"ADMIN", "NHÂN VIÊN"});
+        if (isEdit) cbLoaiTaiKhoan.setSelectedItem(taiKhoan.getLoaiTaiKhoan() == 1 ? "ADMIN" : "NHÂN VIÊN");
+        bx12.add(cbLoaiTaiKhoan);
         bx12.add(Box.createHorizontalStrut(20));
 
         // BOTTOM PANEL

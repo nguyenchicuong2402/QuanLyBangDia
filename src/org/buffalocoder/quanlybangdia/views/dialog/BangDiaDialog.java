@@ -250,7 +250,7 @@ public class BangDiaDialog extends JDialog{
         rootPane.setDefaultButton(btnLuu);
 
         setResizable(false);
-        setSize(600, 680);
+        setSize(600, 600);
         setAlwaysOnTop(true);
         setLocationRelativeTo(null);
         setUndecorated(true);
