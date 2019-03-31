@@ -8,10 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2ecdd5e3-bc5b-493b-80fa-dbdc743fa957" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Account.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Account.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/DangNhap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/DangNhap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/MainForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/MainForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/BangDiaDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/BangDiaDialog.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -65,18 +62,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/DangNhap.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="67" column="35" lean-forward="true" selection-start-line="67" selection-start-column="35" selection-end-line="67" selection-end-column="35" />
+            <state relative-caret-position="176">
+              <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#ghiNhoTK#0;class#DangNhap#0" />
-                <element signature="method#cbGhiNho#0;class#DangNhap#0" />
                 <element signature="method#inputError#0;class#DangNhap#0" />
                 <element signature="method#thongBao#0;class#DangNhap#0" />
                 <element signature="method#thongBaoLoi#0;class#DangNhap#0" />
+                <element signature="method#ghiNhoTaiKhoan#0;class#DangNhap#0" />
                 <element signature="method#btnThoat_Click#0;class#DangNhap#0" />
+                <element signature="method#btnDangNhap_Click#0;class#DangNhap#0" />
                 <element signature="method#txtTenNguoiDung_Changed#0;class#DangNhap#0" />
                 <element signature="method#txtMatKhau_Changed#0;class#DangNhap#0" />
+                <element signature="method#DangNhap#0;class#DangNhap#0" />
               </folding>
             </state>
           </provider>
@@ -190,7 +189,22 @@
               <item name="QuanLyBangDia" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="quanlybangdia" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="QuanLyBangDia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="QuanLyBangDia" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="quanlybangdia" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="QuanLyBangDia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="QuanLyBangDia" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="quanlybangdia" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="QuanLyBangDia" type="b2602c69:ProjectViewProjectNode" />
@@ -198,7 +212,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="quanlybangdia" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="dialog" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -593,11 +606,18 @@
       <option name="project" value="LOCAL" />
       <updated>1554005208247</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="thêm validate cho dialog khách hàng">
+      <created>1554018543456</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1554018543456</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="183970000" />
+    <option name="totallyTimeSpent" value="185907000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -675,7 +695,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="update project" />
     <MESSAGE value="tạo db" />
     <MESSAGE value="thêm script db" />
     <MESSAGE value="thêm Custom TabbedPane" />
@@ -700,7 +719,8 @@
     <MESSAGE value="thêm thư viện JDateChooser, tắt navbar các dialog" />
     <MESSAGE value="phân nội dung trong dialog thêm nhân viên" />
     <MESSAGE value="thêm phím tắt" />
-    <option name="LAST_COMMIT_MESSAGE" value="thêm phím tắt" />
+    <MESSAGE value="thêm validate cho dialog khách hàng" />
+    <option name="LAST_COMMIT_MESSAGE" value="thêm validate cho dialog khách hàng" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -710,12 +730,6 @@
           <line>35</line>
           <properties />
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/DangNhap.java</url>
-          <line>196</line>
-          <properties />
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/MainForm.java</url>
@@ -1087,10 +1101,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/KhachHangDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+        <state relative-caret-position="136">
+          <caret line="204" column="5" lean-forward="true" selection-start-line="204" selection-start-column="5" selection-end-line="204" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#validateData#0;class#KhachHangDialog#0" />
+            <element signature="method#txtHoTen_KeyListener#0;class#KhachHangDialog#0" />
+            <element signature="e#9925#9926#0" expanded="true" />
+            <element signature="e#9971#9972#0" expanded="true" />
+            <element signature="method#txtHoTen_KeyListener#1;class#KhachHangDialog#0" />
+            <element signature="e#10307#10308#0" expanded="true" />
+            <element signature="e#10361#10362#0" expanded="true" />
+            <element signature="method#txtHoTen_KeyListener#2;class#KhachHangDialog#0" />
+            <element signature="e#10711#10712#0" expanded="true" />
+            <element signature="e#10791#10792#0" expanded="true" />
+            <element signature="e#10507#10920#0" />
+            <element signature="e#10740#10741#0" expanded="true" />
+            <element signature="e#10814#10815#0" expanded="true" />
+            <element signature="method#btnThoat_Click#0;class#KhachHangDialog#0" />
+            <element signature="e#11078#11079#0" expanded="true" />
+            <element signature="e#11140#11141#0" expanded="true" />
+            <element signature="method#btnLuu_Click#0;class#KhachHangDialog#0" />
+            <element signature="method#KhachHangDialog#0;class#KhachHangDialog#0" />
           </folding>
         </state>
       </provider>
@@ -1204,18 +1236,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/DangNhap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="67" column="35" lean-forward="true" selection-start-line="67" selection-start-column="35" selection-end-line="67" selection-end-column="35" />
+        <state relative-caret-position="176">
+          <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#ghiNhoTK#0;class#DangNhap#0" />
-            <element signature="method#cbGhiNho#0;class#DangNhap#0" />
             <element signature="method#inputError#0;class#DangNhap#0" />
             <element signature="method#thongBao#0;class#DangNhap#0" />
             <element signature="method#thongBaoLoi#0;class#DangNhap#0" />
+            <element signature="method#ghiNhoTaiKhoan#0;class#DangNhap#0" />
             <element signature="method#btnThoat_Click#0;class#DangNhap#0" />
+            <element signature="method#btnDangNhap_Click#0;class#DangNhap#0" />
             <element signature="method#txtTenNguoiDung_Changed#0;class#DangNhap#0" />
             <element signature="method#txtMatKhau_Changed#0;class#DangNhap#0" />
+            <element signature="method#DangNhap#0;class#DangNhap#0" />
           </folding>
         </state>
       </provider>

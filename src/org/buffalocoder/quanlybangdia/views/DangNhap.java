@@ -18,6 +18,8 @@ import java.io.IOException;
 public class DangNhap extends JFrame {
 
     public static TaiKhoan taiKhoan;
+    private QuanLyXML ql = new QuanLyXML();
+    private TaiKhoanDAO taiKhoanDAO;
 
     private JPanel mainPanel, headerPanel, contentPanel, bottomPanel;
     private JLabel lblTieuDe, lblTenNguoiDung, lblMatKhau, lblBanQuyen, lblLoi;
@@ -26,13 +28,13 @@ public class DangNhap extends JFrame {
     private JButton btnDangNhap, btnThoat;
     private JCheckBox cbGhiNho;
     private Component rootComponent = this;
-    QuanLyXML ql = new QuanLyXML();
-    private TaiKhoanDAO taiKhoanDAO;
 
     private void prepareUI(){
         mainPanel = new JPanel(new BorderLayout());
         this.setContentPane(mainPanel);
 
+
+        //========== HEADER PANEL ==========//
         headerPanel = new JPanel(new BorderLayout());
         headerPanel.setBackground(Colors.PRIMARY);
         headerPanel.setPreferredSize(new Dimension(this.getWidth(), 180));
@@ -45,6 +47,8 @@ public class DangNhap extends JFrame {
         lblTieuDe.setHorizontalAlignment(SwingConstants.CENTER);
         headerPanel.add(lblTieuDe, BorderLayout.CENTER);
 
+
+        //========== CONTENT PANEL ==========//
         contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.LINE_AXIS));
         contentPanel.setPreferredSize(new Dimension(300, 400));
@@ -69,16 +73,17 @@ public class DangNhap extends JFrame {
 
         Box bx3 = Box.createHorizontalBox();
         box.add(bx3);
-        box.add(Box.createVerticalStrut(40));
+        box.add(Box.createVerticalStrut(10));
 
-        JPanel panel = new JPanel(new GridLayout(1, 2, 10, 10));
         Box bx4 = Box.createHorizontalBox();
         box.add(bx4);
-        box.add(Box.createVerticalStrut(20));
-        bx4.add(panel);
+        box.add(Box.createVerticalStrut(10));
 
+        JPanel panel = new JPanel(new GridLayout(1, 2, 10, 0));
         Box bx5 = Box.createVerticalBox();
+        bx5.add(panel);
         box.add(bx5);
+        box.add(Box.createVerticalStrut(20));
 
         lblTenNguoiDung = new JLabel("Tên người dùng");
         MaterialDesign.materialLabel(lblTenNguoiDung);
@@ -102,11 +107,14 @@ public class DangNhap extends JFrame {
 
         cbGhiNho = new JCheckBox("Ghi nhớ đăng nhập");
         MaterialDesign.materialCheckBox(cbGhiNho);
-        cbGhiNho.addActionListener(cbGhiNho());
         bx3.add(cbGhiNho);
         bx3.add(Box.createHorizontalGlue());
-//        ghi nhớ tài khoản
-        ghiNhoTK();
+
+        lblLoi = new JLabel(" ");
+        MaterialDesign.materialLabel(lblLoi);
+        lblLoi.setForeground(Colors.ERROR);
+        lblLoi.setHorizontalAlignment(SwingConstants.CENTER);
+        bx4.add(lblLoi);
 
         btnThoat = new JButton("Thoát");
         btnThoat.setPreferredSize(new Dimension(100, 50));
@@ -117,18 +125,12 @@ public class DangNhap extends JFrame {
 
         btnDangNhap = new JButton("Đăng nhập");
         btnDangNhap.addActionListener(btnDangNhap_Click());
-        btnDangNhap.addActionListener(cbGhiNho());
         MaterialDesign.materialButton(btnDangNhap);
         btnDangNhap.setPreferredSize(btnThoat.getPreferredSize());
         panel.add(btnDangNhap);
 
-        lblLoi = new JLabel("");
-        MaterialDesign.materialLabel(lblLoi);
-        lblLoi.setForeground(Colors.ERROR);
-        lblLoi.setPreferredSize(new Dimension(this.getWidth(), 30));
-        lblLoi.setHorizontalAlignment(SwingConstants.CENTER);
-        bx4.add(lblLoi);
 
+        //========== BOTTOM PANEL ==========//
         bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.setBackground(Colors.PRIMARY);
         bottomPanel.setPreferredSize(new Dimension(100, 40));
@@ -140,12 +142,16 @@ public class DangNhap extends JFrame {
         lblBanQuyen.setHorizontalAlignment(SwingConstants.CENTER);
         bottomPanel.add(lblBanQuyen, BorderLayout.CENTER);
 
+        // set button mặc định khi nhấn enter
         JRootPane rootPane = SwingUtilities.getRootPane(rootComponent);
         rootPane.setDefaultButton(btnDangNhap);
+
+        // Khôi phục tài khoản đã ghi nhớ lần trước
+        khoiPhucTaiKhoan();
     }
 
-    private void ghiNhoTK(){
-        if(ql.getTrangThai()!=0)
+    private void khoiPhucTaiKhoan(){
+        if(ql.getTrangThai() != 0)
         {
             cbGhiNho.setSelected(true);
             txtTenNguoiDung.setText(ql.getTextContentTK());
@@ -153,35 +159,7 @@ public class DangNhap extends JFrame {
         }
     }
 
-    private ActionListener cbGhiNho() {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (cbGhiNho.isSelected()) {
-                    try {
-                        ql.setTrangThai(1);
-                        ql.ghiNhoAccount(txtTenNguoiDung.getText(), txtMatKhau.getText());
-                    } catch (TransformerException e1) {
-                        e1.printStackTrace();
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-                else {
-                    try {
-                        ql.setTrangThai(0);
-                        ql.xoaXML();
-                    } catch (TransformerException e1) {
-                        e1.printStackTrace();
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            }
-        };
-    }
-
-    private void inputError(JTextField txt, String message){
+    private void errorInput(JTextField txt, String message){
         txt.setBorder(MaterialDesign.BORDER_ERROR);
         txt.requestFocus();
         txt.selectAll();
@@ -195,6 +173,29 @@ public class DangNhap extends JFrame {
 
     private void thongBaoLoi(String message){
         JOptionPane.showMessageDialog(rootComponent, message, "Lỗi", JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void ghiNhoTaiKhoan(){
+        if (cbGhiNho.isSelected()) {
+            try {
+                ql.setTrangThai(1);
+                ql.ghiNhoAccount(txtTenNguoiDung.getText(), txtMatKhau.getText());
+            } catch (TransformerException e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+        else {
+            try {
+                ql.setTrangThai(0);
+                ql.xoaXML();
+            } catch (TransformerException e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
     }
 
     private ActionListener btnThoat_Click(){
@@ -220,17 +221,20 @@ public class DangNhap extends JFrame {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // lấy tên đăng nhập và mật khẩu
                 String tenTaiKhoan = txtTenNguoiDung.getText().trim();
                 String matKhau = txtMatKhau.getText().trim();
 
+                // kiểm tra dữ liệu
                 if (tenTaiKhoan.isEmpty()){
-                    inputError(txtTenNguoiDung, "Vui lòng nhập tên người dùng");
+                    errorInput(txtTenNguoiDung, "Vui lòng nhập tên người dùng");
                     return;
                 }else if (matKhau.isEmpty()){
-                    inputError(txtMatKhau, "Vui lòng nhập mật khẩu");
+                    errorInput(txtMatKhau, "Vui lòng nhập mật khẩu");
                     return;
                 }
 
+                // lấy tài khoản từ db lên
                 try{
                     taiKhoan = taiKhoanDAO.getTaiKhoan(tenTaiKhoan);
                 }catch (Exception e1){
@@ -238,7 +242,12 @@ public class DangNhap extends JFrame {
                     return;
                 }
 
+                // kiểm tra username, password có đúng không
+                // nếu đúng thì vào form quản lý
+                // nếu sai thì thông báo
+                // ghi nhớ tài khoản (nếu có check)
                 if (tenTaiKhoan.equals(taiKhoan.getTenTaiKhoan()) && matKhau.equals(taiKhoan.getMatKhau())){
+                    ghiNhoTaiKhoan();
                     rootComponent.setVisible(false);
                     new MainForm();
                 }else{
@@ -257,11 +266,15 @@ public class DangNhap extends JFrame {
 
             }
 
+            /**
+             * Khi người dùng nhấn phím thì bỏ lỗi
+             * @param e
+             */
             @Override
             public void keyPressed(KeyEvent e) {
                 if (!lblLoi.getText().trim().isEmpty()){
                     MaterialDesign.materialTextField(txtTenNguoiDung);
-                    lblLoi.setText("");
+                    lblLoi.setText("  ");
                 }
             }
 
@@ -279,11 +292,15 @@ public class DangNhap extends JFrame {
 
             }
 
+            /**
+             * Khi người dùng nhấn phím thì bỏ lỗi
+             * @param e
+             */
             @Override
             public void keyPressed(KeyEvent e) {
                 if (!lblLoi.getText().trim().isEmpty()){
                     MaterialDesign.materialTextField(txtMatKhau);
-                    lblLoi.setText("");
+                    lblLoi.setText("  ");
                 }
             }
 
