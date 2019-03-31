@@ -1,16 +1,19 @@
 package org.buffalocoder.quanlybangdia.views;
 
+import org.buffalocoder.quanlybangdia.XML.QuanLyXML;
 import org.buffalocoder.quanlybangdia.dao.TaiKhoanDAO;
 import org.buffalocoder.quanlybangdia.models.TaiKhoan;
 import org.buffalocoder.quanlybangdia.utils.Colors;
 import org.buffalocoder.quanlybangdia.utils.Fonts;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import javax.swing.*;
+import javax.xml.transform.TransformerException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
 public class DangNhap extends JFrame {
     public static TaiKhoan taiKhoan;
@@ -22,6 +25,7 @@ public class DangNhap extends JFrame {
     private JButton btnDangNhap, btnThoat;
     private JCheckBox cbGhiNho;
     private Component rootComponent = this;
+    QuanLyXML ql = new QuanLyXML();
 
     private void prepareUI(){
         mainPanel = new JPanel(new BorderLayout());
@@ -96,8 +100,11 @@ public class DangNhap extends JFrame {
 
         cbGhiNho = new JCheckBox("Ghi nhớ đăng nhập");
         MaterialDesign.materialCheckBox(cbGhiNho);
+        cbGhiNho.addActionListener(cbGhiNho());
         bx3.add(cbGhiNho);
         bx3.add(Box.createHorizontalGlue());
+//        ghi nhớ tài khoản
+        ghiNhoTK();
 
         btnThoat = new JButton("Thoát");
         btnThoat.setPreferredSize(new Dimension(100, 50));
@@ -108,6 +115,7 @@ public class DangNhap extends JFrame {
 
         btnDangNhap = new JButton("Đăng nhập");
         btnDangNhap.addActionListener(btnDangNhap_Click());
+        btnDangNhap.addActionListener(cbGhiNho());
         MaterialDesign.materialButton(btnDangNhap);
         btnDangNhap.setPreferredSize(btnThoat.getPreferredSize());
         panel.add(btnDangNhap);
@@ -132,10 +140,44 @@ public class DangNhap extends JFrame {
 
         JRootPane rootPane = SwingUtilities.getRootPane(rootComponent);
         rootPane.setDefaultButton(btnDangNhap);
+    }
+    private void ghiNhoTK(){
+        if(ql.getTrangThai()!=0)
+        {
+            cbGhiNho.setSelected(true);
+            txtTenNguoiDung.setText(ql.getTextContentTK());
+            txtMatKhau.setText(ql.getTextContentPW());
+        }
+        else{
 
-        // TODO xoá dòng này khi nộp
-        txtTenNguoiDung.setText("admin");
-        txtMatKhau.setText("123456");
+        }
+    }
+    private ActionListener cbGhiNho() {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (cbGhiNho.isSelected()) {
+                    try {
+                        ql.setTrangThai(1);
+                        ql.ghiNhoAccount(txtTenNguoiDung.getText(), txtMatKhau.getText());
+                    } catch (TransformerException e1) {
+                        e1.printStackTrace();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                else {
+                    try {
+                        ql.setTrangThai(0);
+                        ql.xoaXML();
+                    } catch (TransformerException e1) {
+                        e1.printStackTrace();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            }
+        };
     }
 
     private void inputError(JTextField txt, String message){
