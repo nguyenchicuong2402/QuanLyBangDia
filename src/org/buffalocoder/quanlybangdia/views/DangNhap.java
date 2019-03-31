@@ -16,6 +16,7 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 
 public class DangNhap extends JFrame {
+
     public static TaiKhoan taiKhoan;
 
     private JPanel mainPanel, headerPanel, contentPanel, bottomPanel;

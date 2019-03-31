@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class QuanLyXML {
+
     Document document = DocGhiFileXML.docFileXML();
     DocGhiFileXML dg = new DocGhiFileXML();
     public QuanLyXML(){

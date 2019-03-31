@@ -14,6 +14,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 public class DocGhiFileXML {
+
     public static Document docFileXML(){
         Document document = null;
         File f = new File("src/Account.xml");
