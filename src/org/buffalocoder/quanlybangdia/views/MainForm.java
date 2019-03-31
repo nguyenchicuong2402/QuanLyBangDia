@@ -176,6 +176,7 @@ public class MainForm extends JFrame {
                 prepareUI();
 
                 setSize(WIDTH, HEIGHT);
+                setExtendedState(JFrame.MAXIMIZED_BOTH);
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
                 setLocationRelativeTo(null);
                 setTitle(TITLE);

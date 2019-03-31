@@ -82,13 +82,11 @@ public class ChoThueDialog extends JDialog {
 
         Box bx6 = Box.createHorizontalBox();
         box.add(bx6);
-        box.add(Box.createVerticalStrut(50));
+        box.add(Box.createVerticalStrut(30));
 
         Box bx7 = Box.createHorizontalBox();
         box.add(bx7);
-        box.add(Box.createVerticalStrut(50));
-
-
+        box.add(Box.createVerticalStrut(20));
 
         lblMaHoaDon = new JLabel("Mã hoá đơn");
         lblMaHoaDon.setPreferredSize(new Dimension(150, 30));
@@ -158,6 +156,7 @@ public class ChoThueDialog extends JDialog {
         txtSoLuong = new JTextField();
         MaterialDesign.materialTextField(txtSoLuong);
         if (isEdit) txtSoLuong.setText(String.valueOf(hoaDon.getSoLuong()));
+        txtSoLuong.addKeyListener(txtSoLuong_KeyListener());
         bx5.add(txtSoLuong);
         bx5.add(Box.createHorizontalStrut(20));
 
@@ -170,6 +169,7 @@ public class ChoThueDialog extends JDialog {
         txtSoNgayDuocMuon = new JTextField();
         MaterialDesign.materialTextField(txtSoNgayDuocMuon);
         if (isEdit) txtSoNgayDuocMuon.setText(String.valueOf(hoaDon.getSoNgayDuocMuon()));
+        txtSoNgayDuocMuon.addKeyListener(txtSoNgayDuocMuon_KeyListener());
         bx6.add(txtSoNgayDuocMuon);
         bx6.add(Box.createHorizontalStrut(20));
 
@@ -210,16 +210,6 @@ public class ChoThueDialog extends JDialog {
     }
 
     private boolean validateData(){
-
-        //String regex="\\d{1,2}-\\d{1,2}-\\d{4}";
-//        String kiemtra=txtNgaySinh.getText();
-//        Pattern pattern = Pattern.compile(regex);
-//        Matcher matcher = pattern.matcher(kiemtra);
-//        if(matcher.matches())
-//         return true;
-//        return false;
-
-
         Pattern pattern = null;
 
         pattern = pattern.compile(PatternRegexs.REGEX_SOLUONGHOADON);
@@ -227,21 +217,46 @@ public class ChoThueDialog extends JDialog {
             errorInput(txtSoLuong, "Vui lòng nhập số lượng");
             return false;
         }else if (!pattern.matcher(txtSoLuong.getText().trim()).matches()){
-            errorInput(txtSoLuong, " số lượng phải là số (không quá 20 số)");
+            errorInput(txtSoLuong, " số lượng phải là số");
             return false;
         }
-
 
         pattern = Pattern.compile(PatternRegexs.REGEX_NGAYMUON);
         if (txtSoNgayDuocMuon.getText().trim().isEmpty()){
             errorInput(txtSoNgayDuocMuon, "Vui lòng nhập số số ngày mượn");
             return false;
         }else if (!pattern.matcher(txtSoNgayDuocMuon.getText().trim()).matches()){
-            errorInput(txtSoNgayDuocMuon, "số ngày mượn phải là số (không quá 20 số)");
+            errorInput(txtSoNgayDuocMuon, "số ngày mượn phải là số");
             return false;
         }
 
         return true;
+    }
+
+    private String getMaHoaDonMoi(){
+        String lastID = "";
+        String newID = "";
+
+        try {
+            lastID = hoaDonDAO.getMaHoaDonCuoi();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (lastID.isEmpty()){
+            return "NV00001";
+        }
+
+        Pattern pattern = Pattern.compile(PatternRegexs.REGEX_MAHOADON);
+        Matcher matcher = pattern.matcher(lastID);
+        if (matcher.find()){
+            int number = Integer.parseInt(matcher.group(1));
+            number++;
+
+            newID = String.format("HD%05d", number);
+        }
+
+        return newID;
     }
 
     private KeyListener txtSoLuong_KeyListener(){
@@ -281,38 +296,6 @@ public class ChoThueDialog extends JDialog {
             }
         };
     }
-
-
-
-
-    private String getMaHoaDonMoi(){
-        String lastID = "";
-        String newID = "";
-
-        try {
-            lastID = hoaDonDAO.getMaHoaDonCuoi();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (lastID.isEmpty()){
-            return "NV00001";
-        }
-
-        Pattern pattern = Pattern.compile(PatternRegexs.REGEX_MAHOADON);
-        Matcher matcher = pattern.matcher(lastID);
-        if (matcher.find()){
-            int number = Integer.parseInt(matcher.group(1));
-            number++;
-
-            newID = String.format("HD%05d", number);
-        }
-
-        return newID;
-    }
-
-
-
 
     private ActionListener btnThoat_Click(){
         return new ActionListener() {
@@ -397,7 +380,7 @@ public class ChoThueDialog extends JDialog {
         rootPane.setDefaultButton(btnLuu);
 
         setResizable(false);
-        setSize(600, 500);
+        setSize(600, 480);
         setAlwaysOnTop(true);
         setLocationRelativeTo(null);
         setUndecorated(true);

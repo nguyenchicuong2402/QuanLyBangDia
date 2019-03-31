@@ -7,9 +7,30 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 public class MaterialDesign {
+    private static final String FONT_NAME = "Times New Roman";
+
+    //========== BORDER =========//
     public static Border BORDER_ERROR = BorderFactory.createLineBorder(Colors.ERROR, 3);
-    public static Border BORDER_DIALOG = BorderFactory.createLineBorder(Colors.PRIMARY, 2);
-    public static Border BORDER_COMBOBOX = BorderFactory.createLineBorder(Colors.PRIMARY, 2);
+    public static Border BORDER_DIALOG = BorderFactory.createLineBorder(Colors.DARK, 2);
+
+    //========== FONT ==========//
+    public static final Font FONT_DEFAULT            = new Font(FONT_NAME, Font.PLAIN, 18);
+    public static final Font FONT_SMALL              = new Font(FONT_NAME, Font.PLAIN, 16);
+    public static final Font FONT_SMALL_ITALIC       = new Font(FONT_NAME, Font.ITALIC, 16);
+    public static final Font FONT_TABLE_HEADER       = new Font(FONT_NAME, Font.PLAIN, 18);
+    public static final Font FONT_TITLE_1            = new Font(FONT_NAME, Font.PLAIN, 40);
+    public static final Font FONT_TITLE_2            = new Font(FONT_NAME, Font.PLAIN, 30);
+    public static final Font FONT_TITLE_ALERT        = new Font(FONT_NAME, Font.PLAIN, 20);
+
+    //========== COLOR ==========//
+    public static final Color COLOR_PRIMARY         = Color.decode("#1976d2");
+    public static final Color COLOR_SECONDARY       = Color.decode("#2196F3");
+    public static final Color COLOR_TEXT            = Color.decode("#ffffff");
+    public static final Color COLOR_BACKGROUND      = Color.decode("#E3F2FD");
+    public static final Color COLOR_ERROR           = Color.decode("#ff1744");
+    public static final Color COLOR_ACCEPT          = Color.decode("#00e676");
+    public static final Color COLOR_DARK            = Color.decode("#0D47A1");
+    public static final Color COLOR_CARD            = Color.decode("#ffffff");
 
     public static void materialButton(JButton button){
         button.setBackground(Colors.PRIMARY);

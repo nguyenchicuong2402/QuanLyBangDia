@@ -7,6 +7,7 @@ import org.buffalocoder.quanlybangdia.utils.Colors;
 import org.buffalocoder.quanlybangdia.utils.Fonts;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.views.dialog.KhachHangDialog;
+import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
@@ -61,7 +62,8 @@ public class QuanLyKhachHangTabbed extends JPanel {
         btnXoa.setPreferredSize(btnThem.getPreferredSize());
         MaterialDesign.materialButton(btnXoa);
         btnXoa.addActionListener(btnXoa_Click());
-        btnXoa.setToolTipText("[Alt + X] Xoá khách hàng");
+        btnXoa.setToolTipText("Vui lòng chọn khách hàng cần xoá");
+        btnXoa.setEnabled(false);
         btnXoa.setMnemonic(KeyEvent.VK_X);
         btnXoa.setBackground(Colors.ERROR);
         funcPanel.add(btnXoa);
@@ -173,15 +175,14 @@ public class QuanLyKhachHangTabbed extends JPanel {
                 String maKhachHang = khachHangTableModel.getValueAt(index, 0).toString();
                 String tenKhachHang = khachHangTableModel.getValueAt(index, 1).toString();
 
-                int selected = JOptionPane.showConfirmDialog(
-                        rootComponent,
-                        String.format("Bạn có muốn xoá khách hàng này không?\nTên khách hàng: %s", tenKhachHang),
+                ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
+                        new JFrame(),
                         "Cảnh báo",
-                        JOptionPane.WARNING_MESSAGE,
-                        JOptionPane.OK_CANCEL_OPTION
+                        String.format("Bạn có muốn xoá khách hàng này không?\nTên khách hàng: %s", tenKhachHang),
+                        ThongBaoDialog.OK_CANCLE_OPTION
                 );
 
-                if (selected == JOptionPane.OK_OPTION){
+                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     try{
                         danhSachKhachHang.xoa(maKhachHang);
                         refreshTable();
@@ -200,6 +201,9 @@ public class QuanLyKhachHangTabbed extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 btnSua.setEnabled(true);
                 btnSua.setToolTipText("[Alt + S] Cập nhật thông tin khách hàng");
+
+                btnXoa.setToolTipText("[Alt + X] Xoá khách hàng");
+                btnXoa.setEnabled(true);
             }
 
             @Override

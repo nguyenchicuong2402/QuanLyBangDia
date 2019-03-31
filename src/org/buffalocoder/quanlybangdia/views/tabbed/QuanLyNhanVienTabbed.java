@@ -11,6 +11,7 @@ import org.buffalocoder.quanlybangdia.utils.Colors;
 import org.buffalocoder.quanlybangdia.utils.Fonts;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.views.dialog.NhanVienDialog;
+import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
@@ -73,7 +74,8 @@ public class QuanLyNhanVienTabbed extends JPanel {
         btnXoa.setPreferredSize(btnThem.getPreferredSize());
         MaterialDesign.materialButton(btnXoa);
         btnXoa.addActionListener(btnXoa_Click());
-        btnXoa.setToolTipText("[Alt + X] Xoá nhân viên");
+        btnXoa.setToolTipText("Vui lòng chọn nhân viên cần xoá");
+        btnXoa.setEnabled(false);
         btnXoa.setMnemonic(KeyEvent.VK_X);
         btnXoa.setBackground(Colors.ERROR);
         funcPanel.add(btnXoa);
@@ -203,15 +205,14 @@ public class QuanLyNhanVienTabbed extends JPanel {
                 String maNhanVien = nhanVienTableModel.getValueAt(index, 0).toString();
                 String tenNhanVien = nhanVienTableModel.getValueAt(index, 1).toString();
 
-                int selected = JOptionPane.showConfirmDialog(
-                        rootComponent,
-                        String.format("Bạn có muốn xoá nhân viên này không?\nTên nhân viên: %s", tenNhanVien),
+                ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
+                        new JFrame(),
                         "Cảnh báo",
-                        JOptionPane.WARNING_MESSAGE,
-                        JOptionPane.OK_CANCEL_OPTION
+                        String.format("Bạn có muốn xoá nhân viên này không?\nTên nhân viên: %s", tenNhanVien),
+                        ThongBaoDialog.OK_CANCLE_OPTION
                 );
 
-                if (selected == JOptionPane.OK_OPTION){
+                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     try{
                         taiKhoanDAO.xoaTaiKhoan(taiKhoanDAO.getTaiKhoanByMaNhanVien(maNhanVien).getTenTaiKhoan());
                         danhSachNhanVien.xoa(maNhanVien);
@@ -230,6 +231,9 @@ public class QuanLyNhanVienTabbed extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 btnSua.setEnabled(true);
                 btnSua.setToolTipText("[Alt + S] Cập nhật thông tin nhân viên");
+
+                btnXoa.setToolTipText("[Alt + X] Xoá nhân viên");
+                btnXoa.setEnabled(true);
             }
 
             @Override

@@ -124,6 +124,7 @@ public class NhanVienDialog extends JDialog {
         txtHoTen = new JTextField();
         MaterialDesign.materialTextField(txtHoTen);
         if (isEdit) txtHoTen.setText(nhanVien.getHoTen());
+        txtHoTen.addKeyListener(txtHoTen_KeyListener());
         bx2.add(txtHoTen);
         bx2.add(Box.createHorizontalStrut(20));
 
@@ -139,6 +140,7 @@ public class NhanVienDialog extends JDialog {
             txtCMND.setText(nhanVien.getcMND());
             txtCMND.setEditable(false);
         }
+        txtCMND.addKeyListener(txtCMND_KeyListener());
         bx3.add(txtCMND);
         bx3.add(Box.createHorizontalStrut(20));
 
@@ -175,6 +177,7 @@ public class NhanVienDialog extends JDialog {
         txtSoDienThoai = new JTextField();
         MaterialDesign.materialTextField(txtSoDienThoai);
         if (isEdit) txtSoDienThoai.setText(nhanVien.getSoDienThoai());
+        txtSoDienThoai.addKeyListener(txtSoDienThoai_KeyListener());
         bx6.add(txtSoDienThoai);
         bx6.add(Box.createHorizontalStrut(20));
 
@@ -187,6 +190,7 @@ public class NhanVienDialog extends JDialog {
         txtDiaChi = new JTextField();
         MaterialDesign.materialTextField(txtDiaChi);
         if (isEdit) txtDiaChi.setText(nhanVien.getDiaChi());
+        txtDiaChi.addKeyListener(txtDiaChi_KeyListener());
         bx7.add(txtDiaChi);
         bx7.add(Box.createHorizontalStrut(20));
 
@@ -230,11 +234,6 @@ public class NhanVienDialog extends JDialog {
         box_account.add(bx12);
         box_account.add(Box.createVerticalStrut(20));
 
-
-        Box bx13 = Box.createHorizontalBox();
-        box_account.add(bx13);
-        box_account.add(Box.createVerticalStrut(20));
-
         lblTenTaiKhoan = new JLabel("Tên tài khoản");
         lblTenTaiKhoan.setPreferredSize(lblMaNV.getPreferredSize());
         MaterialDesign.materialLabel(lblTenTaiKhoan);
@@ -247,6 +246,7 @@ public class NhanVienDialog extends JDialog {
             txtTenTaiKhoan.setText(taiKhoan.getTenTaiKhoan());
             txtTenTaiKhoan.setEditable(false);
         }
+        txtTenTaiKhoan.addKeyListener(txtTenTaiKhoan_KeyListener());
         bx9.add(txtTenTaiKhoan);
         bx9.add(Box.createHorizontalStrut(20));
 
@@ -258,6 +258,7 @@ public class NhanVienDialog extends JDialog {
 
         txtMatKhau = new JPasswordField();
         MaterialDesign.materialTextField(txtMatKhau);
+        txtMatKhau.addKeyListener(txtMatKhau_KeyListener());
         bx10.add(txtMatKhau);
         bx10.add(Box.createHorizontalStrut(20));
 
@@ -269,6 +270,7 @@ public class NhanVienDialog extends JDialog {
 
         txtNhapLaiMatKhau = new JPasswordField();
         MaterialDesign.materialTextField(txtNhapLaiMatKhau);
+        txtNhapLaiMatKhau.addKeyListener(txtNhapLaiMatKhau_KeyListener());
         bx11.add(txtNhapLaiMatKhau);
         bx11.add(Box.createHorizontalStrut(20));
 
@@ -283,13 +285,18 @@ public class NhanVienDialog extends JDialog {
         bx12.add(cbLoaiTaiKhoan);
         bx12.add(Box.createHorizontalStrut(20));
 
+        JPanel loiPanel = new JPanel();
+        loiPanel.setLayout(new BoxLayout(loiPanel, BoxLayout.X_AXIS));
+        MaterialDesign.materialPanel(loiPanel);
+        loiPanel.setBackground(MaterialDesign.COLOR_BACKGROUND);
+        contentPanel.add(loiPanel);
 
         lblLoi = new JLabel("      ");
         MaterialDesign.materialLabel(lblLoi);
         lblLoi.setForeground(Colors.ERROR);
-        bx13.add(Box.createHorizontalStrut(20));
-        bx13.add(lblLoi);
-        bx13.add(Box.createHorizontalGlue());
+        loiPanel.add(Box.createHorizontalStrut(20));
+        loiPanel.add(lblLoi);
+        loiPanel.add(Box.createHorizontalGlue());
 
         // BOTTOM PANEL
         bottomPanel = new JPanel(new GridLayout(1, 2, 1, 10));
@@ -307,7 +314,6 @@ public class NhanVienDialog extends JDialog {
         bottomPanel.add(btnLuu);
     }
 
-
     private void errorInput(JTextField textField, String message){
         lblLoi.setText(message);
         textField.setBorder(MaterialDesign.BORDER_ERROR);
@@ -320,80 +326,7 @@ public class NhanVienDialog extends JDialog {
         lblLoi.setText("    ");
     }
 
-
     private boolean validateData(){
-
-//        // tên
-//        String regexten="[a-zA-Z_0-9]{1,50}";
-//        String kiemtraten=txtHoTen.getText();
-//        Pattern pattern = Pattern.compile(regexten);
-//        Matcher matcherten = pattern.matcher(kiemtraten);
-//
-//        //CMND
-//        String regexCMND="[0-9]{1,20}";
-//        String kiemtraCMND=txtCMND.getText();
-//        pattern = Pattern.compile(regexCMND);
-//        Matcher matcherCMND = pattern.matcher(kiemtraCMND);
-//
-//        //SDT
-//        String regexSDT="[0-9]{1,20}";
-//        String kiemtraSDT=txtCMND.getText();
-//        pattern = Pattern.compile(regexSDT);
-//        Matcher matcherSDT = pattern.matcher(kiemtraSDT);
-//
-//
-//        //địa chỉ
-//        String regexdiachi="[a-zA-Z_0-9]{1,100}";
-//        String kiemtradiachi=txtCMND.getText();
-//        pattern = Pattern.compile(regexdiachi);
-//        Matcher matcherdiachi = pattern.matcher(kiemtradiachi);
-//
-//        // mô tả
-//        String regexmota="[a-zA-Z]{1,100}";
-//        String kiemtramota=txtCMND.getText();
-//        pattern = Pattern.compile(regexmota);
-//        Matcher matchermota = pattern.matcher(kiemtramota);
-//
-//        // tên tài khoản
-//        String regextentk="[a-zA-Z_0-9]{1,30}";
-//        String kiemtratentk=txtTenTaiKhoan.getText();
-//        pattern = Pattern.compile(regextentk);
-//        Matcher matchertentk = pattern.matcher(kiemtratentk);
-//
-//        //password
-//        String regextpass="[a-zA-Z_0-9]{1,128}";
-//        String kiemtrapass=txtMatKhau.getText();
-//        pattern = Pattern.compile(regextpass);
-//        Matcher matcherpass = pattern.matcher(kiemtrapass);
-//
-//
-//        String kiemtrarepass=txtNhapLaiMatKhau.getText();
-////        if(matcherten.matches()&&matcherCMND.matches()) {
-////
-////            return true;
-////
-////        }
-//        if(!matcherten.matches())
-//            return false;
-//
-//        if(!matcherCMND.matches())
-//            return false;
-//
-//        if(!matcherSDT.matches())
-//            return false;
-//
-//        if(!matcherdiachi.matches())
-//            return false;
-//        if(!matchermota.matches())
-//            return false;
-//        if(!matchertentk.matches())
-//            return false;
-//        if(!matcherpass.matches())
-//            return false;
-
-
-
-
         Pattern pattern = null;
 
         // Kiểm tra họ tên
@@ -434,36 +367,56 @@ public class NhanVienDialog extends JDialog {
             return false;
         }
 
-        if (txtMoTa.getText().trim().isEmpty()){
-            errorInput(txtMoTa, "Vui lòng nhập mô tả");
+        if (txtTenTaiKhoan.getText().trim().isEmpty()){
+            errorInput(txtTenTaiKhoan, "Vui lòng nhập tên tài khoản");
             return false;
-        }else if (txtMoTa.getText().trim().length() > 100){
-            errorInput(txtMoTa, "mô tả không quá 100 kí tự");
+        }else if (txtTenTaiKhoan.getText().trim().length() > 30){
+            errorInput(txtTenTaiKhoan, "Tên tài khoản không quá 30 kí tự");
             return false;
         }
 
-        if (txtMatKhau.getText().trim().isEmpty()){
+        if (String.valueOf(txtMatKhau.getPassword()).trim().isEmpty()){
             errorInput(txtMatKhau, "Vui lòng nhập nhập mật khẩu");
             return false;
-        }else if (txtMatKhau.getText().trim().length() > 128){
-            errorInput(txtMatKhau, "mật khẩu không quá 128 kí tự");
+        }else if (String.valueOf(txtMatKhau.getPassword()).trim().length() > 128){
+            errorInput(txtMatKhau, "Mật khẩu không quá 128 kí tự");
             return false;
         }
 
-        if (txtNhapLaiMatKhau.getText().trim().isEmpty()){
+        if (String.valueOf(txtNhapLaiMatKhau.getPassword()).trim().isEmpty()){
             errorInput(txtNhapLaiMatKhau, "Vui lòng nhập nhập lại mật khẩu");
-
-        }else if (txtNhapLaiMatKhau.getText().trim().length() > 128){
-            errorInput(txtNhapLaiMatKhau, "mật khẩu không quá 128 kí tự");
-
-        }else if (!txtMatKhau.getText().equals(txtNhapLaiMatKhau.getText())){
-            errorInput(txtNhapLaiMatKhau, "mật khẩu không trùng với nhập lại");
+            return false;
+        }else if (String.valueOf(txtNhapLaiMatKhau.getPassword()).trim().length() > 128){
+            errorInput(txtNhapLaiMatKhau, "Mật khẩu không quá 128 kí tự");
+            return false;
+        }else if (!String.valueOf(txtMatKhau.getPassword()).trim()
+                .equals(String.valueOf(txtNhapLaiMatKhau.getPassword()).trim())){
+            errorInput(txtNhapLaiMatKhau, "Mật khẩu không trùng khớp");
+            return false;
         }
 
 
         return true;
     }
 
+    private KeyListener txtDiaChi_KeyListener(){
+        return new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                unErrorInput(txtDiaChi);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
+    }
 
     private KeyListener txtHoTen_KeyListener(){
         return new KeyListener() {
@@ -521,7 +474,8 @@ public class NhanVienDialog extends JDialog {
             }
         };
     }
-    private  KeyListener txtMoTa_KeyListener(){
+
+    private  KeyListener txtTenTaiKhoan_KeyListener(){
         return new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -530,7 +484,7 @@ public class NhanVienDialog extends JDialog {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                unErrorInput(txtMoTa);
+                unErrorInput(txtTenTaiKhoan);
             }
 
             @Override
@@ -540,7 +494,7 @@ public class NhanVienDialog extends JDialog {
         };
     }
 
-  private  KeyListener txttxtMatKhau_KeyListener(){
+    private  KeyListener txtMatKhau_KeyListener(){
         return new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -558,7 +512,6 @@ public class NhanVienDialog extends JDialog {
             }
         };
   }
-
 
     private  KeyListener txtNhapLaiMatKhau_KeyListener(){
         return new KeyListener() {
@@ -578,15 +531,6 @@ public class NhanVienDialog extends JDialog {
             }
         };
     }
-
-
-
-
-
-
-
-
-
 
     private String getMaNhanVienMoi(){
         String lastID = "";
@@ -630,7 +574,6 @@ public class NhanVienDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!validateData()){
-                    System.out.println("false");
                     return;
                 }
 

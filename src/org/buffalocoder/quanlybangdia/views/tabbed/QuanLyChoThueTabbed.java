@@ -10,6 +10,7 @@ import org.buffalocoder.quanlybangdia.utils.Fonts;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.views.dialog.BangDiaDialog;
 import org.buffalocoder.quanlybangdia.views.dialog.ChoThueDialog;
+import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -67,7 +68,8 @@ public class QuanLyChoThueTabbed extends JPanel {
         btnXoa = new JButton("Xoá");
         btnXoa.setPreferredSize(btnThem.getPreferredSize());
         btnXoa.addActionListener(btnXoa_Click());
-        btnXoa.setToolTipText("[Alt + X] Xoá hoá đơn");
+        btnXoa.setToolTipText("Vui lòng chọn hoá đơn cần xoá");
+        btnXoa.setEnabled(false);
         btnXoa.setMnemonic(KeyEvent.VK_X);
         MaterialDesign.materialButton(btnXoa);
         btnXoa.setBackground(Colors.ERROR);
@@ -182,15 +184,14 @@ public class QuanLyChoThueTabbed extends JPanel {
                 String tenKhachHang = choThueTableModel.getValueAt(index, 1).toString();
                 String tenBangDia = choThueTableModel.getValueAt(index, 2).toString();
 
-                int selected = JOptionPane.showConfirmDialog(
-                        rootComponent,
-                        String.format("Bạn có muốn xoá hoá đơn này không?\nTên khách hàng: %s\nTên băng đĩa: %s", tenKhachHang, tenBangDia),
+                ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
+                        new JFrame(),
                         "Cảnh báo",
-                        JOptionPane.WARNING_MESSAGE,
-                        JOptionPane.OK_CANCEL_OPTION
+                        String.format("Bạn có muốn xoá hoá đơn này không?\nTên khách hàng: %s\nTên băng đĩa: %s", tenKhachHang, tenBangDia),
+                        ThongBaoDialog.OK_CANCLE_OPTION
                 );
 
-                if (selected == JOptionPane.OK_OPTION){
+                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     try{
                         danhSachHoaDon.xoa(maHoaDon);
                         refreshTable();
@@ -208,6 +209,9 @@ public class QuanLyChoThueTabbed extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 btnSua.setEnabled(true);
                 btnSua.setToolTipText("[Alt + S] Cập nhật thông tin hoá đơn");
+
+                btnXoa.setToolTipText("[Alt + X] Xoá hoá đơn");
+                btnXoa.setEnabled(true);
             }
 
             @Override

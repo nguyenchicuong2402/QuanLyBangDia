@@ -6,6 +6,8 @@ import org.buffalocoder.quanlybangdia.models.TaiKhoan;
 import org.buffalocoder.quanlybangdia.utils.Colors;
 import org.buffalocoder.quanlybangdia.utils.Fonts;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
+import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
+
 import javax.swing.*;
 import javax.xml.transform.TransformerException;
 import java.awt.*;
@@ -204,15 +206,14 @@ public class DangNhap extends JFrame {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int select = JOptionPane.showConfirmDialog(
-                        rootComponent,
+                ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
+                        new JFrame(),
+                        "Thông báo",
                         "Bạn có muốn thoát chương trình không ?",
-                        "Cảnh báo",
-                        JOptionPane.OK_CANCEL_OPTION,
-                        JOptionPane.WARNING_MESSAGE
+                        ThongBaoDialog.OK_CANCLE_OPTION
                 );
 
-                if (select == JOptionPane.OK_OPTION){
+                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     System.exit(0);
                 }
             }

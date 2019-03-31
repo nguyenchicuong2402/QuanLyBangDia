@@ -8,6 +8,7 @@ import org.buffalocoder.quanlybangdia.utils.Fonts;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.views.DangNhap;
 import org.buffalocoder.quanlybangdia.views.dialog.BangDiaDialog;
+import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
@@ -65,8 +66,9 @@ public class QuanLyBangDiaTabbed extends JPanel {
         btnXoa = new JButton("Xoá");
         btnXoa.setPreferredSize(btnThem.getPreferredSize());
         btnXoa.addActionListener(btnXoa_Click());
-        btnXoa.setToolTipText("[Alt + X] Xoá băng đĩa");
+        btnXoa.setToolTipText("Vui lòng chọn băng đĩa cần xoá");
         btnXoa.setMnemonic(KeyEvent.VK_X);
+        btnXoa.setEnabled(false);
         MaterialDesign.materialButton(btnXoa);
         btnXoa.setBackground(Colors.ERROR);
         funcPanel.add(btnXoa);
@@ -180,15 +182,14 @@ public class QuanLyBangDiaTabbed extends JPanel {
                 String maBangDia = bangDiaTableModel.getValueAt(index, 0).toString();
                 String tenBangDia = bangDiaTableModel.getValueAt(index, 1).toString();
 
-                int selected = JOptionPane.showConfirmDialog(
-                        rootComponent,
-                        String.format("Bạn có muốn xoá băng đĩa này không?\nTên băng đĩa: %s", tenBangDia),
+                ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
+                        new JFrame(),
                         "Cảnh báo",
-                        JOptionPane.WARNING_MESSAGE,
-                        JOptionPane.OK_CANCEL_OPTION
+                        String.format("Bạn có muốn xoá băng đĩa này không?\nTên băng đĩa: %s", tenBangDia),
+                        ThongBaoDialog.OK_CANCLE_OPTION
                 );
 
-                if (selected == JOptionPane.OK_OPTION){
+                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     try{
                         danhSachBangDia.xoa(maBangDia);
                         refreshTable();
@@ -206,6 +207,9 @@ public class QuanLyBangDiaTabbed extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 btnSua.setEnabled(true);
                 btnSua.setToolTipText("[Alt + S] Cập nhật thông tin băng đĩa");
+
+                btnXoa.setEnabled(true);
+                btnXoa.setToolTipText("[Alt + X] Xoá băng đĩa");
             }
 
             @Override
