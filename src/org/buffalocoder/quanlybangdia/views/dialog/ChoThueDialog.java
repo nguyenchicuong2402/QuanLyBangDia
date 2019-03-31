@@ -181,7 +181,13 @@ public class ChoThueDialog extends JDialog {
 
     private boolean validateData(){
 
-        //String regex="";
+        String regex="\\d{1,2}-\\d{1,2}-\\d{4}";
+//        String kiemtra=txtNgaySinh.getText();
+//        Pattern pattern = Pattern.compile(regex);
+//        Matcher matcher = pattern.matcher(kiemtra);
+//        if(matcher.matches())
+//         return true;
+//        return false;
 
         return true;
     }

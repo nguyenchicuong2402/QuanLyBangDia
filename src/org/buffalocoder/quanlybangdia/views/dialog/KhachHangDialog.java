@@ -204,22 +204,59 @@ public class KhachHangDialog extends JDialog {
 
     private boolean validateData(){
 
-//        String regex="\\d{1,2}-\\d{1,2}-\\d{4}";
-//        String kiemtra=txtNgaySinh.getText();
-//        Pattern pattern = Pattern.compile(regex);
-//        Matcher matcher = pattern.matcher(kiemtra);
-//        if(matcher.matches())
-//         return true;
-//        return false;
-        return  true;
+        // tên
+        String regexten="[a-zA-Z_0-9]{1,50}";
+        String kiemtraten=txtHoTen.getText();
+        Pattern pattern = Pattern.compile(regexten);
+        Matcher matcherten = pattern.matcher(kiemtraten);
+
+         //CMND
+        String regexCMND="[0-9]{1,20}";
+        String kiemtraCMND=txtCMND.getText();
+        pattern = Pattern.compile(regexCMND);
+        Matcher matcherCMND = pattern.matcher(kiemtraCMND);
+
+        //SDT
+        String regexSDT="[0-9]{1,20}";
+        String kiemtraSDT=txtCMND.getText();
+        pattern = Pattern.compile(regexSDT);
+        Matcher matcherSDT = pattern.matcher(kiemtraSDT);
+
+
+        //địa chỉ
+        String regexdiachi="[a-zA-Z_0-9]{1,100}";
+        String kiemtradiachi=txtCMND.getText();
+        pattern = Pattern.compile(regexdiachi);
+        Matcher matcherdiachi = pattern.matcher(kiemtradiachi);
+
+
+//        if(matcherten.matches()&&matcherCMND.matches()) {
+//
+//            return true;
+//
+//        }
+        if(!matcherten.matches())
+            return false;
+
+        if(!matcherCMND.matches())
+           return false;
+
+        if(!matcherSDT.matches())
+            return false;
+
+        if(!matcherdiachi.matches())
+            return false;
+        return true;
     }
 
     private ActionListener btnLuu_Click(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                if (!validateData())
-//                    return;
+                if (!validateData()){
+                    System.out.println("false");
+                    return;
+                }
 
                 System.out.println();
 
