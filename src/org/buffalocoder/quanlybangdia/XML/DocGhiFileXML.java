@@ -15,9 +15,9 @@ import org.w3c.dom.Node;
 
 public class DocGhiFileXML {
 
-    public static Document docFileXML(){
+    public static Document docFileXML(String file){
         Document document = null;
-        File f = new File("src/Account.xml");
+        File f = new File("src/"+file);
 
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder;

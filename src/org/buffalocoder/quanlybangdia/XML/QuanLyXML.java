@@ -11,8 +11,14 @@ import java.io.IOException;
 
 public class QuanLyXML {
 
-    Document document = DocGhiFileXML.docFileXML();
-    DocGhiFileXML dg = new DocGhiFileXML();
+    private Document document = DocGhiFileXML.docFileXML("Account.xml");
+    private Document docColors = DocGhiFileXML.docFileXML("themes.xml");
+    private DocGhiFileXML dg = new DocGhiFileXML();
+    private NodeList dsColors = docColors.getElementsByTagName("Template");
+    private NodeList dsPrimary = docColors.getElementsByTagName("primary");
+    private NodeList dsSecondary = docColors.getElementsByTagName("secondary");
+    private NodeList dsDark = docColors.getElementsByTagName("dark");
+    private NodeList dsBackground = docColors.getElementsByTagName("background");
     public QuanLyXML(){
 
     }
@@ -29,7 +35,7 @@ public class QuanLyXML {
     }
     public void themXML(String taikhoan, String password) throws TransformerException, IOException {
         try {
-            dg.docFileXML();
+            dg.docFileXML("Account.xml");
         }catch (Exception e){
 
         }
@@ -46,7 +52,7 @@ public class QuanLyXML {
     }
     public  void xoaXML() throws TransformerException, IOException {
         try {
-            dg.docFileXML();
+            dg.docFileXML("Account.xml");
         }catch (Exception e){
 
         }
@@ -59,6 +65,50 @@ public class QuanLyXML {
             document.getDocumentElement().removeChild(pw);
         }
         dg.ghiXML(document);
+    }
+    public int timMau(String id){
+        dg.docFileXML("themes.xml");
+        for (int i = 0; i< dsColors.getLength();i++){
+            if(id.equals(dsColors.item(i).getAttributes().getNamedItem("id").getTextContent()))
+                return i;
+        }
+        return -1;
+    }
+    public String getPrimaryColor(String id){
+        if(timMau(id)!=-1)
+            return String.valueOf(dsPrimary.item(timMau(id)).getTextContent());
+        else
+        {
+            System.out.println("KO tìm thấy màu");
+            return null;
+        }
+    }
+    public String getSecondary(String id){
+        if(timMau(id)!=-1)
+            return String.valueOf(dsSecondary.item(timMau(id)).getTextContent());
+        else
+        {
+            System.out.println("KO tìm thấy màu");
+            return null;
+        }
+    }
+    public String getDark(String id){
+        if(timMau(id)!=-1)
+            return String.valueOf(dsDark.item(timMau(id)).getTextContent());
+        else
+        {
+            System.out.println("KO tìm thấy màu");
+            return null;
+        }
+    }
+    public String getBackground(String id){
+        if(timMau(id)!=-1)
+            return String.valueOf(dsBackground.item(timMau(id)).getTextContent());
+        else
+        {
+            System.out.println("KO tìm thấy màu");
+            return null;
+        }
     }
     public void ghiNhoAccount(String tk, String pass) throws TransformerException, IOException {
         xoaXML();

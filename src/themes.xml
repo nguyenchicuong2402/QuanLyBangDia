@@ -1,117 +1,117 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Themes>
     <Template id="red">
-        <primary></primary>
-        <secondary></secondary>
-        <dark></dark>
-        <background></background>
+        <primary>#c62828</primary>
+        <secondary>#ff5f52</secondary>
+        <dark>#8e0000</dark>
+        <background>#ff6f60</background>
     </Template>
     <Template id="pink">
-        <primary></primary>
-        <secondary></secondary>
-        <dark></dark>
-        <background></background>
+        <primary>#ec407a</primary>
+        <secondary>#ff77a9</secondary>
+        <dark>#b4004e</dark>
+        <background>#ff94c2</background>
     </Template>
     <Template id="purple">
-        <primary></primary>
-        <secondary></secondary>
-        <dark></dark>
-        <background></background>
+        <primary>#7b1fa2</primary>
+        <secondary>#</secondary>
+        <dark>#4a0072</dark>
+        <background>#ae52d4</background>
     </Template>
     <Template id="deep-purple">
-        <primary></primary>
-        <secondary></secondary>
-        <dark></dark>
-        <background></background>
+        <primary>#</primary>
+        <secondary>#</secondary>
+        <dark>#</dark>
+        <background>#</background>
     </Template>
     <Template id="indigo">
-        <primary></primary>
-        <secondary></secondary>
-        <dark></dark>
-        <background></background>
+        <primary>#</primary>
+        <secondary>#</secondary>
+        <dark>#</dark>
+        <background>#</background>
     </Template>
     <Template id="blue">
-        <primary></primary>
-        <secondary></secondary>
-        <dark></dark>
-        <background></background>
+        <primary>#001970</primary>
+        <secondary>#666ad1</secondary>
+        <dark>#001970</dark>
+        <background>#001970</background>
     </Template>
     <Template id="light-blue">
-        <primary></primary>
-        <secondary></secondary>
-        <dark></dark>
-        <background></background>
+        <primary>#</primary>
+        <secondary>#</secondary>
+        <dark>#</dark>
+        <background>#</background>
     </Template>
     <Template id="cyan">
-        <primary></primary>
-        <secondary></secondary>
-        <dark></dark>
-        <background></background>
+        <primary>#5c6bc0</primary>
+        <secondary>#8e99f3</secondary>
+        <dark>#26418f</dark>
+        <background>#5c6bc0</background>
     </Template>
     <Template id="teal">
-        <primary></primary>
-        <secondary></secondary>
-        <dark></dark>
-        <background></background>
+        <primary>#</primary>
+        <secondary>#</secondary>
+        <dark>#</dark>
+        <background>#</background>
     </Template>
     <Template id="green">
-        <primary></primary>
-        <secondary></secondary>
-        <dark></dark>
-        <background></background>
+        <primary>#2e7d32</primary>
+        <secondary>#60ad5e</secondary>
+        <dark>#005005</dark>
+        <background>#60ad5e</background>
     </Template>
     <Template id="light-green">
-        <primary></primary>
-        <secondary></secondary>
-        <dark></dark>
-        <background></background>
+        <primary>#66bb6a</primary>
+        <secondary>#98ee99</secondary>
+        <dark>#338a3e</dark>
+        <background>#98ee99</background>
     </Template>
     <Template id="lime">
-        <primary></primary>
-        <secondary></secondary>
-        <dark></dark>
-        <background></background>
+        <primary>#</primary>
+        <secondary>#</secondary>
+        <dark>#</dark>
+        <background>#</background>
     </Template>
     <Template id="yellow">
-        <primary></primary>
-        <secondary></secondary>
-        <dark></dark>
-        <background></background>
+        <primary>#ffeb3b</primary>
+        <secondary>#ffff72</secondary>
+        <dark>#c8b900</dark>
+        <background>#ffff72</background>
     </Template>
     <Template id="amber">
-        <primary></primary>
-        <secondary></secondary>
-        <dark></dark>
-        <background></background>
+        <primary>#</primary>
+        <secondary>#</secondary>
+        <dark>#</dark>
+        <background>#</background>
     </Template>
     <Template id="orange">
-        <primary></primary>
-        <secondary></secondary>
-        <dark></dark>
-        <background></background>
+        <primary>#ff6f00</primary>
+        <secondary>#ffa040</secondary>
+        <dark>#c43e00</dark>
+        <background>#ffa040</background>
     </Template>
     <Template id="deep-orange">
-        <primary></primary>
-        <secondary></secondary>
-        <dark></dark>
-        <background></background>
+        <primary>#</primary>
+        <secondary>#</secondary>
+        <dark>#</dark>
+        <background>#</background>
     </Template>
     <Template id="brown">
-        <primary></primary>
-        <secondary></secondary>
-        <dark></dark>
-        <background></background>
+        <primary>#4e342e</primary>
+        <secondary>#7b5e57</secondary>
+        <dark>#260e04</dark>
+        <background>#7b5e57</background>
     </Template>
     <Template id="grey">
-        <primary></primary>
-        <secondary></secondary>
-        <dark></dark>
-        <background></background>
+        <primary>#546e7a</primary>
+        <secondary>#819ca9</secondary>
+        <dark>#29434e</dark>
+        <background>#819ca9</background>
     </Template>
     <Template id="blue-grey">
-        <primary></primary>
-        <secondary></secondary>
-        <dark></dark>
-        <background></background>
+        <primary>#</primary>
+        <secondary>#</secondary>
+        <dark>#</dark>
+        <background>#</background>
     </Template>
 </Themes>
