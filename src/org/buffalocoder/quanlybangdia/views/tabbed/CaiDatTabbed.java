@@ -1,21 +1,34 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
+import org.buffalocoder.quanlybangdia.MainProgram;
+import org.buffalocoder.quanlybangdia.dao.DataBaseUtils;
+import org.buffalocoder.quanlybangdia.dao.TaiKhoanDAO;
+import org.buffalocoder.quanlybangdia.models.TaiKhoan;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
+import org.buffalocoder.quanlybangdia.views.DangNhap;
+import org.buffalocoder.quanlybangdia.views.MainForm;
+import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class CaiDatTabbed extends JPanel {
 
+    private static TaiKhoanDAO taiKhoanDAO;
+    private static DataBaseUtils dataBaseUtils;
+
     private JPanel contentPanel, bottomPanel, chuDePanel, doiMatKhauPanel, xoaDatabasePanel;
-    private JButton btnLuu, btnXoaDatabase;
+    private JButton btnThayDoiMatKhau, btnXoaDatabase, btnLamRong;
     private JLabel lblChuDe, lblSubChuDe, lblDoiMatKhau, lblMatKhauHienTai, lblMatKhauMoi,
             lblNhapLaiMatKhau, lblLoiDoiMatKhau, lblXoaDatabase, lblSubXoaDatabase;
     private JComboBox<String> cbChuDe;
     private JPasswordField txtMatKhauHienTai, txtMatKhauMoi, txtNhapLaiMatKhau;
 
-
-    public CaiDatTabbed(){
+    private void prepareUI(){
         this.setLayout(new BorderLayout());
         MaterialDesign.materialPanel(this);
 
@@ -55,21 +68,22 @@ public class CaiDatTabbed extends JPanel {
         boxSubChuDe.add(Box.createVerticalStrut(10));
         boxSubChuDe.add(lblSubChuDe);
 
-        Box boxChuDe = Box.createVerticalBox();
+        Box boxChuDe = Box.createHorizontalBox();
         chuDePanel.add(boxChuDe, BorderLayout.EAST);
 
         cbChuDe = new JComboBox<>(new String[]{"Red Material", "Pink Material", "Purple Material",
-                                            "Deep Purple Material", "Indigo Material", "Blue Material",
-                                            "Light Blue Material", "Cyan Material", "Teal Material",
-                                            "Green Material", "Light Green Material", "Lime Material",
-                                            "Yellow Material", "Amber Material", "Orange Material",
-                                            "Deep Orange Material", "Brown Material", "Grey Material",
-                                            "Blue Grey Material"});
+                "Deep Purple Material", "Indigo Material", "Blue Material",
+                "Light Blue Material", "Cyan Material", "Teal Material",
+                "Green Material", "Light Green Material", "Lime Material",
+                "Yellow Material", "Amber Material", "Orange Material",
+                "Deep Orange Material", "Brown Material", "Grey Material",
+                "Blue Grey Material"});
         MaterialDesign.materialComboBox(cbChuDe);
-        cbChuDe.setPreferredSize(new Dimension(400, 30));
-        boxChuDe.add(Box.createVerticalStrut(30));
+        cbChuDe.setPreferredSize(new Dimension(300, 50));
+        cbChuDe.setMaximumSize(new Dimension(300, 50));
+        cbChuDe.addActionListener(cbChuDe_Change());
         boxChuDe.add(cbChuDe);
-        boxChuDe.add(Box.createVerticalStrut(30));
+        boxChuDe.add(Box.createHorizontalStrut(20));
 
         // thay đổi mật khẩu
         doiMatKhauPanel = new JPanel();
@@ -109,6 +123,10 @@ public class CaiDatTabbed extends JPanel {
         boxNhapMatKhau.add(boxLoi);
         boxNhapMatKhau.add(Box.createVerticalStrut(10));
 
+        Box boxButton = Box.createHorizontalBox();
+        boxNhapMatKhau.add(boxButton);
+        boxNhapMatKhau.add(Box.createVerticalStrut(10));
+
         lblMatKhauHienTai = new JLabel("Mật khẩu hiện tại");
         MaterialDesign.materialLabel(lblMatKhauHienTai);
         lblMatKhauHienTai.setPreferredSize(new Dimension(200, 30));
@@ -116,6 +134,7 @@ public class CaiDatTabbed extends JPanel {
         boxMKHienTai.add(lblMatKhauHienTai);
 
         txtMatKhauHienTai = new JPasswordField();
+        txtMatKhauHienTai.addKeyListener(txtMatKhauHienTai_KeyListener());
         MaterialDesign.materialTextField(txtMatKhauHienTai);
         boxMKHienTai.add(txtMatKhauHienTai);
         boxMKHienTai.add(Box.createHorizontalStrut(200));
@@ -127,6 +146,7 @@ public class CaiDatTabbed extends JPanel {
         boxMKMoi.add(lblMatKhauMoi);
 
         txtMatKhauMoi = new JPasswordField();
+        txtMatKhauMoi.addKeyListener(txtMatKhauMoi_KeyListener());
         MaterialDesign.materialTextField(txtMatKhauMoi);
         boxMKMoi.add(txtMatKhauMoi);
         boxMKMoi.add(Box.createHorizontalStrut(200));
@@ -138,6 +158,7 @@ public class CaiDatTabbed extends JPanel {
         boxNhapLai.add(lblNhapLaiMatKhau);
 
         txtNhapLaiMatKhau = new JPasswordField();
+        txtNhapLaiMatKhau.addKeyListener(txtNhapLaiMatKhau_KeyListener());
         MaterialDesign.materialTextField(txtNhapLaiMatKhau);
         boxNhapLai.add(txtNhapLaiMatKhau);
         boxNhapLai.add(Box.createHorizontalStrut(200));
@@ -146,6 +167,21 @@ public class CaiDatTabbed extends JPanel {
         MaterialDesign.materialLabel(lblLoiDoiMatKhau);
         lblLoiDoiMatKhau.setForeground(MaterialDesign.COLOR_ERROR);
         boxLoi.add(lblLoiDoiMatKhau);
+
+        btnLamRong = new JButton("Làm mới");
+        btnLamRong.setPreferredSize(new Dimension(200, 50));
+        btnLamRong.setMaximumSize(new Dimension(200, 50));
+        btnLamRong.addActionListener(btnLamMoi_Click());
+        MaterialDesign.materialButton(btnLamRong);
+        boxButton.add(btnLamRong);
+        boxButton.add(Box.createHorizontalStrut(30));
+
+        btnThayDoiMatKhau = new JButton("Thay đổi mật khẩu");
+        btnThayDoiMatKhau.setPreferredSize(new Dimension(200, 50));
+        btnThayDoiMatKhau.setMaximumSize(new Dimension(200, 50));
+        btnThayDoiMatKhau.addActionListener(btnThayDoiMatKhau_Click());
+        MaterialDesign.materialButton(btnThayDoiMatKhau);
+        boxButton.add(btnThayDoiMatKhau);
 
         // xoá database
         xoaDatabasePanel = new JPanel(new BorderLayout());
@@ -164,7 +200,7 @@ public class CaiDatTabbed extends JPanel {
         subXoaDatabasePanel.add(Box.createHorizontalStrut(20));
         subXoaDatabasePanel.add(boxXoaDatabase);
 
-        lblXoaDatabase = new JLabel("Xoá database");
+        lblXoaDatabase = new JLabel("Xoá dữ liệu");
         MaterialDesign.materialLabel(lblXoaDatabase);
         lblXoaDatabase.setFont(MaterialDesign.FONT_TITLE_2);
         boxXoaDatabase.add(Box.createVerticalStrut(20));
@@ -176,22 +212,241 @@ public class CaiDatTabbed extends JPanel {
         boxXoaDatabase.add(Box.createVerticalStrut(10));
         boxXoaDatabase.add(lblSubXoaDatabase);
 
-        btnXoaDatabase = new JButton("Xoá database");
+        JPanel btnXoaDBPanel = new JPanel();
+        btnXoaDBPanel.setLayout(new BoxLayout(btnXoaDBPanel, BoxLayout.X_AXIS));
+        btnXoaDBPanel.setBackground(MaterialDesign.COLOR_CARD);
+        xoaDatabasePanel.add(btnXoaDBPanel, BorderLayout.EAST);
+
+        btnXoaDatabase = new JButton("Xoá dữ liệu");
         MaterialDesign.materialButton(btnXoaDatabase);
         btnXoaDatabase.setBackground(MaterialDesign.COLOR_ERROR);
-        btnXoaDatabase.setPreferredSize(new Dimension(300, 30));
-        xoaDatabasePanel.add(btnXoaDatabase, BorderLayout.EAST);
+        btnXoaDatabase.setVerticalAlignment(SwingConstants.CENTER);
+        btnXoaDatabase.setPreferredSize(new Dimension(300, 70));
+        btnXoaDatabase.setMaximumSize(new Dimension(300, 70));
+        btnXoaDatabase.addActionListener(btnXoaDatabase_Click());
+        btnXoaDBPanel.add(btnXoaDatabase);
+        btnXoaDBPanel.add(Box.createHorizontalStrut(20));
 
         contentPanel.add(Box.createVerticalStrut(100));
 
         //========== BOTTOM PANEL ==========//
-        bottomPanel = new JPanel(new BorderLayout());
-        MaterialDesign.materialPanel(bottomPanel);
-        this.add(bottomPanel, BorderLayout.SOUTH);
+    }
 
-        btnLuu = new JButton("Lưu");
-        btnLuu.setPreferredSize(new Dimension(100, 50));
-        MaterialDesign.materialButton(btnLuu);
-        bottomPanel.add(btnLuu, BorderLayout.EAST);
+    public CaiDatTabbed(){
+        try {
+            taiKhoanDAO = TaiKhoanDAO.getInstance();
+            dataBaseUtils = DataBaseUtils.getInstance();
+        } catch (Exception e) {
+            ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
+                    new JFrame(),
+                    "Lỗi",
+                    e.getMessage(),
+                    ThongBaoDialog.OK_OPTION
+            );
+        }
+
+        prepareUI();
+    }
+
+    private void errorInput(JTextField textField, String message){
+        lblLoiDoiMatKhau.setText(message);
+        textField.setBorder(MaterialDesign.BORDER_ERROR);
+        textField.requestFocus();
+        textField.selectAll();
+    }
+
+    private void unErrorInput(JTextField textField){
+        MaterialDesign.materialTextField(textField);
+        lblLoiDoiMatKhau.setText("    ");
+    }
+
+    private ActionListener btnXoaDatabase_Click(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
+                        new JFrame(),
+                        "Cảnh báo",
+                        "Thao tác này sẽ xoá toàn bộ dữ liệu của bạn\nBạn có muốn tiếp tục không ?",
+                        ThongBaoDialog.OK_CANCLE_OPTION
+                );
+
+                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
+                    try {
+                        dataBaseUtils.resetDatabase();
+
+                        thongBaoDialog = new ThongBaoDialog(
+                                new JFrame(),
+                                "Thông báo",
+                                "Xoá dữ liệu thành công\nPhần mềm sẽ tự khởi động lại",
+                                ThongBaoDialog.OK_OPTION
+                        );
+
+                        System.exit(0);
+                    } catch (Exception ex) {
+                        thongBaoDialog = new ThongBaoDialog(
+                                new JFrame(),
+                                "Cảnh báo",
+                                ex.getMessage(),
+                                ThongBaoDialog.OK_CANCLE_OPTION
+                        );
+                    }
+                }
+            }
+        };
+    }
+
+    private ActionListener cbChuDe_Change(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
+                        new JFrame(),
+                        "Thông báo",
+                        "Thao tác này cần khởi động lại phần mềm\nBạn có muốn khởi động lại không ?",
+                        ThongBaoDialog.OK_CANCLE_OPTION
+                );
+
+                if (thongBaoDialog.getKetQua() == ThongBaoDialog.CANCLE_OPTION)
+                    return;
+
+                String theme = (String)cbChuDe.getSelectedItem();
+            }
+        };
+    }
+
+    private ActionListener btnLamMoi_Click(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                txtMatKhauHienTai.setText("");
+                txtMatKhauMoi.setText("");
+                txtNhapLaiMatKhau.setText("");
+            }
+        };
+    }
+
+    private ActionListener btnThayDoiMatKhau_Click(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TaiKhoan taiKhoan = DangNhap.taiKhoan;
+
+                // kiểm tra mật khẩu hiện tại
+                if (String.valueOf(txtMatKhauHienTai.getPassword()).trim().isEmpty()){
+                    errorInput(txtMatKhauHienTai, "Vui lòng nhập mật khẩu");
+                    return;
+                }else if (String.valueOf(txtMatKhauHienTai.getPassword()).length() > 128){
+                    errorInput(txtMatKhauHienTai, "Mật khẩu không quá 128 kí tự");
+                    return;
+                }else if (!String.valueOf(txtMatKhauHienTai.getPassword()).equals(taiKhoan.getMatKhau())){
+                    errorInput(txtMatKhauHienTai, "Mật khẩu không đúng");
+                    return;
+                }
+
+                // kiểm tra mật khẩu mới
+                if (String.valueOf(txtMatKhauMoi.getPassword()).trim().isEmpty()){
+                    errorInput(txtMatKhauMoi, "Vui lòng nhập mật khẩu mới");
+                    return;
+                }else if (String.valueOf(txtMatKhauMoi.getPassword()).length() > 128){
+                    errorInput(txtMatKhauMoi, "Mật khẩu không quá 128 kí tự");
+                    return;
+                }
+
+                // kiểm tra mật khẩu nhập lại
+                if (String.valueOf(txtNhapLaiMatKhau.getPassword()).trim().isEmpty()){
+                    errorInput(txtNhapLaiMatKhau, "Vui lòng nhập lại mật khẩu");
+                    return;
+                }else if (String.valueOf(txtNhapLaiMatKhau.getPassword()).length() > 128){
+                    errorInput(txtNhapLaiMatKhau, "Mật khẩu không quá 128 kí tự");
+                    return;
+                }else if (!String.valueOf(txtNhapLaiMatKhau.getPassword()).equals(
+                            String.valueOf(txtNhapLaiMatKhau.getPassword()))){
+                    errorInput(txtNhapLaiMatKhau, "Mật khẩu không trùng khớp");
+                    return;
+                }
+
+                taiKhoan.setMatKhau(String.valueOf(txtMatKhauMoi.getPassword()));
+                try {
+                    if (taiKhoanDAO.suaTaiKhoan(taiKhoan) != null){
+                        DangNhap.taiKhoan = taiKhoan;
+                        ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
+                                new JFrame(),
+                                "Thông báo",
+                                "Thay đổi mật khẩu thành công",
+                                ThongBaoDialog.OK_OPTION
+                        );
+
+                        txtNhapLaiMatKhau.setText("");
+                        txtMatKhauMoi.setText("");
+                        txtMatKhauHienTai.setText("");
+                    }
+                } catch (Exception ex) {
+                    ThongBaoDialog thongBaoLoi = new ThongBaoDialog(
+                            new JFrame(),
+                            "Lỗi",
+                            ex.getMessage(),
+                            ThongBaoDialog.OK_OPTION
+                    );
+                }
+            }
+        };
+    }
+
+    private KeyListener txtMatKhauHienTai_KeyListener(){
+        return new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                unErrorInput(txtMatKhauHienTai);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
+    }
+
+    private KeyListener txtMatKhauMoi_KeyListener(){
+        return new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                unErrorInput(txtMatKhauMoi);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
+    }
+
+    private KeyListener txtNhapLaiMatKhau_KeyListener(){
+        return new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                unErrorInput(txtNhapLaiMatKhau);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
     }
 }

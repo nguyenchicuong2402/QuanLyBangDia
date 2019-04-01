@@ -213,6 +213,8 @@ public class BangDiaDialog extends JDialog{
         MaterialDesign.materialButton(btnLuu);
         btnLuu.addActionListener(btnLuu_Click());
         bottomPanel.add(btnLuu);
+
+        txtTenBangDia.requestFocus();
     }
 
 
@@ -260,7 +262,7 @@ public class BangDiaDialog extends JDialog{
         }
 
         // Kiểm tra đơn giá
-        pattern = Pattern.compile(PatternRegexs.REGEX_SO);
+        pattern = Pattern.compile(PatternRegexs.REGEX_SOTHUC);
         if (txtDonGia.getText().trim().isEmpty()){
             errorInput(txtDonGia, "Vui lòng nhập đơn giá");
             return false;
@@ -270,7 +272,7 @@ public class BangDiaDialog extends JDialog{
         }
 
         // kiểm tra số lượng
-        pattern = Pattern.compile(PatternRegexs.REGEX_SOTHUC);
+        pattern = Pattern.compile(PatternRegexs.REGEX_SO);
         if (txtSoLuong.getText().trim().isEmpty()){
             errorInput(txtSoLuong, "Vui lòng nhập số lượng");
             return false;
@@ -289,7 +291,6 @@ public class BangDiaDialog extends JDialog{
         try {
             lastID = bangDiaDAO.getMaBangDiaCuoi();
         } catch (Exception e) {
-            e.printStackTrace();
         }
 
         if (lastID.isEmpty()){

@@ -10,7 +10,7 @@ public class DanhSachChoThue {
 
     public DanhSachChoThue() throws Exception {
         hoaDonDAO = HoaDonDAO.getInstance();
-        hoaDons = new ArrayList<>();
+        loadData();
     }
 
     public ArrayList<HoaDon> getAll(){

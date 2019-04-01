@@ -113,6 +113,7 @@ public class KhachHangDialog extends JDialog {
         bx2.add(lblHoTen);
 
         txtHoTen = new JTextField();
+        txtHoTen.requestFocus();
         MaterialDesign.materialTextField(txtHoTen);
         if (isEdit) txtHoTen.setText(khachHang.getHoTen());
         txtHoTen.addKeyListener(txtHoTen_KeyListener());
@@ -228,7 +229,6 @@ public class KhachHangDialog extends JDialog {
         try {
             lastID = khachHangDAO.getMaKhachHangCuoi();
         } catch (Exception e) {
-            e.printStackTrace();
         }
 
         if (lastID.isEmpty()){

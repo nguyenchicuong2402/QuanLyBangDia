@@ -115,14 +115,18 @@ public class HoaDonDAO {
     }
 
     public HoaDon themHoaDon(HoaDon hoaDon) throws Exception {
-        String sql = "INSERT INTO HOADON (MAHD, MAKH) VALUES (?,?)";
+        String sql = "INSERT INTO HOADON (MAHD, NGAYLAP, MAKH) VALUES (?,?,?)";
         try {
             PreparedStatement ps = dataBaseUtils.excuteQueryWrite(sql);
 
             ps.setString(1, hoaDon.getMaHoaDon());
-            ps.setString(2, hoaDon.getKhachHang().getMaKH());
+            ps.setDate(2, hoaDon.getNgayLap());
+            ps.setString(3, hoaDon.getKhachHang().getMaKH());
+
+            System.out.println(hoaDon.getNgayLap());
 
             if (ps.executeUpdate() > 0){
+                dataBaseUtils.commitQuery();
                 sql = "INSERT INTO CHITIETHOADON (MAHD, MABD, SONGAYDUOCMUON, SOLUONG) VALUES (?, ?, ?, ?)";
 
                 ps = dataBaseUtils.excuteQueryWrite(sql);
@@ -139,6 +143,7 @@ public class HoaDonDAO {
             }
         }catch (Exception e){
             dataBaseUtils.rollbackQuery();
+            e.printStackTrace();
             throw new Exception("Lỗi thêm hoá đơn");
         }
 

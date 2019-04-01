@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -145,7 +145,7 @@ public class ChoThueDialog extends JDialog {
         dateChooser = new JDateChooser(Formats.DATE_FORMAT.toPattern(), "##/##/####", '_');
         MaterialDesign.materialDateChooser(dateChooser);
         if (isEdit) dateChooser.setDate(hoaDon.getNgayLap());
-        else dateChooser.setDate(new Date());
+        else dateChooser.setDate(new java.util.Date());
         bx4.add(dateChooser);
         bx4.add(Box.createHorizontalStrut(20));
 
@@ -199,7 +199,6 @@ public class ChoThueDialog extends JDialog {
         bottomPanel.add(btnLuu);
     }
 
-
     private void errorInput(JTextField textField, String message){
         lblLoi.setText(message);
         textField.setBorder(MaterialDesign.BORDER_ERROR);
@@ -243,11 +242,10 @@ public class ChoThueDialog extends JDialog {
         try {
             lastID = hoaDonDAO.getMaHoaDonCuoi();
         } catch (Exception e) {
-            e.printStackTrace();
         }
 
         if (lastID.isEmpty()){
-            return "NV00001";
+            return "HD00001";
         }
 
         Pattern pattern = Pattern.compile(PatternRegexs.REGEX_MAHOADON);
@@ -304,6 +302,7 @@ public class ChoThueDialog extends JDialog {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                hoaDon = null;
                 ChoThueDialog.this.dispose();
             }
         };
@@ -313,23 +312,21 @@ public class ChoThueDialog extends JDialog {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!validateData())
+                if (!validateData()){
+                    hoaDon= null;
                     return;
+                }
 
                 BangDia bangDia = null;
                 KhachHang khachHang = null;
 
-                String regex = "(BD\\\\d.*)\\\\]";
-
-                Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+                Pattern pattern = Pattern.compile("(BD\\d.*)]", Pattern.MULTILINE);
                 Matcher matcher = pattern.matcher(cbMaBangDia.getSelectedItem().toString());
 
                 if (matcher.find())
                     bangDia = danhSachBangDia.getAll().get(danhSachBangDia.tim(matcher.group(1)));
 
-                regex = "(KH\\\\d.*)\\\\]";
-
-                pattern = Pattern.compile(regex, Pattern.MULTILINE);
+                pattern = Pattern.compile("(KH\\d.*)]", Pattern.MULTILINE);
                 matcher = pattern.matcher(cbMaKhachHang.getSelectedItem().toString());
 
                 if (matcher.find())
@@ -340,7 +337,8 @@ public class ChoThueDialog extends JDialog {
                         Integer.parseInt(txtSoNgayDuocMuon.getText().trim()),
                         Integer.parseInt(txtSoLuong.getText().trim()),
                         txtMaHoaDon.getText().trim(),
-                        khachHang
+                        khachHang,
+                        Date.valueOf(Formats.DATE_FORMAT_SQL.format(dateChooser.getDate()))
                 );
 
                 dispose();
@@ -358,8 +356,9 @@ public class ChoThueDialog extends JDialog {
 
         try {
             hoaDonDAO = HoaDonDAO.getInstance();
+            danhSachKhachHang = new DanhSachKhachHang();
+            danhSachBangDia = new DanhSachBangDia();
         } catch (Exception e) {
-            e.printStackTrace();
         }
 
         if (hoaDon == null){
@@ -368,13 +367,6 @@ public class ChoThueDialog extends JDialog {
         }else{
             this.tieuDe = "Cập nhật thông tin cho thuê";
             isEdit = true;
-        }
-
-        try{
-            danhSachKhachHang = new DanhSachKhachHang();
-            danhSachBangDia = new DanhSachBangDia();
-        }catch (Exception e){
-
         }
 
         prepareDialog();

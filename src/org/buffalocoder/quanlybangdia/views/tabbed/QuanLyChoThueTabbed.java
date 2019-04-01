@@ -1,9 +1,6 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
-import org.buffalocoder.quanlybangdia.models.BangDia;
-import org.buffalocoder.quanlybangdia.models.DanhSachChoThue;
-import org.buffalocoder.quanlybangdia.models.HoaDon;
-import org.buffalocoder.quanlybangdia.models.KhachHang;
+import org.buffalocoder.quanlybangdia.models.*;
 import org.buffalocoder.quanlybangdia.models.tablemodel.ChoThueTableModel;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.views.dialog.BangDiaDialog;
@@ -17,8 +14,13 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.Date;
+import java.util.concurrent.TimeUnit;
 
 public class QuanLyChoThueTabbed extends JPanel {
+
+    private static DanhSachBangDia danhSachBangDia;
+    private static DanhSachKhachHang danhSachKhachHang;
+    private DanhSachChoThue danhSachHoaDon;
 
     private JTable tblChoThue;
     private JPanel topPanel, funcPanel, searchPanel;
@@ -26,11 +28,10 @@ public class QuanLyChoThueTabbed extends JPanel {
     private JTextField txtTuKhoa;
     private TableRowSorter<TableModel> sorter;
     private ChoThueTableModel choThueTableModel;
-    private DanhSachChoThue danhSachHoaDon;
     private final Component rootComponent = this;
     private JScrollPane scrollPane;
 
-    public QuanLyChoThueTabbed(){
+    private void prepareUI(){
         this.setLayout(new BorderLayout());
         this.setFont(MaterialDesign.FONT_DEFAULT);
         this.setBorder(BorderFactory.createEmptyBorder());
@@ -49,7 +50,17 @@ public class QuanLyChoThueTabbed extends JPanel {
         btnThem = new JButton("Thêm");
         btnThem.setPreferredSize(new Dimension(90, 40));
         btnThem.addActionListener(btnThem_Click());
-        btnThem.setToolTipText("[Alt + T] Thêm hoá đơn mới");
+        btnThem.setEnabled(false);
+
+        if (danhSachKhachHang.getAll().size() <= 0)
+            btnThem.setToolTipText("Không có khách hàng trong dữ liệu");
+        else if (danhSachBangDia.getAll().size() <= 0)
+            btnThem.setToolTipText("Không có băng đĩa trong dữ liệu");
+        else {
+            btnThem.setEnabled(true);
+            btnThem.setToolTipText("[Alt + T] Thêm hoá đơn mới");
+        }
+
         btnThem.setMnemonic(KeyEvent.VK_T);
         MaterialDesign.materialButton(btnThem);
         funcPanel.add(btnThem);
@@ -92,13 +103,6 @@ public class QuanLyChoThueTabbed extends JPanel {
         box.add(Box.createVerticalStrut(10));
         this.add(box, BorderLayout.CENTER);
 
-        try{
-            danhSachHoaDon = new DanhSachChoThue();
-            danhSachHoaDon.loadData();
-        }catch (Exception e){
-            thongBaoLoi(e.getMessage());
-        }
-
         choThueTableModel = new ChoThueTableModel(danhSachHoaDon.getAll());
 
         tblChoThue = new JTable(choThueTableModel);
@@ -110,12 +114,65 @@ public class QuanLyChoThueTabbed extends JPanel {
         box.add(scrollPane, BorderLayout.CENTER);
     }
 
+    public QuanLyChoThueTabbed(){
+        try{
+            danhSachHoaDon = new DanhSachChoThue();
+            danhSachBangDia = new DanhSachBangDia();
+            danhSachKhachHang = new DanhSachKhachHang();
+        }catch (Exception e){
+            ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
+                    new JFrame(),
+                    "Lỗi", e.getMessage(),
+                    ThongBaoDialog.OK_OPTION
+            );
+        }
+
+        prepareUI();
+    }
+
+    private boolean kiemTraTinhTrangThue(HoaDon hoaDon){
+        // kiểm tra số lượng đặt có đủ không
+        if (hoaDon.getBangDia().getSoLuongTon() < hoaDon.getSoLuong()){
+            thongBao("Không đủ số lượng băng đĩa");
+            return false;
+        }
+
+        // kiểm tra băng đĩa
+        if (hoaDon.getBangDia().getSoLuongTon() <= 0){
+            thongBao("Băng đĩa đã hết trong kho");
+            return false;
+        }
+
+        // kiểm tra người dùng có mượn quá hạn không
+        for (HoaDon hoaDon1 : danhSachHoaDon.getAll()){
+            if (hoaDon1.getKhachHang().getMaKH().equals(
+                    hoaDon.getKhachHang().getMaKH())){
+                if (!hoaDon1.isTinhTrangThue()){
+                    thongBao("Khách hàng thuê băng đĩa quá hạn\nVui lòng nhắc khách hàng trả băng đĩa trước khi thuê");
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     private void thongBao(String message){
-        JOptionPane.showMessageDialog(rootComponent, message, "Thông báo", JOptionPane.WARNING_MESSAGE);
+        ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
+                new JFrame(),
+                "Thông báo",
+                message,
+                ThongBaoDialog.OK_OPTION
+        );
     }
 
     private void thongBaoLoi(String message){
-        JOptionPane.showMessageDialog(rootComponent, message, "Lỗi", JOptionPane.ERROR_MESSAGE);
+        ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
+                new JFrame(),
+                "Lỗi",
+                message,
+                ThongBaoDialog.OK_OPTION
+        );
     }
 
     private void refreshTable(){
@@ -131,7 +188,7 @@ public class QuanLyChoThueTabbed extends JPanel {
                 HoaDon hoaDon = choThueDialog.getHoaDon();
 
                 try{
-                    if (hoaDon != null){
+                    if (hoaDon != null && kiemTraTinhTrangThue(hoaDon)){
                         danhSachHoaDon.them(hoaDon);
                         refreshTable();
                     }
@@ -158,8 +215,10 @@ public class QuanLyChoThueTabbed extends JPanel {
                 hoaDon = choThueDialog.getHoaDon();
 
                 try{
-                    danhSachHoaDon.sua(hoaDon);
-                    refreshTable();
+                    if (hoaDon != null && kiemTraTinhTrangThue(hoaDon)){
+                        danhSachHoaDon.sua(hoaDon);
+                        refreshTable();
+                    }
                 }catch (Exception e1){
                     thongBaoLoi(e1.getMessage());
                 }

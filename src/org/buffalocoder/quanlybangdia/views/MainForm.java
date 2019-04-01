@@ -59,7 +59,7 @@ public class MainForm extends JFrame {
         ExitPanel.add(lblExit);
 
         // TITLE
-        lblTitle = new JLabel("IUH CODER");
+        lblTitle = new JLabel("BUFFALO CODER");
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
         lblTitle.setPreferredSize(new Dimension(294, topPanel.getHeight()));
         lblTitle.setOpaque(true);
@@ -162,7 +162,8 @@ public class MainForm extends JFrame {
         return new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-
+                menuTabbed.revalidate();
+                menuTabbed.repaint();
             }
         };
     }

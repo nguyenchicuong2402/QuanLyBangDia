@@ -2,11 +2,13 @@ package org.buffalocoder.quanlybangdia.models;
 
 import java.sql.Date;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class HoaDon extends ChiTietHoaDon{
     private String maHoaDon;
     private KhachHang khachHang;
     private Date ngayLap;
+    private boolean tinhTrangThue;
 
     public String getMaHoaDon() {
         return maHoaDon;
@@ -30,6 +32,15 @@ public class HoaDon extends ChiTietHoaDon{
 
     public void setNgayLap(Date ngayLap) {
         this.ngayLap = ngayLap;
+    }
+
+    public boolean isTinhTrangThue() {
+        java.util.Date currentDate = new java.util.Date();
+        long soNgayDaThue = TimeUnit.MILLISECONDS.toDays(currentDate.getTime() - ngayLap.getTime());
+
+        tinhTrangThue = (soNgayDaThue < getSoNgayDuocMuon());
+
+        return tinhTrangThue;
     }
 
     public HoaDon() {

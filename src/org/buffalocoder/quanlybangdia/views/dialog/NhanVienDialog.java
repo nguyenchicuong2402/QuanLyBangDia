@@ -122,6 +122,7 @@ public class NhanVienDialog extends JDialog {
         bx2.add(lblHoTen);
 
         txtHoTen = new JTextField();
+        txtHoTen.requestFocus();
         MaterialDesign.materialTextField(txtHoTen);
         if (isEdit) txtHoTen.setText(nhanVien.getHoTen());
         txtHoTen.addKeyListener(txtHoTen_KeyListener());
@@ -540,7 +541,6 @@ public class NhanVienDialog extends JDialog {
         try {
             lastID = nhanVienDAO.getMaNhanVienCuoi();
         } catch (Exception e) {
-            e.printStackTrace();
         }
 
         if (lastID.isEmpty()){

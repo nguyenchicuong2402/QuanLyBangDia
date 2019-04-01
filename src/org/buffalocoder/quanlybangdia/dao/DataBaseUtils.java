@@ -54,6 +54,18 @@ public class DataBaseUtils {
         }
     }
 
+    public boolean resetDatabase() throws Exception {
+        final String sql = "{call RESET_DATABASE}";
+
+        try (CallableStatement stmt = _connection.prepareCall(sql)) {
+            stmt.execute();
+            commitQuery();
+            return true;
+        } catch (SQLException e) {
+            throw new Exception("Lỗi reset database");
+        }
+    }
+
     private Connection getConnection() throws Exception {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
