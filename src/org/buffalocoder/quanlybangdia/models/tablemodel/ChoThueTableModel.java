@@ -8,12 +8,15 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 public class ChoThueTableModel extends AbstractTableModel {
-    private final ArrayList<HoaDon> hoaDons;
+    private ArrayList<HoaDon> hoaDons;
 
     private final String[] columnNames = new String[]{
             "Mã HD", "Tên khách hàng", "Tên băng đĩa", "Số lượng", "Ngày thuê", "Số ngày được thuê"
     };
 
+    public void setModel(ArrayList<HoaDon> hoaDons){
+        this.hoaDons = hoaDons;
+    }
 
     public ChoThueTableModel(ArrayList<HoaDon> hoaDons) {
         this.hoaDons = hoaDons;

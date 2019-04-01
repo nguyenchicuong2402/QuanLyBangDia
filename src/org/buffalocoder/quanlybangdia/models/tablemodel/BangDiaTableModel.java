@@ -14,6 +14,10 @@ public class BangDiaTableModel extends AbstractTableModel {
             "Mã BĐ", "Tên băng đĩa", "Thể loại", "Tình trạng", "Đơn giá", "Số lượng tồn", "Hãng sản xuất", "Ghi chú"
     };
 
+    public void setModel(ArrayList<BangDia> bangDias){
+        this.bangDias = bangDias;
+    }
+
     public BangDiaTableModel(ArrayList<BangDia> bangDias) {
         this.bangDias = bangDias;
     }

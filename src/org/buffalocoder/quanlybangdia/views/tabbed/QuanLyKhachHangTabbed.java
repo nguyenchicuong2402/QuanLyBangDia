@@ -14,16 +14,17 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class QuanLyKhachHangTabbed extends JPanel {
+    private DanhSachKhachHang danhSachKhachHang;
+
     private JTable tblKhachHang;
     private JPanel topPanel, funcPanel, searchPanel;
     private JButton btnThem, btnXoa, btnSua, btnTimKiem;
     private JTextField txtTuKhoa;
     private KhachHangTableModel khachHangTableModel;
-    protected static DanhSachKhachHang danhSachKhachHang;
     private Component rootComponent = this;
     private JScrollPane scrollPane;
 
-    public QuanLyKhachHangTabbed(){
+    private void prepareUI(){
         this.setLayout(new BorderLayout());
         this.setFont(MaterialDesign.FONT_DEFAULT);
         this.setBorder(BorderFactory.createEmptyBorder());
@@ -86,11 +87,6 @@ public class QuanLyKhachHangTabbed extends JPanel {
         box.add(Box.createVerticalStrut(10));
         this.add(box, BorderLayout.CENTER);
 
-        try{
-            danhSachKhachHang = new DanhSachKhachHang();
-        }catch (Exception e){
-            thongBaoLoi(e.getMessage());
-        }
         khachHangTableModel = new KhachHangTableModel(danhSachKhachHang.getAll());
 
         tblKhachHang = new JTable(khachHangTableModel);
@@ -102,7 +98,26 @@ public class QuanLyKhachHangTabbed extends JPanel {
         box.add(scrollPane, BorderLayout.CENTER);
     }
 
-    private void refreshTable(){
+    public QuanLyKhachHangTabbed(){
+        try {
+            danhSachKhachHang = new DanhSachKhachHang();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        prepareUI();
+    }
+
+    public void refreshTable(){
+        try {
+            danhSachKhachHang.loadData();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        khachHangTableModel.setModel(danhSachKhachHang.getAll());
+        tblKhachHang.setModel(khachHangTableModel);
+
         tblKhachHang.revalidate();
         tblKhachHang.repaint();
     }

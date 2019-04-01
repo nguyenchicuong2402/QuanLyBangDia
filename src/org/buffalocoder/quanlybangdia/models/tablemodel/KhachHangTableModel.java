@@ -7,11 +7,15 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
 public class KhachHangTableModel extends AbstractTableModel {
-    private final ArrayList<KhachHang> khachHangs;
+    private ArrayList<KhachHang> khachHangs;
 
     private final String[] columnNames = new String[] {
             "Mã KH", "Tên khách hàng", "Giới tính", "Ngày sinh", "CMND", "Số điện thoại", "Địa chỉ", "Ngày hết hạn"
     };
+
+    public void setModel(ArrayList<KhachHang> khachHangs){
+        this.khachHangs = khachHangs;
+    }
 
     public KhachHangTableModel(ArrayList<KhachHang> khachHangs) {
         this.khachHangs = khachHangs;

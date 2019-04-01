@@ -16,18 +16,19 @@ import java.awt.event.*;
 
 public class QuanLyBangDiaTabbed extends JPanel {
     private final boolean IS_ADMIN = DangNhap.taiKhoan.getLoaiTaiKhoan() == 1;
+    private DanhSachBangDia danhSachBangDia;
 
     private JTable tblBangDia;
     private JPanel topPanel, funcPanel, searchPanel;
     private JButton btnThem, btnXoa, btnSua, btnTimKiem;
     private JTextField txtTuKhoa;
     private BangDiaTableModel bangDiaTableModel;
-    protected static DanhSachBangDia danhSachBangDia;
     private TableRowSorter<TableModel> sorter;
     private final Component rootComponent = this;
     private JScrollPane scrollPane;
 
-    public QuanLyBangDiaTabbed(){
+
+    private void prepareUI(){
         this.setLayout(new BorderLayout());
         this.setFont(MaterialDesign.FONT_DEFAULT);
         this.setBorder(BorderFactory.createEmptyBorder());
@@ -91,12 +92,6 @@ public class QuanLyBangDiaTabbed extends JPanel {
         box.add(Box.createVerticalStrut(10));
         this.add(box, BorderLayout.CENTER);
 
-        try{
-            danhSachBangDia = new DanhSachBangDia();
-        }catch (Exception e){
-            thongBaoLoi(e.getMessage());
-        }
-
         bangDiaTableModel = new BangDiaTableModel(danhSachBangDia.getAll());
 
         tblBangDia = new JTable(bangDiaTableModel);
@@ -109,7 +104,26 @@ public class QuanLyBangDiaTabbed extends JPanel {
         box.add(scrollPane, BorderLayout.CENTER);
     }
 
-    private void refreshTable(){
+    public QuanLyBangDiaTabbed(){
+        try {
+            danhSachBangDia = new DanhSachBangDia();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        prepareUI();
+    }
+
+    public void refreshTable(){
+        try {
+            danhSachBangDia.loadData();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        bangDiaTableModel.setModel(danhSachBangDia.getAll());
+        tblBangDia.setModel(bangDiaTableModel);
+
         tblBangDia.revalidate();
         tblBangDia.repaint();
     }

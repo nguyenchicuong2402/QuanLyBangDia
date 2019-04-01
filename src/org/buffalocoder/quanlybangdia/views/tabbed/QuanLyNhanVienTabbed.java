@@ -19,23 +19,18 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class QuanLyNhanVienTabbed extends JPanel {
+    private DanhSachNhanVien danhSachNhanVien;
+    private TaiKhoanDAO taiKhoanDAO;
+
     private JTable tblNhanVien;
     private JPanel topPanel, funcPanel, searchPanel;
     private JButton btnThem, btnXoa, btnSua, btnTimKiem;
     private JTextField txtTuKhoa;
-    private DanhSachNhanVien danhSachNhanVien;
     private NhanVienTableModel nhanVienTableModel;
-    private TaiKhoanDAO taiKhoanDAO;
     private final Component rootComponent = this;
     private JScrollPane scrollPane;
 
-    public QuanLyNhanVienTabbed(){
-        try{
-            taiKhoanDAO = TaiKhoanDAO.getInstance();
-        }catch (Exception e){
-            thongBaoLoi(e.getMessage());
-        }
-
+    private void prepareUI(){
         this.setLayout(new BorderLayout());
         this.setFont(MaterialDesign.FONT_DEFAULT);
         this.setBorder(BorderFactory.createEmptyBorder());
@@ -98,12 +93,6 @@ public class QuanLyNhanVienTabbed extends JPanel {
         box.add(Box.createVerticalStrut(10));
         this.add(box, BorderLayout.CENTER);
 
-        try{
-            danhSachNhanVien = new DanhSachNhanVien();
-        }catch (Exception e){
-            thongBaoLoi(e.getMessage());
-        }
-
         nhanVienTableModel = new NhanVienTableModel(danhSachNhanVien.getAll());
 
         tblNhanVien = new JTable(nhanVienTableModel);
@@ -115,7 +104,27 @@ public class QuanLyNhanVienTabbed extends JPanel {
         box.add(scrollPane, BorderLayout.CENTER);
     }
 
-    private void refreshTable(){
+    public QuanLyNhanVienTabbed(){
+        try{
+            taiKhoanDAO = TaiKhoanDAO.getInstance();
+            danhSachNhanVien = new DanhSachNhanVien();
+        }catch (Exception e){
+            thongBaoLoi(e.getMessage());
+        }
+
+        prepareUI();
+    }
+
+    public void refreshTable(){
+        try {
+            danhSachNhanVien.loadData();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        nhanVienTableModel.setModel(danhSachNhanVien.getAll());
+        tblNhanVien.setModel(nhanVienTableModel);
+
         tblNhanVien.revalidate();
         tblNhanVien.repaint();
     }

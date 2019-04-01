@@ -8,8 +8,13 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.buffalocoder.quanlybangdia.models.DanhSachBangDia;
+import org.buffalocoder.quanlybangdia.models.DanhSachChoThue;
+import org.buffalocoder.quanlybangdia.models.DanhSachKhachHang;
+import org.buffalocoder.quanlybangdia.models.DanhSachNhanVien;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.views.custom.CustomTabbedPanelUI;
+import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
 import org.buffalocoder.quanlybangdia.views.tabbed.*;
 
 public class MainForm extends JFrame {
@@ -162,6 +167,11 @@ public class MainForm extends JFrame {
         return new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
+                quanLyChoThueTabbed.refreshTable();
+                quanLyBangDiaTabbed.refreshTable();
+                quanLyKhachHangTabbed.refreshTable();
+                quanLyNhanVienTabbed.refreshTable();
+
                 menuTabbed.revalidate();
                 menuTabbed.repaint();
             }

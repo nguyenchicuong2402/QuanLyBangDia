@@ -18,9 +18,9 @@ import java.util.concurrent.TimeUnit;
 
 public class QuanLyChoThueTabbed extends JPanel {
 
-    private static DanhSachBangDia danhSachBangDia;
-    private static DanhSachKhachHang danhSachKhachHang;
-    private DanhSachChoThue danhSachHoaDon;
+    private DanhSachBangDia danhSachBangDia;
+    private DanhSachKhachHang danhSachKhachHang;
+    private DanhSachChoThue danhSachChoThue;
 
     private JTable tblChoThue;
     private JPanel topPanel, funcPanel, searchPanel;
@@ -103,7 +103,7 @@ public class QuanLyChoThueTabbed extends JPanel {
         box.add(Box.createVerticalStrut(10));
         this.add(box, BorderLayout.CENTER);
 
-        choThueTableModel = new ChoThueTableModel(danhSachHoaDon.getAll());
+        choThueTableModel = new ChoThueTableModel(danhSachChoThue.getAll());
 
         tblChoThue = new JTable(choThueTableModel);
         MaterialDesign.materialTable(tblChoThue);
@@ -115,16 +115,12 @@ public class QuanLyChoThueTabbed extends JPanel {
     }
 
     public QuanLyChoThueTabbed(){
-        try{
-            danhSachHoaDon = new DanhSachChoThue();
-            danhSachBangDia = new DanhSachBangDia();
+        try {
+            danhSachChoThue = new DanhSachChoThue();
             danhSachKhachHang = new DanhSachKhachHang();
-        }catch (Exception e){
-            ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
-                    new JFrame(),
-                    "Lỗi", e.getMessage(),
-                    ThongBaoDialog.OK_OPTION
-            );
+            danhSachBangDia = new DanhSachBangDia();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         prepareUI();
@@ -144,7 +140,7 @@ public class QuanLyChoThueTabbed extends JPanel {
         }
 
         // kiểm tra người dùng có mượn quá hạn không
-        for (HoaDon hoaDon1 : danhSachHoaDon.getAll()){
+        for (HoaDon hoaDon1 : danhSachChoThue.getAll()){
             if (hoaDon1.getKhachHang().getMaKH().equals(
                     hoaDon.getKhachHang().getMaKH())){
                 if (!hoaDon1.isTinhTrangThue()){
@@ -175,7 +171,18 @@ public class QuanLyChoThueTabbed extends JPanel {
         );
     }
 
-    private void refreshTable(){
+    public void refreshTable(){
+        try {
+            danhSachBangDia.loadData();
+            danhSachKhachHang.loadData();
+            danhSachChoThue.loadData();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        choThueTableModel.setModel(danhSachChoThue.getAll());
+        tblChoThue.setModel(choThueTableModel);
+
         tblChoThue.revalidate();
         tblChoThue.repaint();
     }
@@ -189,7 +196,7 @@ public class QuanLyChoThueTabbed extends JPanel {
 
                 try{
                     if (hoaDon != null && kiemTraTinhTrangThue(hoaDon)){
-                        danhSachHoaDon.them(hoaDon);
+                        danhSachChoThue.them(hoaDon);
                         refreshTable();
                     }
                 }catch (Exception e1){
@@ -210,13 +217,13 @@ public class QuanLyChoThueTabbed extends JPanel {
                     return;
                 }
 
-                HoaDon hoaDon = danhSachHoaDon.getAll().get(index);
+                HoaDon hoaDon = danhSachChoThue.getAll().get(index);
                 ChoThueDialog choThueDialog = new ChoThueDialog(new JFrame(), hoaDon);
                 hoaDon = choThueDialog.getHoaDon();
 
                 try{
                     if (hoaDon != null && kiemTraTinhTrangThue(hoaDon)){
-                        danhSachHoaDon.sua(hoaDon);
+                        danhSachChoThue.sua(hoaDon);
                         refreshTable();
                     }
                 }catch (Exception e1){
@@ -250,7 +257,7 @@ public class QuanLyChoThueTabbed extends JPanel {
 
                 if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     try{
-                        danhSachHoaDon.xoa(maHoaDon);
+                        danhSachChoThue.xoa(maHoaDon);
                         refreshTable();
                     }catch (Exception e1){
                         thongBaoLoi(e1.getMessage());
