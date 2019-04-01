@@ -322,6 +322,10 @@ public class CaiDatTabbed extends JPanel {
                 txtMatKhauHienTai.setText("");
                 txtMatKhauMoi.setText("");
                 txtNhapLaiMatKhau.setText("");
+
+                unErrorInput(txtMatKhauHienTai);
+                unErrorInput(txtMatKhauMoi);
+                unErrorInput(txtNhapLaiMatKhau);
             }
         };
     }
