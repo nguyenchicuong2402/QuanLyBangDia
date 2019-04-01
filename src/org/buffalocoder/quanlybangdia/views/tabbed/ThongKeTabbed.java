@@ -9,4 +9,6 @@ public class ThongKeTabbed extends JPanel {
 
         this.add(new JLabel("Thống kê tabbed"));
     }
+
+    //TODO báo cáo gửi cho ban giám đốc về doanh thu trong tuần, danh sách các băng đĩa quá hạn, báo cáo về băng đĩa đang được yêu thích
 }

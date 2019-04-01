@@ -9,8 +9,10 @@ public class DataBaseUtils {
     private static final String USERNAME = "sa";
     private static final String PASSWORD = "sapassword";
     private static final String DB_NAME = "QUANLYBANGDIA";
-    private static final String URL = String.format("jdbc:sqlserver://%s:%d;databaseName=%s;user=%s;password=%s",
-            SERVER, PORT, DB_NAME, USERNAME, PASSWORD);
+//    private static final String URL = String.format("jdbc:sqlserver://%s:%d;databaseName=%s;user=%s;password=%s",
+//            SERVER, PORT, DB_NAME, USERNAME, PASSWORD);
+    private static final String URL = String.format("jdbc:sqlserver://%s:%d;databaseName=%s;user=%s;password=123456",
+            SERVER, PORT, DB_NAME, USERNAME);//, PASSWORD);
 
     private static Connection _connection;
 

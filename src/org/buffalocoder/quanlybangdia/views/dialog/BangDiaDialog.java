@@ -281,6 +281,9 @@ public class BangDiaDialog extends JDialog{
         }else if (!pattern.matcher(txtSoLuong.getText().trim()).matches()){
             errorInput(txtSoLuong, "Số lượng phải là số");
             return false;
+        }else if(txtSoLuong.getText().trim().length() > 20){
+            errorInput(txtSoLuong,"nhập số quá lớn");
+            return false;
         }
 
         return true;

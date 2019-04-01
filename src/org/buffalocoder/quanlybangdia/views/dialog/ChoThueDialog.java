@@ -221,7 +221,11 @@ public class ChoThueDialog extends JDialog {
         }else if (!pattern.matcher(txtSoLuong.getText().trim()).matches()){
             errorInput(txtSoLuong, " số lượng phải là số");
             return false;
+        }else if(txtSoLuong.getText().trim().length() > 50){
+            errorInput(txtSoLuong,"nhập số quá lớn");
+            return false;
         }
+
 
         pattern = Pattern.compile(PatternRegexs.REGEX_SO);
         if (txtSoNgayDuocMuon.getText().trim().isEmpty()){
@@ -229,6 +233,9 @@ public class ChoThueDialog extends JDialog {
             return false;
         }else if (!pattern.matcher(txtSoNgayDuocMuon.getText().trim()).matches()){
             errorInput(txtSoNgayDuocMuon, "số ngày mượn phải là số");
+            return false;
+        }else if(txtSoNgayDuocMuon.getText().trim().length() > 50){
+            errorInput(txtSoNgayDuocMuon,"nhập số quá lớn");
             return false;
         }
 

@@ -296,4 +296,7 @@ public class QuanLyChoThueTabbed extends JPanel {
             }
         };
     }
+
+    //TODO THÊM 1 CỘT THÀNH TIỀN
+    //Nếu khách trả muộn so với ngày quy định trên phiếu cho thuê thì họ phải chịu một khoản tiền phạt là 50% tiền thuê/băng đĩa.
 }

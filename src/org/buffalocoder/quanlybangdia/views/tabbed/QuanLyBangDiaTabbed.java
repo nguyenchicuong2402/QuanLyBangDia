@@ -255,4 +255,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
             }
         };
     }
+
+    // TODO thêm 1 button xoá băng đĩa hỏng
+
 }
