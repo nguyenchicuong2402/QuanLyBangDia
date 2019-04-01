@@ -3,24 +3,21 @@ package org.buffalocoder.quanlybangdia.views.tabbed;
 import org.buffalocoder.quanlybangdia.models.*;
 import org.buffalocoder.quanlybangdia.models.tablemodel.ChoThueTableModel;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
-import org.buffalocoder.quanlybangdia.views.dialog.BangDiaDialog;
 import org.buffalocoder.quanlybangdia.views.dialog.ChoThueDialog;
 import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.Date;
-import java.util.concurrent.TimeUnit;
 
 public class QuanLyChoThueTabbed extends JPanel {
 
     private DanhSachBangDia danhSachBangDia;
     private DanhSachKhachHang danhSachKhachHang;
     private DanhSachChoThue danhSachChoThue;
+    private ThongBaoDialog thongBaoDialog;
 
     private JTable tblChoThue;
     private JPanel topPanel, funcPanel, searchPanel;
@@ -120,22 +117,22 @@ public class QuanLyChoThueTabbed extends JPanel {
             danhSachKhachHang = new DanhSachKhachHang();
             danhSachBangDia = new DanhSachBangDia();
         } catch (Exception e) {
-            e.printStackTrace();
+            thongBaoLoi(e.getMessage());
         }
 
         prepareUI();
     }
 
-    private boolean kiemTraTinhTrangThue(HoaDon hoaDon){
+    private boolean kiemTraTinhTrangThue(HoaDon hoaDon, boolean isChinhSua){
         // kiểm tra số lượng đặt có đủ không
-        if (hoaDon.getBangDia().getSoLuongTon() < hoaDon.getSoLuong()){
+        if ((hoaDon.getBangDia().getSoLuongTon() + (isChinhSua ? hoaDon.getSoLuong() : 0)) < hoaDon.getSoLuong()){
             thongBao("Không đủ số lượng băng đĩa");
             return false;
         }
 
         // kiểm tra băng đĩa
-        if (hoaDon.getBangDia().getSoLuongTon() <= 0){
-            thongBao("Băng đĩa đã hết trong kho");
+        if (!hoaDon.getBangDia().isTinhTrang()){
+            thongBao("Băng đĩa không còn sử dụng được");
             return false;
         }
 
@@ -154,7 +151,7 @@ public class QuanLyChoThueTabbed extends JPanel {
     }
 
     private void thongBao(String message){
-        ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
+        thongBaoDialog = new ThongBaoDialog(
                 new JFrame(),
                 "Thông báo",
                 message,
@@ -163,7 +160,7 @@ public class QuanLyChoThueTabbed extends JPanel {
     }
 
     private void thongBaoLoi(String message){
-        ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
+        thongBaoDialog = new ThongBaoDialog(
                 new JFrame(),
                 "Lỗi",
                 message,
@@ -177,7 +174,7 @@ public class QuanLyChoThueTabbed extends JPanel {
             danhSachKhachHang.loadData();
             danhSachChoThue.loadData();
         } catch (Exception e) {
-            e.printStackTrace();
+            thongBaoLoi(e.getMessage());
         }
 
         choThueTableModel.setModel(danhSachChoThue.getAll());
@@ -195,7 +192,7 @@ public class QuanLyChoThueTabbed extends JPanel {
                 HoaDon hoaDon = choThueDialog.getHoaDon();
 
                 try{
-                    if (hoaDon != null && kiemTraTinhTrangThue(hoaDon)){
+                    if (hoaDon != null && kiemTraTinhTrangThue(hoaDon, false)){
                         danhSachChoThue.them(hoaDon);
                         refreshTable();
                     }
@@ -222,7 +219,7 @@ public class QuanLyChoThueTabbed extends JPanel {
                 hoaDon = choThueDialog.getHoaDon();
 
                 try{
-                    if (hoaDon != null && kiemTraTinhTrangThue(hoaDon)){
+                    if (hoaDon != null && kiemTraTinhTrangThue(hoaDon, true)){
                         danhSachChoThue.sua(hoaDon);
                         refreshTable();
                     }

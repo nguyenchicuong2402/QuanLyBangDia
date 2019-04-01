@@ -12,12 +12,27 @@ public class DataBaseUtils {
     private static final String URL = String.format("jdbc:sqlserver://%s:%d;databaseName=%s;user=%s;password=%s",
             SERVER, PORT, DB_NAME, USERNAME, PASSWORD);
 
-    private Connection _connection;
+    private static Connection _connection;
+
+    private DataBaseUtils() throws Exception {
+        _connection = getConnection();
+        _connection.setAutoCommit(false);
+    }
+
+    public static DataBaseUtils getInstance() throws Exception {
+        if(_instance == null) {
+            synchronized(DataBaseUtils.class) {
+                if(null == _instance) {
+                    _instance  = new DataBaseUtils();
+                }
+            }
+        }
+        return _instance;
+    }
 
     public PreparedStatement excuteQueryWrite(String sql){
         try {
-            PreparedStatement ps = _connection.prepareStatement(sql);
-            return ps;
+            return _connection.prepareStatement(sql);
         }catch (Exception e){
 
         }
@@ -25,17 +40,13 @@ public class DataBaseUtils {
     }
 
     public ResultSet excuteQueryRead(String sql){
-        Statement st = null;
-        ResultSet rs = null;
-
         try {
-            st = _connection.createStatement();
-            rs = st.executeQuery(sql);
+            return _connection.createStatement().executeQuery(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return rs;
+        return null;
     }
 
     public void commitQuery() throws Exception {
@@ -75,21 +86,5 @@ public class DataBaseUtils {
         } catch (SQLException e) {
             throw new Exception("Kết nối database thất bại");
         }
-    }
-
-    private DataBaseUtils() throws Exception {
-        _connection = getConnection();
-        _connection.setAutoCommit(false);
-    }
-
-    public static DataBaseUtils getInstance() throws Exception {
-        if(_instance == null) {
-            synchronized(DataBaseUtils.class) {
-                if(null == _instance) {
-                    _instance  = new DataBaseUtils();
-                }
-            }
-        }
-        return _instance;
     }
 }

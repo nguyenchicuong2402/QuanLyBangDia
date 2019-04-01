@@ -20,6 +20,7 @@ public class CaiDatTabbed extends JPanel {
 
     private static TaiKhoanDAO taiKhoanDAO;
     private static DataBaseUtils dataBaseUtils;
+    private ThongBaoDialog thongBaoDialog;
 
     private JPanel contentPanel, bottomPanel, chuDePanel, doiMatKhauPanel, xoaDatabasePanel;
     private JButton btnThayDoiMatKhau, btnXoaDatabase, btnLamRong;
@@ -264,7 +265,7 @@ public class CaiDatTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
+                thongBaoDialog = new ThongBaoDialog(
                         new JFrame(),
                         "Cảnh báo",
                         "Thao tác này sẽ xoá toàn bộ dữ liệu của bạn\nBạn có muốn tiếp tục không ?",
@@ -300,7 +301,7 @@ public class CaiDatTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
+                thongBaoDialog = new ThongBaoDialog(
                         new JFrame(),
                         "Thông báo",
                         "Thao tác này cần khởi động lại phần mềm\nBạn có muốn khởi động lại không ?",
@@ -374,7 +375,7 @@ public class CaiDatTabbed extends JPanel {
                 try {
                     if (taiKhoanDAO.suaTaiKhoan(taiKhoan) != null){
                         DangNhap.taiKhoan = taiKhoan;
-                        ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
+                        thongBaoDialog = new ThongBaoDialog(
                                 new JFrame(),
                                 "Thông báo",
                                 "Thay đổi mật khẩu thành công",
@@ -386,7 +387,7 @@ public class CaiDatTabbed extends JPanel {
                         txtMatKhauHienTai.setText("");
                     }
                 } catch (Exception ex) {
-                    ThongBaoDialog thongBaoLoi = new ThongBaoDialog(
+                    thongBaoDialog = new ThongBaoDialog(
                             new JFrame(),
                             "Lỗi",
                             ex.getMessage(),

@@ -2,8 +2,6 @@ package org.buffalocoder.quanlybangdia.views.tabbed;
 
 import org.buffalocoder.quanlybangdia.dao.TaiKhoanDAO;
 import org.buffalocoder.quanlybangdia.models.DanhSachNhanVien;
-import org.buffalocoder.quanlybangdia.models.HoaDon;
-//import org.buffalocoder.quanlybangdia.models.tablemodel.HoaDonTableModel;
 import org.buffalocoder.quanlybangdia.models.NhanVien;
 import org.buffalocoder.quanlybangdia.models.TaiKhoan;
 import org.buffalocoder.quanlybangdia.models.tablemodel.NhanVienTableModel;
@@ -12,15 +10,13 @@ import org.buffalocoder.quanlybangdia.views.dialog.NhanVienDialog;
 import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
 
 import javax.swing.*;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 public class QuanLyNhanVienTabbed extends JPanel {
     private DanhSachNhanVien danhSachNhanVien;
     private TaiKhoanDAO taiKhoanDAO;
+    private ThongBaoDialog thongBaoDialog;
 
     private JTable tblNhanVien;
     private JPanel topPanel, funcPanel, searchPanel;
@@ -119,7 +115,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
         try {
             danhSachNhanVien.loadData();
         } catch (Exception e) {
-            e.printStackTrace();
+            thongBaoLoi(e.getMessage());
         }
 
         nhanVienTableModel.setModel(danhSachNhanVien.getAll());
@@ -130,11 +126,21 @@ public class QuanLyNhanVienTabbed extends JPanel {
     }
 
     private void thongBao(String message){
-        JOptionPane.showMessageDialog(rootComponent, message, "Thông báo", JOptionPane.WARNING_MESSAGE);
+        thongBaoDialog = new ThongBaoDialog(
+                new JFrame(),
+                "Thông báo",
+                message,
+                ThongBaoDialog.OK_OPTION
+        );
     }
 
     private void thongBaoLoi(String message){
-        JOptionPane.showMessageDialog(rootComponent, message, "Lỗi", JOptionPane.ERROR_MESSAGE);
+        thongBaoDialog = new ThongBaoDialog(
+                new JFrame(),
+                "Lỗi",
+                message,
+                ThongBaoDialog.OK_OPTION
+        );
     }
 
     private ActionListener btnThem_Click(){
@@ -145,13 +151,13 @@ public class QuanLyNhanVienTabbed extends JPanel {
 
                 NhanVien nhanVien = nhanVienDialog.getNhanVien();
                 TaiKhoan taiKhoan = nhanVienDialog.getTaiKhoan();
+
                 if (nhanVien == null && taiKhoan == null)
                     return;
 
                 try{
                     danhSachNhanVien.them(nhanVien);
                     taiKhoanDAO.themTaiKhoan(taiKhoan);
-
                     refreshTable();
                 }catch (Exception e1){
                     thongBaoLoi(e1.getMessage());
@@ -184,12 +190,15 @@ public class QuanLyNhanVienTabbed extends JPanel {
                 nhanVien = nhanVienDialog.getNhanVien();
                 taiKhoan = nhanVienDialog.getTaiKhoan();
 
-                if (nhanVien == null && taiKhoan == null)
+                if (nhanVien == null)
                     return;
 
                 try{
                     danhSachNhanVien.sua(nhanVien);
-                    taiKhoanDAO.suaTaiKhoan(taiKhoan);
+
+                    if (taiKhoan != null)
+                        taiKhoanDAO.suaTaiKhoan(taiKhoan);
+
                     refreshTable();
                 }catch (Exception e1){
                     thongBaoLoi(e1.getMessage());
@@ -221,7 +230,6 @@ public class QuanLyNhanVienTabbed extends JPanel {
 
                 if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     try{
-                        taiKhoanDAO.xoaTaiKhoan(taiKhoanDAO.getTaiKhoanByMaNhanVien(maNhanVien).getTenTaiKhoan());
                         danhSachNhanVien.xoa(maNhanVien);
                         refreshTable();
                     }catch (Exception e1){

@@ -20,6 +20,7 @@ public class DangNhap extends JFrame {
     public static TaiKhoan taiKhoan;
     private QuanLyXML ql = new QuanLyXML();
     private TaiKhoanDAO taiKhoanDAO;
+    private ThongBaoDialog thongBaoDialog;
 
     private JPanel mainPanel, headerPanel, contentPanel, bottomPanel;
     private JLabel lblTieuDe, lblTenNguoiDung, lblMatKhau, lblBanQuyen, lblLoi;
@@ -170,11 +171,21 @@ public class DangNhap extends JFrame {
     }
 
     private void thongBao(String message){
-        JOptionPane.showMessageDialog(rootComponent, message, "Thông báo", JOptionPane.WARNING_MESSAGE);
+        thongBaoDialog = new ThongBaoDialog(
+                new JFrame(),
+                "Thông báo",
+                message,
+                ThongBaoDialog.OK_OPTION
+        );
     }
 
     private void thongBaoLoi(String message){
-        JOptionPane.showMessageDialog(rootComponent, message, "Lỗi", JOptionPane.ERROR_MESSAGE);
+        thongBaoDialog = new ThongBaoDialog(
+                new JFrame(),
+                "Lỗi",
+                message,
+                ThongBaoDialog.OK_OPTION
+        );
     }
 
     private void ghiNhoTaiKhoan(){

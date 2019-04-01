@@ -22,7 +22,7 @@ public class NhanVienDialog extends JDialog {
     private String tieuDe;
     private NhanVien nhanVien;
     private TaiKhoan taiKhoan;
-    private boolean isEdit;
+    private boolean isChinhSua;
     private NhanVienDAO nhanVienDAO;
 
     private JPanel mainPanel, contentPanel, headerPanel, bottomPanel, infoPanel, accountPanel;
@@ -38,11 +38,13 @@ public class NhanVienDialog extends JDialog {
     private void prepareDialog(){
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(MaterialDesign.BORDER_DIALOG);
+        MaterialDesign.materialPanel(mainPanel);
         getContentPane().add(mainPanel);
 
         // HEADER PANEL
         headerPanel = new JPanel(new BorderLayout());
         headerPanel.setPreferredSize(new Dimension(mainPanel.getWidth(), 60));
+        MaterialDesign.materialPanel(headerPanel);
         headerPanel.setBackground(MaterialDesign.COLOR_PRIMARY);
         mainPanel.add(headerPanel, BorderLayout.NORTH);
 
@@ -56,6 +58,7 @@ public class NhanVienDialog extends JDialog {
         // CONTENT PANEL
         contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+        MaterialDesign.materialPanel(contentPanel);
         mainPanel.add(contentPanel, BorderLayout.CENTER);
 
         infoPanel = new JPanel();
@@ -111,7 +114,7 @@ public class NhanVienDialog extends JDialog {
         txtMaNV = new JTextField(getMaNhanVienMoi());
         MaterialDesign.materialTextField(txtMaNV);
         txtMaNV.setEditable(false);
-        if (isEdit) txtMaNV.setText(nhanVien.getMaNhanVien());
+        if (isChinhSua) txtMaNV.setText(nhanVien.getMaNhanVien());
         bx1.add(txtMaNV);
         bx1.add(Box.createHorizontalStrut(20));
 
@@ -124,7 +127,7 @@ public class NhanVienDialog extends JDialog {
         txtHoTen = new JTextField();
         txtHoTen.requestFocus();
         MaterialDesign.materialTextField(txtHoTen);
-        if (isEdit) txtHoTen.setText(nhanVien.getHoTen());
+        if (isChinhSua) txtHoTen.setText(nhanVien.getHoTen());
         txtHoTen.addKeyListener(txtHoTen_KeyListener());
         bx2.add(txtHoTen);
         bx2.add(Box.createHorizontalStrut(20));
@@ -137,7 +140,7 @@ public class NhanVienDialog extends JDialog {
 
         txtCMND = new JTextField();
         MaterialDesign.materialTextField(txtCMND);
-        if (isEdit) {
+        if (isChinhSua) {
             txtCMND.setText(nhanVien.getcMND());
             txtCMND.setEditable(false);
         }
@@ -152,7 +155,8 @@ public class NhanVienDialog extends JDialog {
         bx4.add(lblGioiTinh);
 
         cbGioiTinh = new JComboBox<>(new String[]{"Nam", "Nữ"});
-        if (isEdit) cbGioiTinh.setSelectedItem(nhanVien.isGioiTinh() ? "Nam" : "Nữ");
+        MaterialDesign.materialComboBox(cbGioiTinh);
+        if (isChinhSua) cbGioiTinh.setSelectedItem(nhanVien.isGioiTinh() ? "Nam" : "Nữ");
         bx4.add(cbGioiTinh);
         bx4.add(Box.createHorizontalStrut(20));
 
@@ -164,7 +168,7 @@ public class NhanVienDialog extends JDialog {
 
         dateChooser = new JDateChooser(Formats.DATE_FORMAT.toPattern(), "##/##/####", '_');
         MaterialDesign.materialDateChooser(dateChooser);
-        if (isEdit) dateChooser.setDate(nhanVien.getNgaySinh());
+        if (isChinhSua) dateChooser.setDate(nhanVien.getNgaySinh());
         else dateChooser.setDate(new java.util.Date());
         bx5.add(dateChooser);
         bx5.add(Box.createHorizontalStrut(20));
@@ -177,7 +181,7 @@ public class NhanVienDialog extends JDialog {
 
         txtSoDienThoai = new JTextField();
         MaterialDesign.materialTextField(txtSoDienThoai);
-        if (isEdit) txtSoDienThoai.setText(nhanVien.getSoDienThoai());
+        if (isChinhSua) txtSoDienThoai.setText(nhanVien.getSoDienThoai());
         txtSoDienThoai.addKeyListener(txtSoDienThoai_KeyListener());
         bx6.add(txtSoDienThoai);
         bx6.add(Box.createHorizontalStrut(20));
@@ -190,7 +194,7 @@ public class NhanVienDialog extends JDialog {
 
         txtDiaChi = new JTextField();
         MaterialDesign.materialTextField(txtDiaChi);
-        if (isEdit) txtDiaChi.setText(nhanVien.getDiaChi());
+        if (isChinhSua) txtDiaChi.setText(nhanVien.getDiaChi());
         txtDiaChi.addKeyListener(txtDiaChi_KeyListener());
         bx7.add(txtDiaChi);
         bx7.add(Box.createHorizontalStrut(20));
@@ -203,7 +207,7 @@ public class NhanVienDialog extends JDialog {
 
         txtMoTa = new JTextField();
         MaterialDesign.materialTextField(txtMoTa);
-        if (isEdit) txtMoTa.setText(nhanVien.getMoTa());
+        if (isChinhSua) txtMoTa.setText(nhanVien.getMoTa());
         bx8.add(txtMoTa);
         bx8.add(Box.createHorizontalStrut(20));
 
@@ -243,7 +247,7 @@ public class NhanVienDialog extends JDialog {
 
         txtTenTaiKhoan = new JTextField();
         MaterialDesign.materialTextField(txtTenTaiKhoan);
-        if (isEdit) {
+        if (isChinhSua) {
             txtTenTaiKhoan.setText(taiKhoan.getTenTaiKhoan());
             txtTenTaiKhoan.setEditable(false);
         }
@@ -282,7 +286,9 @@ public class NhanVienDialog extends JDialog {
         bx12.add(lblLoaiTaiKhoan);
 
         cbLoaiTaiKhoan = new JComboBox<>(new String[]{"ADMIN", "NHÂN VIÊN"});
-        if (isEdit) cbLoaiTaiKhoan.setSelectedItem(taiKhoan.getLoaiTaiKhoan() == 1 ? "ADMIN" : "NHÂN VIÊN");
+        cbLoaiTaiKhoan.setSelectedIndex(1);
+        MaterialDesign.materialComboBox(cbLoaiTaiKhoan);
+        if (isChinhSua) cbLoaiTaiKhoan.setSelectedItem(taiKhoan.getLoaiTaiKhoan() == 1 ? "ADMIN" : "NHÂN VIÊN");
         bx12.add(cbLoaiTaiKhoan);
         bx12.add(Box.createHorizontalStrut(20));
 
@@ -301,6 +307,7 @@ public class NhanVienDialog extends JDialog {
 
         // BOTTOM PANEL
         bottomPanel = new JPanel(new GridLayout(1, 2, 1, 10));
+        MaterialDesign.materialPanel(bottomPanel);
         contentPanel.add(bottomPanel, BorderLayout.SOUTH);
 
         btnThoat = new JButton("Đóng");
@@ -310,7 +317,7 @@ public class NhanVienDialog extends JDialog {
         btnThoat.addActionListener(btnThoat_Click());
         bottomPanel.add(btnThoat);
 
-        btnLuu = new JButton(isEdit ? "Lưu" : "Thêm");
+        btnLuu = new JButton(isChinhSua ? "Lưu" : "Thêm");
         MaterialDesign.materialButton(btnLuu);
         btnLuu.addActionListener(btnLuu_Click());
         bottomPanel.add(btnLuu);
@@ -377,26 +384,27 @@ public class NhanVienDialog extends JDialog {
             return false;
         }
 
-        if (String.valueOf(txtMatKhau.getPassword()).trim().isEmpty()){
-            errorInput(txtMatKhau, "Vui lòng nhập nhập mật khẩu");
-            return false;
-        }else if (String.valueOf(txtMatKhau.getPassword()).trim().length() > 128){
-            errorInput(txtMatKhau, "Mật khẩu không quá 128 kí tự");
-            return false;
-        }
+        if (!isChinhSua){
+            if (String.valueOf(txtMatKhau.getPassword()).trim().isEmpty()){
+                errorInput(txtMatKhau, "Vui lòng nhập nhập mật khẩu");
+                return false;
+            }else if (String.valueOf(txtMatKhau.getPassword()).trim().length() > 128){
+                errorInput(txtMatKhau, "Mật khẩu không quá 128 kí tự");
+                return false;
+            }
 
-        if (String.valueOf(txtNhapLaiMatKhau.getPassword()).trim().isEmpty()){
-            errorInput(txtNhapLaiMatKhau, "Vui lòng nhập nhập lại mật khẩu");
-            return false;
-        }else if (String.valueOf(txtNhapLaiMatKhau.getPassword()).trim().length() > 128){
-            errorInput(txtNhapLaiMatKhau, "Mật khẩu không quá 128 kí tự");
-            return false;
-        }else if (!String.valueOf(txtMatKhau.getPassword()).trim()
-                .equals(String.valueOf(txtNhapLaiMatKhau.getPassword()).trim())){
-            errorInput(txtNhapLaiMatKhau, "Mật khẩu không trùng khớp");
-            return false;
+            if (String.valueOf(txtNhapLaiMatKhau.getPassword()).trim().isEmpty()){
+                errorInput(txtNhapLaiMatKhau, "Vui lòng nhập nhập lại mật khẩu");
+                return false;
+            }else if (String.valueOf(txtNhapLaiMatKhau.getPassword()).trim().length() > 128){
+                errorInput(txtNhapLaiMatKhau, "Mật khẩu không quá 128 kí tự");
+                return false;
+            }else if (!String.valueOf(txtMatKhau.getPassword()).trim()
+                    .equals(String.valueOf(txtNhapLaiMatKhau.getPassword()).trim())){
+                errorInput(txtNhapLaiMatKhau, "Mật khẩu không trùng khớp");
+                return false;
+            }
         }
-
 
         return true;
     }
@@ -506,6 +514,8 @@ public class NhanVienDialog extends JDialog {
             @Override
             public void keyPressed(KeyEvent e) {
                 unErrorInput(txtMatKhau);
+                if (String.valueOf(txtMatKhau.getPassword()).length() > 0)
+                    isChinhSua = false;
             }
 
             @Override
@@ -589,12 +599,14 @@ public class NhanVienDialog extends JDialog {
                         txtMoTa.getText().trim()
                 );
 
-                taiKhoan = new TaiKhoan(
-                        txtTenTaiKhoan.getText().trim(),
-                        txtMatKhau.getText().trim(),
-                        cbLoaiTaiKhoan.getSelectedItem().equals("ADMIN") ? 1 : 0,
-                        txtMaNV.getText().trim()
-                );
+                if (!isChinhSua){
+                    taiKhoan = new TaiKhoan(
+                            txtTenTaiKhoan.getText().trim(),
+                            txtMatKhau.getText().trim(),
+                            cbLoaiTaiKhoan.getSelectedItem().equals("ADMIN") ? 1 : 0,
+                            txtMaNV.getText().trim()
+                    );
+                }else taiKhoan = null;
 
                 dispose();
             }
@@ -614,10 +626,10 @@ public class NhanVienDialog extends JDialog {
 
         if (nhanVien == null){
             tieuDe = "Thêm Nhân viên";
-            isEdit = false;
+            isChinhSua = false;
         }else{
             tieuDe = "Sửa thông tin nhân viên";
-            isEdit = true;
+            isChinhSua = true;
         }
 
         prepareDialog();

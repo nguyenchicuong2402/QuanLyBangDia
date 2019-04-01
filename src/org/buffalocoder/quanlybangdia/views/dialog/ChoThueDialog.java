@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 public class ChoThueDialog extends JDialog {
     private HoaDon hoaDon;
     private String tieuDe;
-    private boolean isEdit;
+    private boolean isChinhSua;
     private DanhSachKhachHang danhSachKhachHang;
     private DanhSachBangDia danhSachBangDia;
     private HoaDonDAO hoaDonDAO;
@@ -99,7 +99,7 @@ public class ChoThueDialog extends JDialog {
         txtMaHoaDon = new JTextField(getMaHoaDonMoi());
         MaterialDesign.materialTextField(txtMaHoaDon);
         txtMaHoaDon.setEditable(false);
-        if (isEdit) txtMaHoaDon.setText(hoaDon.getMaHoaDon());
+        if (isChinhSua) txtMaHoaDon.setText(hoaDon.getMaHoaDon());
         bx1.add(txtMaHoaDon);
         bx1.add(Box.createHorizontalStrut(20));
 
@@ -113,7 +113,7 @@ public class ChoThueDialog extends JDialog {
         MaterialDesign.materialComboBox(cbMaKhachHang);
         for (KhachHang khachHang : danhSachKhachHang.getAll())
             cbMaKhachHang.addItem(String.format("[%s] %s", khachHang.getMaKH(), khachHang.getHoTen()));
-        if (isEdit)
+        if (isChinhSua)
             cbMaKhachHang.setSelectedItem(String.format("[%s] %s",
                     hoaDon.getKhachHang().getMaKH(),
                     hoaDon.getKhachHang().getHoTen()));
@@ -130,7 +130,7 @@ public class ChoThueDialog extends JDialog {
         MaterialDesign.materialComboBox(cbMaBangDia);
         for (BangDia bangDia : danhSachBangDia.getAll())
             cbMaBangDia.addItem(String.format("[%s] %s", bangDia.getMaBangDia(), bangDia.getTenBangDia()));
-        if (isEdit)
+        if (isChinhSua)
             cbMaBangDia.setSelectedItem(String.format("[%s] %s",
                     hoaDon.getBangDia().getMaBangDia(), hoaDon.getBangDia().getTenBangDia()));
         bx3.add(cbMaBangDia);
@@ -144,7 +144,7 @@ public class ChoThueDialog extends JDialog {
 
         dateChooser = new JDateChooser(Formats.DATE_FORMAT.toPattern(), "##/##/####", '_');
         MaterialDesign.materialDateChooser(dateChooser);
-        if (isEdit) dateChooser.setDate(hoaDon.getNgayLap());
+        if (isChinhSua) dateChooser.setDate(hoaDon.getNgayLap());
         else dateChooser.setDate(new java.util.Date());
         bx4.add(dateChooser);
         bx4.add(Box.createHorizontalStrut(20));
@@ -157,7 +157,7 @@ public class ChoThueDialog extends JDialog {
 
         txtSoLuong = new JTextField();
         MaterialDesign.materialTextField(txtSoLuong);
-        if (isEdit) txtSoLuong.setText(String.valueOf(hoaDon.getSoLuong()));
+        if (isChinhSua) txtSoLuong.setText(String.valueOf(hoaDon.getSoLuong()));
         txtSoLuong.addKeyListener(txtSoLuong_KeyListener());
         bx5.add(txtSoLuong);
         bx5.add(Box.createHorizontalStrut(20));
@@ -170,7 +170,7 @@ public class ChoThueDialog extends JDialog {
 
         txtSoNgayDuocMuon = new JTextField();
         MaterialDesign.materialTextField(txtSoNgayDuocMuon);
-        if (isEdit) txtSoNgayDuocMuon.setText(String.valueOf(hoaDon.getSoNgayDuocMuon()));
+        if (isChinhSua) txtSoNgayDuocMuon.setText(String.valueOf(hoaDon.getSoNgayDuocMuon()));
         txtSoNgayDuocMuon.addKeyListener(txtSoNgayDuocMuon_KeyListener());
         bx6.add(txtSoNgayDuocMuon);
         bx6.add(Box.createHorizontalStrut(20));
@@ -193,7 +193,7 @@ public class ChoThueDialog extends JDialog {
         btnThoat.addActionListener(btnThoat_Click());
         bottomPanel.add(btnThoat);
 
-        btnLuu = new JButton(isEdit ? "Lưu" : "Thêm");
+        btnLuu = new JButton(isChinhSua ? "Lưu" : "Thêm");
         MaterialDesign.materialButton(btnLuu);
         btnLuu.addActionListener(btnLuu_Click());
         bottomPanel.add(btnLuu);
@@ -363,10 +363,10 @@ public class ChoThueDialog extends JDialog {
 
         if (hoaDon == null){
             this.tieuDe = "Cho thuê";
-            isEdit = false;
+            isChinhSua = false;
         }else{
             this.tieuDe = "Cập nhật thông tin cho thuê";
-            isEdit = true;
+            isChinhSua = true;
         }
 
         prepareDialog();

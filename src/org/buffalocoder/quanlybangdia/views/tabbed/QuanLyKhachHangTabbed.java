@@ -15,6 +15,7 @@ import java.awt.event.*;
 
 public class QuanLyKhachHangTabbed extends JPanel {
     private DanhSachKhachHang danhSachKhachHang;
+    private ThongBaoDialog thongBaoDialog;
 
     private JTable tblKhachHang;
     private JPanel topPanel, funcPanel, searchPanel;
@@ -102,7 +103,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
         try {
             danhSachKhachHang = new DanhSachKhachHang();
         } catch (Exception e) {
-            e.printStackTrace();
+            thongBaoLoi(e.getMessage());
         }
 
         prepareUI();
@@ -112,7 +113,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
         try {
             danhSachKhachHang.loadData();
         } catch (Exception e) {
-            e.printStackTrace();
+            thongBaoLoi(e.getMessage());
         }
 
         khachHangTableModel.setModel(danhSachKhachHang.getAll());
@@ -123,11 +124,21 @@ public class QuanLyKhachHangTabbed extends JPanel {
     }
 
     private void thongBao(String message){
-        JOptionPane.showMessageDialog(rootComponent, message, "Thông báo", JOptionPane.WARNING_MESSAGE);
+        thongBaoDialog = new ThongBaoDialog(
+                new JFrame(),
+                "Thông báo",
+                message,
+                ThongBaoDialog.OK_OPTION
+        );
     }
 
     private void thongBaoLoi(String message){
-        JOptionPane.showMessageDialog(rootComponent, message, "Lỗi", JOptionPane.ERROR_MESSAGE);
+        thongBaoDialog = new ThongBaoDialog(
+                new JFrame(),
+                "Lỗi",
+                message,
+                ThongBaoDialog.OK_OPTION
+        );
     }
 
     private ActionListener btnThem_Click(){

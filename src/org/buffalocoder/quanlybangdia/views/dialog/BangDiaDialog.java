@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 public class BangDiaDialog extends JDialog{
     private String tieuDe;
     private BangDia bangDia;
-    private boolean isEdit;
+    private boolean isChinhSua;
     private BangDiaDAO bangDiaDAO;
 
     private JPanel mainPanel, contentPanel, headerPanel, bottomPanel;
@@ -49,6 +49,7 @@ public class BangDiaDialog extends JDialog{
         contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         contentPanel.setBackground(MaterialDesign.COLOR_BACKGROUND);
+        MaterialDesign.materialPanel(contentPanel);
         mainPanel.add(contentPanel, BorderLayout.CENTER);
 
         Box box = Box.createVerticalBox();
@@ -100,7 +101,7 @@ public class BangDiaDialog extends JDialog{
         txtMaBangDia = new JTextField(getMaBangDiaMoi());
         MaterialDesign.materialTextField(txtMaBangDia);
         txtMaBangDia.setEditable(false);
-        if (isEdit) txtMaBangDia.setText(bangDia.getMaBangDia());
+        if (isChinhSua) txtMaBangDia.setText(bangDia.getMaBangDia());
         bx1.add(txtMaBangDia);
         bx1.add(Box.createHorizontalStrut(20));
 
@@ -112,7 +113,7 @@ public class BangDiaDialog extends JDialog{
 
         txtTenBangDia = new JTextField();
         MaterialDesign.materialTextField(txtTenBangDia);
-        if (isEdit) txtTenBangDia.setText(bangDia.getTenBangDia());
+        if (isChinhSua) txtTenBangDia.setText(bangDia.getTenBangDia());
         txtTenBangDia.addKeyListener(txtTenBangDia_KeyListener());
         bx2.add(txtTenBangDia);
         bx2.add(Box.createHorizontalStrut(20));
@@ -125,7 +126,7 @@ public class BangDiaDialog extends JDialog{
 
         txtTheLoai = new JTextField();
         MaterialDesign.materialTextField(txtTheLoai);
-        if (isEdit) txtTheLoai.setText(bangDia.getTheLoai());
+        if (isChinhSua) txtTheLoai.setText(bangDia.getTheLoai());
         txtTheLoai.addKeyListener(txtTheLoai_KeyListener());
         bx3.add(txtTheLoai);
         bx3.add(Box.createHorizontalStrut(20));
@@ -137,7 +138,8 @@ public class BangDiaDialog extends JDialog{
         bx4.add(lblTinhTrang);
 
         cbTinhTrang = new JComboBox<>(new String[]{"Mới", "Hư hỏng"});
-        if (isEdit) cbTinhTrang.setSelectedItem(bangDia.isTinhTrang() ? "Mới" : "Hư hỏng");
+        MaterialDesign.materialComboBox(cbTinhTrang);
+        if (isChinhSua) cbTinhTrang.setSelectedItem(bangDia.isTinhTrang() ? "Mới" : "Hư hỏng");
         bx4.add(cbTinhTrang);
         bx4.add(Box.createHorizontalStrut(20));
 
@@ -149,7 +151,7 @@ public class BangDiaDialog extends JDialog{
 
         txtHangSanXuat = new JTextField();
         MaterialDesign.materialTextField(txtHangSanXuat);
-        if (isEdit) txtHangSanXuat.setText(bangDia.getHangSanXuat());
+        if (isChinhSua) txtHangSanXuat.setText(bangDia.getHangSanXuat());
         txtHangSanXuat.addKeyListener(txtHangSanXuat_KeyListener());
         bx5.add(txtHangSanXuat);
         bx5.add(Box.createHorizontalStrut(20));
@@ -162,7 +164,7 @@ public class BangDiaDialog extends JDialog{
 
         txtDonGia = new JTextField();
         MaterialDesign.materialTextField(txtDonGia);
-        if (isEdit) txtDonGia.setText(bangDia.getDonGia().toString());
+        if (isChinhSua) txtDonGia.setText(bangDia.getDonGia().toString());
         txtDonGia.addKeyListener(txtDonGia_KeyListener());
         bx6.add(txtDonGia);
         bx6.add(Box.createHorizontalStrut(20));
@@ -175,7 +177,7 @@ public class BangDiaDialog extends JDialog{
 
         txtSoLuong = new JTextField();
         MaterialDesign.materialTextField(txtSoLuong);
-        if (isEdit) txtSoLuong.setText(String.valueOf(bangDia.getSoLuongTon()));
+        if (isChinhSua) txtSoLuong.setText(String.valueOf(bangDia.getSoLuongTon()));
         txtSoLuong.addKeyListener(txtSoLuong_KeyListener());
         bx7.add(txtSoLuong);
         bx7.add(Box.createHorizontalStrut(20));
@@ -187,7 +189,7 @@ public class BangDiaDialog extends JDialog{
         bx8.add(lblGhiChu);
 
         txtGhiChu = new JTextArea(5, 20);
-        if (isEdit) txtGhiChu.setText(bangDia.getGhiChu());
+        if (isChinhSua) txtGhiChu.setText(bangDia.getGhiChu());
         MaterialDesign.materialTextArea(txtGhiChu);
         bx8.add(txtGhiChu);
         bx8.add(Box.createHorizontalStrut(20));
@@ -209,7 +211,7 @@ public class BangDiaDialog extends JDialog{
         btnThoat.setBackground(MaterialDesign.COLOR_ERROR);
         bottomPanel.add(btnThoat);
 
-        btnLuu = new JButton(isEdit ? "Lưu" : "Thêm");
+        btnLuu = new JButton(isChinhSua ? "Lưu" : "Thêm");
         MaterialDesign.materialButton(btnLuu);
         btnLuu.addActionListener(btnLuu_Click());
         bottomPanel.add(btnLuu);
@@ -448,10 +450,10 @@ public class BangDiaDialog extends JDialog{
 
         if (bangDia == null){
             tieuDe = "Thêm băng đĩa";
-            isEdit = false;
+            isChinhSua = false;
         }else{
             tieuDe = "Sửa thông tin băng đĩa";
-            isEdit = true;
+            isChinhSua = true;
         }
 
         prepareDialog();

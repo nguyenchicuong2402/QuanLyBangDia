@@ -11,6 +11,8 @@ public class HoaDonDAO {
     private static HoaDonDAO _instance;
     private static DataBaseUtils dataBaseUtils;
     private static BangDiaDAO bangDiaDAO;
+    private ResultSet resultSet;
+    private PreparedStatement preparedStatement;
 
     private HoaDonDAO() throws Exception {
         dataBaseUtils = DataBaseUtils.getInstance();
@@ -30,11 +32,10 @@ public class HoaDonDAO {
 
     public ArrayList<HoaDon> getHoaDons() throws Exception {
         ArrayList<HoaDon> hoaDons = new ArrayList<HoaDon>();
-
         String sql = "SELECT * FROM VIEW_HOADON";
 
         try {
-            ResultSet resultSet = dataBaseUtils.excuteQueryRead(sql);
+            resultSet = dataBaseUtils.excuteQueryRead(sql);
 
             while(resultSet.next()) {
                 HoaDon hoaDon = new HoaDon(
@@ -48,24 +49,13 @@ public class HoaDonDAO {
 
                 hoaDons.add(hoaDon);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new Exception("Lỗi lấy danh sách hoá đơn");
+        } finally {
+            resultSet.close();
         }
 
         return hoaDons;
-    }
-
-    public String getMaHoaDonCuoi () throws Exception {
-        String sql = "SELECT TOP 1 MAHD FROM HOADON ORDER BY MAHD DESC";
-
-        try {
-            ResultSet resultSet = dataBaseUtils.excuteQueryRead(sql);
-            resultSet.next();
-
-            return resultSet.getString("MAHD");
-        } catch (SQLException e) {
-            throw new Exception("Đọc dữ liệu hoá đơn lỗi");
-        }
     }
 
     public HoaDon getHoaDon (String maHoaDon) throws Exception {
@@ -73,7 +63,7 @@ public class HoaDonDAO {
         String sql = String.format("SELECT * FROM VIEW_HOADON WHERE MAHD = '%s'", maHoaDon);
 
         try {
-            ResultSet resultSet = dataBaseUtils.excuteQueryRead(sql);
+            resultSet = dataBaseUtils.excuteQueryRead(sql);
             resultSet.next();
 
             hoaDon = new HoaDon(
@@ -86,29 +76,52 @@ public class HoaDonDAO {
             );
         } catch (Exception e) {
             throw new Exception("Lỗi lấy thông tin hoá đơn");
+        } finally {
+            resultSet.close();
         }
 
         return hoaDon;
     }
 
+    public String getMaHoaDonCuoi () throws Exception {
+        String sql = "SELECT TOP 1 MAHD FROM HOADON ORDER BY MAHD DESC";
+        String ketQua;
+
+        try {
+            resultSet = dataBaseUtils.excuteQueryRead(sql);
+            resultSet.next();
+
+            ketQua = resultSet.getString("MAHD");
+        } catch (SQLException e) {
+            throw new Exception("Đọc dữ liệu hoá đơn lỗi");
+        } finally {
+            resultSet.close();
+        }
+
+        return ketQua;
+    }
+
     public HoaDon suaHoaDon(HoaDon hoaDon) throws Exception {
         String sql = "UPDATE CHITIETHOADON SET " +
                     "MABD = ?, SONGAYDUOCMUON = ?, SOLUONG = ? WHERE MAHD = ?";
+
         try {
-            PreparedStatement ps = dataBaseUtils.excuteQueryWrite(sql);
+            preparedStatement = dataBaseUtils.excuteQueryWrite(sql);
 
-            ps.setString(1, hoaDon.getBangDia().getMaBangDia());
-            ps.setInt(2, hoaDon.getSoNgayDuocMuon());
-            ps.setInt(3, hoaDon.getSoLuong());
-            ps.setString(4, hoaDon.getMaHoaDon());
+            preparedStatement.setString(1, hoaDon.getBangDia().getMaBangDia());
+            preparedStatement.setInt(2, hoaDon.getSoNgayDuocMuon());
+            preparedStatement.setInt(3, hoaDon.getSoLuong());
+            preparedStatement.setString(4, hoaDon.getMaHoaDon());
 
-            if (ps.executeUpdate() > 0){
+            if (preparedStatement.executeUpdate() > 0){
                 dataBaseUtils.commitQuery();
                 return getHoaDon(hoaDon.getMaHoaDon());
             }
-        }catch (Exception e){
+        } catch (Exception e){
             dataBaseUtils.rollbackQuery();
             throw new Exception("Lỗi cập nhật thông tin hoá đơn");
+        } finally {
+            preparedStatement.close();
         }
 
         return null;
@@ -117,34 +130,33 @@ public class HoaDonDAO {
     public HoaDon themHoaDon(HoaDon hoaDon) throws Exception {
         String sql = "INSERT INTO HOADON (MAHD, NGAYLAP, MAKH) VALUES (?,?,?)";
         try {
-            PreparedStatement ps = dataBaseUtils.excuteQueryWrite(sql);
+            preparedStatement = dataBaseUtils.excuteQueryWrite(sql);
 
-            ps.setString(1, hoaDon.getMaHoaDon());
-            ps.setDate(2, hoaDon.getNgayLap());
-            ps.setString(3, hoaDon.getKhachHang().getMaKH());
+            preparedStatement.setString(1, hoaDon.getMaHoaDon());
+            preparedStatement.setDate(2, hoaDon.getNgayLap());
+            preparedStatement.setString(3, hoaDon.getKhachHang().getMaKH());
 
-            System.out.println(hoaDon.getNgayLap());
-
-            if (ps.executeUpdate() > 0){
+            if (preparedStatement.executeUpdate() > 0){
                 dataBaseUtils.commitQuery();
                 sql = "INSERT INTO CHITIETHOADON (MAHD, MABD, SONGAYDUOCMUON, SOLUONG) VALUES (?, ?, ?, ?)";
 
-                ps = dataBaseUtils.excuteQueryWrite(sql);
+                preparedStatement = dataBaseUtils.excuteQueryWrite(sql);
 
-                ps.setString(1, hoaDon.getMaHoaDon());
-                ps.setString(2, hoaDon.getBangDia().getMaBangDia());
-                ps.setInt(3, hoaDon.getSoNgayDuocMuon());
-                ps.setInt(4, hoaDon.getSoLuong());
+                preparedStatement.setString(1, hoaDon.getMaHoaDon());
+                preparedStatement.setString(2, hoaDon.getBangDia().getMaBangDia());
+                preparedStatement.setInt(3, hoaDon.getSoNgayDuocMuon());
+                preparedStatement.setInt(4, hoaDon.getSoLuong());
 
-                if (ps.executeUpdate() > 0){
+                if (preparedStatement.executeUpdate() > 0){
                     dataBaseUtils.commitQuery();
                     return getHoaDon(hoaDon.getMaHoaDon());
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e){
             dataBaseUtils.rollbackQuery();
-            e.printStackTrace();
             throw new Exception("Lỗi thêm hoá đơn");
+        } finally {
+            preparedStatement.close();
         }
 
         return null;
@@ -154,25 +166,27 @@ public class HoaDonDAO {
         String sql = "DELETE FROM CHITIETHOADON WHERE MAHD = ?";
 
         try {
-            PreparedStatement ps = dataBaseUtils.excuteQueryWrite(sql);
+            preparedStatement = dataBaseUtils.excuteQueryWrite(sql);
 
-            ps.setString(1, maHoaDon);
+            preparedStatement.setString(1, maHoaDon);
 
-            if (ps.executeUpdate() > 0){
+            if (preparedStatement.executeUpdate() > 0){
                 sql = "DELETE FROM HOADON WHERE MAHD = ?";
 
-                ps = DataBaseUtils.getInstance().excuteQueryWrite(sql);
+                preparedStatement = DataBaseUtils.getInstance().excuteQueryWrite(sql);
 
-                ps.setString(1, maHoaDon);
+                preparedStatement.setString(1, maHoaDon);
 
-                if (ps.executeUpdate() > 0){
+                if (preparedStatement.executeUpdate() > 0){
                     dataBaseUtils.commitQuery();
                     return true;
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e){
             dataBaseUtils.rollbackQuery();
             throw new Exception("Lỗi xoá hoá đơn");
+        } finally {
+            preparedStatement.close();
         }
 
         return false;

@@ -12,14 +12,31 @@ public class KhachHangDAO {
     private static KhachHangDAO _instance;
     private static DataBaseUtils dataBaseUtils;
     private static ThongTinCaNhanDAO thongTinCaNhanDAO;
+    private ResultSet resultSet;
+    private PreparedStatement preparedStatement;
+
+    private KhachHangDAO() throws Exception {
+        dataBaseUtils = DataBaseUtils.getInstance();
+        thongTinCaNhanDAO = ThongTinCaNhanDAO.getInstance();
+    }
+
+    public static KhachHangDAO getInstance() throws Exception {
+        if(_instance == null) {
+            synchronized(KhachHangDAO.class) {
+                if(null == _instance) {
+                    _instance  = new KhachHangDAO();
+                }
+            }
+        }
+        return _instance;
+    }
 
     public KhachHang getKhachHang(String maKhachHang) throws Exception {
         KhachHang khachHang = null;
-
         String sql = String.format("SELECT * FROM VIEW_THONGTINKHACHHANG WHERE MAKH = '%s'", maKhachHang);
 
         try {
-            ResultSet resultSet = dataBaseUtils.excuteQueryRead(sql);
+            resultSet = dataBaseUtils.excuteQueryRead(sql);
             resultSet.next();
 
             khachHang = new KhachHang(
@@ -33,8 +50,10 @@ public class KhachHangDAO {
                     resultSet.getDate("NGAYHETHAN")
             );
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new Exception("Lỗi lấy thông tin khách hàng");
+        } finally {
+            resultSet.close();
         }
 
         return khachHang;
@@ -42,11 +61,10 @@ public class KhachHangDAO {
 
     public ArrayList<KhachHang> getKhachHangs() throws Exception {
         ArrayList<KhachHang> khachHangs = new ArrayList<>();
-
         String sql = String.format("SELECT * FROM VIEW_THONGTINKHACHHANG");
 
         try {
-            ResultSet resultSet = dataBaseUtils.excuteQueryRead(sql);
+            resultSet = dataBaseUtils.excuteQueryRead(sql);
 
             while (resultSet.next()){
                 KhachHang khachHang = new KhachHang(
@@ -62,11 +80,28 @@ public class KhachHangDAO {
 
                 khachHangs.add(khachHang);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new Exception("Lỗi lấy danh sách khách hàng");
+        } finally {
+            resultSet.close();
         }
 
         return khachHangs;
+    }
+
+    public String getMaKhachHangCuoi() throws Exception {
+        String sql = "SELECT TOP 1 MAKH FROM KHACHHANG ORDER BY MAKH DESC";
+
+        try {
+            resultSet = dataBaseUtils.excuteQueryRead(sql);
+            resultSet.next();
+
+            return resultSet.getString("MAKH");
+        } catch (Exception e) {
+            throw new Exception("Đọc dữ liệu khách hàng lỗi");
+        } finally {
+            resultSet.close();
+        }
     }
 
     public KhachHang themKhachHang(KhachHang khachHang) throws Exception {
@@ -84,19 +119,21 @@ public class KhachHangDAO {
 
         String sql = "INSERT INTO KHACHHANG (MAKH, CMND) VALUES (?,?)";
         try {
-            PreparedStatement ps = dataBaseUtils.excuteQueryWrite(sql);
+            preparedStatement = dataBaseUtils.excuteQueryWrite(sql);
 
-            ps.setString(1, khachHang.getMaKH());
-            ps.setString(2, khachHang.getcMND());
+            preparedStatement.setString(1, khachHang.getMaKH());
+            preparedStatement.setString(2, khachHang.getcMND());
 
-            if (ps.executeUpdate()>0){
+            if (preparedStatement.executeUpdate()>0){
                 dataBaseUtils.commitQuery();
                 return getKhachHang(khachHang.getMaKH());
             }
 
-        }catch (Exception e){
+        } catch (Exception e){
             dataBaseUtils.rollbackQuery();
             throw new Exception("Lỗi thêm khách hàng");
+        } finally {
+            preparedStatement.close();
         }
 
         return null;
@@ -107,17 +144,19 @@ public class KhachHangDAO {
         String sql = "DELETE FROM KHACHHANG WHERE MAKH = ?";
 
         try {
-            PreparedStatement ps = dataBaseUtils.excuteQueryWrite(sql);
+            preparedStatement = dataBaseUtils.excuteQueryWrite(sql);
 
-            ps.setString(1, maKhachHang);
+            preparedStatement.setString(1, maKhachHang);
 
-            if (ps.executeUpdate() > 0){
+            if (preparedStatement.executeUpdate() > 0){
                 dataBaseUtils.commitQuery();
                 return thongTinCaNhanDAO.xoaThongTinCaNhan(cmnd);
             }
-        }catch (Exception e){
+        } catch (Exception e){
             dataBaseUtils.rollbackQuery();
             throw new Exception("Lỗi xoá khách hàng");
+        } finally {
+            preparedStatement.close();
         }
 
         return false;
@@ -137,34 +176,5 @@ public class KhachHangDAO {
             return null;
 
         return getKhachHang(khachHang.getMaKH());
-    }
-
-    public String getMaKhachHangCuoi() throws Exception {
-        String sql = "SELECT TOP 1 MAKH FROM KHACHHANG ORDER BY MAKH DESC";
-
-        try {
-            ResultSet resultSet = dataBaseUtils.excuteQueryRead(sql);
-            resultSet.next();
-
-            return resultSet.getString("MAKH");
-        } catch (SQLException e) {
-            throw new Exception("Đọc dữ liệu khách hàng lỗi");
-        }
-    }
-
-    private KhachHangDAO() throws Exception {
-        dataBaseUtils = DataBaseUtils.getInstance();
-        thongTinCaNhanDAO = ThongTinCaNhanDAO.getInstance();
-    }
-
-    public static KhachHangDAO getInstance() throws Exception {
-        if(_instance == null) {
-            synchronized(KhachHangDAO.class) {
-                if(null == _instance) {
-                    _instance  = new KhachHangDAO();
-                }
-            }
-        }
-        return _instance;
     }
 }

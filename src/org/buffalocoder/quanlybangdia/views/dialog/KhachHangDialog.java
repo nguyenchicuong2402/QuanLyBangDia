@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 public class KhachHangDialog extends JDialog {
     private String tieuDe;
     private KhachHang khachHang;
-    private boolean isEdit;
+    private boolean isChinhSua;
     private KhachHangDAO khachHangDAO;
 
     private JPanel mainPanel, contentPanel, headerPanel, bottomPanel;
@@ -41,6 +41,7 @@ public class KhachHangDialog extends JDialog {
         // HEADER PANEL
         headerPanel = new JPanel(new BorderLayout());
         headerPanel.setPreferredSize(new Dimension(mainPanel.getWidth(), 60));
+        MaterialDesign.materialPanel(headerPanel);
         headerPanel.setBackground(MaterialDesign.COLOR_PRIMARY);
         mainPanel.add(headerPanel, BorderLayout.NORTH);
 
@@ -54,6 +55,7 @@ public class KhachHangDialog extends JDialog {
         // CONTENT PANEL
         contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+        MaterialDesign.materialPanel(contentPanel);
         contentPanel.setBackground(MaterialDesign.COLOR_BACKGROUND);
         mainPanel.add(contentPanel, BorderLayout.CENTER);
 
@@ -102,7 +104,7 @@ public class KhachHangDialog extends JDialog {
         txtMaKH = new JTextField(getMaKhachHangMoi());
         MaterialDesign.materialTextField(txtMaKH);
         txtMaKH.setEditable(false);
-        if (isEdit) txtMaKH.setText(khachHang.getMaKH());
+        if (isChinhSua) txtMaKH.setText(khachHang.getMaKH());
         bx1.add(txtMaKH);
         bx1.add(Box.createHorizontalStrut(20));
 
@@ -115,7 +117,7 @@ public class KhachHangDialog extends JDialog {
         txtHoTen = new JTextField();
         txtHoTen.requestFocus();
         MaterialDesign.materialTextField(txtHoTen);
-        if (isEdit) txtHoTen.setText(khachHang.getHoTen());
+        if (isChinhSua) txtHoTen.setText(khachHang.getHoTen());
         txtHoTen.addKeyListener(txtHoTen_KeyListener());
         bx2.add(txtHoTen);
         bx2.add(Box.createHorizontalStrut(20));
@@ -128,7 +130,7 @@ public class KhachHangDialog extends JDialog {
 
         txtCMND = new JTextField();
         MaterialDesign.materialTextField(txtCMND);
-        if (isEdit) {
+        if (isChinhSua) {
             txtCMND.setText(khachHang.getcMND());
             txtCMND.setEditable(false);
         }
@@ -143,7 +145,8 @@ public class KhachHangDialog extends JDialog {
         bx4.add(lblGioiTinh);
 
         cbGioiTinh = new JComboBox<>(new String[]{"Nam", "Nữ"});
-        if (isEdit) cbGioiTinh.setSelectedItem(khachHang.isGioiTinh() ? "Nam" : "Nữ");
+        MaterialDesign.materialComboBox(cbGioiTinh);
+        if (isChinhSua) cbGioiTinh.setSelectedItem(khachHang.isGioiTinh() ? "Nam" : "Nữ");
         bx4.add(cbGioiTinh);
         bx4.add(Box.createHorizontalStrut(20));
 
@@ -155,7 +158,7 @@ public class KhachHangDialog extends JDialog {
 
         dateChooser = new JDateChooser(Formats.DATE_FORMAT.toPattern(), "##/##/####", '_');
         MaterialDesign.materialDateChooser(dateChooser);
-        if (isEdit) dateChooser.setDate(khachHang.getNgaySinh());
+        if (isChinhSua) dateChooser.setDate(khachHang.getNgaySinh());
         else dateChooser.setDate(new java.util.Date());
         bx5.add(dateChooser);
         bx5.add(Box.createHorizontalStrut(20));
@@ -168,7 +171,7 @@ public class KhachHangDialog extends JDialog {
 
         txtSoDienThoai = new JTextField();
         MaterialDesign.materialTextField(txtSoDienThoai);
-        if (isEdit) txtSoDienThoai.setText(khachHang.getSoDienThoai());
+        if (isChinhSua) txtSoDienThoai.setText(khachHang.getSoDienThoai());
         txtSoDienThoai.addKeyListener(txtSoDienThoai_KeyListener());
         bx6.add(txtSoDienThoai);
         bx6.add(Box.createHorizontalStrut(20));
@@ -181,7 +184,7 @@ public class KhachHangDialog extends JDialog {
 
         txtDiaChi = new JTextField();
         MaterialDesign.materialTextField(txtDiaChi);
-        if (isEdit) txtDiaChi.setText(khachHang.getDiaChi());
+        if (isChinhSua) txtDiaChi.setText(khachHang.getDiaChi());
         txtDiaChi.addKeyListener(txtDiaChi_KeyListener());
         bx7.add(txtDiaChi);
         bx7.add(Box.createHorizontalStrut(20));
@@ -196,6 +199,7 @@ public class KhachHangDialog extends JDialog {
         // BOTTOM PANEL
         bottomPanel = new JPanel(new GridLayout(1, 2, 1, 10));
         contentPanel.add(bottomPanel, BorderLayout.SOUTH);
+        MaterialDesign.materialPanel(bottomPanel);
 
         btnThoat = new JButton("Đóng");
         MaterialDesign.materialButton(btnThoat);
@@ -204,7 +208,7 @@ public class KhachHangDialog extends JDialog {
         btnThoat.addActionListener(btnThoat_Click());
         bottomPanel.add(btnThoat);
 
-        btnLuu = new JButton(isEdit ? "Lưu" : "Thêm");
+        btnLuu = new JButton(isChinhSua ? "Lưu" : "Thêm");
         MaterialDesign.materialButton(btnLuu);
         btnLuu.addActionListener(btnLuu_Click());
         bottomPanel.add(btnLuu);
@@ -410,10 +414,10 @@ public class KhachHangDialog extends JDialog {
 
         if (khachHang == null){
             tieuDe = "Thêm khách hàng";
-            isEdit = false;
+            isChinhSua = false;
         }else{
             tieuDe = "Sửa thông tin khách hàng";
-            isEdit = true;
+            isChinhSua = true;
         }
 
         prepareDialog();

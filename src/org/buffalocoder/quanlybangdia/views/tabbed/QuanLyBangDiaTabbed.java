@@ -17,6 +17,7 @@ import java.awt.event.*;
 public class QuanLyBangDiaTabbed extends JPanel {
     private final boolean IS_ADMIN = DangNhap.taiKhoan.getLoaiTaiKhoan() == 1;
     private DanhSachBangDia danhSachBangDia;
+    private ThongBaoDialog thongBaoDialog;
 
     private JTable tblBangDia;
     private JPanel topPanel, funcPanel, searchPanel;
@@ -26,7 +27,6 @@ public class QuanLyBangDiaTabbed extends JPanel {
     private TableRowSorter<TableModel> sorter;
     private final Component rootComponent = this;
     private JScrollPane scrollPane;
-
 
     private void prepareUI(){
         this.setLayout(new BorderLayout());
@@ -108,7 +108,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
         try {
             danhSachBangDia = new DanhSachBangDia();
         } catch (Exception e) {
-            e.printStackTrace();
+            thongBaoLoi(e.getMessage());
         }
 
         prepareUI();
@@ -118,7 +118,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
         try {
             danhSachBangDia.loadData();
         } catch (Exception e) {
-            e.printStackTrace();
+            thongBaoLoi(e.getMessage());
         }
 
         bangDiaTableModel.setModel(danhSachBangDia.getAll());
@@ -129,11 +129,21 @@ public class QuanLyBangDiaTabbed extends JPanel {
     }
 
     private void thongBao(String message){
-        JOptionPane.showMessageDialog(rootComponent, message, "Thông báo", JOptionPane.WARNING_MESSAGE);
+        thongBaoDialog = new ThongBaoDialog(
+                new JFrame(),
+                "Thông báo",
+                message,
+                ThongBaoDialog.OK_OPTION
+        );
     }
 
     private void thongBaoLoi(String message){
-        JOptionPane.showMessageDialog(rootComponent, message, "Lỗi", JOptionPane.ERROR_MESSAGE);
+        thongBaoDialog = new ThongBaoDialog(
+                new JFrame(),
+                "Lỗi",
+                message,
+                ThongBaoDialog.OK_OPTION
+        );
     }
 
     private ActionListener btnThem_Click(){
