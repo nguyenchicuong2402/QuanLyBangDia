@@ -230,6 +230,8 @@ public class BangDiaDialog extends JDialog{
     }
 
     private boolean validateData(){
+        Pattern pattern = null;
+
         // Kiểm tra tên băng đĩa
         if (txtTenBangDia.getText().isEmpty()){
             errorInput(txtTenBangDia, "Vui lòng nhập tên băng đĩa");
@@ -257,17 +259,23 @@ public class BangDiaDialog extends JDialog{
             return false;
         }
 
-        //  TODO kiểm tra đơn giá bằng regex
         // Kiểm tra đơn giá
+        pattern = Pattern.compile(PatternRegexs.REGEX_SO);
         if (txtDonGia.getText().trim().isEmpty()){
             errorInput(txtDonGia, "Vui lòng nhập đơn giá");
             return false;
+        }else if (!pattern.matcher(txtDonGia.getText().trim()).matches()){
+            errorInput(txtDonGia, "Đơn giá phải là số");
+            return false;
         }
 
-        // TODO kiểm tra số lượng bằng regex
         // kiểm tra số lượng
+        pattern = Pattern.compile(PatternRegexs.REGEX_SOTHUC);
         if (txtSoLuong.getText().trim().isEmpty()){
             errorInput(txtSoLuong, "Vui lòng nhập số lượng");
+            return false;
+        }else if (!pattern.matcher(txtSoLuong.getText().trim()).matches()){
+            errorInput(txtSoLuong, "Số lượng phải là số");
             return false;
         }
 

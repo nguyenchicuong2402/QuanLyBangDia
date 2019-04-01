@@ -215,7 +215,7 @@ public class ChoThueDialog extends JDialog {
     private boolean validateData(){
         Pattern pattern = null;
 
-        pattern = pattern.compile(PatternRegexs.REGEX_SOLUONGHOADON);
+        pattern = pattern.compile(PatternRegexs.REGEX_SO);
         if (txtSoLuong.getText().trim().isEmpty()){
             errorInput(txtSoLuong, "Vui lòng nhập số lượng");
             return false;
@@ -224,7 +224,7 @@ public class ChoThueDialog extends JDialog {
             return false;
         }
 
-        pattern = Pattern.compile(PatternRegexs.REGEX_NGAYMUON);
+        pattern = Pattern.compile(PatternRegexs.REGEX_SO);
         if (txtSoNgayDuocMuon.getText().trim().isEmpty()){
             errorInput(txtSoNgayDuocMuon, "Vui lòng nhập số số ngày mượn");
             return false;

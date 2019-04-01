@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Propertise>
+    <Account>
+        <username>admin</username>
+        <password>123456</password>
+        <remember>1</remember>
+    </Account>
+    <Setting>
+        <Color>blue</Color>
+    </Setting>
+</Propertise>
