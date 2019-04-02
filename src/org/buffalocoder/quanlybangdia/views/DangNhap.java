@@ -153,7 +153,7 @@ public class DangNhap extends JFrame {
     }
 
     private void khoiPhucTaiKhoan(){
-        if(ql.getTrangThai() != 0)
+        if(ql.getRemember() != 0)
         {
             cbGhiNho.setSelected(true);
             txtTenNguoiDung.setText(ql.getTextContentTK());
@@ -190,7 +190,7 @@ public class DangNhap extends JFrame {
     private void ghiNhoTaiKhoan(){
         if (cbGhiNho.isSelected()) {
             try {
-                ql.setTrangThai(1);
+                ql.setRemember(1);
                 ql.ghiNhoAccount(txtTenNguoiDung.getText(), txtMatKhau.getText());
             } catch (TransformerException e1) {
                 e1.printStackTrace();
@@ -200,7 +200,7 @@ public class DangNhap extends JFrame {
         }
         else {
             try {
-                ql.setTrangThai(0);
+                ql.setRemember(0);
                 ql.xoaXML();
             } catch (TransformerException e1) {
                 e1.printStackTrace();

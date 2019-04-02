@@ -1,11 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Propertise>
-    <Account>
-        <username>admin</username>
-        <password>123456</password>
-        <remember>1</remember>
-    </Account>
-    <Setting>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Setting>
         <Color>blue</Color>
-    </Setting>
-</Propertise>
+        <remember>1</remember>
+        
+        
+<password>123456</password><username>admin</username></Setting>

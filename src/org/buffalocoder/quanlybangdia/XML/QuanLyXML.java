@@ -11,8 +11,10 @@ import java.io.IOException;
 
 public class QuanLyXML {
 
-    private Document document = DocGhiFileXML.docFileXML("Account.xml");
+//    Đọc file properties và file themes
+    private Document document = DocGhiFileXML.docFileXML("properties.xml");
     private Document docColors = DocGhiFileXML.docFileXML("themes.xml");
+//    Lấy Element
     private DocGhiFileXML dg = new DocGhiFileXML();
     private NodeList dsColors = docColors.getElementsByTagName("Template");
     private NodeList dsPrimary = docColors.getElementsByTagName("primary");
@@ -23,7 +25,7 @@ public class QuanLyXML {
 
     }
     public void hienThiDSXML(){
-        NodeList dstk = document.getElementsByTagName("taikhoan");
+        NodeList dstk = document.getElementsByTagName("username");
         NodeList dspw = document.getElementsByTagName("password");
         for (int i = 0; i < dstk.getLength(); i++)
         {
@@ -35,36 +37,36 @@ public class QuanLyXML {
     }
     public void themXML(String taikhoan, String password) throws TransformerException, IOException {
         try {
-            dg.docFileXML("Account.xml");
+            dg.docFileXML("properties.xml");
         }catch (Exception e){
 
         }
-        Element tk = document.createElement("taikhoan");
+        Element tk = document.createElement("username");
         tk.setTextContent(taikhoan);
         Element pass = document.createElement("password");
         pass.setTextContent(password);
-
+//        Lấy phần tử root của NodeList
         Element goc = document.getDocumentElement();
-        goc.insertBefore(pass, goc.getElementsByTagName("taikhoan").item(0));
-        goc.insertBefore(tk, goc.getElementsByTagName("taikhoan").item(0));
-        dg.ghiXML(document);
-        hienThiDSXML();
+        goc.insertBefore(pass, goc.getElementsByTagName("username").item(0));
+        goc.insertBefore(tk, goc.getElementsByTagName("username").item(0));
+        dg.ghiXML(document, "properties.xml");
     }
     public  void xoaXML() throws TransformerException, IOException {
         try {
-            dg.docFileXML("Account.xml");
+            dg.docFileXML("properties.xml");
         }catch (Exception e){
 
         }
-        NodeList dstk = document.getElementsByTagName("taikhoan");
+        NodeList dstk = document.getElementsByTagName("username");
         NodeList dspw = document.getElementsByTagName("password");
         for (int i = 0; i<dstk.getLength(); i++){
             Element tk = (Element) dstk.item(i);
             Element pw = (Element) dspw.item(i);
+//            Xóa node con trên nodelist
             document.getDocumentElement().removeChild(tk);
             document.getDocumentElement().removeChild(pw);
         }
-        dg.ghiXML(document);
+        dg.ghiXML(document, "properties.xml");
     }
     public int timMau(String id){
         dg.docFileXML("themes.xml");
@@ -73,6 +75,12 @@ public class QuanLyXML {
                 return i;
         }
         return -1;
+    }
+    public String getColorSelected(String id){
+        if(timMau(id)!=-1)
+            return String.valueOf(dsColors.item(0).getTextContent());
+        else
+            return null;
     }
     public String getPrimaryColor(String id){
         if(timMau(id)!=-1)
@@ -115,16 +123,15 @@ public class QuanLyXML {
         themXML(tk, pass);
     }
     public String getTextContentTK(){
-        return document.getElementsByTagName("taikhoan").item(0).getTextContent();
+        return document.getElementsByTagName("username").item(0).getTextContent();
     }
     public String getTextContentPW(){
         return document.getElementsByTagName("password").item(0).getTextContent();
     }
-    public int getTrangThai(){
-        return Integer.parseInt(document.getElementsByTagName("trangthai").item(0).getTextContent());
+    public int getRemember(){
+        return Integer.parseInt(document.getElementsByTagName("remember").item(0).getTextContent());
     }
-    public void setTrangThai(int i){
-        document.getElementsByTagName("trangthai").item(0).setTextContent(String.valueOf(i));
+    public void setRemember(int i){
+        document.getElementsByTagName("remember").item(0).setTextContent(String.valueOf(i));
     }
-
 }

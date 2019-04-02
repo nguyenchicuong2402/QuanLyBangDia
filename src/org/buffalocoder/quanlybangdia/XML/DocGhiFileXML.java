@@ -29,13 +29,11 @@ public class DocGhiFileXML {
         }
         return document;
     }
-    public void ghiXML(Document doc) throws TransformerException, IOException {
-        File f = new File("src/Account.xml");
+    public void ghiXML(Document doc, String file) throws TransformerException, IOException {
+        File f = new File("src/"+file);
         DOMSource ds = new DOMSource((Node)doc);
         TransformerFactory factory = TransformerFactory.newInstance();
         Transformer transformer = factory.newTransformer();
-//        transformer.setOutputProperties("{http://xml.apache.org/xslt}indent-amount", "4");
-//        transformer.setOutputProperties(OutputKeys.INDENT, "yes");
         FileWriter fileWriter = new FileWriter(f);
         StreamResult sr = new StreamResult(fileWriter);
         Source dOMSource;
