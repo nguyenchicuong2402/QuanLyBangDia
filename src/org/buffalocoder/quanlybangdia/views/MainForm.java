@@ -1,8 +1,13 @@
 package org.buffalocoder.quanlybangdia.views;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -25,13 +30,13 @@ public class MainForm extends JFrame {
     private final boolean IS_ADMIN = DangNhap.taiKhoan.getLoaiTaiKhoan() == 1;
 
     //========= UI ===========//
-    private JPanel mainPanel, topPanel, contentPanel, userPanel, menuPanel, ExitPanel;
+    private JPanel mainPanel, topPanel, contentPanel, userPanel, menuPanel, logoutPanel;
     private JTabbedPane menuTabbed;
-    private JTextField txtSearch;
     private CustomTabbedPanelUI customTabbedPanelUI;
     private JMenuBar menuBar;
-    private JMenu menuFile, menuEdit, menuView;
-    private JLabel lblTitle, lblExit;
+    private JMenu menuCaiDat;
+    private JLabel lblTitle, lblDangXuat;
+    private JButton btnDangXuat;
 
     private TrangChuTabbed trangChuTabbed;
     private QuanLyChoThueTabbed quanLyChoThueTabbed;
@@ -50,18 +55,6 @@ public class MainForm extends JFrame {
         topPanel = new JPanel(new BorderLayout());
         topPanel.setPreferredSize(new Dimension(this.getWidth(), 80));
         mainPanel.add(topPanel, BorderLayout.NORTH);
-        //Exit Panel
-        ExitPanel = new JPanel(null);
-        ExitPanel.setBackground(MaterialDesign.COLOR_DARK);
-        ExitPanel.setPreferredSize(new Dimension(50, 50));
-        topPanel.add(ExitPanel, BorderLayout.EAST);
-//       lblExit
-        lblExit = new JLabel("X");
-        MaterialDesign.materialLabel(lblExit);
-        lblExit.setForeground(Color.red);
-        lblExit.setBounds(9, 10, 30, 30);
-        lblExit.addMouseListener(lblExit());
-        ExitPanel.add(lblExit);
 
         // TITLE
         lblTitle = new JLabel("BUFFALO CODER");
@@ -77,30 +70,37 @@ public class MainForm extends JFrame {
         // menu panel
         menuPanel = new JPanel();
         menuPanel.setBorder(BorderFactory.createEmptyBorder());
-        topPanel.add(menuPanel);
+        MaterialDesign.materialPanel(menuPanel);
+        menuPanel.setBackground(MaterialDesign.COLOR_DARK);
+        topPanel.add(menuPanel, BorderLayout.CENTER);
 
         menuBar = new JMenuBar();
         menuBar.setBackground(MaterialDesign.COLOR_DARK);
+        menuBar.setBorder(BorderFactory.createEmptyBorder());
         topPanel.add(menuBar);
 
-        menuFile = new JMenu("File");
-        menuFile.setForeground(MaterialDesign.COLOR_TEXT);
-        menuFile.setPreferredSize(new Dimension(50, topPanel.getHeight()));
-        menuBar.add(menuFile);
+        menuCaiDat = new JMenu("Cài đặt");
+        menuCaiDat.setForeground(MaterialDesign.COLOR_TEXT);
+        menuCaiDat.setPreferredSize(new Dimension(80, 20));
+        menuCaiDat.setHorizontalTextPosition(SwingConstants.CENTER);
+        menuBar.add(menuCaiDat);
 
-        menuEdit = new JMenu("Edit");
-        menuEdit.setForeground(MaterialDesign.COLOR_TEXT);
-        menuEdit.setPreferredSize(menuFile.getPreferredSize());
-        menuBar.add(menuEdit);
+        // logout panel
+        logoutPanel = new JPanel(new BorderLayout());
+        MaterialDesign.materialPanel(logoutPanel);
+        logoutPanel.setBackground(MaterialDesign.COLOR_DARK);
+        topPanel.add(logoutPanel, BorderLayout.EAST);
 
-        menuView = new JMenu("View");
-        menuView.setForeground(MaterialDesign.COLOR_TEXT);
-        menuView.setPreferredSize(menuFile.getPreferredSize());
-        menuBar.add(menuView);
+        btnDangXuat = new JButton(MaterialDesign.ICON_DANGXUAT);
+        MaterialDesign.materialButton(btnDangXuat);
+        btnDangXuat.setBackground(MaterialDesign.COLOR_DARK);
+        btnDangXuat.setPreferredSize(new Dimension(80, 50));
+        btnDangXuat.addActionListener(btnDangXuat_Click());
+        logoutPanel.add(btnDangXuat, BorderLayout.CENTER);
 
         /*========== MENU PANEL =========*/
         contentPanel = new JPanel(new BorderLayout());
-        contentPanel.setBackground(MaterialDesign.COLOR_DARK);
+        contentPanel.setBackground(MaterialDesign.COLOR_SECONDARY);
         contentPanel.setBorder(BorderFactory.createEmptyBorder());
         mainPanel.add(contentPanel, BorderLayout.CENTER);
 
@@ -110,7 +110,7 @@ public class MainForm extends JFrame {
         customTabbedPanelUI.setHeight(80);
         customTabbedPanelUI.setMargin(10, 0);
         customTabbedPanelUI.setColorSelected(MaterialDesign.COLOR_PRIMARY);
-        customTabbedPanelUI.setColorDeselected(MaterialDesign.COLOR_DARK);
+        customTabbedPanelUI.setColorDeselected(MaterialDesign.COLOR_SECONDARY);
 
         // tabbed panel
         menuTabbed = new JTabbedPane(JTabbedPane.LEFT);
@@ -163,6 +163,16 @@ public class MainForm extends JFrame {
         };
     }
 
+    private ActionListener btnDangXuat_Click(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new DangNhap();
+            }
+        };
+    }
+
     private ChangeListener menuTabbed_Change(){
         return new ChangeListener() {
             @Override
@@ -191,7 +201,6 @@ public class MainForm extends JFrame {
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
                 setLocationRelativeTo(null);
                 setTitle(TITLE);
-//                setUndecorated(true);
                 setVisible(true);
             }
         });

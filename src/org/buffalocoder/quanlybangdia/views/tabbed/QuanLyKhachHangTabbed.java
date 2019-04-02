@@ -41,7 +41,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
         MaterialDesign.materialPanel(funcPanel);
         topPanel.add(funcPanel, BorderLayout.WEST);
 
-        btnThem = new JButton("Thêm");
+        btnThem = new JButton("Thêm", MaterialDesign.ICON_THEM);
         btnThem.setPreferredSize(new Dimension(90, 40));
         MaterialDesign.materialButton(btnThem);
         btnThem.addActionListener(btnThem_Click());
@@ -49,7 +49,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
         btnThem.setMnemonic(KeyEvent.VK_T);
         funcPanel.add(btnThem);
 
-        btnSua = new JButton("Sửa");
+        btnSua = new JButton("Sửa", MaterialDesign.ICON_SUA);
         btnSua.setPreferredSize(btnThem.getPreferredSize());
         MaterialDesign.materialButton(btnSua);
         btnSua.addActionListener(btnSua_Click());
@@ -58,7 +58,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
         btnSua.setEnabled(false);
         funcPanel.add(btnSua);
 
-        btnXoa = new JButton("Xoá");
+        btnXoa = new JButton("Xoá", MaterialDesign.ICON_XOA);
         btnXoa.setPreferredSize(btnThem.getPreferredSize());
         MaterialDesign.materialButton(btnXoa);
         btnXoa.addActionListener(btnXoa_Click());

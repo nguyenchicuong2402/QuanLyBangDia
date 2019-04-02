@@ -45,7 +45,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
         if (IS_ADMIN)
             topPanel.add(funcPanel, BorderLayout.WEST);
 
-        btnThem = new JButton("Thêm");
+        btnThem = new JButton("Thêm", MaterialDesign.ICON_THEM);
         btnThem.setPreferredSize(new Dimension(90, 40));
         btnThem.addActionListener(btnThem_Click());
         btnThem.setToolTipText("[Alt + T] Thêm băng đĩa mới");
@@ -53,7 +53,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
         MaterialDesign.materialButton(btnThem);
         funcPanel.add(btnThem);
 
-        btnSua = new JButton("Sửa");
+        btnSua = new JButton("Sửa", MaterialDesign.ICON_SUA);
         btnSua.setPreferredSize(btnThem.getPreferredSize());
         btnSua.addActionListener(btnSua_Click());
         btnSua.setToolTipText("Vui lòng chọn băng đĩa cần cập nhật thông tin");
@@ -62,7 +62,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
         MaterialDesign.materialButton(btnSua);
         funcPanel.add(btnSua);
 
-        btnXoa = new JButton("Xoá");
+        btnXoa = new JButton("Xoá", MaterialDesign.ICON_XOA);
         btnXoa.setPreferredSize(btnThem.getPreferredSize());
         btnXoa.addActionListener(btnXoa_Click());
         btnXoa.setToolTipText("Vui lòng chọn băng đĩa cần xoá");

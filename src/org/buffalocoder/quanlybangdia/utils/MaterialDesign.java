@@ -34,10 +34,18 @@ public class MaterialDesign {
     public static Border BORDER_ERROR = BorderFactory.createLineBorder(COLOR_ERROR, 3);
     public static Border BORDER_DIALOG = BorderFactory.createLineBorder(COLOR_DARK, 2);
 
+    //========== ICON ==========//
+    public static ImageIcon ICON_DANGXUAT = new ImageIcon(MaterialDesign.class.getResource("../resources/images/baseline_exit_to_app_white_24dp.png"));
+    public static ImageIcon ICON_THEM = new ImageIcon(MaterialDesign.class.getResource("../resources/images/baseline_add_white_18dp.png"));
+    public static ImageIcon ICON_XOA = new ImageIcon(MaterialDesign.class.getResource("../resources/images/baseline_delete_white_18dp.png"));
+    public static ImageIcon ICON_SUA = new ImageIcon(MaterialDesign.class.getResource("../resources/images/baseline_create_white_18dp.png"));
+
+
     public static void materialButton(JButton button){
         button.setBackground(COLOR_PRIMARY);
         button.setForeground(COLOR_TEXT);
         button.setFont(FONT_DEFAULT);
+        button.setFocusPainted(false);
         button.setBorder(BorderFactory.createEmptyBorder());
     }
 

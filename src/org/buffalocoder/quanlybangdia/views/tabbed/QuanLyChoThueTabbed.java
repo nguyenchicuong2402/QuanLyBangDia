@@ -44,10 +44,13 @@ public class QuanLyChoThueTabbed extends JPanel {
         MaterialDesign.materialPanel(funcPanel);
         topPanel.add(funcPanel, BorderLayout.WEST);
 
-        btnThem = new JButton("Thêm");
+        btnThem = new JButton("Thêm", MaterialDesign.ICON_THEM);
         btnThem.setPreferredSize(new Dimension(90, 40));
         btnThem.addActionListener(btnThem_Click());
         btnThem.setEnabled(false);
+        btnThem.setMnemonic(KeyEvent.VK_T);
+        MaterialDesign.materialButton(btnThem);
+        funcPanel.add(btnThem);
 
         if (danhSachKhachHang.getAll().size() <= 0)
             btnThem.setToolTipText("Không có khách hàng trong dữ liệu");
@@ -58,11 +61,7 @@ public class QuanLyChoThueTabbed extends JPanel {
             btnThem.setToolTipText("[Alt + T] Thêm hoá đơn mới");
         }
 
-        btnThem.setMnemonic(KeyEvent.VK_T);
-        MaterialDesign.materialButton(btnThem);
-        funcPanel.add(btnThem);
-
-        btnSua = new JButton("Sửa");
+        btnSua = new JButton("Sửa", MaterialDesign.ICON_SUA);
         btnSua.setPreferredSize(btnThem.getPreferredSize());
         btnSua.addActionListener(btnSua_Click());
         btnSua.setToolTipText("Vui lòng chọn hoá đơn cần cập nhật thông tin");
@@ -71,7 +70,7 @@ public class QuanLyChoThueTabbed extends JPanel {
         btnSua.setEnabled(false);
         funcPanel.add(btnSua);
 
-        btnXoa = new JButton("Xoá");
+        btnXoa = new JButton("Xoá", MaterialDesign.ICON_XOA);
         btnXoa.setPreferredSize(btnThem.getPreferredSize());
         btnXoa.addActionListener(btnXoa_Click());
         btnXoa.setToolTipText("Vui lòng chọn hoá đơn cần xoá");
