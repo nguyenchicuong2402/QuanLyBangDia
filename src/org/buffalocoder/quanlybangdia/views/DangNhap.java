@@ -34,10 +34,9 @@ public class DangNhap extends JFrame {
         mainPanel = new JPanel(new BorderLayout());
         this.setContentPane(mainPanel);
 
-
         //========== HEADER PANEL ==========//
         headerPanel = new JPanel(new BorderLayout());
-        headerPanel.setBackground(Color.decode(ql.getPrimaryColor("pink")));
+        headerPanel.setBackground(MaterialDesign.COLOR_PRIMARY);
         headerPanel.setPreferredSize(new Dimension(this.getWidth(), 180));
         mainPanel.add(headerPanel, BorderLayout.NORTH);
 

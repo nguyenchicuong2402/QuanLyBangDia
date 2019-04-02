@@ -1,117 +1,117 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Themes>
     <Template id="red">
-        <primary>#c62828</primary>
-        <secondary>#ff5f52</secondary>
-        <dark>#8e0000</dark>
-        <background>#ff6f60</background>
+        <primary>#D32F2F</primary>
+        <secondary>#F44336</secondary>
+        <dark>#B71C1C</dark>
+        <background>#FFEBEE</background>
     </Template>
     <Template id="pink">
-        <primary>#ec407a</primary>
-        <secondary>#ff77a9</secondary>
-        <dark>#b4004e</dark>
-        <background>#ff94c2</background>
+        <primary>#c2185b</primary>
+        <secondary>#e91e63</secondary>
+        <dark>#880e4f</dark>
+        <background>#FCE4EC</background>
     </Template>
     <Template id="purple">
         <primary>#7b1fa2</primary>
-        <secondary>#</secondary>
-        <dark>#4a0072</dark>
-        <background>#ae52d4</background>
+        <secondary>#9c27b0</secondary>
+        <dark>#4a148c</dark>
+        <background>#f3e5f5</background>
     </Template>
     <Template id="deep-purple">
-        <primary>#</primary>
-        <secondary>#</secondary>
-        <dark>#</dark>
-        <background>#</background>
+        <primary>#512da8</primary>
+        <secondary>#673ab7</secondary>
+        <dark>#311b92</dark>
+        <background>#ede7f6</background>
     </Template>
     <Template id="indigo">
-        <primary>#</primary>
-        <secondary>#</secondary>
-        <dark>#</dark>
-        <background>#</background>
+        <primary>#303f9f</primary>
+        <secondary>#3f51b5</secondary>
+        <dark>#1a237e</dark>
+        <background>#e8eaf6</background>
     </Template>
     <Template id="blue">
-        <primary>#001970</primary>
-        <secondary>#666ad1</secondary>
-        <dark>#001970</dark>
-        <background>#001970</background>
+        <primary>#1976d2</primary>
+        <secondary>#2196f3</secondary>
+        <dark>#0d47a1</dark>
+        <background>#e3f2fd</background>
     </Template>
     <Template id="light-blue">
-        <primary>#</primary>
-        <secondary>#</secondary>
-        <dark>#</dark>
-        <background>#</background>
+        <primary>#0288d1</primary>
+        <secondary>#03a9f4</secondary>
+        <dark>#01579b</dark>
+        <background>#e1f5fe</background>
     </Template>
     <Template id="cyan">
-        <primary>#5c6bc0</primary>
-        <secondary>#8e99f3</secondary>
-        <dark>#26418f</dark>
-        <background>#5c6bc0</background>
+        <primary>#0097a7</primary>
+        <secondary>#00bcd4</secondary>
+        <dark>#006064</dark>
+        <background>#e0f7fa</background>
     </Template>
     <Template id="teal">
-        <primary>#</primary>
-        <secondary>#</secondary>
-        <dark>#</dark>
-        <background>#</background>
+        <primary>#00796b</primary>
+        <secondary>#009688</secondary>
+        <dark>#004d40</dark>
+        <background>#e0f2f1</background>
     </Template>
     <Template id="green">
-        <primary>#2e7d32</primary>
-        <secondary>#60ad5e</secondary>
-        <dark>#005005</dark>
-        <background>#60ad5e</background>
+        <primary>#388e3c</primary>
+        <secondary>#4caf50</secondary>
+        <dark>#1b5e20</dark>
+        <background>#e8f5e9</background>
     </Template>
     <Template id="light-green">
-        <primary>#66bb6a</primary>
-        <secondary>#98ee99</secondary>
-        <dark>#338a3e</dark>
-        <background>#98ee99</background>
+        <primary>#689f38</primary>
+        <secondary>#8bc34a</secondary>
+        <dark>#33691e</dark>
+        <background>#f1f8e9</background>
     </Template>
     <Template id="lime">
-        <primary>#</primary>
-        <secondary>#</secondary>
-        <dark>#</dark>
-        <background>#</background>
+        <primary>#afb42b</primary>
+        <secondary>#cddc39</secondary>
+        <dark>#827717</dark>
+        <background>#f9fbe7</background>
     </Template>
     <Template id="yellow">
-        <primary>#ffeb3b</primary>
-        <secondary>#ffff72</secondary>
-        <dark>#c8b900</dark>
-        <background>#ffff72</background>
+        <primary>#fbc02d</primary>
+        <secondary>#ffeb3b</secondary>
+        <dark>#f57f17</dark>
+        <background>#fffde7</background>
     </Template>
     <Template id="amber">
-        <primary>#</primary>
-        <secondary>#</secondary>
-        <dark>#</dark>
-        <background>#</background>
+        <primary>#ffa000</primary>
+        <secondary>#ffc107</secondary>
+        <dark>#ff6f00</dark>
+        <background>#fff8e1</background>
     </Template>
     <Template id="orange">
-        <primary>#ff6f00</primary>
-        <secondary>#ffa040</secondary>
-        <dark>#c43e00</dark>
-        <background>#ffa040</background>
+        <primary>#f57c00</primary>
+        <secondary>#ff9800</secondary>
+        <dark>#e65100</dark>
+        <background>#fff3e0</background>
     </Template>
     <Template id="deep-orange">
-        <primary>#</primary>
-        <secondary>#</secondary>
-        <dark>#</dark>
-        <background>#</background>
+        <primary>#e64a19</primary>
+        <secondary>#ff5722</secondary>
+        <dark>#bf360c</dark>
+        <background>#fbe9e7</background>
     </Template>
     <Template id="brown">
-        <primary>#4e342e</primary>
-        <secondary>#7b5e57</secondary>
-        <dark>#260e04</dark>
-        <background>#7b5e57</background>
+        <primary>#5d4037</primary>
+        <secondary>#795548</secondary>
+        <dark>#3e2723</dark>
+        <background>#efebe9</background>
     </Template>
     <Template id="grey">
-        <primary>#546e7a</primary>
-        <secondary>#819ca9</secondary>
-        <dark>#29434e</dark>
-        <background>#819ca9</background>
+        <primary>#616161</primary>
+        <secondary>#9e9e9e</secondary>
+        <dark>#212121</dark>
+        <background>#fafafa</background>
     </Template>
     <Template id="blue-grey">
-        <primary>#</primary>
-        <secondary>#</secondary>
-        <dark>#</dark>
-        <background>#</background>
+        <primary>#455a64</primary>
+        <secondary>#607d8b</secondary>
+        <dark>#263238</dark>
+        <background>#eceff1</background>
     </Template>
 </Themes>

@@ -170,7 +170,9 @@ public class MainForm extends JFrame {
                 quanLyChoThueTabbed.refreshTable();
                 quanLyBangDiaTabbed.refreshTable();
                 quanLyKhachHangTabbed.refreshTable();
-                quanLyNhanVienTabbed.refreshTable();
+
+                if (IS_ADMIN)
+                    quanLyNhanVienTabbed.refreshTable();
 
                 menuTabbed.revalidate();
                 menuTabbed.repaint();

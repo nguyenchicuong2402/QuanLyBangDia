@@ -1,12 +1,15 @@
 package org.buffalocoder.quanlybangdia.utils;
 
 import com.toedter.calendar.JDateChooser;
+import org.buffalocoder.quanlybangdia.XML.QuanLyXML;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
 public class MaterialDesign {
+    private static final QuanLyXML XML = new QuanLyXML();
+    private static final String ID_COLOR = "teal";
     private static final String FONT_NAME = "Times New Roman";
 
     //========== FONT ==========//
@@ -19,13 +22,12 @@ public class MaterialDesign {
     public static final Font FONT_TITLE_ALERT        = new Font(FONT_NAME, Font.PLAIN, 20);
 
     //========== COLOR ==========//
-    public static final Color COLOR_PRIMARY         = Color.decode("#1976d2");
-    public static final Color COLOR_SECONDARY       = Color.decode("#2196F3");
+    public static final Color COLOR_PRIMARY         = Color.decode(XML.getPrimaryColor(ID_COLOR));
+    public static final Color COLOR_SECONDARY       = Color.decode(XML.getSecondary(ID_COLOR));
+    public static final Color COLOR_DARK            = Color.decode(XML.getDark(ID_COLOR));
+    public static final Color COLOR_BACKGROUND      = Color.decode(XML.getBackground(ID_COLOR));
     public static final Color COLOR_TEXT            = Color.decode("#ffffff");
-    public static final Color COLOR_BACKGROUND      = Color.decode("#E3F2FD");
-    public static final Color COLOR_ERROR           = Color.decode("#ff1744");
-    public static final Color COLOR_ACCEPT          = Color.decode("#00e676");
-    public static final Color COLOR_DARK            = Color.decode("#0D47A1");
+    public static final Color COLOR_ERROR           = Color.decode("#D50000");
     public static final Color COLOR_CARD            = Color.decode("#ffffff");
 
     //========== BORDER =========//

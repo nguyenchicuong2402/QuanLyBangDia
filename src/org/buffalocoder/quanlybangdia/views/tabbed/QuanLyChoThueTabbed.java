@@ -177,6 +177,17 @@ public class QuanLyChoThueTabbed extends JPanel {
             thongBaoLoi(e.getMessage());
         }
 
+        if (danhSachKhachHang.getAll().size() > 0 && danhSachBangDia.getAll().size() > 0){
+            btnThem.setEnabled(true);
+            btnThem.setToolTipText("[Alt + T] Thêm hoá đơn");
+        }else if (danhSachKhachHang.getAll().size() <= 0) {
+            btnThem.setEnabled(false);
+            btnThem.setToolTipText("Vui lòng thêm khách hàng");
+        }else if (danhSachBangDia.getAll().size() <= 0){
+            btnThem.setEnabled(false);
+            btnThem.setToolTipText("Vui lòng thêm băng đĩa");
+        }
+
         choThueTableModel.setModel(danhSachChoThue.getAll());
         tblChoThue.setModel(choThueTableModel);
 
