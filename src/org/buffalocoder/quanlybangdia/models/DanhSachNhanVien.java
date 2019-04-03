@@ -7,13 +7,10 @@ import java.util.ArrayList;
 
 public class DanhSachNhanVien {
     private ArrayList<NhanVien> nhanViens;
-    private ArrayList<TaiKhoan> taiKhoans;
     private static NhanVienDAO nhanVienDAO;
-    private static TaiKhoanDAO taiKhoanDAO;
 
     public DanhSachNhanVien() throws Exception {
         nhanVienDAO = NhanVienDAO.getInstance();
-        taiKhoanDAO = TaiKhoanDAO.getInstance();
         loadData();
     }
 

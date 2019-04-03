@@ -1,7 +1,5 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
-import com.sun.tools.javac.Main;
-import org.buffalocoder.quanlybangdia.MainProgram;
 import org.buffalocoder.quanlybangdia.dao.DataBaseUtils;
 import org.buffalocoder.quanlybangdia.dao.TaiKhoanDAO;
 import org.buffalocoder.quanlybangdia.models.TaiKhoan;

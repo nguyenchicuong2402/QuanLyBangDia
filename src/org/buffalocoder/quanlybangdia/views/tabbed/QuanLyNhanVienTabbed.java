@@ -253,6 +253,11 @@ public class QuanLyNhanVienTabbed extends JPanel {
                 String maNhanVien = nhanVienTableModel.getValueAt(index, 0).toString();
                 String tenNhanVien = nhanVienTableModel.getValueAt(index, 1).toString();
 
+                if (maNhanVien.equals("NV00001")){
+                    thongBao("Không thể xoá admin mặc định");
+                    return;
+                }
+
                 ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
                         new JFrame(),
                         "Cảnh báo",

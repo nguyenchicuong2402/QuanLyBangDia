@@ -68,6 +68,15 @@ public class DanhSachBangDia {
         }
     }
 
+    public int tongSoBangDiaTon(){
+        int tong = 0;
+
+        for (BangDia bangDia : bangDias)
+            tong += bangDia.getSoLuongTon();
+
+        return tong;
+    }
+
     public ArrayList<String> getMaBangDias(){
         ArrayList<String> maBangDias = new ArrayList<>();
 
