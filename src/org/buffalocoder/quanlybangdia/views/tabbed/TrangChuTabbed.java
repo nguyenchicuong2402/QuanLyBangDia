@@ -42,6 +42,15 @@ public class TrangChuTabbed extends JPanel {
         Box boxLoiChao = Box.createVerticalBox();
         innerHeaderPanel.add(boxLoiChao);
 
+        Box boxLoiChao1 = Box.createHorizontalBox();
+        boxLoiChao.add(Box.createVerticalStrut(50));
+        boxLoiChao.add(boxLoiChao1);
+
+        Box boxLoiChao2 = Box.createHorizontalBox();
+        boxLoiChao.add(Box.createVerticalStrut(20));
+        boxLoiChao.add(boxLoiChao2);
+        boxLoiChao.add(Box.createVerticalStrut(50));
+
         String loiChao = "Chào " + DangNhap.taiKhoan.getTenTaiKhoan();
         try {
             loiChao = "Chào buổi sáng " + nhanVien.getHoTen();
@@ -50,31 +59,30 @@ public class TrangChuTabbed extends JPanel {
         lblLoiChao = new JLabel(loiChao, JLabel.LEFT);
         MaterialDesign.materialLabel(lblLoiChao);
         lblLoiChao.setFont(MaterialDesign.FONT_TITLE_2);
-        boxLoiChao.add(Box.createVerticalStrut(50));
-        boxLoiChao.add(lblLoiChao);
+        boxLoiChao1.add(Box.createHorizontalStrut(10));
+        boxLoiChao1.add(lblLoiChao);
 
         String loiChuc = "Chúc 1 ngày làm việc vui vẻ";
         lblLoiChuc = new JLabel(loiChuc, JLabel.LEFT);
         MaterialDesign.materialLabel(lblLoiChuc);
         lblLoiChuc.setFont(MaterialDesign.FONT_DEFAULT_ITALIC);
-        boxLoiChao.add(Box.createVerticalStrut(20));
-        boxLoiChao.add(lblLoiChuc);
-        boxLoiChao.add(Box.createVerticalStrut(50));
+        boxLoiChao2.add(Box.createHorizontalStrut(10));
+        boxLoiChao2.add(lblLoiChuc);
 
         leftPanel = new JPanel();
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.X_AXIS));
         MaterialDesign.materialPanel(leftPanel);
         leftPanel.setBackground(MaterialDesign.COLOR_BACKGROUND);
-        leftPanel.setPreferredSize(new Dimension(500, 500));
-        leftPanel.setMaximumSize(new Dimension(500, 500));
+        leftPanel.setPreferredSize(new Dimension(700, 500));
+        leftPanel.setMaximumSize(new Dimension(700, 500));
         this.add(leftPanel, BorderLayout.WEST);
 
         JPanel innerLeftPanel = new JPanel();
         innerLeftPanel.setLayout(new BoxLayout(innerLeftPanel, BoxLayout.Y_AXIS));
         MaterialDesign.materialPanel(innerLeftPanel);
         innerLeftPanel.setBackground(MaterialDesign.COLOR_CARD);
-        innerLeftPanel.setPreferredSize(new Dimension(500, 500));
-        innerLeftPanel.setMaximumSize(new Dimension(500, 500));
+        innerLeftPanel.setPreferredSize(new Dimension(700, 500));
+        innerLeftPanel.setMaximumSize(new Dimension(700, 500));
         leftPanel.add(Box.createHorizontalStrut(10));
         leftPanel.add(innerLeftPanel);
         leftPanel.add(Box.createHorizontalStrut(10));

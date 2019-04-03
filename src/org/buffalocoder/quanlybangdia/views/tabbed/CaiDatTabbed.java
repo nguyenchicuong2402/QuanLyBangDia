@@ -2,8 +2,6 @@ package org.buffalocoder.quanlybangdia.views.tabbed;
 
 import com.sun.tools.javac.Main;
 import org.buffalocoder.quanlybangdia.MainProgram;
-import org.buffalocoder.quanlybangdia.XML.DocGhiFileXML;
-import org.buffalocoder.quanlybangdia.XML.QuanLyXML;
 import org.buffalocoder.quanlybangdia.dao.DataBaseUtils;
 import org.buffalocoder.quanlybangdia.dao.TaiKhoanDAO;
 import org.buffalocoder.quanlybangdia.models.TaiKhoan;
@@ -12,19 +10,16 @@ import org.buffalocoder.quanlybangdia.views.DangNhap;
 import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
 
 import javax.swing.*;
-import javax.xml.transform.TransformerException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CaiDatTabbed extends JPanel {
 
-    private QuanLyXML XML = new QuanLyXML();
     private static TaiKhoanDAO taiKhoanDAO;
     private static DataBaseUtils dataBaseUtils;
     private ThongBaoDialog thongBaoDialog;
@@ -35,6 +30,7 @@ public class CaiDatTabbed extends JPanel {
             lblNhapLaiMatKhau, lblLoiDoiMatKhau, lblXoaDatabase, lblSubXoaDatabase;
     private JComboBox<String> cbChuDe;
     private JPasswordField txtMatKhauHienTai, txtMatKhauMoi, txtNhapLaiMatKhau;
+
     private void prepareUI(){
         this.setLayout(new BorderLayout());
         MaterialDesign.materialPanel(this);
@@ -321,15 +317,8 @@ public class CaiDatTabbed extends JPanel {
                     Matcher matcher = pattern.matcher(String.valueOf(cbChuDe.getSelectedItem()).toLowerCase());
 
                     if (matcher.find()){
-
                         String id_color = matcher.group(1);
-                        try {
-                            XML.setRememberColor(id_color);
-                        } catch (TransformerException e1) {
-                            e1.printStackTrace();
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
+                        MaterialDesign.resetColor(id_color);
                     }
                 }
             }

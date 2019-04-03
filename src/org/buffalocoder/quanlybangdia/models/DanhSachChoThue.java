@@ -48,4 +48,23 @@ public class DanhSachChoThue {
     public boolean sua(HoaDon hoaDon) throws Exception {
         return hoaDons.set(tim(hoaDon.getMaHoaDon()), hoaDonDAO.suaHoaDon(hoaDon)) != null;
     }
+
+    public double tongDoanhThu(){
+        double tong = 0;
+
+        for (HoaDon hoaDon : hoaDons){
+            tong += hoaDon.thanhTien();
+        }
+
+        return tong;
+    }
+
+    public int soLuongBangDiaDaThue(){
+        int tong = 0;
+
+        for (HoaDon hoaDon : hoaDons)
+            tong += hoaDon.getSoLuong();
+
+        return tong;
+    }
 }
