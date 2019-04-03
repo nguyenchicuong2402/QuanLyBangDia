@@ -36,7 +36,7 @@
         <dark>#0d47a1</dark>
         <background>#e3f2fd</background>
     </Template>
-    <Template id="light-blue">
+    <Template id="light blue">
         <primary>#0288d1</primary>
         <secondary>#03a9f4</secondary>
         <dark>#01579b</dark>
@@ -60,7 +60,7 @@
         <dark>#1b5e20</dark>
         <background>#e8f5e9</background>
     </Template>
-    <Template id="light-green">
+    <Template id="light green">
         <primary>#689f38</primary>
         <secondary>#8bc34a</secondary>
         <dark>#33691e</dark>
@@ -90,7 +90,7 @@
         <dark>#e65100</dark>
         <background>#fff3e0</background>
     </Template>
-    <Template id="deep-orange">
+    <Template id="deep orange">
         <primary>#e64a19</primary>
         <secondary>#ff5722</secondary>
         <dark>#bf360c</dark>
@@ -108,7 +108,7 @@
         <dark>#212121</dark>
         <background>#fafafa</background>
     </Template>
-    <Template id="blue-grey">
+    <Template id="blue grey">
         <primary>#455a64</primary>
         <secondary>#607d8b</secondary>
         <dark>#263238</dark>
