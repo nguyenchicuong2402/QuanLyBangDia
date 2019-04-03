@@ -330,6 +330,7 @@ public class CaiDatTabbed extends JPanel {
                             e1.printStackTrace();
                         }
                     }
+                    System.exit(0);
                 }
             }
         };
