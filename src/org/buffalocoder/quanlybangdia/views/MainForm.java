@@ -109,7 +109,7 @@ public class MainForm extends JFrame {
         menuTabbed.setUI(customTabbedPanelUI);
         menuTabbed.setFont(MaterialDesign.FONT_DEFAULT);
         menuTabbed.addTab("Trang chủ", trangChuTabbed = new TrangChuTabbed());
-        menuTabbed.addTab("Cho thuê", quanLyChoThueTabbed = new QuanLyChoThueTabbed())  ;
+        menuTabbed.addTab("Danh sách đang thuê", quanLyChoThueTabbed = new QuanLyChoThueTabbed())  ;
         menuTabbed.addTab(IS_ADMIN ? "Quản lý băng đĩa" : "Danh sách băng đĩa",
                 quanLyBangDiaTabbed = new QuanLyBangDiaTabbed());
         menuTabbed.addTab("Quản lý khách hàng",

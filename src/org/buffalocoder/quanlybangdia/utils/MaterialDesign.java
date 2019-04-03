@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class MaterialDesign {
     private static final QuanLyXML XML = new QuanLyXML();
-    private static String ID_COLOR = XML.getRememberColor();
+    private static final String ID_COLOR = XML.getRememberColor();
     private static final String FONT_NAME = "Times New Roman";
 
     //========== FONT ==========//

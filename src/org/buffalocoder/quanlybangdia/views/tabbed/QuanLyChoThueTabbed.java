@@ -72,10 +72,10 @@ public class QuanLyChoThueTabbed extends JPanel {
         btnSua.setEnabled(false);
         funcPanel.add(btnSua);
 
-        btnXoa = new JButton("Xoá", MaterialDesign.ICON_XOA);
-        btnXoa.setPreferredSize(btnThem.getPreferredSize());
+        btnXoa = new JButton("Xoá/Trả băng đĩa", MaterialDesign.ICON_XOA);
+        btnXoa.setPreferredSize(new Dimension(200, 40));
         btnXoa.addActionListener(btnXoa_Click());
-        btnXoa.setToolTipText("Vui lòng chọn hoá đơn cần xoá");
+        btnXoa.setToolTipText("Vui lòng chọn hoá đơn cần xoá/trả");
         btnXoa.setEnabled(false);
         btnXoa.setMnemonic(KeyEvent.VK_X);
         MaterialDesign.materialButton(btnXoa);
@@ -337,7 +337,7 @@ public class QuanLyChoThueTabbed extends JPanel {
                 btnSua.setEnabled(true);
                 btnSua.setToolTipText("[Alt + S] Cập nhật thông tin hoá đơn");
 
-                btnXoa.setToolTipText("[Alt + X] Xoá hoá đơn");
+                btnXoa.setToolTipText("[Alt + X] Xoá/Trả hoá đơn");
                 btnXoa.setEnabled(true);
             }
 
