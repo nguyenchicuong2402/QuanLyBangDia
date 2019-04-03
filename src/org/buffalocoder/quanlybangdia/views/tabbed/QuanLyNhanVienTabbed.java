@@ -1,6 +1,7 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
 import org.buffalocoder.quanlybangdia.dao.TaiKhoanDAO;
+import org.buffalocoder.quanlybangdia.models.BangDia;
 import org.buffalocoder.quanlybangdia.models.DanhSachNhanVien;
 import org.buffalocoder.quanlybangdia.models.NhanVien;
 import org.buffalocoder.quanlybangdia.models.TaiKhoan;
@@ -10,6 +11,10 @@ import org.buffalocoder.quanlybangdia.views.dialog.NhanVienDialog;
 import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -21,10 +26,11 @@ public class QuanLyNhanVienTabbed extends JPanel {
     private JTable tblNhanVien;
     private JPanel topPanel, funcPanel, searchPanel;
     private JButton btnThem, btnXoa, btnSua, btnTimKiem;
-    private JTextField txtTuKhoa;
+    private JTextField txtTimKiem;
     private NhanVienTableModel nhanVienTableModel;
     private final Component rootComponent = this;
     private JScrollPane scrollPane;
+    private TableRowSorter<TableModel> sorter;
 
     private void prepareUI(){
         this.setLayout(new BorderLayout());
@@ -43,7 +49,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
         topPanel.add(funcPanel, BorderLayout.WEST);
 
         btnThem = new JButton("Thêm", MaterialDesign.ICON_THEM);
-        btnThem.setPreferredSize(new Dimension(90, 40));
+        btnThem.setPreferredSize(new Dimension(100, 40));
         MaterialDesign.materialButton(btnThem);
         btnThem.addActionListener(btnThem_Click());
         btnThem.setToolTipText("[Alt + T] Thêm nhân viên mới");
@@ -74,13 +80,15 @@ public class QuanLyNhanVienTabbed extends JPanel {
         MaterialDesign.materialPanel(searchPanel);
         topPanel.add(searchPanel, BorderLayout.EAST);
 
-        txtTuKhoa = new JTextField();
-        txtTuKhoa.setPreferredSize(new Dimension(300, 40));
-        MaterialDesign.materialTextField(txtTuKhoa);
-        searchPanel.add(txtTuKhoa);
+        txtTimKiem = new JTextField();
+        txtTimKiem.setPreferredSize(new Dimension(300, 40));
+        txtTimKiem.getDocument().addDocumentListener(txtTimKiem_DocumentListener());
+        MaterialDesign.materialTextField(txtTimKiem);
+        searchPanel.add(txtTimKiem);
 
         btnTimKiem = new JButton("Tìm kiếm");
         btnTimKiem.setPreferredSize(btnThem.getPreferredSize());
+        btnTimKiem.addActionListener(btnTimKiem_Click());
         MaterialDesign.materialButton(btnTimKiem);
         searchPanel.add(btnTimKiem);
 
@@ -91,7 +99,10 @@ public class QuanLyNhanVienTabbed extends JPanel {
 
         nhanVienTableModel = new NhanVienTableModel(danhSachNhanVien.getAll());
 
+        sorter = new TableRowSorter<>(nhanVienTableModel);
+
         tblNhanVien = new JTable(nhanVienTableModel);
+        tblNhanVien.setRowSorter(sorter);
         MaterialDesign.materialTable(tblNhanVien);
         tblNhanVien.addMouseListener(tblNhanVien_MouseListener());
 
@@ -111,6 +122,25 @@ public class QuanLyNhanVienTabbed extends JPanel {
         prepareUI();
     }
 
+    private void filterTable(String filter_text) {
+        if (filter_text.isEmpty())
+            sorter.setRowFilter(null);
+        else {
+            try{
+                RowFilter<Object, Object> filter = new RowFilter<Object, Object>() {
+                    @Override
+                    public boolean include(Entry<?, ?> entry) {
+                        return (entry.getStringValue(1).contains(filter_text));
+                    }
+                };
+                sorter.setRowFilter(filter);
+            }catch (NumberFormatException e){
+                txtTimKiem.selectAll();
+            }
+
+        }
+    }
+    
     public void refreshTable(){
         try {
             danhSachNhanVien.loadData();
@@ -120,6 +150,8 @@ public class QuanLyNhanVienTabbed extends JPanel {
 
         nhanVienTableModel.setModel(danhSachNhanVien.getAll());
         tblNhanVien.setModel(nhanVienTableModel);
+
+        sorter.setModel(nhanVienTableModel);
 
         tblNhanVien.revalidate();
         tblNhanVien.repaint();
@@ -236,6 +268,34 @@ public class QuanLyNhanVienTabbed extends JPanel {
                         thongBaoLoi(e1.getMessage());
                     }
                 }
+            }
+        };
+    }
+
+    private ActionListener btnTimKiem_Click(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                filterTable(txtTimKiem.getText().trim());
+            }
+        };
+    }
+
+    private DocumentListener txtTimKiem_DocumentListener(){
+        return new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filterTable(txtTimKiem.getText().trim());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterTable(txtTimKiem.getText().trim());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filterTable(txtTimKiem.getText().trim());
             }
         };
     }

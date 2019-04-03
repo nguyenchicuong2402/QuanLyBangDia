@@ -9,6 +9,8 @@ import org.buffalocoder.quanlybangdia.views.dialog.BangDiaDialog;
 import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
@@ -21,8 +23,8 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
     private JTable tblBangDia;
     private JPanel topPanel, funcPanel, searchPanel;
-    private JButton btnThem, btnXoa, btnSua, btnTimKiem;
-    private JTextField txtTuKhoa;
+    private JButton btnThem, btnXoa, btnSua, btnXoaBangDiaHong, btnTimKiem;
+    private JTextField txtTimKiem;
     private BangDiaTableModel bangDiaTableModel;
     private TableRowSorter<TableModel> sorter;
     private final Component rootComponent = this;
@@ -46,7 +48,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
             topPanel.add(funcPanel, BorderLayout.WEST);
 
         btnThem = new JButton("Thêm", MaterialDesign.ICON_THEM);
-        btnThem.setPreferredSize(new Dimension(90, 40));
+        btnThem.setPreferredSize(new Dimension(100, 40));
         btnThem.addActionListener(btnThem_Click());
         btnThem.setToolTipText("[Alt + T] Thêm băng đĩa mới");
         btnThem.setMnemonic(KeyEvent.VK_T);
@@ -72,18 +74,28 @@ public class QuanLyBangDiaTabbed extends JPanel {
         btnXoa.setBackground(MaterialDesign.COLOR_ERROR);
         funcPanel.add(btnXoa);
 
+        btnXoaBangDiaHong = new JButton("Xoá băng đĩa hỏng", MaterialDesign.ICON_XOA);
+        btnXoaBangDiaHong.setPreferredSize(new Dimension(200, 40));
+        btnXoaBangDiaHong.addActionListener(btnXoaBangDiaHong_Click());
+        btnXoaBangDiaHong.setToolTipText("Xoá băng đĩa đã hư hỏng");
+        MaterialDesign.materialButton(btnXoaBangDiaHong);
+        btnXoaBangDiaHong.setBackground(MaterialDesign.COLOR_ERROR);
+        funcPanel.add(btnXoaBangDiaHong);
+
         // tìm kiếm
         searchPanel = new JPanel();
         MaterialDesign.materialPanel(searchPanel);
         topPanel.add(searchPanel, BorderLayout.EAST);
 
-        txtTuKhoa = new JTextField();
-        txtTuKhoa.setPreferredSize(new Dimension(300, 40));
-        MaterialDesign.materialTextField(txtTuKhoa);
-        searchPanel.add(txtTuKhoa, BorderLayout.CENTER);
+        txtTimKiem = new JTextField();
+        txtTimKiem.setPreferredSize(new Dimension(300, 40));
+        txtTimKiem.getDocument().addDocumentListener(txtTimKiem_DocumentListener());
+        MaterialDesign.materialTextField(txtTimKiem);
+        searchPanel.add(txtTimKiem, BorderLayout.CENTER);
 
         btnTimKiem = new JButton("Tìm kiếm");
         btnTimKiem.setPreferredSize(btnThem.getPreferredSize());
+        btnTimKiem.addActionListener(btnTimKiem_Click());
         MaterialDesign.materialButton(btnTimKiem);
         searchPanel.add(btnTimKiem, BorderLayout.EAST);
 
@@ -93,6 +105,8 @@ public class QuanLyBangDiaTabbed extends JPanel {
         this.add(box, BorderLayout.CENTER);
 
         bangDiaTableModel = new BangDiaTableModel(danhSachBangDia.getAll());
+
+        sorter = new TableRowSorter<TableModel>(bangDiaTableModel);
 
         tblBangDia = new JTable(bangDiaTableModel);
         tblBangDia.setRowSorter(sorter = new TableRowSorter<>(tblBangDia.getModel()));
@@ -124,8 +138,29 @@ public class QuanLyBangDiaTabbed extends JPanel {
         bangDiaTableModel.setModel(danhSachBangDia.getAll());
         tblBangDia.setModel(bangDiaTableModel);
 
+        sorter.setModel(bangDiaTableModel);
+
         tblBangDia.revalidate();
         tblBangDia.repaint();
+    }
+
+    private void filterTable(String filter_text) {
+        if (filter_text.isEmpty())
+            sorter.setRowFilter(null);
+        else {
+            try{
+                RowFilter<Object, Object> filter = new RowFilter<Object, Object>() {
+                    @Override
+                    public boolean include(Entry<?, ?> entry) {
+                        return (entry.getStringValue(1).contains(filter_text));
+                    }
+                };
+                sorter.setRowFilter(filter);
+            }catch (NumberFormatException e){
+                txtTimKiem.selectAll();
+            }
+
+        }
     }
 
     private void thongBao(String message){
@@ -223,6 +258,34 @@ public class QuanLyBangDiaTabbed extends JPanel {
         };
     }
 
+    private ActionListener btnTimKiem_Click(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                filterTable(txtTimKiem.getText().trim());
+            }
+        };
+    }
+
+    private ActionListener btnXoaBangDiaHong_Click(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                thongBaoDialog = new ThongBaoDialog(
+                        new JFrame(),
+                        "Thông báo",
+                        "Thao tác này sẽ xoá tất cả băng đĩa hỏng trong hệ thống\nBạn có muốn tiếp tục không ?",
+                        ThongBaoDialog.OK_CANCLE_OPTION
+                );
+
+                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
+                    danhSachBangDia.xoaBangDiaHong();
+                    refreshTable();
+                }
+            }
+        };
+    }
+
     private MouseListener tblBangDia_MouseListener(){
         return new MouseListener() {
             @Override
@@ -256,6 +319,22 @@ public class QuanLyBangDiaTabbed extends JPanel {
         };
     }
 
-    // TODO thêm 1 button xoá băng đĩa hỏng
+    private DocumentListener txtTimKiem_DocumentListener(){
+        return new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filterTable(txtTimKiem.getText().trim());
+            }
 
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterTable(txtTimKiem.getText().trim());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filterTable(txtTimKiem.getText().trim());
+            }
+        };
+    }
 }

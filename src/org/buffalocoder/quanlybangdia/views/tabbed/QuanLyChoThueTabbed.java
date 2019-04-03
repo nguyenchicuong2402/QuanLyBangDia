@@ -7,6 +7,8 @@ import org.buffalocoder.quanlybangdia.views.dialog.ChoThueDialog;
 import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
@@ -22,7 +24,7 @@ public class QuanLyChoThueTabbed extends JPanel {
     private JTable tblChoThue;
     private JPanel topPanel, funcPanel, searchPanel;
     private JButton btnThem, btnXoa, btnSua, btnTimKiem;
-    private JTextField txtTuKhoa;
+    private JTextField txtTimKiem;
     private TableRowSorter<TableModel> sorter;
     private ChoThueTableModel choThueTableModel;
     private final Component rootComponent = this;
@@ -45,7 +47,7 @@ public class QuanLyChoThueTabbed extends JPanel {
         topPanel.add(funcPanel, BorderLayout.WEST);
 
         btnThem = new JButton("Thêm", MaterialDesign.ICON_THEM);
-        btnThem.setPreferredSize(new Dimension(90, 40));
+        btnThem.setPreferredSize(new Dimension(100, 40));
         btnThem.addActionListener(btnThem_Click());
         btnThem.setEnabled(false);
         btnThem.setMnemonic(KeyEvent.VK_T);
@@ -85,13 +87,15 @@ public class QuanLyChoThueTabbed extends JPanel {
         MaterialDesign.materialPanel(searchPanel);
         topPanel.add(searchPanel, BorderLayout.EAST);
 
-        txtTuKhoa = new JTextField();
-        txtTuKhoa.setPreferredSize(new Dimension(300, 40));
-        MaterialDesign.materialTextField(txtTuKhoa);
-        searchPanel.add(txtTuKhoa);
+        txtTimKiem = new JTextField();
+        txtTimKiem.setPreferredSize(new Dimension(300, 40));
+        txtTimKiem.getDocument().addDocumentListener(txtTimKiem_DocumentListener());
+        MaterialDesign.materialTextField(txtTimKiem);
+        searchPanel.add(txtTimKiem);
 
         btnTimKiem = new JButton("Tìm kiếm");
         btnTimKiem.setPreferredSize(btnThem.getPreferredSize());
+        btnTimKiem.addActionListener(btnTimKiem_Click());
         MaterialDesign.materialButton(btnTimKiem);
         searchPanel.add(btnTimKiem);
 
@@ -101,7 +105,10 @@ public class QuanLyChoThueTabbed extends JPanel {
 
         choThueTableModel = new ChoThueTableModel(danhSachChoThue.getAll());
 
+        sorter = new TableRowSorter<>(choThueTableModel);
+
         tblChoThue = new JTable(choThueTableModel);
+        tblChoThue.setRowSorter(sorter);
         MaterialDesign.materialTable(tblChoThue);
         tblChoThue.addMouseListener(tblChoThue_MouseListener());
 
@@ -190,8 +197,29 @@ public class QuanLyChoThueTabbed extends JPanel {
         choThueTableModel.setModel(danhSachChoThue.getAll());
         tblChoThue.setModel(choThueTableModel);
 
+        sorter.setModel(choThueTableModel);
+
         tblChoThue.revalidate();
         tblChoThue.repaint();
+    }
+
+    private void filterTable(String filter_text) {
+        if (filter_text.isEmpty())
+            sorter.setRowFilter(null);
+        else {
+            try{
+                RowFilter<Object, Object> filter = new RowFilter<Object, Object>() {
+                    @Override
+                    public boolean include(Entry<?, ?> entry) {
+                        return (entry.getStringValue(1).contains(filter_text));
+                    }
+                };
+                sorter.setRowFilter(filter);
+            }catch (NumberFormatException e){
+                txtTimKiem.selectAll();
+            }
+
+        }
     }
 
     private ActionListener btnThem_Click(){
@@ -274,6 +302,34 @@ public class QuanLyChoThueTabbed extends JPanel {
         };
     }
 
+    private ActionListener btnTimKiem_Click(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                filterTable(txtTimKiem.getText().trim());
+            }
+        };
+    }
+
+    private DocumentListener txtTimKiem_DocumentListener(){
+        return new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filterTable(txtTimKiem.getText().trim());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterTable(txtTimKiem.getText().trim());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filterTable(txtTimKiem.getText().trim());
+            }
+        };
+    }
+
     private MouseListener tblChoThue_MouseListener(){
         return new MouseListener() {
             @Override
@@ -306,7 +362,4 @@ public class QuanLyChoThueTabbed extends JPanel {
             }
         };
     }
-
-    //TODO THÊM 1 CỘT THÀNH TIỀN
-    //Nếu khách trả muộn so với ngày quy định trên phiếu cho thuê thì họ phải chịu một khoản tiền phạt là 50% tiền thuê/băng đĩa.
 }

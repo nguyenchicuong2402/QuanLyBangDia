@@ -8,10 +8,13 @@ import org.buffalocoder.quanlybangdia.views.dialog.KhachHangDialog;
 import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
 
 public class QuanLyKhachHangTabbed extends JPanel {
     private DanhSachKhachHang danhSachKhachHang;
@@ -20,10 +23,11 @@ public class QuanLyKhachHangTabbed extends JPanel {
     private JTable tblKhachHang;
     private JPanel topPanel, funcPanel, searchPanel;
     private JButton btnThem, btnXoa, btnSua, btnTimKiem;
-    private JTextField txtTuKhoa;
+    private JTextField txtTimKiem;
     private KhachHangTableModel khachHangTableModel;
     private Component rootComponent = this;
     private JScrollPane scrollPane;
+    private TableRowSorter<TableModel> sorter;
 
     private void prepareUI(){
         this.setLayout(new BorderLayout());
@@ -42,7 +46,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
         topPanel.add(funcPanel, BorderLayout.WEST);
 
         btnThem = new JButton("Thêm", MaterialDesign.ICON_THEM);
-        btnThem.setPreferredSize(new Dimension(90, 40));
+        btnThem.setPreferredSize(new Dimension(100, 40));
         MaterialDesign.materialButton(btnThem);
         btnThem.addActionListener(btnThem_Click());
         btnThem.setToolTipText("[Alt + T] Thêm khách hàng mới");
@@ -73,13 +77,15 @@ public class QuanLyKhachHangTabbed extends JPanel {
         MaterialDesign.materialPanel(searchPanel);
         topPanel.add(searchPanel, BorderLayout.EAST);
 
-        txtTuKhoa = new JTextField();
-        txtTuKhoa.setPreferredSize(new Dimension(300, 40));
-        MaterialDesign.materialTextField(txtTuKhoa);
-        searchPanel.add(txtTuKhoa);
+        txtTimKiem = new JTextField();
+        txtTimKiem.setPreferredSize(new Dimension(300, 40));
+        txtTimKiem.getDocument().addDocumentListener(txtTimKiem_DocumentListerner());
+        MaterialDesign.materialTextField(txtTimKiem);
+        searchPanel.add(txtTimKiem);
 
         btnTimKiem = new JButton("Tìm kiếm");
         btnTimKiem.setPreferredSize(btnThem.getPreferredSize());
+        btnTimKiem.addActionListener(btnTimKiem_Click());
         MaterialDesign.materialButton(btnTimKiem);
         searchPanel.add(btnTimKiem);
 
@@ -90,7 +96,10 @@ public class QuanLyKhachHangTabbed extends JPanel {
 
         khachHangTableModel = new KhachHangTableModel(danhSachKhachHang.getAll());
 
+        sorter = new TableRowSorter<>(khachHangTableModel);
+
         tblKhachHang = new JTable(khachHangTableModel);
+        tblKhachHang.setRowSorter(sorter);
         MaterialDesign.materialTable(tblKhachHang);
         tblKhachHang.addMouseListener(tblKhachHang_MouseListener());
 
@@ -119,10 +128,31 @@ public class QuanLyKhachHangTabbed extends JPanel {
         khachHangTableModel.setModel(danhSachKhachHang.getAll());
         tblKhachHang.setModel(khachHangTableModel);
 
+        sorter.setModel(khachHangTableModel);
+
         tblKhachHang.revalidate();
         tblKhachHang.repaint();
     }
 
+    private void filterTable(String filter_text) {
+        if (filter_text.isEmpty())
+            sorter.setRowFilter(null);
+        else {
+            try{
+                RowFilter<Object, Object> filter = new RowFilter<Object, Object>() {
+                    @Override
+                    public boolean include(Entry<?, ?> entry) {
+                        return (entry.getStringValue(1).contains(filter_text));
+                    }
+                };
+                sorter.setRowFilter(filter);
+            }catch (NumberFormatException e){
+                txtTimKiem.selectAll();
+            }
+
+        }
+    }
+    
     private void thongBao(String message){
         thongBaoDialog = new ThongBaoDialog(
                 new JFrame(),
@@ -215,6 +245,34 @@ public class QuanLyKhachHangTabbed extends JPanel {
                     }
                 }
 
+            }
+        };
+    }
+
+    private ActionListener btnTimKiem_Click(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                filterTable(txtTimKiem.getText().trim());
+            }
+        };
+    }
+
+    private DocumentListener txtTimKiem_DocumentListerner(){
+        return new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filterTable(txtTimKiem.getText().trim());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterTable(txtTimKiem.getText().trim());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filterTable(txtTimKiem.getText().trim());
             }
         };
     }

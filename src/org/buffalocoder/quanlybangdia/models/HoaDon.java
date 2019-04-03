@@ -43,6 +43,15 @@ public class HoaDon extends ChiTietHoaDon{
         return tinhTrangThue;
     }
 
+    public double thanhTien(){
+        double tongTien = getSoLuong() * getBangDia().getDonGia();
+
+        if (!isTinhTrangThue())
+            tongTien += (0.5 * tongTien);
+
+        return tongTien;
+    }
+
     public HoaDon() {
     }
 

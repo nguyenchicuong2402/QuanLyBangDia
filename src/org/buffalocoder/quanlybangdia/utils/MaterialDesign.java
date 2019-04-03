@@ -9,11 +9,12 @@ import java.awt.*;
 
 public class MaterialDesign {
     private static final QuanLyXML XML = new QuanLyXML();
-    private static final String ID_COLOR = "teal";
+    private static String ID_COLOR = "teal";
     private static final String FONT_NAME = "Times New Roman";
 
     //========== FONT ==========//
     public static final Font FONT_DEFAULT            = new Font(FONT_NAME, Font.PLAIN, 18);
+    public static final Font FONT_DEFAULT_ITALIC     = new Font(FONT_NAME, Font.ITALIC, 20);
     public static final Font FONT_SMALL              = new Font(FONT_NAME, Font.PLAIN, 16);
     public static final Font FONT_SMALL_ITALIC       = new Font(FONT_NAME, Font.ITALIC, 16);
     public static final Font FONT_TABLE_HEADER       = new Font(FONT_NAME, Font.PLAIN, 18);
@@ -40,6 +41,9 @@ public class MaterialDesign {
     public static ImageIcon ICON_XOA = new ImageIcon(MaterialDesign.class.getResource("../resources/images/baseline_delete_white_18dp.png"));
     public static ImageIcon ICON_SUA = new ImageIcon(MaterialDesign.class.getResource("../resources/images/baseline_create_white_18dp.png"));
 
+    public static void resetColor(String id){
+        ID_COLOR = id;
+    }
 
     public static void materialButton(JButton button){
         button.setBackground(COLOR_PRIMARY);

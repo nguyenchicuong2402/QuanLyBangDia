@@ -139,7 +139,11 @@ public class BangDiaDialog extends JDialog{
 
         cbTinhTrang = new JComboBox<>(new String[]{"Mới", "Hư hỏng"});
         MaterialDesign.materialComboBox(cbTinhTrang);
-        if (isChinhSua) cbTinhTrang.setSelectedItem(bangDia.isTinhTrang() ? "Mới" : "Hư hỏng");
+        cbTinhTrang.setEnabled(false);
+        if (isChinhSua) {
+            cbTinhTrang.setEnabled(true);
+            cbTinhTrang.setSelectedItem(bangDia.isTinhTrang() ? "Mới" : "Hư hỏng");
+        }
         bx4.add(cbTinhTrang);
         bx4.add(Box.createHorizontalStrut(20));
 
@@ -218,7 +222,6 @@ public class BangDiaDialog extends JDialog{
 
         txtTenBangDia.requestFocus();
     }
-
 
     private void errorInput(JTextField textField, String message){
         textField.setBorder(MaterialDesign.BORDER_ERROR);

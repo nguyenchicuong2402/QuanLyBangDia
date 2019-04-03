@@ -4,14 +4,13 @@ import org.buffalocoder.quanlybangdia.models.HoaDon;
 import org.buffalocoder.quanlybangdia.utils.Formats;
 
 import javax.swing.table.AbstractTableModel;
-import java.sql.Date;
 import java.util.ArrayList;
 
 public class ChoThueTableModel extends AbstractTableModel {
     private ArrayList<HoaDon> hoaDons;
 
     private final String[] columnNames = new String[]{
-            "Mã HD", "Tên khách hàng", "Tên băng đĩa", "Số lượng", "Ngày thuê", "Số ngày được thuê"
+            "Mã HD", "Tên khách hàng", "Tên băng đĩa", "Số lượng", "Ngày thuê", "Số ngày được thuê", "Thành tiền"
     };
 
     public void setModel(ArrayList<HoaDon> hoaDons){
@@ -49,6 +48,7 @@ public class ChoThueTableModel extends AbstractTableModel {
                 case 3: return row.getSoLuong();
                 case 4: return Formats.DATE_FORMAT.format(row.getNgayLap());
                 case 5: return row.getSoNgayDuocMuon();
+                case 6: return row.thanhTien();
             }
         }catch (Exception e){
 

@@ -5,9 +5,5 @@ public class lỗi {
 
     // TODO thêm 1 button xoá băng đĩa hỏng
 
-    // lỗi chưa phân quyển các tài khoản nhân viên bị hư tabbeld và mất hiệu ứng nhưng vẫn chạy bth
-
     // các textfied cho nhập chuỗi ko cho nhập kí tự đặc biệt
-
-    // regex cho thuê sai ( đã fix)
 }

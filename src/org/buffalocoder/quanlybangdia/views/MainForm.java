@@ -5,26 +5,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.net.URISyntaxException;
-import java.net.URL;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.buffalocoder.quanlybangdia.models.DanhSachBangDia;
-import org.buffalocoder.quanlybangdia.models.DanhSachChoThue;
-import org.buffalocoder.quanlybangdia.models.DanhSachKhachHang;
-import org.buffalocoder.quanlybangdia.models.DanhSachNhanVien;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.views.custom.CustomTabbedPanelUI;
-import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
 import org.buffalocoder.quanlybangdia.views.tabbed.*;
 
 public class MainForm extends JFrame {
     //========== CONSTANT ==========//
-    private final int WIDTH = 1200;
+    private final int WIDTH = 1300;
     private final int HEIGHT = 800;
     private final String TITLE = "Quản lý băng đĩa";
     private final boolean IS_ADMIN = DangNhap.taiKhoan.getLoaiTaiKhoan() == 1;
@@ -132,35 +124,6 @@ public class MainForm extends JFrame {
         menuTabbed.addChangeListener(menuTabbed_Change());
 
         contentPanel.add(menuTabbed);
-    }
-
-    private MouseListener lblExit(){
-        return new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                System.exit(0);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        };
     }
 
     private ActionListener btnDangXuat_Click(){

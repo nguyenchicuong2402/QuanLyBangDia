@@ -3,6 +3,7 @@ package org.buffalocoder.quanlybangdia.models;
 import org.buffalocoder.quanlybangdia.dao.BangDiaDAO;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class DanhSachBangDia {
     private ArrayList<BangDia> bangDias = null;
@@ -34,7 +35,7 @@ public class DanhSachBangDia {
         if (bangDia == null)
             return false;
 
-        return (bangDias.remove(bangDia) && bangDiaDAO.xoaBangDia(maBangDia));
+        return (bangDiaDAO.xoaBangDia(maBangDia) && bangDias.remove(bangDia));
     }
 
     public boolean sua(BangDia bangDia) throws Exception {
@@ -47,6 +48,24 @@ public class DanhSachBangDia {
                 return i;
 
         return -1;
+    }
+
+    public void xoaBangDiaHong(){
+        ArrayList<String> dsXoa = new ArrayList<>();
+
+        for (BangDia bangDia : bangDias){
+            if (!bangDia.isTinhTrang()) {
+                dsXoa.add(bangDia.getMaBangDia());
+            }
+        }
+
+        for (String maBangDia : dsXoa){
+            try {
+                xoa(maBangDia);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public ArrayList<String> getMaBangDias(){

@@ -1,12 +1,12 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
+import com.sun.tools.javac.Main;
 import org.buffalocoder.quanlybangdia.MainProgram;
 import org.buffalocoder.quanlybangdia.dao.DataBaseUtils;
 import org.buffalocoder.quanlybangdia.dao.TaiKhoanDAO;
 import org.buffalocoder.quanlybangdia.models.TaiKhoan;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.views.DangNhap;
-import org.buffalocoder.quanlybangdia.views.MainForm;
 import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
 
 import javax.swing.*;
@@ -15,6 +15,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CaiDatTabbed extends JPanel {
 
@@ -92,7 +94,7 @@ public class CaiDatTabbed extends JPanel {
         MaterialDesign.materialPanel(doiMatKhauPanel);
         doiMatKhauPanel.setBackground(MaterialDesign.COLOR_CARD);
         contentPanel.add(doiMatKhauPanel);
-        contentPanel.add(Box.createVerticalStrut(10));
+        contentPanel.add(Box.createVerticalStrut(DangNhap.taiKhoan.getLoaiTaiKhoan() == 1 ? 10 : 120));
 
         Box boxDoiMatKhau = Box.createHorizontalBox();
         doiMatKhauPanel.add(boxDoiMatKhau);
@@ -188,7 +190,9 @@ public class CaiDatTabbed extends JPanel {
         xoaDatabasePanel = new JPanel(new BorderLayout());
         MaterialDesign.materialPanel(xoaDatabasePanel);
         xoaDatabasePanel.setBackground(MaterialDesign.COLOR_CARD);
-        contentPanel.add(xoaDatabasePanel);
+
+        if (DangNhap.taiKhoan.getLoaiTaiKhoan() == 1)
+            contentPanel.add(xoaDatabasePanel);
         contentPanel.add(Box.createVerticalStrut(10));
 
         JPanel subXoaDatabasePanel = new JPanel();
@@ -308,11 +312,15 @@ public class CaiDatTabbed extends JPanel {
                         ThongBaoDialog.OK_CANCLE_OPTION
                 );
 
-                if (thongBaoDialog.getKetQua() == ThongBaoDialog.CANCLE_OPTION)
-                    return;
+                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
+                    Pattern pattern = Pattern.compile("^(.*) material$");
+                    Matcher matcher = pattern.matcher(String.valueOf(cbChuDe.getSelectedItem()).toLowerCase());
 
-                String theme = (String)cbChuDe.getSelectedItem();
-
+                    if (matcher.find()){
+                        String id_color = matcher.group(1);
+                        MaterialDesign.resetColor(id_color);
+                    }
+                }
             }
         };
     }
