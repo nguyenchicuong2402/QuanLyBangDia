@@ -18,7 +18,7 @@
         <dark>#4a148c</dark>
         <background>#f3e5f5</background>
     </Template>
-    <Template id="deep-purple">
+    <Template id="deep purple">
         <primary>#512da8</primary>
         <secondary>#673ab7</secondary>
         <dark>#311b92</dark>

@@ -68,6 +68,7 @@ public class QuanLyXML {
         }
         dg.ghiXML(document, "properties.xml");
     }
+//    Color
     public int timMau(String id){
         dg.docFileXML("themes.xml");
         for (int i = 0; i< dsColors.getLength();i++){
@@ -81,6 +82,13 @@ public class QuanLyXML {
             return String.valueOf(dsColors.item(0).getTextContent());
         else
             return null;
+    }
+    public void setRememberColor(String id) throws TransformerException, IOException {
+        document.getElementsByTagName("Color").item(0).setTextContent(id);
+        dg.ghiXML(document, "properties.xml");
+    }
+    public String getRememberColor(){
+        return document.getElementsByTagName("Color").item(0).getTextContent();
     }
     public String getPrimaryColor(String id){
         if(timMau(id)!=-1)
@@ -118,16 +126,18 @@ public class QuanLyXML {
             return null;
         }
     }
-    public void ghiNhoAccount(String tk, String pass) throws TransformerException, IOException {
-        xoaXML();
-        themXML(tk, pass);
-    }
+//    Account
     public String getTextContentTK(){
         return document.getElementsByTagName("username").item(0).getTextContent();
     }
     public String getTextContentPW(){
         return document.getElementsByTagName("password").item(0).getTextContent();
     }
+//    remember
+    public void ghiNhoAccount(String tk, String pass) throws TransformerException, IOException {
+    xoaXML();
+    themXML(tk, pass);
+}
     public int getRemember(){
         return Integer.parseInt(document.getElementsByTagName("remember").item(0).getTextContent());
     }

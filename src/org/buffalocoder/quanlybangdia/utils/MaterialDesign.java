@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class MaterialDesign {
     private static final QuanLyXML XML = new QuanLyXML();
-    private static String ID_COLOR = "teal";
+    private static String ID_COLOR = XML.getRememberColor();
     private static final String FONT_NAME = "Times New Roman";
 
     //========== FONT ==========//
@@ -40,10 +40,6 @@ public class MaterialDesign {
     public static ImageIcon ICON_THEM = new ImageIcon(MaterialDesign.class.getResource("../resources/images/baseline_add_white_18dp.png"));
     public static ImageIcon ICON_XOA = new ImageIcon(MaterialDesign.class.getResource("../resources/images/baseline_delete_white_18dp.png"));
     public static ImageIcon ICON_SUA = new ImageIcon(MaterialDesign.class.getResource("../resources/images/baseline_create_white_18dp.png"));
-
-    public static void resetColor(String id){
-        ID_COLOR = id;
-    }
 
     public static void materialButton(JButton button){
         button.setBackground(COLOR_PRIMARY);
