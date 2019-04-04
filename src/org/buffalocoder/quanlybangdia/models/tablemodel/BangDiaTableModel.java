@@ -97,7 +97,6 @@ public class BangDiaTableModel extends AbstractTableModel {
         if ((columnIndex >= 0) && (columnIndex < getColumnCount()))
             return getValueAt(0, columnIndex).getClass();
 
-
         return Object.class;
     }
 
