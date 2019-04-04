@@ -3,7 +3,8 @@
 	<output-test url="file://$MODULE_DIR$/out/test/QuanLyBangDia"/>
 	<exclude-output/>
 	<contentEntry url="file://$MODULE_DIR$"/>
-	<lib name="mssql-jdbc-7.2.1.jre8.jar" scope="COMPILE">
-		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/resources/lib/mssql-jdbc-7.2.1.jre8.jar!/"/>
-	</lib>
+	<levels>
+		<level name="jcalendar-1.4" value="project"/>
+		<level name="mssql-jdbc-7.2.1.jre11" value="project"/>
+	</levels>
 </component>
