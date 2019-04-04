@@ -242,6 +242,24 @@ public class TrangChuTabbed extends JPanel {
         bx9.add(Box.createHorizontalGlue());
     }
 
+    public void refresh(){
+        try {
+            nhanVien = nhanVienDAO.getNhanVien(DangNhap.taiKhoan.getMaNhanVien());
+        } catch (Exception e) {
+            return;
+        }
+
+        lblMaNV_2.setText(nhanVien.getMaNhanVien());
+        lblTenNguoiDung_2.setText(DangNhap.taiKhoan.getTenTaiKhoan());
+        lblHoTen_2.setText(nhanVien.getHoTen());
+        lblGioiTinh_2.setText(nhanVien.isGioiTinh() ? "Nam" : "Nữ");
+        lblNgaySinh_2.setText(Formats.DATE_FORMAT.format(nhanVien.getNgaySinh()));
+        lblCMND_2.setText(nhanVien.getcMND());
+        lblSoDienThoai_2.setText(nhanVien.getSoDienThoai());
+        lblDiaChi_2.setText(nhanVien.getDiaChi());
+        lblMoTa_2.setText(nhanVien.getMoTa());
+    }
+
     public TrangChuTabbed(){
         try {
             nhanVienDAO = NhanVienDAO.getInstance();

@@ -174,7 +174,7 @@ public class QuanLyChoThueTabbed extends JPanel {
         );
     }
 
-    public void refreshTable(){
+    public void refresh(){
         try {
             danhSachBangDia.loadData();
             danhSachKhachHang.loadData();
@@ -232,7 +232,7 @@ public class QuanLyChoThueTabbed extends JPanel {
                 try{
                     if (hoaDon != null && kiemTraTinhTrangThue(hoaDon, false)){
                         danhSachChoThue.them(hoaDon);
-                        refreshTable();
+                        refresh();
                     }
                 }catch (Exception e1){
                     thongBaoLoi(e1.getMessage());
@@ -257,9 +257,9 @@ public class QuanLyChoThueTabbed extends JPanel {
                 hoaDon = choThueDialog.getHoaDon();
 
                 try{
-                    if (hoaDon != null && kiemTraTinhTrangThue(hoaDon, true)){
+                    if (hoaDon != null){
                         danhSachChoThue.sua(hoaDon);
-                        refreshTable();
+                        refresh();
                     }
                 }catch (Exception e1){
                     thongBaoLoi(e1.getMessage());
@@ -293,7 +293,7 @@ public class QuanLyChoThueTabbed extends JPanel {
                 if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     try{
                         danhSachChoThue.xoa(maHoaDon);
-                        refreshTable();
+                        refresh();
                     }catch (Exception e1){
                         thongBaoLoi(e1.getMessage());
                     }

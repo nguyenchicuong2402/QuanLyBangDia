@@ -66,17 +66,6 @@ public class MainForm extends JFrame {
         menuPanel.setBackground(MaterialDesign.COLOR_DARK);
         topPanel.add(menuPanel, BorderLayout.CENTER);
 
-        menuBar = new JMenuBar();
-        menuBar.setBackground(MaterialDesign.COLOR_DARK);
-        menuBar.setBorder(BorderFactory.createEmptyBorder());
-        topPanel.add(menuBar);
-
-        menuCaiDat = new JMenu("Cài đặt");
-        menuCaiDat.setForeground(MaterialDesign.COLOR_TEXT);
-        menuCaiDat.setPreferredSize(new Dimension(80, 20));
-        menuCaiDat.setHorizontalTextPosition(SwingConstants.CENTER);
-        menuBar.add(menuCaiDat);
-
         // logout panel
         logoutPanel = new JPanel(new BorderLayout());
         MaterialDesign.materialPanel(logoutPanel);
@@ -140,12 +129,14 @@ public class MainForm extends JFrame {
         return new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                quanLyChoThueTabbed.refreshTable();
-                quanLyBangDiaTabbed.refreshTable();
-                quanLyKhachHangTabbed.refreshTable();
+                quanLyChoThueTabbed.refresh();
+                quanLyBangDiaTabbed.refresh();
+                quanLyKhachHangTabbed.refresh();
+                thongKeTabbed.refresh();
+                trangChuTabbed.refresh();
 
                 if (IS_ADMIN)
-                    quanLyNhanVienTabbed.refreshTable();
+                    quanLyNhanVienTabbed.refresh();
 
                 menuTabbed.revalidate();
                 menuTabbed.repaint();

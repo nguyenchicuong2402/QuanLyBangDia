@@ -141,7 +141,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
         }
     }
     
-    public void refreshTable(){
+    public void refresh(){
         try {
             danhSachNhanVien.loadData();
         } catch (Exception e) {
@@ -190,7 +190,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
                 try{
                     danhSachNhanVien.them(nhanVien);
                     taiKhoanDAO.themTaiKhoan(taiKhoan);
-                    refreshTable();
+                    refresh();
                 }catch (Exception e1){
                     thongBaoLoi(e1.getMessage());
                 }
@@ -231,7 +231,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
                     if (taiKhoan != null)
                         taiKhoanDAO.suaTaiKhoan(taiKhoan);
 
-                    refreshTable();
+                    refresh();
                 }catch (Exception e1){
                     thongBaoLoi(e1.getMessage());
                 }
@@ -268,7 +268,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
                 if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     try{
                         danhSachNhanVien.xoa(maNhanVien);
-                        refreshTable();
+                        refresh();
                     }catch (Exception e1){
                         thongBaoLoi(e1.getMessage());
                     }

@@ -118,7 +118,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
         prepareUI();
     }
 
-    public void refreshTable(){
+    public void refresh(){
         try {
             danhSachKhachHang.loadData();
         } catch (Exception e) {
@@ -183,7 +183,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
 
                 try{
                     danhSachKhachHang.them(khachHang);
-                    refreshTable();
+                    refresh();
                 }catch (Exception e1){
                     thongBaoLoi(e1.getMessage());
                 }
@@ -207,7 +207,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
 
                 try{
                     danhSachKhachHang.sua(khachHangDialog.getKhachHang());
-                    refreshTable();
+                    refresh();
                 }catch (Exception e1){
                     thongBaoLoi(e1.getMessage());
                 }
@@ -239,7 +239,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
                 if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     try{
                         danhSachKhachHang.xoa(maKhachHang);
-                        refreshTable();
+                        refresh();
                     }catch (Exception e1){
                         thongBaoLoi(e1.getMessage());
                     }

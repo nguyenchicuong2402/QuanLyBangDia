@@ -128,7 +128,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
         prepareUI();
     }
 
-    public void refreshTable(){
+    public void refresh(){
         try {
             danhSachBangDia.loadData();
         } catch (Exception e) {
@@ -193,7 +193,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
                 try{
                     danhSachBangDia.them(bangDia);
-                    refreshTable();
+                    refresh();
                 }catch (Exception e1){
                     thongBaoLoi(e1.getMessage());
                 }
@@ -217,7 +217,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
                 try{
                     danhSachBangDia.sua(bangDiaDialog.getBangDia());
-                    refreshTable();
+                    refresh();
                 }catch (Exception e1){
                     thongBaoLoi(e1.getMessage());
                 }
@@ -249,7 +249,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
                 if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     try{
                         danhSachBangDia.xoa(maBangDia);
-                        refreshTable();
+                        refresh();
                     }catch (Exception e1){
                         thongBaoLoi(e1.getMessage());
                     }
@@ -280,7 +280,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
                 if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     danhSachBangDia.xoaBangDiaHong();
-                    refreshTable();
+                    refresh();
                 }
             }
         };

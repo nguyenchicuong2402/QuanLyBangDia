@@ -114,8 +114,16 @@ public class HoaDonDAO {
             preparedStatement.setString(4, hoaDon.getMaHoaDon());
 
             if (preparedStatement.executeUpdate() > 0){
-                dataBaseUtils.commitQuery();
-                return getHoaDon(hoaDon.getMaHoaDon());
+                sql = "UPDATE HOADON SET NGAYLAP = ? WHERE MAHD = ?";
+                preparedStatement = dataBaseUtils.excuteQueryWrite(sql);
+
+                preparedStatement.setDate(1, hoaDon.getNgayLap());
+                preparedStatement.setString(2, hoaDon.getMaHoaDon());
+
+                if (preparedStatement.executeUpdate() > 0){
+                    dataBaseUtils.commitQuery();
+                    return getHoaDon(hoaDon.getMaHoaDon());
+                }
             }
         } catch (Exception e){
             dataBaseUtils.rollbackQuery();
