@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Propertise>
+        <Account remember="1">
+                <username>admin</username>
+                <password>123456</password>
+        </Account>
+        <Setting>
+                <themes>deep purple</themes>
+        </Setting>
+        <SQL>
+                <server>localhost</server>
+                <port>1433</port>
+                <database>QUANLYBANGDIA</database>
+                <username>sa</username>
+                <password>sapassword</password>
+        </SQL>
+</Propertise>

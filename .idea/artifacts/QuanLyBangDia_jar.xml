@@ -3,8 +3,9 @@
     <output-path>$PROJECT_DIR$/out/artifacts/QuanLyBangDia_jar</output-path>
     <root id="archive" name="QuanLyBangDia.jar">
       <element id="module-output" name="QuanLyBangDia" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/resources/lib/jcalendar-1.4.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/resources/lib/mssql-jdbc-7.2.1.jre8.jar" path-in-jar="/" />
+      <element id="library" level="project" name="jcalendar-1.4" />
+      <element id="library" level="project" name="mssql-jdbc-7.2.1.jre11" />
+      <element id="dir-copy" path="$PROJECT_DIR$/resources" />
     </root>
   </artifact>
 </component>

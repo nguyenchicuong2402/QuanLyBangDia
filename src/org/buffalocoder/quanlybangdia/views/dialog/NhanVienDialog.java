@@ -602,7 +602,7 @@ public class NhanVienDialog extends JDialog {
                 if (!isChinhSua){
                     taiKhoan = new TaiKhoan(
                             txtTenTaiKhoan.getText().trim(),
-                            txtMatKhau.getText().trim(),
+                            String.valueOf(txtMatKhau.getPassword()),
                             cbLoaiTaiKhoan.getSelectedItem().equals("ADMIN") ? 1 : 0,
                             txtMaNV.getText().trim()
                     );

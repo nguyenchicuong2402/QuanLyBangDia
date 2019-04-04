@@ -1,20 +1,23 @@
 package org.buffalocoder.quanlybangdia.dao;
 
+import org.buffalocoder.quanlybangdia.XML.QuanLyXML;
+
 import java.sql.*;
 
 public class DataBaseUtils {
     private static DataBaseUtils _instance;
-    private static final String SERVER = "localhost";
-    private static final int PORT = 1433;
-    private static final String USERNAME = "sa";
-    private static final String PASSWORD = "sapassword";
-    private static final String DB_NAME = "QUANLYBANGDIA";
-    private static final String URL = String.format("jdbc:sqlserver://%s:%d;databaseName=%s;user=%s;password=%s",
-            SERVER, PORT, DB_NAME, USERNAME, PASSWORD);
+    private static QuanLyXML quanLyXML;
+    private static final String TEMPLATE_URL = "jdbc:sqlserver://%s:%d;databaseName=%s;user=%s;password=%s";
+    private static String url = "";
 
     private static Connection _connection;
 
     private DataBaseUtils() throws Exception {
+        quanLyXML = new QuanLyXML();
+        final String config[] = quanLyXML.getConfigDatabase();
+
+        url = String.format(TEMPLATE_URL, config[0], Integer.parseInt(config[1]), config[2], config[3], config[4]);
+
         _connection = getConnection();
         _connection.setAutoCommit(false);
     }
@@ -80,7 +83,7 @@ public class DataBaseUtils {
     private Connection getConnection() throws Exception {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            return DriverManager.getConnection(URL);
+            return DriverManager.getConnection(url);
         } catch (ClassNotFoundException e) {
             throw new Exception("Không tìm thấy thư viện JDBC");
         } catch (SQLException e) {

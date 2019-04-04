@@ -7,18 +7,16 @@ import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
 
 import javax.swing.*;
-import javax.xml.transform.TransformerException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.IOException;
 
 public class DangNhap extends JFrame {
 
     public static TaiKhoan taiKhoan;
-    private QuanLyXML ql = new QuanLyXML();
+    private static QuanLyXML quanLyXML;
     private TaiKhoanDAO taiKhoanDAO;
     private ThongBaoDialog thongBaoDialog;
 
@@ -153,11 +151,10 @@ public class DangNhap extends JFrame {
     }
 
     private void khoiPhucTaiKhoan(){
-        if(ql.getRemember() != 0)
-        {
+        if (taiKhoan != null){
             cbGhiNho.setSelected(true);
-            txtTenNguoiDung.setText(ql.getTextContentTK());
-            txtMatKhau.setText(ql.getTextContentPW());
+            txtTenNguoiDung.setText(taiKhoan.getTenTaiKhoan());
+            txtMatKhau.setText(taiKhoan.getMatKhau());
         }
     }
 
@@ -188,26 +185,10 @@ public class DangNhap extends JFrame {
     }
 
     private void ghiNhoTaiKhoan(){
-        if (cbGhiNho.isSelected()) {
-            try {
-                ql.setRemember(1);
-                ql.ghiNhoAccount(txtTenNguoiDung.getText(), txtMatKhau.getText());
-            } catch (TransformerException e1) {
-                e1.printStackTrace();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-        }
-        else {
-            try {
-                ql.setRemember(0);
-                ql.xoaXML();
-            } catch (TransformerException e1) {
-                e1.printStackTrace();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-        }
+        if (cbGhiNho.isSelected())
+            quanLyXML.ghiNhoTaiKhoan(taiKhoan);
+        else
+            quanLyXML.ghiNhoTaiKhoan(null);
     }
 
     private ActionListener btnThoat_Click(){
@@ -234,7 +215,7 @@ public class DangNhap extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // lấy tên đăng nhập và mật khẩu
                 String tenTaiKhoan = txtTenNguoiDung.getText().trim();
-                String matKhau = txtMatKhau.getText().trim();
+                String matKhau = String.valueOf(txtMatKhau.getPassword());
 
                 // kiểm tra dữ liệu
                 if (tenTaiKhoan.isEmpty()){
@@ -329,6 +310,9 @@ public class DangNhap extends JFrame {
             thongBaoLoi(e.getMessage());
             System.exit(1);
         }
+
+        quanLyXML = new QuanLyXML();
+        taiKhoan = quanLyXML.getGhiNhoTaiKhoan();
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override

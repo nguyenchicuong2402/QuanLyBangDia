@@ -8,8 +8,8 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 public class MaterialDesign {
-    private static final QuanLyXML XML = new QuanLyXML();
-    private static final String ID_COLOR = XML.getRememberColor();
+    private static final QuanLyXML quanlyXML = new QuanLyXML();
+    private static final String ID_COLOR = quanlyXML.getIDThemes();
     private static final String FONT_NAME = "Times New Roman";
 
     //========== FONT ==========//
@@ -23,10 +23,10 @@ public class MaterialDesign {
     public static final Font FONT_TITLE_ALERT        = new Font(FONT_NAME, Font.PLAIN, 20);
 
     //========== COLOR ==========//
-    public static final Color COLOR_PRIMARY         = Color.decode(XML.getPrimaryColor(ID_COLOR));
-    public static final Color COLOR_SECONDARY       = Color.decode(XML.getSecondary(ID_COLOR));
-    public static final Color COLOR_DARK            = Color.decode(XML.getDark(ID_COLOR));
-    public static final Color COLOR_BACKGROUND      = Color.decode(XML.getBackground(ID_COLOR));
+    public static final Color COLOR_PRIMARY         = Color.decode(quanlyXML.getColorPrimary(ID_COLOR));
+    public static final Color COLOR_SECONDARY       = Color.decode(quanlyXML.getColorSecondary(ID_COLOR));
+    public static final Color COLOR_DARK            = Color.decode(quanlyXML.getColorDark(ID_COLOR));
+    public static final Color COLOR_BACKGROUND      = Color.decode(quanlyXML.getColorBackground(ID_COLOR));
     public static final Color COLOR_TEXT            = Color.decode("#ffffff");
     public static final Color COLOR_ERROR           = Color.decode("#D50000");
     public static final Color COLOR_CARD            = Color.decode("#ffffff");
@@ -36,10 +36,10 @@ public class MaterialDesign {
     public static Border BORDER_DIALOG = BorderFactory.createLineBorder(COLOR_DARK, 2);
 
     //========== ICON ==========//
-    public static ImageIcon ICON_DANGXUAT = new ImageIcon(MaterialDesign.class.getResource("../resources/images/baseline_exit_to_app_white_24dp.png"));
-    public static ImageIcon ICON_THEM = new ImageIcon(MaterialDesign.class.getResource("../resources/images/baseline_add_white_18dp.png"));
-    public static ImageIcon ICON_XOA = new ImageIcon(MaterialDesign.class.getResource("../resources/images/baseline_delete_white_18dp.png"));
-    public static ImageIcon ICON_SUA = new ImageIcon(MaterialDesign.class.getResource("../resources/images/baseline_create_white_18dp.png"));
+    public static ImageIcon ICON_DANGXUAT = new ImageIcon("resources/images/baseline_exit_to_app_white_24dp.png");
+    public static ImageIcon ICON_THEM = new ImageIcon("resources/images/baseline_add_white_18dp.png");
+    public static ImageIcon ICON_XOA = new ImageIcon("resources/images/baseline_delete_white_18dp.png");
+    public static ImageIcon ICON_SUA = new ImageIcon("resources/images/baseline_create_white_18dp.png");
 
     public static void materialButton(JButton button){
         button.setBackground(COLOR_PRIMARY);

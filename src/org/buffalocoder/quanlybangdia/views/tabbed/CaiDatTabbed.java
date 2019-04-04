@@ -1,7 +1,5 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
-import com.sun.tools.javac.Main;
-import org.buffalocoder.quanlybangdia.MainProgram;
 import org.buffalocoder.quanlybangdia.XML.QuanLyXML;
 import org.buffalocoder.quanlybangdia.dao.DataBaseUtils;
 import org.buffalocoder.quanlybangdia.dao.TaiKhoanDAO;
@@ -11,19 +9,17 @@ import org.buffalocoder.quanlybangdia.views.DangNhap;
 import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
 
 import javax.swing.*;
-import javax.xml.transform.TransformerException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CaiDatTabbed extends JPanel {
 
-    private QuanLyXML XML = new QuanLyXML();
+    private QuanLyXML quanLyXML = new QuanLyXML();
     private static TaiKhoanDAO taiKhoanDAO;
     private static DataBaseUtils dataBaseUtils;
     private ThongBaoDialog thongBaoDialog;
@@ -322,13 +318,7 @@ public class CaiDatTabbed extends JPanel {
 
                     if (matcher.find()){
                         String id_color = matcher.group(1);
-                        try {
-                            XML.setRememberColor(id_color);
-                        } catch (TransformerException e1) {
-                            e1.printStackTrace();
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
+                        quanLyXML.setIDColor(id_color);
                     }
                     System.exit(0);
                 }

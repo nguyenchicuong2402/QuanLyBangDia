@@ -1,42 +1,55 @@
 package org.buffalocoder.quanlybangdia.XML;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.File;
+import java.io.FileWriter;
+
 public class DocGhiFileXML {
+    public DocGhiFileXML(){
 
-    public static Document docFileXML(String file){
+    }
+
+    public Document docFileXML(String filePath) throws Exception {
         Document document = null;
-        File f = new File("src/"+file);
-
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder;
+
         try {
+            File file = new File(filePath);
             documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            document = documentBuilder.parse(f);
+            document = documentBuilder.parse(file);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new Exception("Lỗi đọc file cấu hình");
         }
+
         return document;
     }
-    public void ghiXML(Document doc, String file) throws TransformerException, IOException {
-        File f = new File("src/"+file);
-        DOMSource ds = new DOMSource((Node)doc);
-        TransformerFactory factory = TransformerFactory.newInstance();
-        Transformer transformer = factory.newTransformer();
-        FileWriter fileWriter = new FileWriter(f);
-        StreamResult sr = new StreamResult(fileWriter);
-        Source dOMSource;
-        transformer.transform(ds, sr);
+
+    public void ghiFileXML(Document doc, String filePath) throws Exception {
+        try{
+            File file = new File(filePath);
+
+            DOMSource domSource = new DOMSource((Node)doc);
+
+            TransformerFactory factory = TransformerFactory.newInstance();
+
+            Transformer transformer = factory.newTransformer();
+
+            FileWriter fileWriter = new FileWriter(file);
+
+            StreamResult sr = new StreamResult(fileWriter);
+
+            transformer.transform(domSource, sr);
+        }catch (Exception e){
+            throw new Exception("Lỗi ghi file cấu hình");
+        }
     }
 }
