@@ -66,6 +66,13 @@ public class HoaDon extends ChiTietHoaDon{
         this.ngayLap = ngayLap;
     }
 
+    public HoaDon(BangDia bangDia, int soNgayDuocMuon, int soLuong, String maHoaDon, KhachHang khachHang, Date ngayLap, boolean tinhTrang) {
+        super(bangDia, soNgayDuocMuon, soLuong, tinhTrang);
+        this.maHoaDon = maHoaDon;
+        this.khachHang = khachHang;
+        this.ngayLap = ngayLap;
+    }
+
     public HoaDon(BangDia bangDia, int soNgayDuocMuon, int soLuong, String maHoaDon, KhachHang khachHang) {
         super(bangDia, soNgayDuocMuon, soLuong);
         this.maHoaDon = maHoaDon;

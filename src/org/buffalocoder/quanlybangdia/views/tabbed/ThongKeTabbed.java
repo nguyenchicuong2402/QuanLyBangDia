@@ -19,7 +19,8 @@ public class ThongKeTabbed extends JPanel {
 
     private JPanel doanhThuPanel, thueQuaHanPanel, tinhTrangPanel, leftPanel, rightPanel;
     private JLabel lblTieuDeDoanhThu, lblTieuDeThueQuaHan, lblTieuDeTinhTrang, lblDoanhThu,
-                lblTongSoBangDia_1, lblTongSoBangDia_2, lblTongSoBangDiaDaThue_1, lblTongSoBangDiaDaThue_2;
+                lblTongSoBangDia_1, lblTongSoBangDia_2, lblTongSoBangDiaDaThue_1, lblTongSoBangDiaDaThue_2,
+                lblTongSoBangDiaHong_1, lblTongSoBangDiaHong_2;
     private ChoThueTableModel choThueTableModel;
     private JTable tblChoThue;
 
@@ -86,6 +87,9 @@ public class ThongKeTabbed extends JPanel {
         Box bx2 = Box.createHorizontalBox();
         boxTinhTrang.add(bx2);
 
+        Box bx3 = Box.createHorizontalBox();
+        boxTinhTrang.add(bx3);
+
         lblTongSoBangDia_1 = new JLabel("Tổng số băng đĩa: ");
         MaterialDesign.materialLabel(lblTongSoBangDia_1);
         lblTongSoBangDia_1.setFont(MaterialDesign.FONT_TITLE_2);
@@ -109,6 +113,18 @@ public class ThongKeTabbed extends JPanel {
         lblTongSoBangDiaDaThue_2.setFont(MaterialDesign.FONT_TITLE_2);
         bx2.add(lblTongSoBangDiaDaThue_2);
         bx2.add(Box.createHorizontalGlue());
+
+        lblTongSoBangDiaHong_1 = new JLabel("Số băng đĩa đã hỏng: ");
+        MaterialDesign.materialLabel(lblTongSoBangDiaHong_1);
+        lblTongSoBangDiaHong_1.setFont(MaterialDesign.FONT_TITLE_2);
+        lblTongSoBangDiaHong_1.setPreferredSize(lblTongSoBangDia_1.getPreferredSize());
+        bx3.add(lblTongSoBangDiaHong_1);
+
+        lblTongSoBangDiaHong_2 = new JLabel();
+        MaterialDesign.materialLabel(lblTongSoBangDiaHong_2);
+        lblTongSoBangDiaHong_2.setFont(MaterialDesign.FONT_TITLE_2);
+        bx3.add(lblTongSoBangDiaHong_2);
+        bx3.add(Box.createHorizontalGlue());
 
         // thuê quá hạn panel
         thueQuaHanPanel = new JPanel(new BorderLayout());
@@ -143,6 +159,8 @@ public class ThongKeTabbed extends JPanel {
                     danhSachChoThue.soLuongBangDiaDaThue()));
 
             lblTongSoBangDiaDaThue_2.setText(String.valueOf(danhSachChoThue.soLuongBangDiaDaThue()));
+
+            lblTongSoBangDiaHong_2.setText(String.valueOf(danhSachBangDia.tongSoBangDiaHong()));
 
             lblDoanhThu.setText(String.valueOf(danhSachChoThue.tongDoanhThu()));
 

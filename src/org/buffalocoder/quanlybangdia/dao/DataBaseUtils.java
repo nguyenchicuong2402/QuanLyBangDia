@@ -76,6 +76,18 @@ public class DataBaseUtils {
             commitQuery();
             return true;
         } catch (SQLException e) {
+            rollbackQuery();
+            throw new Exception("Lỗi reset database");
+        }
+    }
+
+    public boolean excuteProcedure(String sql) throws Exception {
+        try (CallableStatement stmt = _connection.prepareCall(sql)) {
+            stmt.execute();
+            commitQuery();
+            return true;
+        } catch (SQLException e) {
+            rollbackQuery();
             throw new Exception("Lỗi reset database");
         }
     }

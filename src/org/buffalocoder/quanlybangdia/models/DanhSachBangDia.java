@@ -77,6 +77,16 @@ public class DanhSachBangDia {
         return tong;
     }
 
+    public int tongSoBangDiaHong(){
+        int count = 0;
+
+        for (BangDia bangDia : bangDias)
+            if (!bangDia.isTinhTrang())
+                count++;
+
+        return count;
+    }
+
     public ArrayList<String> getMaBangDias(){
         ArrayList<String> maBangDias = new ArrayList<>();
 

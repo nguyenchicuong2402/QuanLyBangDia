@@ -44,7 +44,8 @@ public class HoaDonDAO {
                         resultSet.getInt("SOLUONG"),
                         resultSet.getString("MAHD"),
                         KhachHangDAO.getInstance().getKhachHang(resultSet.getString("MAKH")),
-                        resultSet.getDate("NGAYLAP")
+                        resultSet.getDate("NGAYLAP"),
+                        resultSet.getInt("TINHTRANG") == 1
                 );
 
                 hoaDons.add(hoaDon);
@@ -72,7 +73,8 @@ public class HoaDonDAO {
                     resultSet.getInt("SOLUONG"),
                     resultSet.getString("MAHD"),
                     KhachHangDAO.getInstance().getKhachHang(resultSet.getString("MAKH")),
-                    resultSet.getDate("NGAYLAP")
+                    resultSet.getDate("NGAYLAP"),
+                    resultSet.getInt("TINHTRANG") == 1
             );
         } catch (Exception e) {
             throw new Exception("Lỗi lấy thông tin hoá đơn");
@@ -103,7 +105,7 @@ public class HoaDonDAO {
 
     public HoaDon suaHoaDon(HoaDon hoaDon) throws Exception {
         String sql = "UPDATE CHITIETHOADON SET " +
-                    "MABD = ?, SONGAYDUOCMUON = ?, SOLUONG = ? WHERE MAHD = ?";
+                    "MABD = ?, SONGAYDUOCMUON = ?, SOLUONG = ?, TINHTRANG = ? WHERE MAHD = ?";
 
         try {
             preparedStatement = dataBaseUtils.excuteQueryWrite(sql);
@@ -111,7 +113,8 @@ public class HoaDonDAO {
             preparedStatement.setString(1, hoaDon.getBangDia().getMaBangDia());
             preparedStatement.setInt(2, hoaDon.getSoNgayDuocMuon());
             preparedStatement.setInt(3, hoaDon.getSoLuong());
-            preparedStatement.setString(4, hoaDon.getMaHoaDon());
+            preparedStatement.setInt(4, hoaDon.isTinhTrang() ? 1 : 0);
+            preparedStatement.setString(5, hoaDon.getMaHoaDon());
 
             if (preparedStatement.executeUpdate() > 0){
                 sql = "UPDATE HOADON SET NGAYLAP = ? WHERE MAHD = ?";
@@ -146,7 +149,7 @@ public class HoaDonDAO {
 
             if (preparedStatement.executeUpdate() > 0){
                 dataBaseUtils.commitQuery();
-                sql = "INSERT INTO CHITIETHOADON (MAHD, MABD, SONGAYDUOCMUON, SOLUONG) VALUES (?, ?, ?, ?)";
+                sql = "INSERT INTO CHITIETHOADON (MAHD, MABD, SONGAYDUOCMUON, SOLUONG, TINHTRANG) VALUES (?, ?, ?, ?, ?)";
 
                 preparedStatement = dataBaseUtils.excuteQueryWrite(sql);
 
@@ -154,6 +157,7 @@ public class HoaDonDAO {
                 preparedStatement.setString(2, hoaDon.getBangDia().getMaBangDia());
                 preparedStatement.setInt(3, hoaDon.getSoNgayDuocMuon());
                 preparedStatement.setInt(4, hoaDon.getSoLuong());
+                preparedStatement.setInt(5, hoaDon.isTinhTrang() ? 1 : 0);
 
                 if (preparedStatement.executeUpdate() > 0){
                     dataBaseUtils.commitQuery();
@@ -168,6 +172,17 @@ public class HoaDonDAO {
         }
 
         return null;
+    }
+
+    public boolean thanhToanHoaDon(String maHoaDon) throws Exception {
+        final String sql = String.format("{call THANHTOAN_HOADON(%s)}", maHoaDon);
+
+        try {
+            dataBaseUtils.excuteProcedure(sql);
+            return true;
+        } catch (Exception e) {
+            throw new Exception("Lỗi thanh toán hoá đơn");
+        }
     }
 
     public boolean xoaHoaDon(String maHoaDon) throws Exception {

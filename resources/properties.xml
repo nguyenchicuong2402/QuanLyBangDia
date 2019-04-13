@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><Propertise>
         <Account remember="1">
                 <username>admin</username>
-                <password>123456</password>
+                <password>admin</password>
         </Account>
         <Setting>
-                <themes>pink</themes>
+                <themes>blue</themes>
         </Setting>
         <SQL>
                 <server>localhost</server>

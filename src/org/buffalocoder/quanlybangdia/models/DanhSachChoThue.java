@@ -59,11 +59,16 @@ public class DanhSachChoThue {
         return tong;
     }
 
+    public void thanhToanHoaDon(String maHoaDon) throws Exception {
+        hoaDonDAO.thanhToanHoaDon(maHoaDon);
+    }
+
     public int soLuongBangDiaDaThue(){
         int tong = 0;
 
         for (HoaDon hoaDon : hoaDons)
-            tong += hoaDon.getSoLuong();
+            if (!hoaDon.isTinhTrang())
+                tong += hoaDon.getSoLuong();
 
         return tong;
     }
