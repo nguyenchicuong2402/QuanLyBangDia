@@ -7,11 +7,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ecdd5e3-bc5b-493b-80fa-dbdc743fa957" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/QuanLyBangDia_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/QuanLyBangDia_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/df75f2f0-7ce4-45b2-80a2-e38b7d2fc263.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/df75f2f0-7ce4-45b2-80a2-e38b7d2fc263/storage_v2/_src_/database/QUANLYBANGDIA.xh4veg.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/df75f2f0-7ce4-45b2-80a2-e38b7d2fc263/storage_v2/_src_/database/QUANLYBANGDIA.xh4veg/schema/dbo.sYMBAA.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/df75f2f0-7ce4-45b2-80a2-e38b7d2fc263/storage_v2/_src_/database/QUANLYBANGDIA.xh4veg/schema/dbo.sYMBAA.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.project" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.settings/org.eclipse.core.resources.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuanLyBangDia.userlibraries" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/QuanLyBangDia_jar/QuanLyBangDia.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuanLyBangDia.iml" beforeDir="false" afterPath="$PROJECT_DIR$/QuanLyBangDia.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/QuanLyBangDia_jar/mssql-jdbc-7.2.1.jre11.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/properties.xml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/properties.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/XML/DocGhiFileXML.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/XML/DocGhiFileXML.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/XML/QuanLyXML.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/XML/QuanLyXML.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -61,7 +69,22 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/XML/QuanLyXML.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="242">
+              <caret line="217" column="32" selection-start-line="217" selection-start-column="32" selection-end-line="217" selection-end-column="32" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#487#488#0" expanded="true" />
+                <element signature="e#538#539#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -126,8 +149,6 @@
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/tablemodel/BangDiaTableModel.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/MainForm.java" />
-        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/XML/QuanLyXML.java" />
-        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/XML/DocGhiFileXML.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/XML/DocGhiFileXMLFeature.java" />
         <option value="$PROJECT_DIR$/src/properties.xml" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/dao/DataBaseUtils.java" />
@@ -138,6 +159,8 @@
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/DangNhap.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/NhanVienDialog.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/utils/MaterialDesign.java" />
+        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/XML/DocGhiFileXML.java" />
+        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/XML/QuanLyXML.java" />
       </list>
     </option>
   </component>
@@ -155,7 +178,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -167,35 +189,26 @@
             <path>
               <item name="QuanLyBangDia" type="b2602c69:ProjectViewProjectNode" />
               <item name="QuanLyBangDia" type="462c0819:PsiDirectoryNode" />
-              <item name="library" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="QuanLyBangDia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="QuanLyBangDia" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="QuanLyBangDia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="QuanLyBangDia" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="QuanLyBangDia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="QuanLyBangDia" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
-              <item name="QuanLyBangDia_jar" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="QuanLyBangDia" type="b2602c69:ProjectViewProjectNode" />
               <item name="QuanLyBangDia" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="quanlybangdia" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="QuanLyBangDia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="QuanLyBangDia" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="quanlybangdia" type="462c0819:PsiDirectoryNode" />
+              <item name="XML" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -394,6 +407,7 @@
       <workItem from="1554799496753" duration="8000" />
       <workItem from="1555033906889" duration="237000" />
       <workItem from="1555039518140" duration="604000" />
+      <workItem from="1555130532580" duration="434000" />
     </task>
     <task id="LOCAL-00001" summary="thêm thư mục cho project">
       <created>1551462091913</created>
@@ -710,11 +724,18 @@
       <option name="project" value="LOCAL" />
       <updated>1554400958317</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="cập nhật thư viện">
+      <created>1555130557619</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1555130557619</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="269203000" />
+    <option name="totallyTimeSpent" value="269637000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -727,8 +748,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2124665" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21514745" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -737,7 +759,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32914925" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49329758" weight="0.32775453" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49329758" visible="true" weight="0.32775453" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -800,7 +822,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="update database" />
     <MESSAGE value="fix lỗi thêm trùng băng đĩa" />
     <MESSAGE value="thêm phân quyền người dùng" />
     <MESSAGE value="thêm dialog thêm, sửa cho băng đĩa, khách hàng" />
@@ -825,7 +846,8 @@
     <MESSAGE value="hoàn thành" />
     <MESSAGE value="config for eclipse" />
     <MESSAGE value="thay đổi cấu trúc thư mục, cập nhật đọc ghi file xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="thay đổi cấu trúc thư mục, cập nhật đọc ghi file xml" />
+    <MESSAGE value="cập nhật thư viện" />
+    <option name="LAST_COMMIT_MESSAGE" value="cập nhật thư viện" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1300,26 +1322,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/XML/DocGhiFileXML.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="19" column="65" selection-start-line="19" selection-start-column="65" selection-end-line="19" selection-end-column="65" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/XML/QuanLyXML.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2112">
-          <caret line="98" column="25" lean-forward="true" selection-start-line="98" selection-start-column="25" selection-end-line="98" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/utils/MaterialDesign.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-891">
@@ -1351,6 +1353,28 @@
             <element signature="method#btnThoat_Click#0;class#DangNhap#0" />
             <element signature="method#txtTenNguoiDung_Changed#0;class#DangNhap#0" />
             <element signature="method#txtMatKhau_Changed#0;class#DangNhap#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/XML/DocGhiFileXML.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="38" column="24" lean-forward="true" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/XML/QuanLyXML.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="217" column="32" selection-start-line="217" selection-start-column="32" selection-end-line="217" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#487#488#0" expanded="true" />
+            <element signature="e#538#539#0" expanded="true" />
           </folding>
         </state>
       </provider>

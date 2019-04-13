@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="QUANLYBANGDIA@localhost">
+  <database-model serializer="dbm" dbms="MSSQL" family-id="MSSQL" format-version="4.15">
+    <root id="1">
+      <ServerVersion>14.0.2002</ServerVersion>
+    </root>
+    <database id="2" parent="1" name="MOVIES">
+      <ObjectId>7</ObjectId>
+      <Collation>SQL_Latin1_General_CP1_CI_AS</Collation>
+    </database>
+    <database id="3" parent="1" name="QLBH">
+      <ObjectId>6</ObjectId>
+      <Collation>SQL_Latin1_General_CP1_CI_AS</Collation>
+    </database>
+    <database id="4" parent="1" name="QLSACH">
+      <ObjectId>5</ObjectId>
+      <Collation>SQL_Latin1_General_CP1_CI_AS</Collation>
+    </database>
+    <database id="5" parent="1" name="QUANLYBANGDIA">
+      <ObjectId>8</ObjectId>
+      <Current>1</Current>
+      <Visible>1</Visible>
+      <Collation>SQL_Latin1_General_CP1_CI_AS</Collation>
+    </database>
+    <database id="6" parent="1" name="master">
+      <ObjectId>1</ObjectId>
+      <Collation>SQL_Latin1_General_CP1_CI_AS</Collation>
+    </database>
+    <database id="7" parent="1" name="model">
+      <ObjectId>3</ObjectId>
+      <Collation>SQL_Latin1_General_CP1_CI_AS</Collation>
+    </database>
+    <database id="8" parent="1" name="msdb">
+      <ObjectId>4</ObjectId>
+      <Collation>SQL_Latin1_General_CP1_CI_AS</Collation>
+    </database>
+    <database id="9" parent="1" name="tempdb">
+      <ObjectId>2</ObjectId>
+      <Collation>SQL_Latin1_General_CP1_CI_AS</Collation>
+    </database>
+    <schema id="10" parent="5" name="INFORMATION_SCHEMA">
+      <ObjectId>3</ObjectId>
+    </schema>
+    <schema id="11" parent="5" name="db_accessadmin">
+      <ObjectId>16385</ObjectId>
+    </schema>
+    <schema id="12" parent="5" name="db_backupoperator">
+      <ObjectId>16389</ObjectId>
+    </schema>
+    <schema id="13" parent="5" name="db_datareader">
+      <ObjectId>16390</ObjectId>
+    </schema>
+    <schema id="14" parent="5" name="db_datawriter">
+      <ObjectId>16391</ObjectId>
+    </schema>
+    <schema id="15" parent="5" name="db_ddladmin">
+      <ObjectId>16387</ObjectId>
+    </schema>
+    <schema id="16" parent="5" name="db_denydatareader">
+      <ObjectId>16392</ObjectId>
+    </schema>
+    <schema id="17" parent="5" name="db_denydatawriter">
+      <ObjectId>16393</ObjectId>
+    </schema>
+    <schema id="18" parent="5" name="db_owner">
+      <ObjectId>16384</ObjectId>
+    </schema>
+    <schema id="19" parent="5" name="db_securityadmin">
+      <ObjectId>16386</ObjectId>
+    </schema>
+    <schema id="20" parent="5" name="dbo">
+      <ObjectId>1</ObjectId>
+      <IntrospectionTimestamp>2019-03-30.17:15:14.067</IntrospectionTimestamp>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="21" parent="5" name="guest">
+      <ObjectId>2</ObjectId>
+    </schema>
+    <schema id="22" parent="5" name="sys">
+      <ObjectId>4</ObjectId>
+    </schema>
+    <table id="23" parent="20" name="BANGDIA">
+      <ObjectId>1093578934</ObjectId>
+      <CreatedTimestamp>2019-03-30.15:48:14.190</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:22.007</ModifiedTimestamp>
+    </table>
+    <table id="24" parent="20" name="CHITIETHOADON">
+      <ObjectId>1189579276</ObjectId>
+      <CreatedTimestamp>2019-03-30.15:48:18.470</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:47.130</ModifiedTimestamp>
+    </table>
+    <table id="25" parent="20" name="HOADON">
+      <ObjectId>1141579105</ObjectId>
+      <CreatedTimestamp>2019-03-30.15:48:16.257</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:25.257</ModifiedTimestamp>
+    </table>
+    <table id="26" parent="20" name="KHACHHANG">
+      <ObjectId>949578421</ObjectId>
+      <CreatedTimestamp>2019-03-30.15:48:08.413</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:20.327</ModifiedTimestamp>
+    </table>
+    <table id="27" parent="20" name="NHANVIEN">
+      <ObjectId>997578592</ObjectId>
+      <CreatedTimestamp>2019-03-30.15:48:10.327</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:12.097</ModifiedTimestamp>
+    </table>
+    <table id="28" parent="20" name="TAIKHOAN">
+      <ObjectId>1045578763</ObjectId>
+      <CreatedTimestamp>2019-03-30.15:48:12.093</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:12.093</ModifiedTimestamp>
+    </table>
+    <table id="29" parent="20" name="THONGTINCANHAN">
+      <ObjectId>901578250</ObjectId>
+      <CreatedTimestamp>2019-03-30.15:48:06.950</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:10.330</ModifiedTimestamp>
+    </table>
+    <view id="30" parent="20" name="VIEW_HOADON">
+      <ObjectId>1317579732</ObjectId>
+      <SourceTextLength>183</SourceTextLength>
+      <CreatedTimestamp>2019-03-30.15:48:31.583</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:31.583</ModifiedTimestamp>
+    </view>
+    <view id="31" parent="20" name="VIEW_THONGTINKHACHHANG">
+      <ObjectId>1285579618</ObjectId>
+      <SourceTextLength>216</SourceTextLength>
+      <CreatedTimestamp>2019-03-30.15:48:27.370</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:27.370</ModifiedTimestamp>
+    </view>
+    <view id="32" parent="20" name="VIEW_THONGTINNHANVIEN">
+      <ObjectId>1301579675</ObjectId>
+      <SourceTextLength>208</SourceTextLength>
+      <CreatedTimestamp>2019-03-30.15:48:29.670</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:29.670</ModifiedTimestamp>
+    </view>
+    <column id="33" parent="23" name="MABD">
+      <Position>1</Position>
+      <DataType>nvarchar(10 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="34" parent="23" name="TENBD">
+      <Position>2</Position>
+      <DataType>nvarchar(50 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="23" name="HANGSANXUAT">
+      <Position>3</Position>
+      <DataType>nvarchar(50 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="36" parent="23" name="GHICHU">
+      <Position>4</Position>
+      <DataType>nvarchar(100 char)|0s</DataType>
+    </column>
+    <column id="37" parent="23" name="DONGIA">
+      <Position>5</Position>
+      <DataType>money|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="38" parent="23" name="TINHTRANG">
+      <Position>6</Position>
+      <DefaultConstraintName>BANGDIA_DF_TINHTRANG</DefaultConstraintName>
+      <DefaultExpression>1</DefaultExpression>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="39" parent="23" name="THELOAI">
+      <Position>7</Position>
+      <DataType>nvarchar(30 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="40" parent="23" name="SOLUONGTON">
+      <Position>8</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="41" parent="23" name="BANGDIA_PK">
+      <Position>1</Position>
+      <ColNames>MABD</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="42" parent="23" name="BANGDIA_PK">
+      <ObjectId>1109578991</ObjectId>
+      <CreatedTimestamp>2019-03-30.15:48:14.190</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:14.190</ModifiedTimestamp>
+      <ColNames>MABD</ColNames>
+      <UnderlyingIndexName>BANGDIA_PK</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <check id="43" parent="23" name="BANGDIA_CK_TINHTRANG">
+      <ObjectId>1125579048</ObjectId>
+      <CreatedTimestamp>2019-03-30.15:48:14.190</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:14.190</ModifiedTimestamp>
+      <ColNames>TINHTRANG</ColNames>
+      <Predicate>[TINHTRANG]=1 OR [TINHTRANG]=0</Predicate>
+    </check>
+    <default id="44" parent="23" name="BANGDIA_DF_TINHTRANG">
+      <ObjectId>1253579504</ObjectId>
+      <ModifiedTimestamp>2019-03-30.15:48:22.007</ModifiedTimestamp>
+      <ColNames>TINHTRANG</ColNames>
+      <DefaultExpression>1</DefaultExpression>
+    </default>
+    <column id="45" parent="24" name="MAHD">
+      <Position>1</Position>
+      <DataType>varchar(10 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="46" parent="24" name="MABD">
+      <Position>2</Position>
+      <DataType>nvarchar(10 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="47" parent="24" name="SONGAYDUOCMUON">
+      <Position>3</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="48" parent="24" name="SOLUONG">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="49" parent="24" name="CHITIETHOADON_PK">
+      <Position>1</Position>
+      <ColNames>MAHD</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="50" parent="24" name="CHITIETHOADON_PK">
+      <ObjectId>1205579333</ObjectId>
+      <CreatedTimestamp>2019-03-30.15:48:18.470</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:18.470</ModifiedTimestamp>
+      <ColNames>MAHD</ColNames>
+      <UnderlyingIndexName>CHITIETHOADON_PK</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="51" parent="24" name="CHITIETHOADON_FK_BANGDIA">
+      <ObjectId>1221579390</ObjectId>
+      <CreatedTimestamp>2019-03-30.15:48:18.473</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:18.473</ModifiedTimestamp>
+      <ColNames>MABD</ColNames>
+      <RefTableId>1093578934</RefTableId>
+      <RefSchemaName>dbo</RefSchemaName>
+      <RefTableName>BANGDIA</RefTableName>
+      <RefKeyName>BANGDIA_PK</RefKeyName>
+      <RefColNames>MABD</RefColNames>
+    </foreign-key>
+    <trigger id="52" parent="24" name="TRG_THEMHOADON">
+      <ObjectId>1333579789</ObjectId>
+      <SourceTextLength>234</SourceTextLength>
+      <CreatedTimestamp>2019-03-30.15:48:34.573</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:34.573</ModifiedTimestamp>
+      <Events>I</Events>
+      <Turn>after-stmt</Turn>
+    </trigger>
+    <trigger id="53" parent="24" name="TRG_CAPNHATHOADON">
+      <ObjectId>1349579846</ObjectId>
+      <SourceTextLength>296</SourceTextLength>
+      <CreatedTimestamp>2019-03-30.15:48:37.160</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:37.160</ModifiedTimestamp>
+      <Events>U</Events>
+      <Turn>after-stmt</Turn>
+    </trigger>
+    <trigger id="54" parent="24" name="TRG_XOADONHAN">
+      <ObjectId>1365579903</ObjectId>
+      <SourceTextLength>231</SourceTextLength>
+      <CreatedTimestamp>2019-03-30.15:48:47.130</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:47.130</ModifiedTimestamp>
+      <Events>D</Events>
+      <Turn>after-stmt</Turn>
+    </trigger>
+    <column id="55" parent="25" name="MAHD">
+      <Position>1</Position>
+      <DataType>varchar(10 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="56" parent="25" name="NGAYLAP">
+      <Position>2</Position>
+      <DefaultConstraintName>HOADON_DF_NGAYLAP</DefaultConstraintName>
+      <DefaultExpression>getdate()</DefaultExpression>
+      <DataType>date|0s</DataType>
+    </column>
+    <column id="57" parent="25" name="MAKH">
+      <Position>3</Position>
+      <DataType>varchar(10 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="58" parent="25" name="HOADON_PK">
+      <Position>1</Position>
+      <ColNames>MAHD</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="59" parent="25" name="HOADON_PK">
+      <ObjectId>1157579162</ObjectId>
+      <CreatedTimestamp>2019-03-30.15:48:16.257</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:16.257</ModifiedTimestamp>
+      <ColNames>MAHD</ColNames>
+      <UnderlyingIndexName>HOADON_PK</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="60" parent="25" name="HOADON_FK_KHACHHANG">
+      <ObjectId>1173579219</ObjectId>
+      <CreatedTimestamp>2019-03-30.15:48:16.257</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:16.257</ModifiedTimestamp>
+      <ColNames>MAKH</ColNames>
+      <RefTableId>949578421</RefTableId>
+      <RefSchemaName>dbo</RefSchemaName>
+      <RefTableName>KHACHHANG</RefTableName>
+      <RefKeyName>KHACHHANG_PK</RefKeyName>
+      <RefColNames>MAKH</RefColNames>
+    </foreign-key>
+    <default id="61" parent="25" name="HOADON_DF_NGAYLAP">
+      <ObjectId>1269579561</ObjectId>
+      <ModifiedTimestamp>2019-03-30.15:48:25.257</ModifiedTimestamp>
+      <ColNames>NGAYLAP</ColNames>
+      <DefaultExpression>getdate()</DefaultExpression>
+    </default>
+    <column id="62" parent="26" name="MAKH">
+      <Position>1</Position>
+      <DataType>varchar(10 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="63" parent="26" name="CMND">
+      <Position>2</Position>
+      <DataType>varchar(20 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="64" parent="26" name="NGAYHETHAN">
+      <Position>3</Position>
+      <DefaultConstraintName>KHACHHANG_DF_NGAYHETHAN</DefaultConstraintName>
+      <DefaultExpression>dateadd(year,3,getdate())</DefaultExpression>
+      <DataType>date|0s</DataType>
+    </column>
+    <index id="65" parent="26" name="KHACHHANG_PK">
+      <Position>1</Position>
+      <ColNames>MAKH</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="66" parent="26" name="KHACHHANG_PK">
+      <ObjectId>965578478</ObjectId>
+      <CreatedTimestamp>2019-03-30.15:48:08.413</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:08.413</ModifiedTimestamp>
+      <ColNames>MAKH</ColNames>
+      <UnderlyingIndexName>KHACHHANG_PK</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="67" parent="26" name="KHACHHANG_FK">
+      <ObjectId>981578535</ObjectId>
+      <CreatedTimestamp>2019-03-30.15:48:08.413</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:08.413</ModifiedTimestamp>
+      <ColNames>CMND</ColNames>
+      <RefTableId>901578250</RefTableId>
+      <RefSchemaName>dbo</RefSchemaName>
+      <RefTableName>THONGTINCANHAN</RefTableName>
+      <RefKeyName>THONGTINCANHAN_PK</RefKeyName>
+      <RefColNames>CMND</RefColNames>
+    </foreign-key>
+    <default id="68" parent="26" name="KHACHHANG_DF_NGAYHETHAN">
+      <ObjectId>1237579447</ObjectId>
+      <ModifiedTimestamp>2019-03-30.15:48:20.327</ModifiedTimestamp>
+      <ColNames>NGAYHETHAN</ColNames>
+      <DefaultExpression>dateadd(year,3,getdate())</DefaultExpression>
+    </default>
+    <column id="69" parent="27" name="MANV">
+      <Position>1</Position>
+      <DataType>varchar(10 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="70" parent="27" name="CMND">
+      <Position>2</Position>
+      <DataType>varchar(20 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="71" parent="27" name="MOTA">
+      <Position>3</Position>
+      <DataType>nvarchar(100 char)|0s</DataType>
+    </column>
+    <index id="72" parent="27" name="NHANVIEN_PK">
+      <Position>1</Position>
+      <ColNames>MANV</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="73" parent="27" name="NHANVIEN_PK">
+      <ObjectId>1013578649</ObjectId>
+      <CreatedTimestamp>2019-03-30.15:48:10.330</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:10.330</ModifiedTimestamp>
+      <ColNames>MANV</ColNames>
+      <UnderlyingIndexName>NHANVIEN_PK</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="74" parent="27" name="NHANVIEN_FK">
+      <ObjectId>1029578706</ObjectId>
+      <CreatedTimestamp>2019-03-30.15:48:10.330</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:10.330</ModifiedTimestamp>
+      <ColNames>CMND</ColNames>
+      <RefTableId>901578250</RefTableId>
+      <RefSchemaName>dbo</RefSchemaName>
+      <RefTableName>THONGTINCANHAN</RefTableName>
+      <RefKeyName>THONGTINCANHAN_PK</RefKeyName>
+      <RefColNames>CMND</RefColNames>
+    </foreign-key>
+    <column id="75" parent="28" name="TENTAIKHOAN">
+      <Position>1</Position>
+      <DataType>varchar(30 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="76" parent="28" name="MATKHAU">
+      <Position>2</Position>
+      <DataType>nvarchar(128 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="77" parent="28" name="LOAITK">
+      <Position>3</Position>
+      <DataType>smallint|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="78" parent="28" name="MANV">
+      <Position>4</Position>
+      <DataType>varchar(10 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="79" parent="28" name="TAIKHOAN_PK">
+      <Position>1</Position>
+      <ColNames>TENTAIKHOAN</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="80" parent="28" name="TAIKHOAN_PK">
+      <ObjectId>1061578820</ObjectId>
+      <CreatedTimestamp>2019-03-30.15:48:12.093</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:12.093</ModifiedTimestamp>
+      <ColNames>TENTAIKHOAN</ColNames>
+      <UnderlyingIndexName>TAIKHOAN_PK</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="81" parent="28" name="TAIKHOAN_FK">
+      <ObjectId>1077578877</ObjectId>
+      <CreatedTimestamp>2019-03-30.15:48:12.097</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:12.097</ModifiedTimestamp>
+      <ColNames>MANV</ColNames>
+      <RefTableId>997578592</RefTableId>
+      <RefSchemaName>dbo</RefSchemaName>
+      <RefTableName>NHANVIEN</RefTableName>
+      <RefKeyName>NHANVIEN_PK</RefKeyName>
+      <RefColNames>MANV</RefColNames>
+    </foreign-key>
+    <column id="82" parent="29" name="CMND">
+      <Position>1</Position>
+      <DataType>varchar(20 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="83" parent="29" name="HOTEN">
+      <Position>2</Position>
+      <DataType>nvarchar(50 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="84" parent="29" name="DIENTHOAI">
+      <Position>3</Position>
+      <DataType>varchar(20 char)|0s</DataType>
+    </column>
+    <column id="85" parent="29" name="DIACHI">
+      <Position>4</Position>
+      <DataType>nvarchar(100 char)|0s</DataType>
+    </column>
+    <column id="86" parent="29" name="GIOITINH">
+      <Position>5</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="87" parent="29" name="NGAYSINH">
+      <Position>6</Position>
+      <DataType>date|0s</DataType>
+    </column>
+    <index id="88" parent="29" name="THONGTINCANHAN_PK">
+      <Position>1</Position>
+      <ColNames>CMND</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="89" parent="29" name="THONGTINCANHAN_PK">
+      <ObjectId>917578307</ObjectId>
+      <CreatedTimestamp>2019-03-30.15:48:06.953</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:06.953</ModifiedTimestamp>
+      <ColNames>CMND</ColNames>
+      <UnderlyingIndexName>THONGTINCANHAN_PK</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <check id="90" parent="29" name="THONGTINCANHAN_CK_GIOITINH">
+      <ObjectId>933578364</ObjectId>
+      <CreatedTimestamp>2019-03-30.15:48:06.957</CreatedTimestamp>
+      <ModifiedTimestamp>2019-03-30.15:48:06.957</ModifiedTimestamp>
+      <ColNames>GIOITINH</ColNames>
+      <Predicate>[GIOITINH]=1 OR [GIOITINH]=0</Predicate>
+    </check>
+    <column id="91" parent="30" name="MAHD">
+      <Position>1</Position>
+      <DataType>varchar(10 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="92" parent="30" name="MAKH">
+      <Position>2</Position>
+      <DataType>varchar(10 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="93" parent="30" name="NGAYLAP">
+      <Position>3</Position>
+      <DataType>date|0s</DataType>
+    </column>
+    <column id="94" parent="30" name="MABD">
+      <Position>4</Position>
+      <DataType>nvarchar(10 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="95" parent="30" name="SONGAYDUOCMUON">
+      <Position>5</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="96" parent="30" name="SOLUONG">
+      <Position>6</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="97" parent="31" name="CMND">
+      <Position>1</Position>
+      <DataType>varchar(20 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="98" parent="31" name="MAKH">
+      <Position>2</Position>
+      <DataType>varchar(10 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="99" parent="31" name="HOTEN">
+      <Position>3</Position>
+      <DataType>nvarchar(50 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="100" parent="31" name="DIENTHOAI">
+      <Position>4</Position>
+      <DataType>varchar(20 char)|0s</DataType>
+    </column>
+    <column id="101" parent="31" name="DIACHI">
+      <Position>5</Position>
+      <DataType>nvarchar(100 char)|0s</DataType>
+    </column>
+    <column id="102" parent="31" name="GIOITINH">
+      <Position>6</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="103" parent="31" name="NGAYSINH">
+      <Position>7</Position>
+      <DataType>date|0s</DataType>
+    </column>
+    <column id="104" parent="31" name="NGAYHETHAN">
+      <Position>8</Position>
+      <DataType>date|0s</DataType>
+    </column>
+    <column id="105" parent="32" name="CMND">
+      <Position>1</Position>
+      <DataType>varchar(20 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="106" parent="32" name="MANV">
+      <Position>2</Position>
+      <DataType>varchar(10 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="107" parent="32" name="HOTEN">
+      <Position>3</Position>
+      <DataType>nvarchar(50 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="108" parent="32" name="DIENTHOAI">
+      <Position>4</Position>
+      <DataType>varchar(20 char)|0s</DataType>
+    </column>
+    <column id="109" parent="32" name="DIACHI">
+      <Position>5</Position>
+      <DataType>nvarchar(100 char)|0s</DataType>
+    </column>
+    <column id="110" parent="32" name="GIOITINH">
+      <Position>6</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="111" parent="32" name="NGAYSINH">
+      <Position>7</Position>
+      <DataType>date|0s</DataType>
+    </column>
+    <column id="112" parent="32" name="MOTA">
+      <Position>8</Position>
+      <DataType>nvarchar(100 char)|0s</DataType>
+    </column>
+  </database-model>
+</dataSource>

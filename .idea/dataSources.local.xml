@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="QUANLYBANGDIA@localhost" uuid="df75f2f0-7ce4-45b2-80a2-e38b7d2fc263">
+      <database-info product="Microsoft SQL Server" version="14.00.2002" jdbc-version="4.2" driver-name="Microsoft JDBC Driver 7.0 for SQL Server" driver-version="7.0.0.0" dbms="MSSQL" exact-version="14.0.2002" exact-driver-version="7.0">
+        <extra-name-characters>$#@</extra-name-characters>
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+      <domain-auth>true</domain-auth>
+      <introspection-schemas>@:@</introspection-schemas>
+    </data-source>
+  </component>
+</project>

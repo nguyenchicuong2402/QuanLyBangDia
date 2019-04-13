@@ -17,6 +17,12 @@ public class DocGhiFileXML {
 
     }
 
+    /**
+     * Phương thức đọc file XML
+     * @param filePath
+     * @return
+     * @throws Exception
+     */
     public Document docFileXML(String filePath) throws Exception {
         Document document = null;
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -33,6 +39,12 @@ public class DocGhiFileXML {
         return document;
     }
 
+    /**
+     * Phương thức ghi file XML
+     * @param doc
+     * @param filePath
+     * @throws Exception
+     */
     public void ghiFileXML(Document doc, String filePath) throws Exception {
         try{
             File file = new File(filePath);

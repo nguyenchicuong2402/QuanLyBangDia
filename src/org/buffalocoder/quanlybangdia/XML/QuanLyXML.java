@@ -6,6 +6,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 public class QuanLyXML {
+    /* Đường dẫn 2 file XML */
     private static final String FILEPATH_PROPERTISE = "resources/properties.xml";
     private static final String FILEPATH_THEMES = "resources/themes.xml";
 
@@ -16,6 +17,10 @@ public class QuanLyXML {
         docGhiFileXML = new DocGhiFileXML();
     }
 
+    /**
+     * Phương thức lấy config database
+     * @return
+     */
     public String[] getConfigDatabase(){
         String config[] = new String[5];
 
@@ -36,6 +41,11 @@ public class QuanLyXML {
         }
     }
 
+
+    /**
+     * Lấy tài khoản đã ghi nhớ trong hệ thống
+     * @return
+     */
     public TaiKhoan getGhiNhoTaiKhoan(){
         TaiKhoan taiKhoan = new TaiKhoan();
 
@@ -62,6 +72,11 @@ public class QuanLyXML {
         return null;
     }
 
+    /**
+     * Ghi nhớ tài khoản vào hệ thống
+     * @param taiKhoan
+     * @return
+     */
     public boolean ghiNhoTaiKhoan(TaiKhoan taiKhoan){
         try{
             document = docGhiFileXML.docFileXML(FILEPATH_PROPERTISE);
@@ -84,6 +99,11 @@ public class QuanLyXML {
         }
     }
 
+    /**
+     * Ghi nhớ ID Color hiện tại
+     * @param id
+     * @return
+     */
     public boolean setIDColor(String id){
         try{
             document = docGhiFileXML.docFileXML(FILEPATH_PROPERTISE);
@@ -100,6 +120,10 @@ public class QuanLyXML {
         }
     }
 
+    /**
+     * Lấy ID Theme hiện tại đang sử dụng
+     * @return
+     */
     public String getIDThemes(){
         try{
             document = docGhiFileXML.docFileXML(FILEPATH_PROPERTISE);
@@ -112,6 +136,11 @@ public class QuanLyXML {
         }
     }
 
+    /**
+     * Lấy màu Primary bằng ID Theme
+     * @param id
+     * @return
+     */
     public String getColorPrimary(String id){
         try{
             document = docGhiFileXML.docFileXML(FILEPATH_THEMES);
@@ -126,6 +155,11 @@ public class QuanLyXML {
         }
     }
 
+    /**
+     * Lấy màu Secondary bằng ID Theme
+     * @param id
+     * @return
+     */
     public String getColorSecondary(String id){
         try{
             document = docGhiFileXML.docFileXML(FILEPATH_THEMES);
@@ -140,6 +174,12 @@ public class QuanLyXML {
         }
     }
 
+
+    /**
+     * Lấy màu Dark bằng ID Theme
+     * @param id
+     * @return
+     */
     public String getColorDark(String id){
         try{
             document = docGhiFileXML.docFileXML(FILEPATH_THEMES);
@@ -154,6 +194,12 @@ public class QuanLyXML {
         }
     }
 
+
+    /**
+     * Lấy màu bakground bằng ID Theme
+     * @param id
+     * @return
+     */
     public String getColorBackground(String id){
         try{
             document = docGhiFileXML.docFileXML(FILEPATH_THEMES);
@@ -168,6 +214,12 @@ public class QuanLyXML {
         }
     }
 
+    /**
+     * Tìm màu theo ID trong XML
+     * @param nodeList
+     * @param id
+     * @return
+     */
     public Element timMauTheoID(NodeList nodeList, String id){
         for (int i = 0; i < nodeList.getLength(); i++){
             if (nodeList.item(i).getAttributes().item(0).getTextContent().equals(id))
