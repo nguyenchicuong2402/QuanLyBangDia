@@ -14,11 +14,22 @@ public class HoaDonDAO {
     private ResultSet resultSet;
     private PreparedStatement preparedStatement;
 
+
+    /**
+     * Tạo kết nối đến DB
+     * @throws Exception
+     */
     private HoaDonDAO() throws Exception {
         dataBaseUtils = DataBaseUtils.getInstance();
         bangDiaDAO = BangDiaDAO.getInstance();
     }
 
+
+    /**
+     * Design Pattern: Singleton
+     * @return
+     * @throws Exception
+     */
     public static HoaDonDAO getInstance() throws Exception {
         if(_instance == null) {
             synchronized(HoaDonDAO.class) {
@@ -30,6 +41,12 @@ public class HoaDonDAO {
         return _instance;
     }
 
+
+    /**
+     * đọc danh sách hoá đơn từ DB
+     * @return
+     * @throws Exception
+     */
     public ArrayList<HoaDon> getHoaDons() throws Exception {
         ArrayList<HoaDon> hoaDons = new ArrayList<HoaDon>();
         String sql = "SELECT * FROM VIEW_HOADON";
@@ -59,6 +76,13 @@ public class HoaDonDAO {
         return hoaDons;
     }
 
+
+    /**
+     * Đọc hoá đơn từ DB
+     * @param maHoaDon
+     * @return
+     * @throws Exception
+     */
     public HoaDon getHoaDon (String maHoaDon) throws Exception {
         HoaDon hoaDon = null;
         String sql = String.format("SELECT * FROM VIEW_HOADON WHERE MAHD = '%s'", maHoaDon);
@@ -85,6 +109,13 @@ public class HoaDonDAO {
         return hoaDon;
     }
 
+
+    /**
+     * Lấy mã hoá đơn cuối
+     * dùng để generate mã hoá đơn mới
+     * @return
+     * @throws Exception
+     */
     public String getMaHoaDonCuoi () throws Exception {
         String sql = "SELECT TOP 1 MAHD FROM HOADON ORDER BY MAHD DESC";
         String ketQua;
@@ -103,6 +134,13 @@ public class HoaDonDAO {
         return ketQua;
     }
 
+
+    /**
+     * Cập nhật thông tin hoá đơn vào DB
+     * @param hoaDon
+     * @return
+     * @throws Exception
+     */
     public HoaDon suaHoaDon(HoaDon hoaDon) throws Exception {
         String sql = "UPDATE CHITIETHOADON SET " +
                     "MABD = ?, SONGAYDUOCMUON = ?, SOLUONG = ?, TINHTRANG = ? WHERE MAHD = ?";
@@ -138,6 +176,13 @@ public class HoaDonDAO {
         return null;
     }
 
+
+    /**
+     * Thêm hoá đơn mới vào DB
+     * @param hoaDon
+     * @return
+     * @throws Exception
+     */
     public HoaDon themHoaDon(HoaDon hoaDon) throws Exception {
         String sql = "INSERT INTO HOADON (MAHD, NGAYLAP, MAKH) VALUES (?,?,?)";
         try {
@@ -174,6 +219,13 @@ public class HoaDonDAO {
         return null;
     }
 
+
+    /**
+     * Cập nhật thanh toán hoá đơn vào BD
+     * @param maHoaDon
+     * @return
+     * @throws Exception
+     */
     public boolean thanhToanHoaDon(String maHoaDon) throws Exception {
         final String sql = String.format("{call THANHTOAN_HOADON(%s)}", maHoaDon);
 
@@ -185,6 +237,13 @@ public class HoaDonDAO {
         }
     }
 
+
+    /**
+     * Xoá hoá đơn trong DB
+     * @param maHoaDon
+     * @return
+     * @throws Exception
+     */
     public boolean xoaHoaDon(String maHoaDon) throws Exception {
         String sql = "DELETE FROM CHITIETHOADON WHERE MAHD = ?";
 

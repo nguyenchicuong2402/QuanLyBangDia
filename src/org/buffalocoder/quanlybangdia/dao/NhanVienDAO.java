@@ -5,7 +5,6 @@ import org.buffalocoder.quanlybangdia.models.ThongTinCaNhan;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class NhanVienDAO {
@@ -16,12 +15,23 @@ public class NhanVienDAO {
     private ResultSet resultSet;
     private PreparedStatement preparedStatement;
 
+
+    /**
+     * Kết nối DB
+     * @throws Exception
+     */
     private NhanVienDAO() throws Exception {
         dataBaseUtils = DataBaseUtils.getInstance();
         thongTinCaNhanDAO = ThongTinCaNhanDAO.getInstance();
         taiKhoanDAO = TaiKhoanDAO.getInstance();
     }
 
+
+    /**
+     * Design Patter: Singleton
+     * @return
+     * @throws Exception
+     */
     public static NhanVienDAO getInstance() throws Exception {
         if(_instance == null) {
             synchronized(NhanVienDAO.class) {
@@ -33,6 +43,13 @@ public class NhanVienDAO {
         return _instance;
     }
 
+
+    /**
+     * Đọc nhân viên từ DB
+     * @param maNhanVien
+     * @return
+     * @throws Exception
+     */
     public NhanVien getNhanVien(String maNhanVien) throws Exception {
         NhanVien nhanVien = null;
         String sql = String.format("SELECT * FROM VIEW_THONGTINNHANVIEN WHERE MANV = '%s'", maNhanVien);
@@ -60,6 +77,12 @@ public class NhanVienDAO {
         return nhanVien;
     }
 
+
+    /**
+     * Đọc danh sách nhân viên từ DB
+     * @return
+     * @throws Exception
+     */
     public ArrayList<NhanVien> getNhanViens() throws Exception {
         ArrayList<NhanVien> nhanViens = new ArrayList<>();
         String sql = String.format("SELECT * FROM VIEW_THONGTINNHANVIEN");
@@ -90,6 +113,13 @@ public class NhanVienDAO {
         return nhanViens;
     }
 
+
+    /**
+     * Lấy mã nhân viên cuối
+     * dùng để generate mã nhân viên mới
+     * @return
+     * @throws Exception
+     */
     public String getMaNhanVienCuoi() throws Exception {
         String sql = "SELECT TOP 1 MANV FROM NHANVIEN ORDER BY MANV DESC";
 
@@ -105,6 +135,13 @@ public class NhanVienDAO {
         }
     }
 
+
+    /**
+     * Thêm nhân viên mới vào DB
+     * @param nhanVien
+     * @return
+     * @throws Exception
+     */
     public NhanVien themNhanVien(NhanVien nhanVien) throws Exception {
         String sql = "INSERT INTO NHANVIEN (MANV, CMND, MOTA) VALUES (?,?,?)";
 
@@ -141,6 +178,13 @@ public class NhanVienDAO {
         return null;
     }
 
+
+    /**
+     * Xoá nhân viên mới vào DB
+     * @param maNhanVien
+     * @return
+     * @throws Exception
+     */
     public boolean xoaNhanVien(String maNhanVien) throws Exception {
         String cmnd = getNhanVien(maNhanVien).getcMND();
         String tenTaiKhoan = taiKhoanDAO.getTaiKhoanByMaNhanVien(maNhanVien).getTenTaiKhoan();
@@ -168,6 +212,13 @@ public class NhanVienDAO {
         return false;
     }
 
+
+    /**
+     * Cập nhật nhân viên vào DB
+     * @param nhanVien
+     * @return
+     * @throws Exception
+     */
     public NhanVien suaNhanVien(NhanVien nhanVien) throws Exception {
         String sql = "UPDATE NHANVIEN SET MOTA = ? WHERE MANV = ?";
 

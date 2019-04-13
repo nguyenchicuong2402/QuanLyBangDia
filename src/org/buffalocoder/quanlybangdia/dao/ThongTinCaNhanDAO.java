@@ -3,7 +3,6 @@ package org.buffalocoder.quanlybangdia.dao;
 import org.buffalocoder.quanlybangdia.models.ThongTinCaNhan;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class ThongTinCaNhanDAO {
     private static ThongTinCaNhanDAO _instance;
@@ -11,10 +10,21 @@ public class ThongTinCaNhanDAO {
     private ResultSet resultSet;
     private PreparedStatement preparedStatement;
 
+
+    /**
+     * Tạo kết nối DB
+     * @throws Exception
+     */
     private ThongTinCaNhanDAO() throws Exception {
         dataBaseUtils = DataBaseUtils.getInstance();
     }
 
+
+    /**
+     * Design Pattern: Singleton
+     * @return
+     * @throws Exception
+     */
     public static ThongTinCaNhanDAO getInstance() throws Exception {
         if(_instance == null) {
             synchronized(ThongTinCaNhanDAO.class) {
@@ -26,6 +36,13 @@ public class ThongTinCaNhanDAO {
         return _instance;
     }
 
+
+    /**
+     * Lấy thông tin cá nhân
+     * @param CMND
+     * @return
+     * @throws Exception
+     */
     public ThongTinCaNhan getThongTinCaNhan(String CMND) throws Exception {
         ThongTinCaNhan thongTinCaNhan = null;
         String sql = String.format("SELECT * FROM THONGTINCANHAN WHERE CMND = '%s'", CMND);
@@ -51,6 +68,13 @@ public class ThongTinCaNhanDAO {
         return thongTinCaNhan;
     }
 
+
+    /**
+     * Thêm thông tin cá nhân váo DB
+     * @param thongTinCaNhan
+     * @return
+     * @throws Exception
+     */
     public ThongTinCaNhan themThongTinCaNhan(ThongTinCaNhan thongTinCaNhan) throws Exception {
         String sql = "INSERT INTO THONGTINCANHAN (CMND, HOTEN, DIENTHOAI, DIACHI, GIOITINH, NGAYSINH) " +
                 "VALUES (?,?,?,?,?,?)";
@@ -79,6 +103,13 @@ public class ThongTinCaNhanDAO {
         return null;
     }
 
+
+    /**
+     * Xoá thông tin cá nhân trong DB
+     * @param CMND
+     * @return
+     * @throws Exception
+     */
     public boolean xoaThongTinCaNhan(String CMND) throws Exception {
         String sql = "DELETE FROM THONGTINCANHAN WHERE CMND = ?";
 
@@ -101,6 +132,13 @@ public class ThongTinCaNhanDAO {
         return false;
     }
 
+
+    /**
+     * Cập nhật thông tin cá nhân trong DB
+     * @param thongTinCaNhan
+     * @return
+     * @throws Exception
+     */
     public ThongTinCaNhan suaThongTinCaNhan(ThongTinCaNhan thongTinCaNhan) throws Exception {
         String sql = "UPDATE THONGTINCANHAN SET " +
                 "HOTEN = ?, DIENTHOAI = ?, DIACHI = ?, GIOITINH = ?, NGAYSINH = ? " +

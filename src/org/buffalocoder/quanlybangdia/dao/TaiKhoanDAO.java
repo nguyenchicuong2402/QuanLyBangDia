@@ -1,11 +1,9 @@
 package org.buffalocoder.quanlybangdia.dao;
 
-import org.buffalocoder.quanlybangdia.models.NhanVien;
 import org.buffalocoder.quanlybangdia.models.TaiKhoan;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class TaiKhoanDAO {
     private static TaiKhoanDAO _instance;
@@ -13,10 +11,21 @@ public class TaiKhoanDAO {
     private ResultSet resultSet;
     private PreparedStatement preparedStatement;
 
+
+    /**
+     * Tạo kết nối DB
+     * @throws Exception
+     */
     private TaiKhoanDAO() throws Exception {
         dataBaseUtils = DataBaseUtils.getInstance();
     }
 
+
+    /**
+     * Design Pattern: Singleton
+     * @return
+     * @throws Exception
+     */
     public static TaiKhoanDAO getInstance() throws Exception {
         if(_instance == null) {
             synchronized(TaiKhoanDAO.class) {
@@ -28,6 +37,13 @@ public class TaiKhoanDAO {
         return _instance;
     }
 
+
+    /**
+     * Đọc tài khoản trong DB
+     * @param tenTaiKhoan
+     * @return
+     * @throws Exception
+     */
     public TaiKhoan getTaiKhoan(String tenTaiKhoan) throws Exception {
         TaiKhoan taiKhoan = new TaiKhoan();
         String sql = String.format("SELECT * FROM TAIKHOAN WHERE TENTAIKHOAN = '%s'", tenTaiKhoan);
@@ -49,6 +65,13 @@ public class TaiKhoanDAO {
         return taiKhoan;
     }
 
+
+    /**
+     * Đọc tài khoản trong DB thông qua mã nhân viên
+     * @param maNhanVien
+     * @return
+     * @throws Exception
+     */
     public TaiKhoan getTaiKhoanByMaNhanVien (String maNhanVien) throws Exception {
         TaiKhoan taiKhoan = new TaiKhoan();
         String sql = String.format("SELECT * FROM TAIKHOAN WHERE MANV = '%s'", maNhanVien);
@@ -73,6 +96,13 @@ public class TaiKhoanDAO {
         return taiKhoan;
     }
 
+
+    /**
+     * Thêm tài khoản mới vào DB
+     * @param taiKhoan
+     * @return
+     * @throws Exception
+     */
     public TaiKhoan themTaiKhoan(TaiKhoan taiKhoan) throws Exception {
         String sql = "INSERT INTO TAIKHOAN (TENTAIKHOAN, MATKHAU, LOAITK, MANV) VALUES (?, ?, ?, ?)";
 
@@ -102,6 +132,13 @@ public class TaiKhoanDAO {
         return null;
     }
 
+
+    /**
+     * Cập nhật tài khoản vào DB
+     * @param taiKhoan
+     * @return
+     * @throws Exception
+     */
     public TaiKhoan suaTaiKhoan (TaiKhoan taiKhoan) throws Exception {
         String sql = "UPDATE TAIKHOAN SET MATKHAU = ?, LOAITK = ? WHERE TENTAIKHOAN = ?";
 
@@ -129,6 +166,13 @@ public class TaiKhoanDAO {
         return null;
     }
 
+
+    /**
+     * Xoá tài khoản trong Db
+     * @param tenTaiKhoan
+     * @return
+     * @throws Exception
+     */
     public boolean xoaTaiKhoan (String tenTaiKhoan) throws Exception {
         String sql = "DELETE FROM TAIKHOAN WHERE TENTAIKHOAN = ?";
 

@@ -5,7 +5,6 @@ import org.buffalocoder.quanlybangdia.models.ThongTinCaNhan;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class KhachHangDAO {
@@ -15,11 +14,22 @@ public class KhachHangDAO {
     private ResultSet resultSet;
     private PreparedStatement preparedStatement;
 
+
+    /**
+     * Tạo kết nối DB
+     * @throws Exception
+     */
     private KhachHangDAO() throws Exception {
         dataBaseUtils = DataBaseUtils.getInstance();
         thongTinCaNhanDAO = ThongTinCaNhanDAO.getInstance();
     }
 
+
+    /**
+     * Design Pattern: Singleton
+     * @return
+     * @throws Exception
+     */
     public static KhachHangDAO getInstance() throws Exception {
         if(_instance == null) {
             synchronized(KhachHangDAO.class) {
@@ -31,6 +41,13 @@ public class KhachHangDAO {
         return _instance;
     }
 
+
+    /**
+     * Đọc khách hàng từ DB
+     * @param maKhachHang
+     * @return
+     * @throws Exception
+     */
     public KhachHang getKhachHang(String maKhachHang) throws Exception {
         KhachHang khachHang = null;
         String sql = String.format("SELECT * FROM VIEW_THONGTINKHACHHANG WHERE MAKH = '%s'", maKhachHang);
@@ -59,6 +76,12 @@ public class KhachHangDAO {
         return khachHang;
     }
 
+
+    /**
+     * Đọc danh sách khách hàng trong Db
+     * @return
+     * @throws Exception
+     */
     public ArrayList<KhachHang> getKhachHangs() throws Exception {
         ArrayList<KhachHang> khachHangs = new ArrayList<>();
         String sql = String.format("SELECT * FROM VIEW_THONGTINKHACHHANG");
@@ -89,6 +112,13 @@ public class KhachHangDAO {
         return khachHangs;
     }
 
+
+    /**
+     * Lấy mã khách hàng cuối
+     * dùng để generate mã khách hàng mới
+     * @return
+     * @throws Exception
+     */
     public String getMaKhachHangCuoi() throws Exception {
         String sql = "SELECT TOP 1 MAKH FROM KHACHHANG ORDER BY MAKH DESC";
 
@@ -104,6 +134,13 @@ public class KhachHangDAO {
         }
     }
 
+
+    /**
+     * Thêm khách hàng mới vào DB
+     * @param khachHang
+     * @return
+     * @throws Exception
+     */
     public KhachHang themKhachHang(KhachHang khachHang) throws Exception {
         ThongTinCaNhan thongTinCaNhan = new ThongTinCaNhan(
                 khachHang.getcMND(),
@@ -139,6 +176,13 @@ public class KhachHangDAO {
         return null;
     }
 
+
+    /**
+     * Xoá khách hàng trong DB
+     * @param maKhachHang
+     * @return
+     * @throws Exception
+     */
     public boolean xoaKhachHang(String maKhachHang) throws Exception {
         String cmnd = getKhachHang(maKhachHang).getcMND();
         String sql = "DELETE FROM KHACHHANG WHERE MAKH = ?";
@@ -162,6 +206,13 @@ public class KhachHangDAO {
         return false;
     }
 
+
+    /**
+     * Cập nhật thông tin khách hàng trong DB
+     * @param khachHang
+     * @return
+     * @throws Exception
+     */
     public KhachHang suaKhachHang(KhachHang khachHang) throws Exception {
         ThongTinCaNhan thongTinCaNhan = new ThongTinCaNhan(
                 khachHang.getcMND(),

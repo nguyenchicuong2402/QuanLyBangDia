@@ -13,6 +13,12 @@ public class BangDiaDAO {
         dataBaseUtils = DataBaseUtils.getInstance();
     }
 
+
+    /**
+     * Design Pattern: Singleton
+     * @return
+     * @throws Exception
+     */
     public static BangDiaDAO getInstance() throws Exception {
         if (_instance == null) {
             synchronized (BangDiaDAO.class) {
@@ -24,6 +30,12 @@ public class BangDiaDAO {
         return _instance;
     }
 
+
+    /**
+     * Đọc danh sách băng đĩa từ DB
+     * @return
+     * @throws Exception
+     */
     public ArrayList<BangDia> getBangDias() throws Exception {
         ArrayList<BangDia> bangDias = new ArrayList<BangDia>();
         ResultSet resultSet = null;
@@ -57,6 +69,13 @@ public class BangDiaDAO {
         return bangDias;
     }
 
+
+    /**
+     * Lấy băng đĩa từ DB
+     * @param maBangDia
+     * @return
+     * @throws Exception
+     */
     public BangDia getBangDia(String maBangDia) throws Exception {
         BangDia bangDia = null;
         String sql = String.format("SELECT * FROM BANGDIA WHERE MABD = '%s'", maBangDia);
@@ -86,6 +105,13 @@ public class BangDiaDAO {
         return bangDia;
     }
 
+
+    /**
+     * Lấy mã băng đĩa cuối trong DB
+     * Dùng để generate mã băng đĩa mới
+     * @return
+     * @throws Exception
+     */
     public String getMaBangDiaCuoi() throws Exception {
         String sql = "SELECT TOP 1 MABD FROM BANGDIA ORDER BY MABD DESC";
         ResultSet resultSet = null;
@@ -105,6 +131,13 @@ public class BangDiaDAO {
         return ketQua;
     }
 
+
+    /**
+     * Thêm băng đĩa mới vào DB
+     * @param bangDia
+     * @return
+     * @throws Exception
+     */
     public BangDia themBangDia(BangDia bangDia) throws Exception {
         String sql = "INSERT INTO BANGDIA (MABD, TENBD, HANGSANXUAT, GHICHU, DONGIA, TINHTRANG, THELOAI, SOLUONGTON) VALUES (?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = null;
@@ -138,6 +171,13 @@ public class BangDiaDAO {
         return null;
     }
 
+
+    /**
+     * Xoá băng đĩa trong DB
+     * @param maBangDia
+     * @return
+     * @throws Exception
+     */
     public boolean xoaBangDia(String maBangDia) throws Exception {
         String sql = "DELETE FROM BANGDIA WHERE MABD = ?";
         PreparedStatement preparedStatement = null;
@@ -164,6 +204,13 @@ public class BangDiaDAO {
         return false;
     }
 
+
+    /**
+     * Cập nhật thông tin băng đĩa trong DB
+     * @param bangDia
+     * @return
+     * @throws Exception
+     */
     public BangDia suaBangDia(BangDia bangDia) throws Exception {
         String sql = "UPDATE BANGDIA SET " +
                 "TENBD = ?, HANGSANXUAT = ?, GHICHU = ?, DONGIA = ?, " +

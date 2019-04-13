@@ -12,6 +12,11 @@ public class DataBaseUtils {
 
     private static Connection _connection;
 
+
+    /**
+     * Tạo kết nối đến DB
+     * @throws Exception
+     */
     private DataBaseUtils() throws Exception {
         quanLyXML = new QuanLyXML();
         final String config[] = quanLyXML.getConfigDatabase();
@@ -22,6 +27,12 @@ public class DataBaseUtils {
         _connection.setAutoCommit(false);
     }
 
+
+    /**
+     * Design Pattern: Singleton
+     * @return
+     * @throws Exception
+     */
     public static DataBaseUtils getInstance() throws Exception {
         if(_instance == null) {
             synchronized(DataBaseUtils.class) {
@@ -33,6 +44,12 @@ public class DataBaseUtils {
         return _instance;
     }
 
+
+    /**
+     * Thực thi script sql insert, update, delete
+     * @param sql
+     * @return
+     */
     public PreparedStatement excuteQueryWrite(String sql){
         try {
             return _connection.prepareStatement(sql);
@@ -42,6 +59,12 @@ public class DataBaseUtils {
         return null;
     }
 
+
+    /**
+     * Thực thi script sql select
+     * @param sql
+     * @return
+     */
     public ResultSet excuteQueryRead(String sql){
         try {
             return _connection.createStatement().executeQuery(sql);
@@ -52,6 +75,11 @@ public class DataBaseUtils {
         return null;
     }
 
+
+    /**
+     * commit sql
+     * @throws Exception
+     */
     public void commitQuery() throws Exception {
         try {
             _connection.commit();
@@ -60,6 +88,11 @@ public class DataBaseUtils {
         }
     }
 
+
+    /**
+     * rollback sql
+     * @throws Exception
+     */
     public void rollbackQuery() throws Exception {
         try {
             _connection.rollback();
@@ -68,6 +101,12 @@ public class DataBaseUtils {
         }
     }
 
+
+    /**
+     * reset DB về trạng thái ban đầu
+     * @return
+     * @throws Exception
+     */
     public boolean resetDatabase() throws Exception {
         final String sql = "{call RESET_DATABASE}";
 
@@ -81,6 +120,13 @@ public class DataBaseUtils {
         }
     }
 
+
+    /**
+     * thực thi hàm, thủ tục trong sql
+     * @param sql
+     * @return
+     * @throws Exception
+     */
     public boolean excuteProcedure(String sql) throws Exception {
         try (CallableStatement stmt = _connection.prepareCall(sql)) {
             stmt.execute();
@@ -92,6 +138,12 @@ public class DataBaseUtils {
         }
     }
 
+
+    /**
+     * load thư viện và tạo connection
+     * @return
+     * @throws Exception
+     */
     private Connection getConnection() throws Exception {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
