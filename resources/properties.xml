@@ -4,7 +4,7 @@
                 <password>123456</password>
         </Account>
         <Setting>
-                <themes>deep purple</themes>
+                <themes>pink</themes>
         </Setting>
         <SQL>
                 <server>localhost</server>

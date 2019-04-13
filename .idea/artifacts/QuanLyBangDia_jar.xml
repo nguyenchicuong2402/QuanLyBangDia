@@ -5,7 +5,6 @@
       <element id="module-output" name="QuanLyBangDia" />
       <element id="library" level="project" name="jcalendar-1.4" />
       <element id="library" level="project" name="mssql-jdbc-7.2.1.jre11" />
-      <element id="dir-copy" path="$PROJECT_DIR$/resources" />
     </root>
   </artifact>
 </component>
