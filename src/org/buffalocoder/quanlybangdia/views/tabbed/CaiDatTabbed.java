@@ -1,5 +1,6 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
+import org.buffalocoder.quanlybangdia.MainProgram;
 import org.buffalocoder.quanlybangdia.XML.QuanLyXML;
 import org.buffalocoder.quanlybangdia.dao.DataBaseUtils;
 import org.buffalocoder.quanlybangdia.dao.TaiKhoanDAO;
@@ -283,10 +284,11 @@ public class CaiDatTabbed extends JPanel {
                         thongBaoDialog = new ThongBaoDialog(
                                 new JFrame(),
                                 "Thông báo",
-                                "Xoá dữ liệu thành công\nPhần mềm sẽ tự khởi động lại",
+                                "Xoá dữ liệu thành công\nVui lòng khởi động lại phần mềm",
                                 ThongBaoDialog.OK_OPTION
                         );
 
+                        quanLyXML.ghiNhoTaiKhoan(null);
                         System.exit(0);
                     } catch (Exception ex) {
                         thongBaoDialog = new ThongBaoDialog(

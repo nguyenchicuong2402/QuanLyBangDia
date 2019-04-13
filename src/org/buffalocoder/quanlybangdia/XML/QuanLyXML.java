@@ -90,6 +90,8 @@ public class QuanLyXML {
                 accountElement.getElementsByTagName("password").item(0).setTextContent(taiKhoan.getMatKhau());
             }else{
                 accountElement.getAttributes().getNamedItem("remember").setTextContent("0");
+                accountElement.getElementsByTagName("username").item(0).setTextContent("");
+                accountElement.getElementsByTagName("password").item(0).setTextContent("");
             }
 
             docGhiFileXML.ghiFileXML(document, FILEPATH_PROPERTISE);
