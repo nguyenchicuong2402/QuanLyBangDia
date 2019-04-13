@@ -40,6 +40,7 @@ public class MaterialDesign {
     public static ImageIcon ICON_THEM = new ImageIcon("resources/images/baseline_add_white_18dp.png");
     public static ImageIcon ICON_XOA = new ImageIcon("resources/images/baseline_delete_white_18dp.png");
     public static ImageIcon ICON_SUA = new ImageIcon("resources/images/baseline_create_white_18dp.png");
+    public static ImageIcon ICON_THANHTOAN = new ImageIcon("resources/images/baseline_payment_white_18dp.png");
 
     /**
      * Phương thức set thuôc tính cho button

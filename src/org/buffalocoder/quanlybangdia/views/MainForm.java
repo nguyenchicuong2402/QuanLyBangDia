@@ -3,9 +3,6 @@ package org.buffalocoder.quanlybangdia.views;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -23,12 +20,10 @@ public class MainForm extends JFrame {
     private final boolean IS_ADMIN = DangNhap.taiKhoan.getLoaiTaiKhoan() == 1;
 
     //========= UI ===========//
-    private JPanel mainPanel, topPanel, contentPanel, userPanel, menuPanel, logoutPanel;
+    private JPanel mainPanel, topPanel, contentPanel, menuPanel, logoutPanel;
     private JTabbedPane menuTabbed;
     private CustomTabbedPanelUI customTabbedPanelUI;
-    private JMenuBar menuBar;
-    private JMenu menuCaiDat;
-    private JLabel lblTitle, lblDangXuat;
+    private JLabel lblTitle;
     private JButton btnDangXuat;
 
     private TrangChuTabbed trangChuTabbed;
@@ -165,6 +160,7 @@ public class MainForm extends JFrame {
                 prepareUI();
 
                 setSize(WIDTH, HEIGHT);
+                setMinimumSize(new Dimension(WIDTH, HEIGHT));
                 setExtendedState(JFrame.MAXIMIZED_BOTH);
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
                 setLocationRelativeTo(null);

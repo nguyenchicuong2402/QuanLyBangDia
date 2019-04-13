@@ -7,15 +7,21 @@ import org.buffalocoder.quanlybangdia.models.tablemodel.ChoThueTableModel;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 
 import javax.swing.*;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 import java.awt.*;
-import java.lang.reflect.Array;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.NumberFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ThongKeTabbed extends JPanel {
     private static DanhSachChoThue danhSachChoThue;
     private static DanhSachBangDia danhSachBangDia;
+    private static LocalDate currentDate = LocalDate.now();
 
     private JPanel doanhThuPanel, thueQuaHanPanel, tinhTrangPanel, leftPanel, rightPanel;
     private JLabel lblTieuDeDoanhThu, lblTieuDeThueQuaHan, lblTieuDeTinhTrang, lblDoanhThu,
@@ -23,6 +29,7 @@ public class ThongKeTabbed extends JPanel {
                 lblTongSoBangDiaHong_1, lblTongSoBangDiaHong_2;
     private ChoThueTableModel choThueTableModel;
     private JTable tblChoThue;
+    private JComboBox<String> cbThang, cbNam;
 
 
     private void prepareUI(){
@@ -48,16 +55,45 @@ public class ThongKeTabbed extends JPanel {
         doanhThuPanel.setBackground(MaterialDesign.COLOR_CARD);
         leftPanel.add(doanhThuPanel, BorderLayout.NORTH);
 
-        lblTieuDeDoanhThu = new JLabel("Doanh thu tuần", JLabel.CENTER);
+        JPanel filterDoanhThu = new JPanel();
+        filterDoanhThu.setLayout(new BoxLayout(filterDoanhThu, BoxLayout.X_AXIS));
+        MaterialDesign.materialPanel(filterDoanhThu);
+        filterDoanhThu.setBackground(MaterialDesign.COLOR_CARD);
+        doanhThuPanel.add(filterDoanhThu, BorderLayout.NORTH);
+
+        Box boxFilterDoanhThu = Box.createVerticalBox();
+        filterDoanhThu.add(boxFilterDoanhThu);
+
+        Box boxTitleDoanhThu = Box.createHorizontalBox();
+        boxFilterDoanhThu.add(Box.createHorizontalGlue());
+        boxFilterDoanhThu.add(boxTitleDoanhThu);
+
+        Box boxFilter = Box.createHorizontalBox();
+        boxFilterDoanhThu.add(boxFilter);
+
+        lblTieuDeDoanhThu = new JLabel("Doanh thu");
         MaterialDesign.materialLabel(lblTieuDeDoanhThu);
         lblTieuDeDoanhThu.setFont(MaterialDesign.FONT_TITLE_1);
-        doanhThuPanel.add(lblTieuDeDoanhThu, BorderLayout.NORTH);
+        boxTitleDoanhThu.add(lblTieuDeDoanhThu);
 
         lblDoanhThu = new JLabel();
         lblDoanhThu.setHorizontalAlignment(JLabel.CENTER);
         MaterialDesign.materialLabel(lblDoanhThu);
         lblDoanhThu.setFont(MaterialDesign.FONT_TITLE_1);
         doanhThuPanel.add(lblDoanhThu, BorderLayout.CENTER);
+
+        cbThang = new JComboBox<>();
+        cbThang.addActionListener(cbThang_Selected());
+        MaterialDesign.materialComboBox(cbThang);
+        boxFilter.add(Box.createHorizontalStrut(20));
+        boxFilter.add(cbThang);
+
+        cbNam = new JComboBox<>();
+        MaterialDesign.materialComboBox(cbNam);
+        cbNam.addActionListener(cbNam_Selected());
+        boxFilter.add(Box.createHorizontalStrut(10));
+        boxFilter.add(cbNam);
+        boxFilter.add(Box.createHorizontalStrut(20));
 
         // tình trạng kho panel
         tinhTrangPanel = new JPanel(new BorderLayout());
@@ -147,14 +183,35 @@ public class ThongKeTabbed extends JPanel {
         MaterialDesign.materialScrollPane(scrollPane);
         thueQuaHanPanel.add(scrollPane, BorderLayout.CENTER);
 
+        // generate dữ liệu năm (5 năm gần đây)
+        for (int i = 0; i < 5; i++)
+            cbNam.addItem(String.valueOf(currentDate.getYear() - i));
+
         refresh();
     }
 
     public void refresh(){
+        final Pattern pattern = Pattern.compile("^Tháng (\\d.*)");
+
         try {
+            // load data mới
             danhSachBangDia.loadData();
             danhSachChoThue.loadData();
 
+            // Card doanh thu
+            int nam = Integer.parseInt(String.valueOf(cbNam.getSelectedItem()));
+            int thang = 0;
+            final Matcher matcher = pattern.matcher(String.valueOf(cbThang.getSelectedItem()));
+            if (matcher.find())
+                thang = Integer.valueOf(matcher.group(1));
+
+
+            Locale locale_vn = new Locale("vi", "VN");
+            NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale_vn);
+            lblDoanhThu.setText(numberFormat.format(danhSachChoThue.tongDoanhThu(thang, nam)));
+
+
+            // tình trạng kho
             lblTongSoBangDia_2.setText(String.valueOf(danhSachBangDia.tongSoBangDiaTon() +
                     danhSachChoThue.soLuongBangDiaDaThue()));
 
@@ -162,8 +219,8 @@ public class ThongKeTabbed extends JPanel {
 
             lblTongSoBangDiaHong_2.setText(String.valueOf(danhSachBangDia.tongSoBangDiaHong()));
 
-            lblDoanhThu.setText(String.valueOf(danhSachChoThue.tongDoanhThu()));
 
+            // cập nhật bảng thuê quá hạn
             ArrayList<HoaDon> hoaDons = new ArrayList<>();
             for (HoaDon hoaDon : danhSachChoThue.getAll())
                 if (!hoaDon.isTinhTrangThue())
@@ -180,6 +237,31 @@ public class ThongKeTabbed extends JPanel {
             e.printStackTrace();
         }
     }
+
+    private ActionListener cbNam_Selected(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // generate dữ liệu tháng theo năm
+                cbThang.removeAllItems();
+                int nam = Integer.parseInt(String.valueOf(cbNam.getSelectedItem()));
+                for (int i = 0; i <= (nam == currentDate.getYear() ? currentDate.getMonthValue() : 12); i++)
+                    cbThang.addItem(i == 0 ? "Tất cả" : String.format("Tháng %d", i));
+
+                refresh();
+            }
+        };
+    }
+
+    private ActionListener cbThang_Selected(){
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refresh();
+            }
+        };
+    }
+
 
     public ThongKeTabbed(){
         try {

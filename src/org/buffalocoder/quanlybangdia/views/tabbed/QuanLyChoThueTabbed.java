@@ -73,16 +73,8 @@ public class QuanLyChoThueTabbed extends JPanel {
         btnSua.setEnabled(false);
         funcPanel.add(btnSua);
 
-        btnTraBangDia = new JButton("Thanh toán hóa đơn", MaterialDesign.ICON_XOA);
-        btnTraBangDia.setPreferredSize(new Dimension(200, 40));
-        btnTraBangDia.addActionListener(btnTraBangDia_Click());
-        btnTraBangDia.setToolTipText("Vui lòng chọn hoá đơn cần trả");
-        btnTraBangDia.setEnabled(false);
-        MaterialDesign.materialButton(btnTraBangDia);
-        funcPanel.add(btnTraBangDia);
-
-        btnXoa = new JButton("Xoá hoá đơn", MaterialDesign.ICON_XOA);
-        btnXoa.setPreferredSize(new Dimension(150, 40));
+        btnXoa = new JButton("Xoá", MaterialDesign.ICON_XOA);
+        btnXoa.setPreferredSize(btnThem.getPreferredSize());
         btnXoa.addActionListener(btnXoa_Click());
         btnXoa.setToolTipText("Vui lòng chọn hoá đơn cần xoá/trả");
         btnXoa.setEnabled(false);
@@ -90,6 +82,14 @@ public class QuanLyChoThueTabbed extends JPanel {
         MaterialDesign.materialButton(btnXoa);
         btnXoa.setBackground(MaterialDesign.COLOR_ERROR);
         funcPanel.add(btnXoa);
+
+        btnTraBangDia = new JButton("Thanh toán", MaterialDesign.ICON_THANHTOAN);
+        btnTraBangDia.setPreferredSize(new Dimension(140, 40));
+        btnTraBangDia.addActionListener(btnTraBangDia_Click());
+        btnTraBangDia.setToolTipText("Vui lòng chọn hoá đơn cần trả");
+        btnTraBangDia.setEnabled(false);
+        MaterialDesign.materialButton(btnTraBangDia);
+        funcPanel.add(btnTraBangDia);
 
         cbFilter = new JComboBox<>(new String[]{"Tất cả", "Đã thanh toán", "Đang thuê"});
         cbFilter.setPreferredSize(new Dimension(150, 40));

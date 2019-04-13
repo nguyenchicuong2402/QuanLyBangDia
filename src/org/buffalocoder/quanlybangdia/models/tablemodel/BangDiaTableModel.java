@@ -71,34 +71,4 @@ public class BangDiaTableModel extends AbstractTableModel {
 
         return null;
     }
-
-    @Override
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        if (rowIndex > getRowCount())
-            return;
-
-        BangDia row = bangDias.get(rowIndex);
-
-        switch (columnIndex){
-            case 0: row.setMaBangDia(aValue.toString());    break;
-            case 1: row.setTenBangDia(aValue.toString());   break;
-            case 2: row.setTheLoai(aValue.toString());      break;
-            case 3: row.setTinhTrang(aValue.toString().equalsIgnoreCase("Mới"));    break;
-            case 4: row.setDonGia((Double) aValue); break;
-            case 5: row.setHangSanXuat(aValue.toString());  break;
-            case 6: row.setGhiChu(aValue.toString());
-        }
-
-        fireTableCellUpdated(rowIndex, columnIndex);
-    }
-
-    @Override
-    public Class<?> getColumnClass(int columnIndex) {
-        if ((columnIndex >= 0) && (columnIndex < getColumnCount()))
-            return getValueAt(0, columnIndex).getClass();
-
-        return Object.class;
-    }
-
-
 }

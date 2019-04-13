@@ -4,7 +4,9 @@ import org.buffalocoder.quanlybangdia.models.HoaDon;
 import org.buffalocoder.quanlybangdia.utils.Formats;
 
 import javax.swing.table.AbstractTableModel;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ChoThueTableModel extends AbstractTableModel {
     private ArrayList<HoaDon> hoaDons;
@@ -39,17 +41,20 @@ public class ChoThueTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         try{
-            HoaDon row = hoaDons.get(rowIndex);
+            HoaDon hoaDon = hoaDons.get(rowIndex);
 
             switch (columnIndex) {
-                case 0: return row.getMaHoaDon();
-                case 1: return row.getKhachHang().getHoTen();
-                case 2: return row.getBangDia().getTenBangDia();
-                case 3: return row.getSoLuong();
-                case 4: return Formats.DATE_FORMAT.format(row.getNgayLap());
-                case 5: return row.getSoNgayDuocMuon();
-                case 6: return row.thanhTien();
-                case 7: return row.isTinhTrang() ? "Đã thanh toán" : "Đang thuê";
+                case 0: return hoaDon.getMaHoaDon();
+                case 1: return hoaDon.getKhachHang().getHoTen();
+                case 2: return hoaDon.getBangDia().getTenBangDia();
+                case 3: return hoaDon.getSoLuong();
+                case 4: return Formats.DATE_FORMAT.format(hoaDon.getNgayLap());
+                case 5: return hoaDon.getSoNgayDuocMuon();
+                case 6:
+                    Locale locale = new Locale("vi", "VN");
+                    NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale);
+                    return numberFormat.format(hoaDon.thanhTien());
+                case 7: return hoaDon.isTinhTrang() ? "Đã thanh toán" : "Đang thuê";
             }
         }catch (Exception e){
 

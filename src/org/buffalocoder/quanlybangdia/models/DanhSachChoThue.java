@@ -49,11 +49,17 @@ public class DanhSachChoThue {
         return hoaDons.set(tim(hoaDon.getMaHoaDon()), hoaDonDAO.suaHoaDon(hoaDon)) != null;
     }
 
-    public double tongDoanhThu(){
+    public double tongDoanhThu(int thang, int nam){
         double tong = 0;
 
         for (HoaDon hoaDon : hoaDons){
-            tong += hoaDon.thanhTien();
+            if (hoaDon.isTinhTrang()){
+                if (thang == 0 && hoaDon.getNgayLap().toLocalDate().getYear() == nam)
+                    tong += hoaDon.thanhTien();
+                else if (hoaDon.getNgayLap().toLocalDate().getMonth().getValue() <= thang &&
+                        hoaDon.getNgayLap().toLocalDate().getYear() == nam)
+                    tong += hoaDon.thanhTien();
+            }
         }
 
         return tong;
