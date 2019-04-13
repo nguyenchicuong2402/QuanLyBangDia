@@ -1,5 +1,6 @@
 package org.buffalocoder.quanlybangdia;
 
+import org.buffalocoder.quanlybangdia.utils.PasswordUtils;
 import org.buffalocoder.quanlybangdia.views.DangNhap;
 
 public class MainProgram {
