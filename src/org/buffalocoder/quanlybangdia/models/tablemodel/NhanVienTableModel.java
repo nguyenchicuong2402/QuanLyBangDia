@@ -4,8 +4,6 @@ import org.buffalocoder.quanlybangdia.models.NhanVien;
 import org.buffalocoder.quanlybangdia.utils.Formats;
 
 import javax.swing.table.AbstractTableModel;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class NhanVienTableModel extends AbstractTableModel {

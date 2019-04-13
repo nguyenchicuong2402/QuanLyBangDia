@@ -13,14 +13,32 @@ public class DanhSachKhachHang {
         loadData();
     }
 
+
+    /**
+     * Lấy danh sách khách hàng
+     * @return
+     */
     public ArrayList<KhachHang> getAll(){
         return khachHangs;
     }
 
+
+    /**
+     * Load danh sách khách hàng từ DB lên
+     * @throws Exception
+     */
     public void loadData() throws Exception {
         khachHangs = khachHangDAO.getKhachHangs();
     }
 
+
+    /**
+     * Thêm khách hàng mới (không cho thêm trùng mã khách hàng + CMND)
+     * Lưu khách hàng vào DB
+     * @param khachHang
+     * @return
+     * @throws Exception
+     */
     public boolean them(KhachHang khachHang) throws Exception {
         if (khachHang == null && khachHangs.contains(khachHang))
             return false;
@@ -28,6 +46,14 @@ public class DanhSachKhachHang {
         return khachHangs.add(khachHangDAO.themKhachHang(khachHang));
     }
 
+
+    /**
+     * Xoá khách hàng
+     * Xoá khách hàng tương ứng trong DB
+     * @param maKhachHang
+     * @return
+     * @throws Exception
+     */
     public boolean xoa(String maKhachHang) throws Exception {
         KhachHang khachHang = khachHangs.get(tim(maKhachHang));
 
@@ -37,24 +63,29 @@ public class DanhSachKhachHang {
         return khachHangDAO.xoaKhachHang(maKhachHang) && khachHangs.remove(khachHang);
     }
 
+
+    /**
+     * Cập nhật thông tin khách hàng
+     * Cập nhật thông tin khách hàng tương ứng trong DB
+     * @param khachHang
+     * @return
+     * @throws Exception
+     */
     public boolean sua(KhachHang khachHang) throws Exception {
         return khachHangs.set(tim(khachHang.getMaKH()), khachHangDAO.suaKhachHang(khachHang)) != null;
     }
 
+
+    /**
+     * Tìm vị trí của khách hàng trong danh sách
+     * @param maKhachHang
+     * @return
+     */
     public int tim (String maKhachHang){
         for (int i = 0; i < khachHangs.size(); i++)
             if (khachHangs.get(i).getMaKH().equals(maKhachHang))
                 return i;
 
         return -1;
-    }
-
-    public ArrayList<String> getMaKhachHangs(){
-        ArrayList<String> maKhachHangs = new ArrayList<>();
-
-        for (KhachHang khachHang : khachHangs)
-            maKhachHangs.add(khachHang.getMaKH());
-
-        return maKhachHangs;
     }
 }

@@ -26,7 +26,7 @@ public class ThongKeTabbed extends JPanel {
     private JPanel doanhThuPanel, thueQuaHanPanel, tinhTrangPanel, leftPanel, rightPanel;
     private JLabel lblTieuDeDoanhThu, lblTieuDeThueQuaHan, lblTieuDeTinhTrang, lblDoanhThu,
                 lblTongSoBangDia_1, lblTongSoBangDia_2, lblTongSoBangDiaDaThue_1, lblTongSoBangDiaDaThue_2,
-                lblTongSoBangDiaHong_1, lblTongSoBangDiaHong_2;
+                lblTongSoBangDiaHong_1, lblTongSoBangDiaHong_2, lblThoiGian;
     private ChoThueTableModel choThueTableModel;
     private JTable tblChoThue;
     private JComboBox<String> cbThang, cbNam;
@@ -66,7 +66,14 @@ public class ThongKeTabbed extends JPanel {
 
         Box boxTitleDoanhThu = Box.createHorizontalBox();
         boxFilterDoanhThu.add(Box.createHorizontalGlue());
+        boxFilterDoanhThu.add(Box.createVerticalStrut(10));
         boxFilterDoanhThu.add(boxTitleDoanhThu);
+        boxFilterDoanhThu.add(Box.createVerticalStrut(10));
+
+        Box boxThoiGian = Box.createHorizontalBox();
+        boxFilterDoanhThu.add(Box.createHorizontalGlue());
+        boxFilterDoanhThu.add(boxThoiGian);
+        boxFilterDoanhThu.add(Box.createVerticalStrut(10));
 
         Box boxFilter = Box.createHorizontalBox();
         boxFilterDoanhThu.add(boxFilter);
@@ -75,6 +82,11 @@ public class ThongKeTabbed extends JPanel {
         MaterialDesign.materialLabel(lblTieuDeDoanhThu);
         lblTieuDeDoanhThu.setFont(MaterialDesign.FONT_TITLE_1);
         boxTitleDoanhThu.add(lblTieuDeDoanhThu);
+
+        lblThoiGian = new JLabel("das");
+        MaterialDesign.materialLabel(lblThoiGian);
+        lblThoiGian.setFont(MaterialDesign.FONT_TITLE_2);
+        boxThoiGian.add(lblThoiGian);
 
         lblDoanhThu = new JLabel();
         lblDoanhThu.setHorizontalAlignment(JLabel.CENTER);
@@ -184,6 +196,7 @@ public class ThongKeTabbed extends JPanel {
         thueQuaHanPanel.add(scrollPane, BorderLayout.CENTER);
 
         // generate dữ liệu năm (5 năm gần đây)
+        cbNam.addItem("Tất cả");
         for (int i = 0; i < 5; i++)
             cbNam.addItem(String.valueOf(currentDate.getYear() - i));
 
@@ -199,7 +212,8 @@ public class ThongKeTabbed extends JPanel {
             danhSachChoThue.loadData();
 
             // Card doanh thu
-            int nam = Integer.parseInt(String.valueOf(cbNam.getSelectedItem()));
+            int nam = String.valueOf(cbNam.getSelectedItem()).equalsIgnoreCase("Tất cả") ? 0 :
+                                Integer.parseInt(String.valueOf(cbNam.getSelectedItem()));
             int thang = 0;
             final Matcher matcher = pattern.matcher(String.valueOf(cbThang.getSelectedItem()));
             if (matcher.find())
@@ -210,6 +224,18 @@ public class ThongKeTabbed extends JPanel {
             NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale_vn);
             lblDoanhThu.setText(numberFormat.format(danhSachChoThue.tongDoanhThu(thang, nam)));
 
+            if (thang != 0 && nam != 0){
+                lblTieuDeDoanhThu.setText("Doanh thu");
+                lblThoiGian.setText(String.format("Tháng %d/%d", thang, nam));
+            }
+            else if (thang == 0 && nam != 0){
+                lblTieuDeDoanhThu.setText("Doanh thu");
+                lblThoiGian.setText(String.format("Năm %d", nam));
+            }
+            else {
+                lblThoiGian.setText("");
+                lblTieuDeDoanhThu.setText("Tổng doanh thu");
+            }
 
             // tình trạng kho
             lblTongSoBangDia_2.setText(String.valueOf(danhSachBangDia.tongSoBangDiaTon() +
@@ -223,7 +249,7 @@ public class ThongKeTabbed extends JPanel {
             // cập nhật bảng thuê quá hạn
             ArrayList<HoaDon> hoaDons = new ArrayList<>();
             for (HoaDon hoaDon : danhSachChoThue.getAll())
-                if (!hoaDon.isTinhTrangThue())
+                if (!hoaDon.isThueQuaHan() && !hoaDon.isTinhTrang())
                     hoaDons.add(hoaDon);
 
             choThueTableModel.setModel(hoaDons);
@@ -242,11 +268,17 @@ public class ThongKeTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // generate dữ liệu tháng theo năm
-                cbThang.removeAllItems();
-                int nam = Integer.parseInt(String.valueOf(cbNam.getSelectedItem()));
-                for (int i = 0; i <= (nam == currentDate.getYear() ? currentDate.getMonthValue() : 12); i++)
-                    cbThang.addItem(i == 0 ? "Tất cả" : String.format("Tháng %d", i));
+
+                if (String.valueOf(cbNam.getSelectedItem()).equalsIgnoreCase("Tất cả")){
+                    cbThang.removeAllItems();
+                    cbThang.addItem("Tất cả");
+                }else{
+                    // generate dữ liệu tháng theo năm
+                    cbThang.removeAllItems();
+                    int nam = Integer.parseInt(String.valueOf(cbNam.getSelectedItem()));
+                    for (int i = 0; i <= (nam == currentDate.getYear() ? currentDate.getMonthValue() : 12); i++)
+                        cbThang.addItem(i == 0 ? "Tất cả" : String.format("Tháng %d", i));
+                }
 
                 refresh();
             }

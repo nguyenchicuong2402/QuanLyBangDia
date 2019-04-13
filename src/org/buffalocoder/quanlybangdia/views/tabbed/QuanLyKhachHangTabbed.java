@@ -132,6 +132,20 @@ public class QuanLyKhachHangTabbed extends JPanel {
 
         tblKhachHang.revalidate();
         tblKhachHang.repaint();
+
+        if (tblKhachHang.getSelectedRow() != -1){
+            btnSua.setEnabled(true);
+            btnSua.setToolTipText("[Alt + S] Cập nhật thông tin khách hàng");
+
+            btnXoa.setToolTipText("[Alt + X] Xoá khách hàng");
+            btnXoa.setEnabled(true);
+        }else{
+            btnSua.setToolTipText("Vui lòng chọn khách hàng cần cập nhật thông tin");
+            btnSua.setEnabled(false);
+
+            btnXoa.setToolTipText("Vui lòng chọn khách hàng cần xoá");
+            btnXoa.setEnabled(false);
+        }
     }
 
     private void filterTable(String filter_text) {
@@ -195,7 +209,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int index = tblKhachHang.getSelectedRow();
+                int index = tblKhachHang.convertRowIndexToModel(tblKhachHang.getSelectedRow());
 
                 if (index == -1){
                     thongBao("Vui lòng chọn khách hàng cần sửa");
@@ -219,15 +233,15 @@ public class QuanLyKhachHangTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int index = tblKhachHang.getSelectedRow();
+                int index = tblKhachHang.convertRowIndexToModel(tblKhachHang.getSelectedRow());
 
                 if (index == -1){
                     thongBao("Vui lòng chọn khách hàng cần xoá");
                     return;
                 }
 
-                String maKhachHang = khachHangTableModel.getValueAt(index, 0).toString();
-                String tenKhachHang = khachHangTableModel.getValueAt(index, 1).toString();
+                String maKhachHang = tblKhachHang.getModel().getValueAt(index, 0).toString();
+                String tenKhachHang = tblKhachHang.getModel().getValueAt(index, 1).toString();
 
                 ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
                         new JFrame(),
@@ -239,6 +253,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
                 if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     try{
                         danhSachKhachHang.xoa(maKhachHang);
+                        tblKhachHang.clearSelection();
                         refresh();
                     }catch (Exception e1){
                         thongBaoLoi(e1.getMessage());
@@ -281,11 +296,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
         return new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                btnSua.setEnabled(true);
-                btnSua.setToolTipText("[Alt + S] Cập nhật thông tin khách hàng");
-
-                btnXoa.setToolTipText("[Alt + X] Xoá khách hàng");
-                btnXoa.setEnabled(true);
+                refresh();
             }
 
             @Override

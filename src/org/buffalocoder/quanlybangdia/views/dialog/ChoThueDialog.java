@@ -11,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 import java.sql.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -129,10 +128,17 @@ public class ChoThueDialog extends JDialog {
         cbMaBangDia = new JComboBox<String>();
         MaterialDesign.materialComboBox(cbMaBangDia);
         for (BangDia bangDia : danhSachBangDia.getAll())
-            cbMaBangDia.addItem(String.format("[%s] %s", bangDia.getMaBangDia(), bangDia.getTenBangDia()));
-        if (isChinhSua)
+            if (bangDia.getSoLuongTon() > 0)
+                cbMaBangDia.addItem(String.format("[%s] %s", bangDia.getMaBangDia(), bangDia.getTenBangDia()));
+
+        if (isChinhSua){
+            cbMaBangDia.addItem(String.format("[%s] %s",
+                    hoaDon.getBangDia().getMaBangDia(), hoaDon.getBangDia().getTenBangDia()));
+
             cbMaBangDia.setSelectedItem(String.format("[%s] %s",
                     hoaDon.getBangDia().getMaBangDia(), hoaDon.getBangDia().getTenBangDia()));
+        }
+
         bx3.add(cbMaBangDia);
         bx3.add(Box.createHorizontalStrut(20));
 

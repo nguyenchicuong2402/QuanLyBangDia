@@ -115,7 +115,6 @@ public class KhachHangDialog extends JDialog {
         bx2.add(lblHoTen);
 
         txtHoTen = new JTextField();
-        txtHoTen.requestFocus();
         MaterialDesign.materialTextField(txtHoTen);
         if (isChinhSua) txtHoTen.setText(khachHang.getHoTen());
         txtHoTen.addKeyListener(txtHoTen_KeyListener());

@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class MaterialDesign {
     private static final QuanLyXML quanlyXML = new QuanLyXML();
-    private static final String ID_COLOR = quanlyXML.getIDThemes();
+    private static String ID_COLOR = quanlyXML.getIDThemes();
     private static final String FONT_NAME = "Times New Roman";
 
     //========== FONT ==========//
@@ -23,13 +23,13 @@ public class MaterialDesign {
     public static final Font FONT_TITLE_ALERT        = new Font(FONT_NAME, Font.PLAIN, 20);
 
     //========== COLOR ==========//
-    public static final Color COLOR_PRIMARY         = Color.decode(quanlyXML.getColorPrimary(ID_COLOR));
-    public static final Color COLOR_SECONDARY       = Color.decode(quanlyXML.getColorSecondary(ID_COLOR));
-    public static final Color COLOR_DARK            = Color.decode(quanlyXML.getColorDark(ID_COLOR));
-    public static final Color COLOR_BACKGROUND      = Color.decode(quanlyXML.getColorBackground(ID_COLOR));
-    public static final Color COLOR_TEXT            = Color.decode("#ffffff");
-    public static final Color COLOR_ERROR           = Color.decode("#D50000");
-    public static final Color COLOR_CARD            = Color.decode("#ffffff");
+    public static Color COLOR_PRIMARY         = Color.decode(quanlyXML.getColorPrimary(ID_COLOR));
+    public static Color COLOR_SECONDARY       = Color.decode(quanlyXML.getColorSecondary(ID_COLOR));
+    public static Color COLOR_DARK            = Color.decode(quanlyXML.getColorDark(ID_COLOR));
+    public static Color COLOR_BACKGROUND      = Color.decode(quanlyXML.getColorBackground(ID_COLOR));
+    public static Color COLOR_TEXT            = Color.decode("#ffffff");
+    public static Color COLOR_ERROR           = Color.decode("#D50000");
+    public static Color COLOR_CARD            = Color.decode("#ffffff");
 
     //========== BORDER =========//
     public static Border BORDER_ERROR = BorderFactory.createLineBorder(COLOR_ERROR, 3);
@@ -41,6 +41,7 @@ public class MaterialDesign {
     public static ImageIcon ICON_XOA = new ImageIcon("resources/images/baseline_delete_white_18dp.png");
     public static ImageIcon ICON_SUA = new ImageIcon("resources/images/baseline_create_white_18dp.png");
     public static ImageIcon ICON_THANHTOAN = new ImageIcon("resources/images/baseline_payment_white_18dp.png");
+
 
     /**
      * Phương thức set thuôc tính cho button

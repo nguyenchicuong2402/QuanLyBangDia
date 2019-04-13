@@ -73,6 +73,7 @@ public class MainForm extends JFrame {
         btnDangXuat.setBackground(MaterialDesign.COLOR_DARK);
         btnDangXuat.setPreferredSize(new Dimension(80, 50));
         btnDangXuat.addActionListener(btnDangXuat_Click());
+        btnDangXuat.setToolTipText("Đăng xuất");
         logoutPanel.add(btnDangXuat, BorderLayout.CENTER);
 
         /*========== MENU PANEL =========*/

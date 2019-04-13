@@ -20,20 +20,6 @@ public class BangDia {
         this.soLuongTon = soLuongTon;
     }
 
-    public BangDia() {
-    }
-
-    public BangDia(String maBangDia, String tenBangDia, String theLoai, boolean tinhTrang, String hangSanXuat, String ghiChu, Double donGia, int soLuongTon) {
-        this.maBangDia = maBangDia;
-        this.tenBangDia = tenBangDia;
-        this.theLoai = theLoai;
-        this.tinhTrang = tinhTrang;
-        this.hangSanXuat = hangSanXuat;
-        this.ghiChu = ghiChu;
-        this.donGia = donGia;
-        this.soLuongTon = soLuongTon;
-    }
-
     public String getMaBangDia() {
         return maBangDia;
     }
@@ -88,6 +74,20 @@ public class BangDia {
 
     public void setDonGia(Double donGia) {
         this.donGia = donGia;
+    }
+
+    public BangDia() {
+    }
+
+    public BangDia(String maBangDia, String tenBangDia, String theLoai, boolean tinhTrang, String hangSanXuat, String ghiChu, Double donGia, int soLuongTon) {
+        this.maBangDia = maBangDia;
+        this.tenBangDia = tenBangDia;
+        this.theLoai = theLoai;
+        this.tinhTrang = tinhTrang;
+        this.hangSanXuat = hangSanXuat;
+        this.ghiChu = ghiChu;
+        this.donGia = donGia;
+        this.soLuongTon = soLuongTon;
     }
 
     @Override

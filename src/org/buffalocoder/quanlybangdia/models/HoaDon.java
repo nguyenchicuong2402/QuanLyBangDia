@@ -34,7 +34,7 @@ public class HoaDon extends ChiTietHoaDon{
         this.ngayLap = ngayLap;
     }
 
-    public boolean isTinhTrangThue() {
+    public boolean isThueQuaHan() {
         java.util.Date currentDate = new java.util.Date();
         long soNgayDaThue = TimeUnit.MILLISECONDS.toDays(currentDate.getTime() - ngayLap.getTime());
 
@@ -46,7 +46,7 @@ public class HoaDon extends ChiTietHoaDon{
     public double thanhTien(){
         double tongTien = getSoLuong() * getBangDia().getDonGia();
 
-        if (!isTinhTrangThue())
+        if (!isThueQuaHan())
             tongTien += (0.5 * tongTien);
 
         return tongTien;

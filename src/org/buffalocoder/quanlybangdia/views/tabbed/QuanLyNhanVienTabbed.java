@@ -155,6 +155,20 @@ public class QuanLyNhanVienTabbed extends JPanel {
 
         tblNhanVien.revalidate();
         tblNhanVien.repaint();
+
+        if (tblNhanVien.getSelectedRow() != -1){
+            btnSua.setEnabled(true);
+            btnSua.setToolTipText("[Alt + S] Cập nhật thông tin nhân viên");
+
+            btnXoa.setToolTipText("[Alt + X] Xoá nhân viên");
+            btnXoa.setEnabled(true);
+        }else {
+            btnSua.setToolTipText("Vui lòng chọn nhân viên cần cập nhật thông tin");
+            btnSua.setEnabled(false);
+
+            btnXoa.setToolTipText("Vui lòng chọn nhân viên cần xoá");
+            btnXoa.setEnabled(false);
+        }
     }
 
     private void thongBao(String message){
@@ -202,7 +216,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int index = tblNhanVien.getSelectedRow();
+                int index = tblNhanVien.convertRowIndexToModel(tblNhanVien.getSelectedRow());
 
                 if (index == -1){
                     thongBao("Vui lòng chọn nhân viên cần sửa");
@@ -243,15 +257,15 @@ public class QuanLyNhanVienTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int index = tblNhanVien.getSelectedRow();
+                int index = tblNhanVien.convertRowIndexToModel(tblNhanVien.getSelectedRow());
 
                 if (index == -1){
                     thongBao("Vui lòng chọn nhân viên cần xoá");
                     return;
                 }
 
-                String maNhanVien = nhanVienTableModel.getValueAt(index, 0).toString();
-                String tenNhanVien = nhanVienTableModel.getValueAt(index, 1).toString();
+                String maNhanVien = tblNhanVien.getModel().getValueAt(index, 0).toString();
+                String tenNhanVien = tblNhanVien.getModel().getValueAt(index, 1).toString();
 
                 if (maNhanVien.equals("NV00001")){
                     thongBao("Không thể xoá admin mặc định");
@@ -268,6 +282,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
                 if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     try{
                         danhSachNhanVien.xoa(maNhanVien);
+                        tblNhanVien.clearSelection();
                         refresh();
                     }catch (Exception e1){
                         thongBaoLoi(e1.getMessage());
@@ -309,11 +324,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
         return new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                btnSua.setEnabled(true);
-                btnSua.setToolTipText("[Alt + S] Cập nhật thông tin nhân viên");
-
-                btnXoa.setToolTipText("[Alt + X] Xoá nhân viên");
-                btnXoa.setEnabled(true);
+                refresh();
             }
 
             @Override

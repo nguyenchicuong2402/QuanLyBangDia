@@ -142,6 +142,24 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
         tblBangDia.revalidate();
         tblBangDia.repaint();
+
+        /**
+         * Kiểm tra xem người dùng có chọn dòng nào không
+         * Nếu người dùng có chọn thì bật nút xoá và sửa
+         */
+        if (tblBangDia.getSelectedRow() == -1){
+            btnSua.setToolTipText("Vui lòng chọn băng đĩa cần cập nhật thông tin");
+            btnSua.setEnabled(false);
+
+            btnXoa.setToolTipText("Vui lòng chọn băng đĩa cần xoá");
+            btnXoa.setEnabled(false);
+        }else{
+            btnSua.setEnabled(true);
+            btnSua.setToolTipText("[Alt + S] Cập nhật thông tin băng đĩa");
+
+            btnXoa.setEnabled(true);
+            btnXoa.setToolTipText("[Alt + X] Xoá băng đĩa");
+        }
     }
 
     private void filterTable(String filter_text) {
@@ -205,7 +223,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int index = tblBangDia.getSelectedRow();
+                int index = tblBangDia.convertRowIndexToModel(tblBangDia.getSelectedRow());
 
                 if (index == -1){
                     thongBao("Vui lòng chọn băng đĩa cần sửa");
@@ -229,15 +247,15 @@ public class QuanLyBangDiaTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int index = tblBangDia.getSelectedRow();
+                int index = tblBangDia.convertRowIndexToModel(tblBangDia.getSelectedRow());
 
                 if (index == -1){
                     thongBao("Vui lòng chọn băng đĩa cần xoá");
                     return;
                 }
 
-                String maBangDia = bangDiaTableModel.getValueAt(index, 0).toString();
-                String tenBangDia = bangDiaTableModel.getValueAt(index, 1).toString();
+                String maBangDia = tblBangDia.getModel().getValueAt(index, 0).toString();
+                String tenBangDia = tblBangDia.getModel().getValueAt(index, 1).toString();
 
                 ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
                         new JFrame(),
@@ -249,6 +267,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
                 if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     try{
                         danhSachBangDia.xoa(maBangDia);
+                        tblBangDia.clearSelection();
                         refresh();
                     }catch (Exception e1){
                         thongBaoLoi(e1.getMessage());
@@ -290,11 +309,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
         return new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                btnSua.setEnabled(true);
-                btnSua.setToolTipText("[Alt + S] Cập nhật thông tin băng đĩa");
-
-                btnXoa.setEnabled(true);
-                btnXoa.setToolTipText("[Alt + X] Xoá băng đĩa");
+                refresh();
             }
 
             @Override

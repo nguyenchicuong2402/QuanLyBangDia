@@ -24,7 +24,7 @@ public class QuanLyChoThueTabbed extends JPanel {
 
     private JTable tblChoThue;
     private JPanel topPanel, funcPanel, searchPanel;
-    private JButton btnThem, btnXoa, btnSua, btnTimKiem, btnTraBangDia;
+    private JButton btnThem, btnXoa, btnSua, btnTimKiem, btnThanhToan;
     private JTextField txtTimKiem;
     private TableRowSorter<TableModel> sorter;
     private ChoThueTableModel choThueTableModel;
@@ -76,20 +76,20 @@ public class QuanLyChoThueTabbed extends JPanel {
         btnXoa = new JButton("Xoá", MaterialDesign.ICON_XOA);
         btnXoa.setPreferredSize(btnThem.getPreferredSize());
         btnXoa.addActionListener(btnXoa_Click());
-        btnXoa.setToolTipText("Vui lòng chọn hoá đơn cần xoá/trả");
+        btnXoa.setToolTipText("Vui lòng chọn hoá đơn cần xoá");
         btnXoa.setEnabled(false);
         btnXoa.setMnemonic(KeyEvent.VK_X);
         MaterialDesign.materialButton(btnXoa);
         btnXoa.setBackground(MaterialDesign.COLOR_ERROR);
         funcPanel.add(btnXoa);
 
-        btnTraBangDia = new JButton("Thanh toán", MaterialDesign.ICON_THANHTOAN);
-        btnTraBangDia.setPreferredSize(new Dimension(140, 40));
-        btnTraBangDia.addActionListener(btnTraBangDia_Click());
-        btnTraBangDia.setToolTipText("Vui lòng chọn hoá đơn cần trả");
-        btnTraBangDia.setEnabled(false);
-        MaterialDesign.materialButton(btnTraBangDia);
-        funcPanel.add(btnTraBangDia);
+        btnThanhToan = new JButton("Thanh toán", MaterialDesign.ICON_THANHTOAN);
+        btnThanhToan.setPreferredSize(new Dimension(140, 40));
+        btnThanhToan.addActionListener(btnThanhToan_Click());
+        btnThanhToan.setToolTipText("Vui lòng chọn hoá đơn cần thanh toán");
+        btnThanhToan.setEnabled(false);
+        MaterialDesign.materialButton(btnThanhToan);
+        funcPanel.add(btnThanhToan);
 
         cbFilter = new JComboBox<>(new String[]{"Tất cả", "Đã thanh toán", "Đang thuê"});
         cbFilter.setPreferredSize(new Dimension(150, 40));
@@ -161,7 +161,7 @@ public class QuanLyChoThueTabbed extends JPanel {
         for (HoaDon hoaDon1 : danhSachChoThue.getAll()){
             if (hoaDon1.getKhachHang().getMaKH().equals(
                     hoaDon.getKhachHang().getMaKH())){
-                if (!hoaDon1.isTinhTrangThue()){
+                if (!hoaDon1.isThueQuaHan()){
                     thongBao("Khách hàng thuê băng đĩa quá hạn\nVui lòng nhắc khách hàng trả băng đĩa trước khi thuê");
                     return false;
                 }
@@ -198,6 +198,18 @@ public class QuanLyChoThueTabbed extends JPanel {
             thongBaoLoi(e.getMessage());
         }
 
+        choThueTableModel.setModel(danhSachChoThue.getAll());
+        tblChoThue.setModel(choThueTableModel);
+
+        sorter.setModel(choThueTableModel);
+
+        tblChoThue.revalidate();
+        tblChoThue.repaint();
+
+        /**
+         * Bật tắt nút thêm hoá đơn
+         * Khi chưa có người dùng và băng đĩa thì k được thêm hoá đơn
+         */
         if (danhSachKhachHang.getAll().size() > 0 && danhSachBangDia.getAll().size() > 0){
             btnThem.setEnabled(true);
             btnThem.setToolTipText("[Alt + T] Thêm hoá đơn");
@@ -209,13 +221,49 @@ public class QuanLyChoThueTabbed extends JPanel {
             btnThem.setToolTipText("Vui lòng thêm băng đĩa");
         }
 
-        choThueTableModel.setModel(danhSachChoThue.getAll());
-        tblChoThue.setModel(choThueTableModel);
 
-        sorter.setModel(choThueTableModel);
+        /**
+         * Bật tắt nút xoá, sửa, thanh toán
+         * Khi người dùng chưa chọn hoá đơn nào thì disable nút xoá, sửa, thanh toán
+         * Nếu hoá đơn đã thanh toán thì disable nút thanh toán
+         */
+        int rowSelected = tblChoThue.getSelectedRow();
 
-        tblChoThue.revalidate();
-        tblChoThue.repaint();
+        if (rowSelected == -1){
+            btnSua.setToolTipText("Vui lòng chọn hoá đơn cần cập nhật thông tin");
+            btnSua.setEnabled(false);
+
+            btnXoa.setToolTipText("Vui lòng chọn hoá đơn cần xoá");
+            btnXoa.setEnabled(false);
+
+            btnThanhToan.setToolTipText("Vui lòng chọn hoá đơn cần thanh toán");
+            btnThanhToan.setEnabled(false);
+        }else{
+            btnSua.setEnabled(true);
+            btnSua.setToolTipText("[Alt + S] Cập nhật thông tin hoá đơn");
+
+            btnXoa.setToolTipText("[Alt + X] Xoá hoá đơn");
+            btnXoa.setEnabled(true);
+
+            if (String.valueOf(tblChoThue.getModel().getValueAt(rowSelected, 7)).equalsIgnoreCase("Đang thuê")){
+                btnThanhToan.setToolTipText("Thanh toán hoá đơn");
+                btnThanhToan.setEnabled(true);
+            }else{
+                btnThanhToan.setToolTipText("Hoá đơn đã được thanh toán");
+                btnThanhToan.setEnabled(false);
+
+                btnSua.setToolTipText("Không thể cập nhật hoá đơn đã thanh toán");
+                btnSua.setEnabled(false);
+
+                btnXoa.setToolTipText("Không thể xoá hoá đơn đã thanh toán");
+                btnXoa.setEnabled(false);
+            }
+        }
+
+
+
+
+
     }
 
     private void filterTable(String filter_text) {
@@ -259,7 +307,7 @@ public class QuanLyChoThueTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int index = tblChoThue.getSelectedRow();
+                int index = tblChoThue.convertRowIndexToModel(tblChoThue.getSelectedRow());
 
                 if (index == -1){
                     thongBao("Vui lòng chọn hoá đơn cần sửa");
@@ -286,12 +334,12 @@ public class QuanLyChoThueTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int index = tblChoThue.getSelectedRow();
+                int index = tblChoThue.convertRowIndexToModel(tblChoThue.getSelectedRow());
 
                 if (index == -1){
                     thongBao("Vui lòng chọn hoá đơn cần xoá");
                     return;
-                }else if (String.valueOf(tblChoThue.getValueAt(index, 7)).equalsIgnoreCase("Đã thanh toán")){
+                }else if (String.valueOf(tblChoThue.getModel().getValueAt(index, 7)).equalsIgnoreCase("Đã thanh toán")){
                     thongBao("Không thể xoá hoá đơn đã thanh toán");
                     return;
                 }
@@ -310,6 +358,7 @@ public class QuanLyChoThueTabbed extends JPanel {
                 if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     try{
                         danhSachChoThue.xoa(maHoaDon);
+                        tblChoThue.clearSelection();
                         refresh();
                     }catch (Exception e1){
                         thongBaoLoi(e1.getMessage());
@@ -319,11 +368,11 @@ public class QuanLyChoThueTabbed extends JPanel {
         };
     }
 
-    private ActionListener btnTraBangDia_Click(){
+    private ActionListener btnThanhToan_Click(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int index = tblChoThue.getSelectedRow();
+                int index = tblChoThue.convertRowIndexToModel(tblChoThue.getSelectedRow());
 
                 if (index == -1){
                     thongBao("Vui lòng chọn hoá đơn cần thanh toán");
@@ -344,6 +393,7 @@ public class QuanLyChoThueTabbed extends JPanel {
                 if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     try{
                         danhSachChoThue.thanhToanHoaDon(maHoaDon);
+                        tblChoThue.clearSelection();
                         refresh();
                     }catch (Exception e1){
                         thongBaoLoi(e1.getMessage());
@@ -410,21 +460,7 @@ public class QuanLyChoThueTabbed extends JPanel {
         return new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int rowSelected = tblChoThue.getSelectedRow();
-
-                btnSua.setEnabled(true);
-                btnSua.setToolTipText("[Alt + S] Cập nhật thông tin hoá đơn");
-
-                btnXoa.setToolTipText("[Alt + X] Xoá hoá đơn");
-                btnXoa.setEnabled(true);
-
-                if (rowSelected != -1 &&
-                        String.valueOf(tblChoThue.getValueAt(rowSelected, 7)).equalsIgnoreCase("Đang thuê")){
-                    btnTraBangDia.setToolTipText("[Alt + X] Thanh toán hoá đơn");
-                    btnTraBangDia.setEnabled(true);
-                }
-
-
+                refresh();
             }
 
             @Override

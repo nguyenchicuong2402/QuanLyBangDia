@@ -307,23 +307,24 @@ public class CaiDatTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Pattern pattern = Pattern.compile("^(.*) material$");
+                Matcher matcher = pattern.matcher(String.valueOf(cbChuDe.getSelectedItem()).toLowerCase());
+
+                if (matcher.find()){
+                    String id_color = matcher.group(1);
+                    quanLyXML.setIDColor(id_color);
+                }
+
                 thongBaoDialog = new ThongBaoDialog(
                         new JFrame(),
                         "Thông báo",
-                        "Thao tác này cần khởi động lại phần mềm\nBạn có muốn khởi động lại không ?",
+                        "Vui lòng khởi động lại phần mềm để cập nhật thay đổi",
                         ThongBaoDialog.OK_CANCLE_OPTION
                 );
 
-                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
-                    Pattern pattern = Pattern.compile("^(.*) material$");
-                    Matcher matcher = pattern.matcher(String.valueOf(cbChuDe.getSelectedItem()).toLowerCase());
-
-                    if (matcher.find()){
-                        String id_color = matcher.group(1);
-                        quanLyXML.setIDColor(id_color);
-                    }
+                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION)
                     System.exit(0);
-                }
+
             }
         };
     }
