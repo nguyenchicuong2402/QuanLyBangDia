@@ -12,6 +12,7 @@ import javax.swing.event.ChangeListener;
 
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.views.custom.CustomTabbedPanelUI;
+import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
 import org.buffalocoder.quanlybangdia.views.tabbed.*;
 
 public class MainForm extends JFrame {
@@ -119,8 +120,17 @@ public class MainForm extends JFrame {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new DangNhap();
+                ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
+                        new JFrame(),
+                        "Cảnh báo",
+                        "Bạn có muốn đăng xuất khỏi phiên người dùng này không ?",
+                        ThongBaoDialog.OK_CANCLE_OPTION
+                );
+
+                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
+                    setVisible(false);
+                    new DangNhap();
+                }
             }
         };
     }

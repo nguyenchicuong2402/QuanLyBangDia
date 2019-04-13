@@ -9,6 +9,7 @@ import org.buffalocoder.quanlybangdia.views.DangNhap;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalTime;
 
 public class TrangChuTabbed extends JPanel {
 
@@ -51,12 +52,9 @@ public class TrangChuTabbed extends JPanel {
         boxLoiChao.add(boxLoiChao2);
         boxLoiChao.add(Box.createVerticalStrut(50));
 
-        String loiChao = "Chào " + DangNhap.taiKhoan.getTenTaiKhoan();
-        try {
-            loiChao = "Chào buổi sáng " + nhanVien.getHoTen();
-        } catch (Exception e) {
-        }
-        lblLoiChao = new JLabel(loiChao, JLabel.LEFT);
+
+        lblLoiChao = new JLabel();
+        lblLoiChao.setHorizontalAlignment(JLabel.LEFT);
         MaterialDesign.materialLabel(lblLoiChao);
         lblLoiChao.setFont(MaterialDesign.FONT_TITLE_2);
         boxLoiChao1.add(Box.createHorizontalStrut(10));
@@ -240,6 +238,8 @@ public class TrangChuTabbed extends JPanel {
         MaterialDesign.materialLabel(lblMoTa_2);
         bx9.add(lblMoTa_2);
         bx9.add(Box.createHorizontalGlue());
+
+        refresh();
     }
 
     public void refresh(){
@@ -258,6 +258,22 @@ public class TrangChuTabbed extends JPanel {
         lblSoDienThoai_2.setText(nhanVien.getSoDienThoai());
         lblDiaChi_2.setText(nhanVien.getDiaChi());
         lblMoTa_2.setText(nhanVien.getMoTa());
+
+        // cập nhật lời chào theo thời gian hệ thống
+        int hour = LocalTime.now().getHour();
+        String loiChao = "Chào " + DangNhap.taiKhoan.getTenTaiKhoan();
+
+        if (hour >= 6 && hour <= 10){
+            loiChao = "Chào buổi sáng ";
+        }else if (hour >= 11 && hour <=12){
+            loiChao = "Chào buổi trưa ";
+        }else if (hour >= 13 && hour <= 17){
+            loiChao = "Chào buổi chiều ";
+        }else {
+            loiChao = "Chào buổi tối ";
+        }
+
+        lblLoiChao.setText(loiChao + nhanVien.getHoTen());
     }
 
     public TrangChuTabbed(){
