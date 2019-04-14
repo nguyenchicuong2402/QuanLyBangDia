@@ -1,6 +1,5 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
-import org.buffalocoder.quanlybangdia.MainProgram;
 import org.buffalocoder.quanlybangdia.XML.QuanLyXML;
 import org.buffalocoder.quanlybangdia.dao.DataBaseUtils;
 import org.buffalocoder.quanlybangdia.dao.TaiKhoanDAO;
@@ -32,6 +31,10 @@ public class CaiDatTabbed extends JPanel {
     private JComboBox<String> cbChuDe;
     private JPasswordField txtMatKhauHienTai, txtMatKhauMoi, txtNhapLaiMatKhau;
 
+
+    /**
+     * Tạo GUI
+     */
     private void prepareUI(){
         this.setLayout(new BorderLayout());
         MaterialDesign.materialPanel(this);
@@ -238,22 +241,12 @@ public class CaiDatTabbed extends JPanel {
         //========== BOTTOM PANEL ==========//
     }
 
-    public CaiDatTabbed(){
-        try {
-            taiKhoanDAO = TaiKhoanDAO.getInstance();
-            dataBaseUtils = DataBaseUtils.getInstance();
-        } catch (Exception e) {
-            ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
-                    new JFrame(),
-                    "Lỗi",
-                    e.getMessage(),
-                    ThongBaoDialog.OK_OPTION
-            );
-        }
 
-        prepareUI();
-    }
-
+    /**
+     * Thông báo lỗi nhập text
+     * @param textField
+     * @param message
+     */
     private void errorInput(JTextField textField, String message){
         lblLoiDoiMatKhau.setText(message);
         textField.setBorder(MaterialDesign.BORDER_ERROR);
@@ -261,15 +254,28 @@ public class CaiDatTabbed extends JPanel {
         textField.selectAll();
     }
 
+
+    /**
+     * Tắt thông báo lỗi nhập text
+     * @param textField
+     */
     private void unErrorInput(JTextField textField){
-        MaterialDesign.materialTextField(textField);
-        lblLoiDoiMatKhau.setText("    ");
+        if (lblLoiDoiMatKhau.getText().isEmpty()){
+            MaterialDesign.materialTextField(textField);
+            lblLoiDoiMatKhau.setText("    ");
+        }
     }
 
+
+    /**
+     * Sự kiện button xoá database
+     * @return
+     */
     private ActionListener btnXoaDatabase_Click(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // thông báo cho người dùng
                 thongBaoDialog = new ThongBaoDialog(
                         new JFrame(),
                         "Cảnh báo",
@@ -277,6 +283,7 @@ public class CaiDatTabbed extends JPanel {
                         ThongBaoDialog.OK_CANCLE_OPTION
                 );
 
+                // nếu người dùng đồng ý thì xoá dữ liệu
                 if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     try {
                         dataBaseUtils.resetDatabase();
@@ -303,6 +310,11 @@ public class CaiDatTabbed extends JPanel {
         };
     }
 
+
+    /**
+     * Sự kiện thay đổi chủ đề
+     * @return
+     */
     private ActionListener cbChuDe_Change(){
         return new ActionListener() {
             @Override
@@ -310,11 +322,13 @@ public class CaiDatTabbed extends JPanel {
                 Pattern pattern = Pattern.compile("^(.*) material$");
                 Matcher matcher = pattern.matcher(String.valueOf(cbChuDe.getSelectedItem()).toLowerCase());
 
+                // Lấy ID Theme và lưu vào Propertise
                 if (matcher.find()){
                     String id_color = matcher.group(1);
                     quanLyXML.setIDColor(id_color);
                 }
 
+                // Thông báo khởi động lại phần mềm
                 thongBaoDialog = new ThongBaoDialog(
                         new JFrame(),
                         "Thông báo",
@@ -322,13 +336,18 @@ public class CaiDatTabbed extends JPanel {
                         ThongBaoDialog.OK_CANCLE_OPTION
                 );
 
+                // Nếu người dùng đồng ý khỡi động lại phần mềm
                 if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION)
                     System.exit(0);
-
             }
         };
     }
 
+
+    /**
+     * Sự kiện button làm mới thay đổi mật khẩu
+     * @return
+     */
     private ActionListener btnLamMoi_Click(){
         return new ActionListener() {
             @Override
@@ -344,6 +363,11 @@ public class CaiDatTabbed extends JPanel {
         };
     }
 
+
+    /**
+     * Sự kiện button thay đổi mật khẩu
+     * @return
+     */
     private ActionListener btnThayDoiMatKhau_Click(){
         return new ActionListener() {
             @Override
@@ -411,12 +435,16 @@ public class CaiDatTabbed extends JPanel {
         };
     }
 
+
+    /**
+     * Sự kiện nhập text mật khẩu hiện tại
+     * Nếu có lỗi thì xoá
+     * @return
+     */
     private KeyListener txtMatKhauHienTai_KeyListener(){
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
+            public void keyTyped(KeyEvent e) {}
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -424,18 +452,20 @@ public class CaiDatTabbed extends JPanel {
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
+            public void keyReleased(KeyEvent e) {}
         };
     }
 
+
+    /**
+     * Sự kiện nhập text mật khẩu mới
+     * Nếu có lỗi thì xoá
+     * @return
+     */
     private KeyListener txtMatKhauMoi_KeyListener(){
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
+            public void keyTyped(KeyEvent e) {}
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -443,18 +473,20 @@ public class CaiDatTabbed extends JPanel {
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
+            public void keyReleased(KeyEvent e) {}
         };
     }
 
+
+    /**
+     * Sự kiện nhập text mật khẩu hiện tại
+     * Nếu có lỗi thì xoá
+     * @return
+     */
     private KeyListener txtNhapLaiMatKhau_KeyListener(){
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
+            public void keyTyped(KeyEvent e) {}
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -462,9 +494,24 @@ public class CaiDatTabbed extends JPanel {
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
+            public void keyReleased(KeyEvent e) {}
         };
+    }
+
+
+    public CaiDatTabbed(){
+        try {
+            taiKhoanDAO = TaiKhoanDAO.getInstance();
+            dataBaseUtils = DataBaseUtils.getInstance();
+        } catch (Exception e) {
+            ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
+                    new JFrame(),
+                    "Lỗi",
+                    e.getMessage(),
+                    ThongBaoDialog.OK_OPTION
+            );
+        }
+
+        prepareUI();
     }
 }

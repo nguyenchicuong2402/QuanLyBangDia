@@ -31,6 +31,10 @@ public class QuanLyChoThueTabbed extends JPanel {
     private JScrollPane scrollPane;
     private JComboBox<String> cbFilter;
 
+
+    /**
+     * Tạo GUI
+     */
     private void prepareUI(){
         this.setLayout(new BorderLayout());
         this.setFont(MaterialDesign.FONT_DEFAULT);
@@ -132,18 +136,13 @@ public class QuanLyChoThueTabbed extends JPanel {
         box.add(scrollPane, BorderLayout.CENTER);
     }
 
-    public QuanLyChoThueTabbed(){
-        try {
-            danhSachChoThue = new DanhSachChoThue();
-            danhSachKhachHang = new DanhSachKhachHang();
-            danhSachBangDia = new DanhSachBangDia();
-        } catch (Exception e) {
-            thongBaoLoi(e.getMessage());
-        }
 
-        prepareUI();
-    }
-
+    /**
+     *
+     * @param hoaDon
+     * @param isChinhSua
+     * @return
+     */
     private boolean kiemTraTinhTrangThue(HoaDon hoaDon, boolean isChinhSua){
         // kiểm tra số lượng đặt có đủ không
         if ((hoaDon.getBangDia().getSoLuongTon() + (isChinhSua ? hoaDon.getSoLuong() : 0)) < hoaDon.getSoLuong()){
@@ -483,5 +482,17 @@ public class QuanLyChoThueTabbed extends JPanel {
 
             }
         };
+    }
+
+    public QuanLyChoThueTabbed(){
+        try {
+            danhSachChoThue = new DanhSachChoThue();
+            danhSachKhachHang = new DanhSachKhachHang();
+            danhSachBangDia = new DanhSachBangDia();
+        } catch (Exception e) {
+            thongBaoLoi(e.getMessage());
+        }
+
+        prepareUI();
     }
 }

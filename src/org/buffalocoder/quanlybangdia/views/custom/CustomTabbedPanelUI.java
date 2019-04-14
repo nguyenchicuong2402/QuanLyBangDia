@@ -8,11 +8,22 @@ import java.awt.*;
 import java.util.Arrays;
 
 public class CustomTabbedPanelUI extends BasicTabbedPaneUI {
-    private int width = 200;       // chiều dài tab
-    private int height = 50;       // chiểu rộng tab
+    // chiều dài tab
+    private int width = 200;
+
+    // chiểu rộng tab
+    private int height = 50;
+
+    // màu khi tab được chọn
     private Color colorSelected = Color.BLUE;
+
+    // màu khi tab không được chọn
     private Color colorDeselected = Color.CYAN;
+
+    // màu text khi tab được chọn
     private Color colorTextSelected = Color.WHITE;
+
+    // màu text khi tab không được chọn
     private Color colorTextDeselected = Color.WHITE;
     private int[] margin = {0, 0};
 
@@ -125,7 +136,7 @@ public class CustomTabbedPanelUI extends BasicTabbedPaneUI {
     }
 
     /**
-     * Tuỳ biến background
+     * Tuỳ biến background tab
      * @param g
      * @param tabPlacement
      * @param tabIndex
@@ -184,7 +195,7 @@ public class CustomTabbedPanelUI extends BasicTabbedPaneUI {
     }
 
     /**
-     * Thay đổi màu cho tiêu đề tabbed panel
+     * Cấu hình text và textFont
      * @param g
      * @param tabPlacement
      * @param font
@@ -224,11 +235,27 @@ public class CustomTabbedPanelUI extends BasicTabbedPaneUI {
         }
     }
 
+
+    /**
+     * Tính độ dài của tab
+     * @param tabPlacement
+     * @param tabIndex
+     * @param metrics
+     * @return
+     */
     @Override
     protected int calculateTabWidth(int tabPlacement, int tabIndex, FontMetrics metrics) {
         return width + super.calculateTabWidth(tabPlacement, tabIndex, metrics);
     }
 
+
+    /**
+     * Tính độ rộng của tab
+     * @param tabPlacement
+     * @param tabIndex
+     * @param fontHeight
+     * @return
+     */
     @Override
     protected int calculateTabHeight(int tabPlacement, int tabIndex, int fontHeight) {
         if (tabPlacement == LEFT || tabPlacement == RIGHT) {
@@ -238,9 +265,11 @@ public class CustomTabbedPanelUI extends BasicTabbedPaneUI {
         }
     }
 
+
     @Override
     protected void paintTabBorder(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
     }
+
 
     @Override
     protected void paintFocusIndicator(Graphics g, int tabPlacement, Rectangle[] rects, int tabIndex, Rectangle iconRect, Rectangle textRect, boolean isSelected) {

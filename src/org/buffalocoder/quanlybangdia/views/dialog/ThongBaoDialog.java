@@ -3,11 +3,8 @@ package org.buffalocoder.quanlybangdia.views.dialog;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ThongBaoDialog extends JDialog{
     public static final int OK_CANCLE_OPTION = 1;
@@ -23,6 +20,10 @@ public class ThongBaoDialog extends JDialog{
     private JLabel lblTieuDe, lblNoiDung;
     private JButton btnDongY, btnHuy;
 
+
+    /**
+     * Tạo GUI
+     */
     private void prepareDialog() {
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(MaterialDesign.BORDER_DIALOG);
@@ -97,6 +98,11 @@ public class ThongBaoDialog extends JDialog{
         bx2.add(Box.createHorizontalStrut(20));
     }
 
+
+    /**
+     * Sự kiện button Huỷ
+     * @return
+     */
     private ActionListener btnHuy_Click(){
         return new ActionListener() {
             @Override
@@ -107,6 +113,11 @@ public class ThongBaoDialog extends JDialog{
         };
     }
 
+
+    /**
+     * Sự kiện button Đồng ý
+     * @return
+     */
     private ActionListener btnDongY_Click(){
         return new ActionListener() {
             @Override
@@ -117,9 +128,15 @@ public class ThongBaoDialog extends JDialog{
         };
     }
 
+
+    /**
+     * Lấy kết quả người dùng chọn
+     * @return
+     */
     public int getKetQua() {
         return ketQua;
     }
+
 
     public ThongBaoDialog(JFrame frame, String tieuDe, String noiDung, int kieuThongBao){
         super(frame, true);

@@ -6,7 +6,6 @@ import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.utils.PatternRegexs;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.regex.Matcher;
@@ -26,6 +25,10 @@ public class BangDiaDialog extends JDialog{
     private JTextArea txtGhiChu;
     private JComboBox<String> cbTinhTrang;
 
+
+    /**
+     * tạo GUI
+     */
     private void prepareDialog(){
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(MaterialDesign.BORDER_DIALOG);
@@ -223,6 +226,12 @@ public class BangDiaDialog extends JDialog{
         txtTenBangDia.requestFocus();
     }
 
+
+    /**
+     * Thông báo lỗi khi nhập sai
+     * @param textField
+     * @param message
+     */
     private void errorInput(JTextField textField, String message){
         textField.setBorder(MaterialDesign.BORDER_ERROR);
         textField.requestFocus();
@@ -231,11 +240,23 @@ public class BangDiaDialog extends JDialog{
         lblLoi.setText(message);
     }
 
+
+    /**
+     * Tắt thông báo lỗi khi nhập sai
+     * @param textField
+     */
     private void unErrorInput(JTextField textField){
-        MaterialDesign.materialTextField(textField);
-        lblLoi.setText(" ");
+        if (!lblLoi.getText().isEmpty()){
+            MaterialDesign.materialTextField(textField);
+            lblLoi.setText(" ");
+        }
     }
 
+
+    /**
+     * Kiểm tra dữ liệu nhập
+     * @return
+     */
     private boolean validateData(){
         Pattern pattern = null;
 
@@ -292,19 +313,27 @@ public class BangDiaDialog extends JDialog{
         return true;
     }
 
+
+    /**
+     * Generate mã băng đãi mới
+     * @return
+     */
     private String getMaBangDiaMoi(){
         String lastID = "";
         String newID = "";
 
+        // lấy mã băng đĩa cuối trong DB
         try {
             lastID = bangDiaDAO.getMaBangDiaCuoi();
         } catch (Exception e) {
         }
 
+        // nếu chưa có băng đĩa nào trong DB thì trả về mã mặc định đầu tiên
         if (lastID.isEmpty()){
             return "BD00001";
         }
 
+        // generate mã
         Pattern pattern = Pattern.compile(PatternRegexs.REGEX_MABANGDIA);
         Matcher matcher = pattern.matcher(lastID);
         if (matcher.find()){
@@ -317,12 +346,16 @@ public class BangDiaDialog extends JDialog{
         return newID;
     }
 
+
+    /**
+     * Sự kiện khi nhập text tên băng đĩa
+     * Nếu có lỗi thì sẽ xoá lỗi
+     * @return
+     */
     private KeyListener txtTenBangDia_KeyListener(){
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
+            public void keyTyped(KeyEvent e) {}
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -330,18 +363,20 @@ public class BangDiaDialog extends JDialog{
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
+            public void keyReleased(KeyEvent e) {}
         };
     }
 
+
+    /**
+     * Sự kiện khi nhập text thể loại
+     * Nếu có lỗi thì sẽ xoá lỗi
+     * @return
+     */
     private KeyListener txtTheLoai_KeyListener(){
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
+            public void keyTyped(KeyEvent e) {}
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -349,18 +384,20 @@ public class BangDiaDialog extends JDialog{
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
+            public void keyReleased(KeyEvent e) {}
         };
     }
 
+
+    /**
+     * Sự kiện khi nhập text Hãng sản xuất
+     * Nếu có lỗi thì sẽ xoá lỗi
+     * @return
+     */
     private KeyListener txtHangSanXuat_KeyListener(){
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
+            public void keyTyped(KeyEvent e) {}
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -368,18 +405,20 @@ public class BangDiaDialog extends JDialog{
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
+            public void keyReleased(KeyEvent e) {}
         };
     }
 
+
+    /**
+     * Sự kiện khi nhập text dơn giá
+     * Nếu có lỗi thì sẽ xoá lỗi
+     * @return
+     */
     private KeyListener txtDonGia_KeyListener(){
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
+            public void keyTyped(KeyEvent e) {}
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -387,18 +426,20 @@ public class BangDiaDialog extends JDialog{
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
+            public void keyReleased(KeyEvent e) {}
         };
     }
 
+
+    /**
+     * Sự kiện khi nhập text số lượng
+     * Nếu có lỗi thì sẽ xoá lỗi
+     * @return
+     */
     private KeyListener txtSoLuong_KeyListener(){
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
+            public void keyTyped(KeyEvent e) {}
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -406,28 +447,42 @@ public class BangDiaDialog extends JDialog{
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
+            public void keyReleased(KeyEvent e) {}
         };
     }
 
+
+    /**
+     * Sự kiện button thoát > đóng dialog
+     * @return
+     */
     private ActionListener btnThoat_Click(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                bangDia = null;
                 BangDiaDialog.this.dispose();
             }
         };
     }
 
+
+    /**
+     * Sự kiện button Lưu
+     * @return
+     */
     private ActionListener btnLuu_Click(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                /**
+                 * Kiểm tra dữ liệu
+                 * nếu có lỗi thì thông báo
+                 */
                 if (!validateData())
                     return;
 
+                // lấy thông tin băng đĩa đã nhập
                 bangDia = new BangDia(
                         txtMaBangDia.getText().trim(),
                         txtTenBangDia.getText().trim(),
@@ -439,9 +494,19 @@ public class BangDiaDialog extends JDialog{
                         Integer.parseInt(txtSoLuong.getText().trim())
                 );
 
+                // đóng dialog
                 dispose();
             }
         };
+    }
+
+
+    /**
+     * Lấy băn đĩa đã được thêm/chỉnh sửa
+     * @return
+     */
+    public BangDia getBangDia(){
+        return bangDia;
     }
 
     public BangDiaDialog(JFrame frame, BangDia bangDia){
@@ -474,9 +539,5 @@ public class BangDiaDialog extends JDialog{
         setUndecorated(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
-    }
-
-    public BangDia getBangDia(){
-        return bangDia;
     }
 }

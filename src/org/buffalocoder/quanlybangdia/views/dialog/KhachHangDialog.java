@@ -2,14 +2,11 @@ package org.buffalocoder.quanlybangdia.views.dialog;
 
 import com.toedter.calendar.JDateChooser;
 import org.buffalocoder.quanlybangdia.dao.KhachHangDAO;
-import org.buffalocoder.quanlybangdia.models.BangDia;
 import org.buffalocoder.quanlybangdia.models.KhachHang;
 import org.buffalocoder.quanlybangdia.utils.*;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.datatransfer.DataFlavor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -32,6 +29,10 @@ public class KhachHangDialog extends JDialog {
     private JComboBox<String> cbGioiTinh;
     private JDateChooser dateChooser;
 
+
+    /**
+     * Tạo GUI
+     */
     private void prepareDialog(){
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(MaterialDesign.BORDER_DIALOG);
@@ -213,6 +214,12 @@ public class KhachHangDialog extends JDialog {
         bottomPanel.add(btnLuu);
     }
 
+
+    /**
+     * Thông báo lỗi nhập text
+     * @param textField
+     * @param message
+     */
     private void errorInput(JTextField textField, String message){
         lblLoi.setText(message);
         textField.setBorder(MaterialDesign.BORDER_ERROR);
@@ -220,24 +227,39 @@ public class KhachHangDialog extends JDialog {
         textField.selectAll();
     }
 
+
+    /**
+     * Tắt thông báo lỗi nhập text
+     * @param textField
+     */
     private void unErrorInput(JTextField textField){
-        MaterialDesign.materialTextField(textField);
-        lblLoi.setText("    ");
+        if (lblLoi.getText().isEmpty()){
+            MaterialDesign.materialTextField(textField);
+            lblLoi.setText("    ");
+        }
     }
 
+
+    /**
+     * Generate mã khách hàng mới
+     * @return
+     */
     private String getMaKhachHangMoi(){
         String lastID = "";
         String newID = "";
 
+        // lấy mã khách hàng cuối trong DB
         try {
             lastID = khachHangDAO.getMaKhachHangCuoi();
         } catch (Exception e) {
         }
 
+        // Nếu chưa có khách hàng trong DB thì trả về mã mặc định
         if (lastID.isEmpty()){
             return "KH00001";
         }
 
+        // generate mã khách hàng mới
         Pattern pattern = Pattern.compile(PatternRegexs.REGEX_MAKHACHHANG);
         Matcher matcher = pattern.matcher(lastID);
         if (matcher.find()){
@@ -250,6 +272,11 @@ public class KhachHangDialog extends JDialog {
         return newID;
     }
 
+
+    /**
+     * Kiểm tra dữ liệu nhập
+     * @return
+     */
     private boolean validateData(){
         Pattern pattern = null;
 
@@ -294,12 +321,16 @@ public class KhachHangDialog extends JDialog {
         return true;
     }
 
+
+    /**
+     * Sự kiện nhập text Họ tên
+     * Nếu có lỗi thì tắt lỗi
+     * @return
+     */
     private KeyListener txtHoTen_KeyListener(){
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
+            public void keyTyped(KeyEvent e) {}
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -307,18 +338,20 @@ public class KhachHangDialog extends JDialog {
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
+            public void keyReleased(KeyEvent e) {}
         };
     }
 
+
+    /**
+     * Kiểm tra nhập CMND
+     * Nếu có lỗi thì tắt lỗi
+     * @return
+     */
     private KeyListener txtCMND_KeyListener(){
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
+            public void keyTyped(KeyEvent e) {}
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -326,18 +359,20 @@ public class KhachHangDialog extends JDialog {
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
+            public void keyReleased(KeyEvent e) {}
         };
     }
 
+
+    /**
+     * Kiểm tra nhập số điện thoại
+     * Nếu có lỗi thì tắt lỗi
+     * @return
+     */
     private KeyListener txtSoDienThoai_KeyListener(){
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
+            public void keyTyped(KeyEvent e) {}
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -345,18 +380,20 @@ public class KhachHangDialog extends JDialog {
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
+            public void keyReleased(KeyEvent e) {}
         };
     }
 
+
+    /**
+     * Kiểm tra nhập địa chỉ
+     * Nếu có lỗi thì tắt lỗi
+     * @return
+     */
     private KeyListener txtDiaChi_KeyListener(){
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
+            public void keyTyped(KeyEvent e) {}
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -364,28 +401,39 @@ public class KhachHangDialog extends JDialog {
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
+            public void keyReleased(KeyEvent e) {}
         };
     }
 
+
+    /**
+     * Sự kiện khi nhấn button Thoát
+     * @return
+     */
     private ActionListener btnThoat_Click(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                khachHang = null;
                 KhachHangDialog.this.dispose();
             }
         };
     }
 
+
+    /**
+     * Sự kiện khi nhấn nút Lưu
+     * @return
+     */
     private ActionListener btnLuu_Click(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // kiểm tra dữ liệu nhập
                 if (!validateData())
                     return;
 
+                // lấy thông tin khách hàng
                 khachHang = new KhachHang(
                         txtCMND.getText().trim(),
                         txtHoTen.getText().trim(),
@@ -396,10 +444,21 @@ public class KhachHangDialog extends JDialog {
                         txtMaKH.getText().trim()
                 );
 
+                // đóng dialog
                 dispose();
             }
         };
     }
+
+
+    /**
+     * Lấy thông tin khách hàng
+     * @return
+     */
+    public KhachHang getKhachHang(){
+        return khachHang;
+    }
+
 
     public KhachHangDialog(JFrame frame, KhachHang khachHang){
         super(frame, true);
@@ -431,9 +490,5 @@ public class KhachHangDialog extends JDialog {
         setUndecorated(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
-    }
-
-    public KhachHang getKhachHang(){
-        return khachHang;
     }
 }

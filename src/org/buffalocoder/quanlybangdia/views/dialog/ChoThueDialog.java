@@ -32,6 +32,9 @@ public class ChoThueDialog extends JDialog {
     private JDateChooser dateChooser;
 
 
+    /**
+     * Tạo GUI
+     */
     private void prepareDialog(){
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(MaterialDesign.BORDER_DIALOG);
@@ -205,6 +208,12 @@ public class ChoThueDialog extends JDialog {
         bottomPanel.add(btnLuu);
     }
 
+
+    /**
+     * Thông báo lỗi nhập text
+     * @param textField
+     * @param message
+     */
     private void errorInput(JTextField textField, String message){
         lblLoi.setText(message);
         textField.setBorder(MaterialDesign.BORDER_ERROR);
@@ -212,14 +221,27 @@ public class ChoThueDialog extends JDialog {
         textField.selectAll();
     }
 
+
+    /**
+     * Tắt thông báo lỗi nhập text
+     * @param textField
+     */
     private void unErrorInput(JTextField textField){
-        MaterialDesign.materialTextField(textField);
-        lblLoi.setText("    ");
+        if (!lblLoi.getText().isEmpty()){
+            MaterialDesign.materialTextField(textField);
+            lblLoi.setText("    ");
+        }
     }
 
+
+    /**
+     * Kiểm tra nhập dữ liệu
+     * @return
+     */
     private boolean validateData(){
         Pattern pattern = null;
 
+        // Kiểm tra số lượng
         pattern = pattern.compile(PatternRegexs.REGEX_SO);
         if (txtSoLuong.getText().trim().isEmpty()){
             errorInput(txtSoLuong, "Vui lòng nhập số lượng");
@@ -232,7 +254,7 @@ public class ChoThueDialog extends JDialog {
             return false;
         }
 
-
+        // Kiểm tra số ngày mượn
         pattern = Pattern.compile(PatternRegexs.REGEX_SO);
         if (txtSoNgayDuocMuon.getText().trim().isEmpty()){
             errorInput(txtSoNgayDuocMuon, "Vui lòng nhập số số ngày mượn");
@@ -248,19 +270,27 @@ public class ChoThueDialog extends JDialog {
         return true;
     }
 
+
+    /**
+     * Generate mã hoá đơn mới
+     * @return
+     */
     private String getMaHoaDonMoi(){
         String lastID = "";
         String newID = "";
 
+        // lấy mã hoá đơn cuối trong DB
         try {
             lastID = hoaDonDAO.getMaHoaDonCuoi();
         } catch (Exception e) {
         }
 
+        // Nếu chưa có hoá đơn nào trong DB thì trả về mã mặc định
         if (lastID.isEmpty()){
             return "HD00001";
         }
 
+        // generate mã
         Pattern pattern = Pattern.compile(PatternRegexs.REGEX_MAHOADON);
         Matcher matcher = pattern.matcher(lastID);
         if (matcher.find()){
@@ -273,12 +303,15 @@ public class ChoThueDialog extends JDialog {
         return newID;
     }
 
+
+    /**
+     * Sự kiện khi nhập text số lượng
+     * @return
+     */
     private KeyListener txtSoLuong_KeyListener(){
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
+            public void keyTyped(KeyEvent e) {}
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -286,12 +319,15 @@ public class ChoThueDialog extends JDialog {
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
+            public void keyReleased(KeyEvent e) {}
         };
     }
 
+
+    /**
+     * Sự kiện nhập text số ngày được mượn
+     * @return
+     */
     private KeyListener txtSoNgayDuocMuon_KeyListener(){
         return new KeyListener() {
             @Override
@@ -311,6 +347,11 @@ public class ChoThueDialog extends JDialog {
         };
     }
 
+
+    /**
+     * Sự kiện nút Thoát
+     * @return
+     */
     private ActionListener btnThoat_Click(){
         return new ActionListener() {
             @Override
@@ -321,30 +362,39 @@ public class ChoThueDialog extends JDialog {
         };
     }
 
+
+    /**
+     * Sự kiện nút Lưu
+     * @return
+     */
     private ActionListener btnLuu_Click(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!validateData()){
-                    hoaDon= null;
+                // Kiểm tra dữ liệu nhập
+                if (!validateData())
                     return;
-                }
 
                 BangDia bangDia = null;
                 KhachHang khachHang = null;
+                Pattern pattern = null;
+                Matcher matcher = null;
 
-                Pattern pattern = Pattern.compile("(BD\\d.*)]", Pattern.MULTILINE);
-                Matcher matcher = pattern.matcher(cbMaBangDia.getSelectedItem().toString());
+                // lấy dữ liệu băng đĩa
+                pattern = Pattern.compile("(BD\\d.*)]", Pattern.MULTILINE);
+                matcher = pattern.matcher(cbMaBangDia.getSelectedItem().toString());
 
                 if (matcher.find())
                     bangDia = danhSachBangDia.getAll().get(danhSachBangDia.tim(matcher.group(1)));
 
+                // lấy dữ liệu khách hàng
                 pattern = Pattern.compile("(KH\\d.*)]", Pattern.MULTILINE);
                 matcher = pattern.matcher(cbMaKhachHang.getSelectedItem().toString());
 
                 if (matcher.find())
                     khachHang = danhSachKhachHang.getAll().get(danhSachKhachHang.tim(matcher.group(1)));
 
+                // tạo thông tin hoá đơn
                 hoaDon = new HoaDon(
                         bangDia,
                         Integer.parseInt(txtSoNgayDuocMuon.getText().trim()),
@@ -354,14 +404,20 @@ public class ChoThueDialog extends JDialog {
                         Date.valueOf(Formats.DATE_FORMAT_SQL.format(dateChooser.getDate()))
                 );
 
+                // đóng dialog
                 dispose();
             }
         };
     }
 
+    /**
+     * Trả về hoá đơn đã được thêm/chỉnh sửa
+     * @return
+     */
     public HoaDon getHoaDon() {
         return hoaDon;
     }
+
 
     public ChoThueDialog(JFrame frame, HoaDon hoaDon){
         super(frame, true);
