@@ -233,7 +233,7 @@ public class KhachHangDialog extends JDialog {
      * @param textField
      */
     private void unErrorInput(JTextField textField){
-        if (lblLoi.getText().isEmpty()){
+        if (!lblLoi.getText().isEmpty()){
             MaterialDesign.materialTextField(textField);
             lblLoi.setText("    ");
         }

@@ -126,22 +126,25 @@ public class QuanLyBangDiaTabbed extends JPanel {
     /**
      * Refresh lại tab khi có cập nhật dữ liệu
      */
-    public void refresh(){
-        // load lại dữ liệu từ DB
-        try {
-            danhSachBangDia.loadData();
-        } catch (Exception e) {
-            thongBaoLoi(e.getMessage());
+    public void refresh(boolean reloadData){
+        if (reloadData){
+            // load lại dữ liệu từ DB
+            try {
+                danhSachBangDia.loadData();
+            } catch (Exception e) {
+                thongBaoLoi(e.getMessage());
+            }
+
+            // load lại table băng đĩa
+            bangDiaTableModel.setModel(danhSachBangDia.getAll());
+            tblBangDia.setModel(bangDiaTableModel);
+
+            sorter.setModel(bangDiaTableModel);
+
+            tblBangDia.revalidate();
+            tblBangDia.repaint();
+            tblBangDia.clearSelection();
         }
-
-        // load lại table băng đĩa
-        bangDiaTableModel.setModel(danhSachBangDia.getAll());
-        tblBangDia.setModel(bangDiaTableModel);
-
-        sorter.setModel(bangDiaTableModel);
-
-        tblBangDia.revalidate();
-        tblBangDia.repaint();
 
         /**
          * Kiểm tra xem người dùng có chọn dòng nào không
@@ -238,7 +241,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
                 // thêm băng đĩa vào danh sách và lưu vào DB
                 try{
                     danhSachBangDia.them(bangDia);
-                    refresh();
+                    refresh(true);
                 }catch (Exception e1){
                     thongBaoLoi(e1.getMessage());
                 }
@@ -278,7 +281,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
                 // sửa băng đĩa trong danh sách và DB
                 try{
                     danhSachBangDia.sua(bangDia);
-                    refresh();
+                    refresh(true);
                 }catch (Exception e1){
                     thongBaoLoi(e1.getMessage());
                 }
@@ -321,7 +324,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
                     try{
                         danhSachBangDia.xoa(maBangDia);
                         tblBangDia.clearSelection();
-                        refresh();
+                        refresh(true);
                     }catch (Exception e1){
                         thongBaoLoi(e1.getMessage());
                     }
@@ -364,7 +367,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
                 // nếu người dùng đồng ý
                 if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     danhSachBangDia.xoaBangDiaHong();
-                    refresh();
+                    refresh(true);
                 }
             }
         };
@@ -379,7 +382,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
         return new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                refresh();
+                refresh(false);
             }
 
             @Override

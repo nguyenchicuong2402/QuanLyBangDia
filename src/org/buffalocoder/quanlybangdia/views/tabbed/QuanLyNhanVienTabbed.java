@@ -134,7 +134,6 @@ public class QuanLyNhanVienTabbed extends JPanel {
             }catch (NumberFormatException e){
                 txtTimKiem.selectAll();
             }
-
         }
     }
 
@@ -142,22 +141,27 @@ public class QuanLyNhanVienTabbed extends JPanel {
     /**
      * Cập nhật giao diện khi có sự thay đổi dữ liệu
      */
-    public void refresh(){
-        // load dữ liệu từ DB
-        try {
-            danhSachNhanVien.loadData();
-        } catch (Exception e) {
-            thongBaoLoi(e.getMessage());
+    public void refresh(boolean reloadData){
+        int selected = tblNhanVien.convertRowIndexToModel(tblNhanVien.getSelectedRow());
+
+        if (reloadData){
+            // load dữ liệu từ DB
+            try {
+                danhSachNhanVien.loadData();
+            } catch (Exception e) {
+                thongBaoLoi(e.getMessage());
+            }
+
+            // load dữ liệu lên table
+            nhanVienTableModel.setModel(danhSachNhanVien.getAll());
+            tblNhanVien.setModel(nhanVienTableModel);
+
+            sorter.setModel(nhanVienTableModel);
+
+            tblNhanVien.revalidate();
+            tblNhanVien.repaint();
+            tblNhanVien.clearSelection();
         }
-
-        // load dữ liệu lên table
-        nhanVienTableModel.setModel(danhSachNhanVien.getAll());
-        tblNhanVien.setModel(nhanVienTableModel);
-
-        sorter.setModel(nhanVienTableModel);
-
-        tblNhanVien.revalidate();
-        tblNhanVien.repaint();
 
         // bật tắt nút xoá/sửa
         if (tblNhanVien.getSelectedRow() != -1){
@@ -227,7 +231,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
                 try{
                     danhSachNhanVien.them(nhanVien);
                     taiKhoanDAO.themTaiKhoan(taiKhoan);
-                    refresh();
+                    refresh(true);
                 }catch (Exception e1){
                     thongBaoLoi(e1.getMessage());
                 }
@@ -281,7 +285,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
                     if (taiKhoan != null)
                         taiKhoanDAO.suaTaiKhoan(taiKhoan);
 
-                    refresh();
+                    refresh(true);
                 }catch (Exception e1){
                     thongBaoLoi(e1.getMessage());
                 }
@@ -330,7 +334,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
                     try{
                         danhSachNhanVien.xoa(maNhanVien);
                         tblNhanVien.clearSelection();
-                        refresh();
+                        refresh(true);
                     }catch (Exception e1){
                         thongBaoLoi(e1.getMessage());
                     }
@@ -387,7 +391,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
         return new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                refresh();
+                refresh(false);
             }
 
             @Override
@@ -405,7 +409,11 @@ public class QuanLyNhanVienTabbed extends JPanel {
     }
 
 
+    /**
+     * Constructor
+     */
     public QuanLyNhanVienTabbed(){
+        // kết nối DB
         try{
             taiKhoanDAO = TaiKhoanDAO.getInstance();
             danhSachNhanVien = new DanhSachNhanVien();

@@ -214,24 +214,27 @@ public class QuanLyChoThueTabbed extends JPanel {
     /**
      * Refresh giao diện khi có cập nhật dữ liệu
      */
-    public void refresh(){
-        // load lại dữ liệu từ DB
-        try {
-            danhSachBangDia.loadData();
-            danhSachKhachHang.loadData();
-            danhSachChoThue.loadData();
-        } catch (Exception e) {
-            thongBaoLoi(e.getMessage());
+    public void refresh(boolean reloadData){
+        if (reloadData){
+            // load lại dữ liệu từ DB
+            try {
+                danhSachBangDia.loadData();
+                danhSachKhachHang.loadData();
+                danhSachChoThue.loadData();
+            } catch (Exception e) {
+                thongBaoLoi(e.getMessage());
+            }
+
+            // load lại table
+            choThueTableModel.setModel(danhSachChoThue.getAll());
+            tblChoThue.setModel(choThueTableModel);
+
+            sorter.setModel(choThueTableModel);
+
+            tblChoThue.revalidate();
+            tblChoThue.repaint();
+            tblChoThue.clearSelection();
         }
-
-        // load lại table
-        choThueTableModel.setModel(danhSachChoThue.getAll());
-        tblChoThue.setModel(choThueTableModel);
-
-        sorter.setModel(choThueTableModel);
-
-        tblChoThue.revalidate();
-        tblChoThue.repaint();
 
         /**
          * Bật tắt nút thêm hoá đơn
@@ -254,7 +257,7 @@ public class QuanLyChoThueTabbed extends JPanel {
          * Khi người dùng chưa chọn hoá đơn nào thì disable nút xoá, sửa, thanh toán
          * Nếu hoá đơn đã thanh toán thì disable nút thanh toán
          */
-        int rowSelected = tblChoThue.getSelectedRow();
+        int rowSelected = tblChoThue.convertRowIndexToModel(tblChoThue.getSelectedRow());
 
         if (rowSelected == -1){
             btnSua.setToolTipText("Vui lòng chọn hoá đơn cần cập nhật thông tin");
@@ -331,7 +334,7 @@ public class QuanLyChoThueTabbed extends JPanel {
                 try{
                     if (hoaDon != null && kiemTraTinhTrangThue(hoaDon, 0)){
                         danhSachChoThue.them(hoaDon);
-                        refresh();
+                        refresh(true);
                     }
                 }catch (Exception e1){
                     thongBaoLoi(e1.getMessage());
@@ -372,7 +375,7 @@ public class QuanLyChoThueTabbed extends JPanel {
                 try{
                     if (hoaDon != null && kiemTraTinhTrangThue(hoaDon, soLuongCu)){
                         danhSachChoThue.sua(hoaDon);
-                        refresh();
+                        refresh(true);
                     }
                 }catch (Exception e1){
                     thongBaoLoi(e1.getMessage());
@@ -421,7 +424,7 @@ public class QuanLyChoThueTabbed extends JPanel {
                     try{
                         danhSachChoThue.xoa(maHoaDon);
                         tblChoThue.clearSelection();
-                        refresh();
+                        refresh(true);
                     }catch (Exception e1){
                         thongBaoLoi(e1.getMessage());
                     }
@@ -466,7 +469,7 @@ public class QuanLyChoThueTabbed extends JPanel {
                     try{
                         danhSachChoThue.thanhToanHoaDon(maHoaDon);
                         tblChoThue.clearSelection();
-                        refresh();
+                        refresh(true);
                     }catch (Exception e1){
                         thongBaoLoi(e1.getMessage());
                     }
@@ -558,7 +561,7 @@ public class QuanLyChoThueTabbed extends JPanel {
         return new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                refresh();
+                refresh(false);
             }
 
             @Override

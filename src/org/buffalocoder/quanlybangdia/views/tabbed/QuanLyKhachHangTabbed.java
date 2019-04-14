@@ -115,22 +115,25 @@ public class QuanLyKhachHangTabbed extends JPanel {
     /**
      * Refresh giao diện khi có cập nhật
      */
-    public void refresh(){
-        // load lai dữ liệu
-        try {
-            danhSachKhachHang.loadData();
-        } catch (Exception e) {
-            thongBaoLoi(e.getMessage());
+    public void refresh(boolean reloadData){
+        if (reloadData){
+            // load lai dữ liệu
+            try {
+                danhSachKhachHang.loadData();
+            } catch (Exception e) {
+                thongBaoLoi(e.getMessage());
+            }
+
+            // cập nhật table
+            khachHangTableModel.setModel(danhSachKhachHang.getAll());
+            tblKhachHang.setModel(khachHangTableModel);
+
+            sorter.setModel(khachHangTableModel);
+
+            tblKhachHang.revalidate();
+            tblKhachHang.repaint();
+            tblKhachHang.clearSelection();
         }
-
-        // cập nhật table
-        khachHangTableModel.setModel(danhSachKhachHang.getAll());
-        tblKhachHang.setModel(khachHangTableModel);
-
-        sorter.setModel(khachHangTableModel);
-
-        tblKhachHang.revalidate();
-        tblKhachHang.repaint();
 
         // bật tắt chức năng sữa, xoá
         if (tblKhachHang.getSelectedRow() != -1){
@@ -223,7 +226,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
                 // thêm vào DB
                 try{
                     danhSachKhachHang.them(khachHang);
-                    refresh();
+                    refresh(true);
                 }catch (Exception e1){
                     thongBaoLoi(e1.getMessage());
                 }
@@ -253,10 +256,17 @@ public class QuanLyKhachHangTabbed extends JPanel {
                 KhachHangDialog khachHangDialog = new KhachHangDialog(new JFrame(),
                         danhSachKhachHang.getAll().get(index));
 
+                // lấy thông tin khách hàng
+                KhachHang khachHang = khachHangDialog.getKhachHang();
+
+                // kiểm tra khách hàng có null không
+                if (khachHang == null)
+                    return;
+
                 // lưu thông tin thay đổi vào DB
                 try{
-                    danhSachKhachHang.sua(khachHangDialog.getKhachHang());
-                    refresh();
+                    danhSachKhachHang.sua(khachHang);
+                    refresh(true);
                 }catch (Exception e1){
                     thongBaoLoi(e1.getMessage());
                 }
@@ -299,7 +309,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
                     try{
                         danhSachKhachHang.xoa(maKhachHang);
                         tblKhachHang.clearSelection();
-                        refresh();
+                        refresh(true);
                     }catch (Exception e1){
                         thongBaoLoi(e1.getMessage());
                     }
@@ -356,7 +366,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
         return new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                refresh();
+                refresh(false);
             }
 
             @Override
