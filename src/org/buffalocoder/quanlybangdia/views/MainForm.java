@@ -34,6 +34,9 @@ public class MainForm extends JFrame {
     private ThongKeTabbed thongKeTabbed;
     private CaiDatTabbed caiDatTabbed;
 
+    /**
+     * Tạo GUI
+     */
     private void prepareUI(){
         /*========== MAIN PANEL =========*/
         mainPanel = new JPanel(new BorderLayout());
@@ -112,10 +115,16 @@ public class MainForm extends JFrame {
         contentPanel.add(menuTabbed);
     }
 
+
+    /**
+     * Sự kiện button đăng xuất
+     * @return
+     */
     private ActionListener btnDangXuat_Click(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // dialog xác nhận đăng xuất
                 ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
                         new JFrame(),
                         "Cảnh báo",
@@ -123,6 +132,7 @@ public class MainForm extends JFrame {
                         ThongBaoDialog.OK_CANCLE_OPTION
                 );
 
+                // nếu người dùng đồng ý đang xuất
                 if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     setVisible(false);
                     new DangNhap();
@@ -131,6 +141,11 @@ public class MainForm extends JFrame {
         };
     }
 
+
+    /**
+     * Sự kiện khi chọn 1 tab
+     * @return
+     */
     private ChangeListener menuTabbed_Change(){
         return new ChangeListener() {
             @Override
@@ -154,7 +169,12 @@ public class MainForm extends JFrame {
         };
     }
 
+
+    /**
+     * Constructor
+     */
     public MainForm(){
+        // hiển thị form
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {

@@ -1,7 +1,6 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
 import org.buffalocoder.quanlybangdia.dao.TaiKhoanDAO;
-import org.buffalocoder.quanlybangdia.models.BangDia;
 import org.buffalocoder.quanlybangdia.models.DanhSachNhanVien;
 import org.buffalocoder.quanlybangdia.models.NhanVien;
 import org.buffalocoder.quanlybangdia.models.TaiKhoan;
@@ -22,16 +21,20 @@ public class QuanLyNhanVienTabbed extends JPanel {
     private DanhSachNhanVien danhSachNhanVien;
     private TaiKhoanDAO taiKhoanDAO;
     private ThongBaoDialog thongBaoDialog;
+    private final Component rootComponent = this;
 
     private JTable tblNhanVien;
     private JPanel topPanel, funcPanel, searchPanel;
     private JButton btnThem, btnXoa, btnSua, btnTimKiem;
     private JTextField txtTimKiem;
     private NhanVienTableModel nhanVienTableModel;
-    private final Component rootComponent = this;
     private JScrollPane scrollPane;
     private TableRowSorter<TableModel> sorter;
 
+
+    /**
+     * Tạo GUI
+     */
     private void prepareUI(){
         this.setLayout(new BorderLayout());
         this.setFont(MaterialDesign.FONT_DEFAULT);
@@ -111,17 +114,11 @@ public class QuanLyNhanVienTabbed extends JPanel {
         box.add(scrollPane, BorderLayout.CENTER);
     }
 
-    public QuanLyNhanVienTabbed(){
-        try{
-            taiKhoanDAO = TaiKhoanDAO.getInstance();
-            danhSachNhanVien = new DanhSachNhanVien();
-        }catch (Exception e){
-            thongBaoLoi(e.getMessage());
-        }
 
-        prepareUI();
-    }
-
+    /**
+     * Filter table theo tên nhân viên
+     * @param filter_text
+     */
     private void filterTable(String filter_text) {
         if (filter_text.isEmpty())
             sorter.setRowFilter(null);
@@ -140,14 +137,20 @@ public class QuanLyNhanVienTabbed extends JPanel {
 
         }
     }
-    
+
+
+    /**
+     * Cập nhật giao diện khi có sự thay đổi dữ liệu
+     */
     public void refresh(){
+        // load dữ liệu từ DB
         try {
             danhSachNhanVien.loadData();
         } catch (Exception e) {
             thongBaoLoi(e.getMessage());
         }
 
+        // load dữ liệu lên table
         nhanVienTableModel.setModel(danhSachNhanVien.getAll());
         tblNhanVien.setModel(nhanVienTableModel);
 
@@ -156,6 +159,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
         tblNhanVien.revalidate();
         tblNhanVien.repaint();
 
+        // bật tắt nút xoá/sửa
         if (tblNhanVien.getSelectedRow() != -1){
             btnSua.setEnabled(true);
             btnSua.setToolTipText("[Alt + S] Cập nhật thông tin nhân viên");
@@ -171,6 +175,11 @@ public class QuanLyNhanVienTabbed extends JPanel {
         }
     }
 
+
+    /**
+     * Dialog thông báo
+     * @param message
+     */
     private void thongBao(String message){
         thongBaoDialog = new ThongBaoDialog(
                 new JFrame(),
@@ -180,6 +189,11 @@ public class QuanLyNhanVienTabbed extends JPanel {
         );
     }
 
+
+    /**
+     * Dialog thông báo lỗi
+     * @param message
+     */
     private void thongBaoLoi(String message){
         thongBaoDialog = new ThongBaoDialog(
                 new JFrame(),
@@ -189,18 +203,27 @@ public class QuanLyNhanVienTabbed extends JPanel {
         );
     }
 
+
+    /**
+     * Sự kiện nút thêm
+     * @return
+     */
     private ActionListener btnThem_Click(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // hiện dialog thêm
                 NhanVienDialog nhanVienDialog = new NhanVienDialog(new JFrame(), null, null);
 
+                // lấy thông tin nhân viên + tài khoản vừa nhập
                 NhanVien nhanVien = nhanVienDialog.getNhanVien();
                 TaiKhoan taiKhoan = nhanVienDialog.getTaiKhoan();
 
+                // nếu người dùng không muốn thêm
                 if (nhanVien == null && taiKhoan == null)
                     return;
 
+                // thêm nhân viên và tài khoản vào DB
                 try{
                     danhSachNhanVien.them(nhanVien);
                     taiKhoanDAO.themTaiKhoan(taiKhoan);
@@ -212,17 +235,25 @@ public class QuanLyNhanVienTabbed extends JPanel {
         };
     }
 
+
+    /**
+     * Sự kiện sửa thông tin nhân viên
+     * @return
+     */
     private ActionListener btnSua_Click(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // lấy vị trí người dùng chọn
                 int index = tblNhanVien.convertRowIndexToModel(tblNhanVien.getSelectedRow());
 
+                // nếu người dùng chưa chọn dòng nào
                 if (index == -1){
                     thongBao("Vui lòng chọn nhân viên cần sửa");
                     return;
                 }
 
+                // lấy thông tin nhân viên + tài khoản
                 NhanVien nhanVien = danhSachNhanVien.getAll().get(index);
                 TaiKhoan taiKhoan = null;
                 try {
@@ -231,14 +262,19 @@ public class QuanLyNhanVienTabbed extends JPanel {
                     thongBaoLoi(e1.getMessage());
                     return;
                 }
+
+                // hiện dialog chỉnh sửa
                 NhanVienDialog nhanVienDialog = new NhanVienDialog(new JFrame(), nhanVien, taiKhoan);
 
+                // lấy thông tin nhân viên và tài khoản sau khi chỉnh sửa
                 nhanVien = nhanVienDialog.getNhanVien();
                 taiKhoan = nhanVienDialog.getTaiKhoan();
 
+                // nếu người dùng không muốn chỉnh sửa
                 if (nhanVien == null)
                     return;
 
+                // lưu dữ liệu vào DB
                 try{
                     danhSachNhanVien.sua(nhanVien);
 
@@ -253,25 +289,35 @@ public class QuanLyNhanVienTabbed extends JPanel {
         };
     }
 
+
+    /**
+     * Sự kiện button xoá
+     * @return
+     */
     private ActionListener btnXoa_Click(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // lấy vị trí người dùng chọn
                 int index = tblNhanVien.convertRowIndexToModel(tblNhanVien.getSelectedRow());
 
+                // nếu người dùng chưa chọn dòng nào thì thông báo
                 if (index == -1){
                     thongBao("Vui lòng chọn nhân viên cần xoá");
                     return;
                 }
 
+                // lấy thông tin nhân viên ở dòng đã chọn
                 String maNhanVien = tblNhanVien.getModel().getValueAt(index, 0).toString();
                 String tenNhanVien = tblNhanVien.getModel().getValueAt(index, 1).toString();
 
+                // nếu người dùng chọn tài khoản mặc định thì thông báo không cho xoá
                 if (maNhanVien.equals("NV00001")){
                     thongBao("Không thể xoá admin mặc định");
                     return;
                 }
 
+                // dialog xác nhận xoá
                 ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
                         new JFrame(),
                         "Cảnh báo",
@@ -279,6 +325,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
                         ThongBaoDialog.OK_CANCLE_OPTION
                 );
 
+                // nếu người dùng đồng ý xoá
                 if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     try{
                         danhSachNhanVien.xoa(maNhanVien);
@@ -292,6 +339,11 @@ public class QuanLyNhanVienTabbed extends JPanel {
         };
     }
 
+
+    /**
+     * Sự kiện button tìm kiếm
+     * @return
+     */
     private ActionListener btnTimKiem_Click(){
         return new ActionListener() {
             @Override
@@ -301,6 +353,12 @@ public class QuanLyNhanVienTabbed extends JPanel {
         };
     }
 
+
+    /**
+     * Sự kiện khi nhập text tìm kiếm
+     * Dùng để tìm kiếm realtime
+     * @return
+     */
     private DocumentListener txtTimKiem_DocumentListener(){
         return new DocumentListener() {
             @Override
@@ -320,6 +378,11 @@ public class QuanLyNhanVienTabbed extends JPanel {
         };
     }
 
+
+    /**
+     * Sự kiện table nhân viên
+     * @return
+     */
     private MouseListener tblNhanVien_MouseListener(){
         return new MouseListener() {
             @Override
@@ -328,24 +391,28 @@ public class QuanLyNhanVienTabbed extends JPanel {
             }
 
             @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
+            public void mousePressed(MouseEvent e) {}
 
             @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
+            public void mouseReleased(MouseEvent e) {}
 
             @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
+            public void mouseEntered(MouseEvent e) {}
 
             @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
+            public void mouseExited(MouseEvent e) {}
         };
+    }
+
+
+    public QuanLyNhanVienTabbed(){
+        try{
+            taiKhoanDAO = TaiKhoanDAO.getInstance();
+            danhSachNhanVien = new DanhSachNhanVien();
+        }catch (Exception e){
+            thongBaoLoi(e.getMessage());
+        }
+
+        prepareUI();
     }
 }

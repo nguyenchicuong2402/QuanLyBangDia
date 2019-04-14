@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,6 +31,9 @@ public class ThongKeTabbed extends JPanel {
     private JComboBox<String> cbThang, cbNam;
 
 
+    /**
+     * Tạo GUI
+     */
     private void prepareUI(){
         this.setLayout(new BorderLayout());
         MaterialDesign.materialPanel(this);
@@ -203,6 +205,10 @@ public class ThongKeTabbed extends JPanel {
         refresh();
     }
 
+
+    /**
+     * Cập nhật giao diện khi dữ liệu thay đổi
+     */
     public void refresh(){
         final Pattern pattern = Pattern.compile("^Tháng (\\d.*)");
 
@@ -219,11 +225,12 @@ public class ThongKeTabbed extends JPanel {
             if (matcher.find())
                 thang = Integer.valueOf(matcher.group(1));
 
-
+            // hiển thị doanh thu theo định dạng tiền việt nam
             Locale locale_vn = new Locale("vi", "VN");
             NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale_vn);
             lblDoanhThu.setText(numberFormat.format(danhSachChoThue.tongDoanhThu(thang, nam)));
 
+            // Thay đổi title khi người dùng chọn thống kê theo tháng, năm
             if (thang != 0 && nam != 0){
                 lblTieuDeDoanhThu.setText("Doanh thu");
                 lblThoiGian.setText(String.format("Tháng %d/%d", thang, nam));
@@ -264,11 +271,20 @@ public class ThongKeTabbed extends JPanel {
         }
     }
 
+
+    /**
+     * Sự kiện khi chọn item combo box Năm
+     * @return
+     */
     private ActionListener cbNam_Selected(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                /**
+                 * nếu như người dùng muốn xem tổng doanh thu thì xoá tất cả item tháng
+                 * item tháng sẽ phụ thuộc theo năm (nếu chọn năm hiện tại thì tháng không vươt quá tháng hiện tại)
+                 */
                 if (String.valueOf(cbNam.getSelectedItem()).equalsIgnoreCase("Tất cả")){
                     cbThang.removeAllItems();
                     cbThang.addItem("Tất cả");
@@ -285,6 +301,11 @@ public class ThongKeTabbed extends JPanel {
         };
     }
 
+
+    /**
+     * Sự kiện khi chọn item combo box tháng
+     * @return
+     */
     private ActionListener cbThang_Selected(){
         return new ActionListener() {
             @Override

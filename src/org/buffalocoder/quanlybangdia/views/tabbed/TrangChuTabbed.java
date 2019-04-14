@@ -2,7 +2,6 @@ package org.buffalocoder.quanlybangdia.views.tabbed;
 
 import org.buffalocoder.quanlybangdia.dao.NhanVienDAO;
 import org.buffalocoder.quanlybangdia.models.NhanVien;
-import org.buffalocoder.quanlybangdia.models.TaiKhoan;
 import org.buffalocoder.quanlybangdia.utils.Formats;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.views.DangNhap;
@@ -23,6 +22,10 @@ public class TrangChuTabbed extends JPanel {
                     lblTieuDeThongTin;
     private JPanel headerPanel, leftPanel, rightPanel;
 
+
+    /**
+     * Tạo GUI
+     */
     private void prepareUI(){
         this.setLayout(new BorderLayout());
         MaterialDesign.materialPanel(this);
@@ -242,13 +245,19 @@ public class TrangChuTabbed extends JPanel {
         refresh();
     }
 
+
+    /**
+     * Refresh dữ liệu
+     */
     public void refresh(){
+        // load dữ liệu DB
         try {
             nhanVien = nhanVienDAO.getNhanVien(DangNhap.taiKhoan.getMaNhanVien());
         } catch (Exception e) {
             return;
         }
 
+        // hiển thị thông tin nhân viên
         lblMaNV_2.setText(nhanVien.getMaNhanVien());
         lblTenNguoiDung_2.setText(DangNhap.taiKhoan.getTenTaiKhoan());
         lblHoTen_2.setText(nhanVien.getHoTen());
@@ -275,6 +284,7 @@ public class TrangChuTabbed extends JPanel {
 
         lblLoiChao.setText(loiChao + nhanVien.getHoTen());
     }
+
 
     public TrangChuTabbed(){
         try {

@@ -138,14 +138,26 @@ public class QuanLyChoThueTabbed extends JPanel {
 
 
     /**
-     *
+     * Kiểm tra tình trạng thuê trước khi thêm/sửa
      * @param hoaDon
-     * @param isChinhSua
+     * @param soLuongCu
      * @return
      */
-    private boolean kiemTraTinhTrangThue(HoaDon hoaDon, boolean isChinhSua){
+    private boolean kiemTraTinhTrangThue(HoaDon hoaDon, int soLuongCu){
+        // kiểm tra số lượng thuê có lớn > 0
+        if (hoaDon.getSoLuong() <= 0){
+            thongBao("Số lượng băng đĩa phải lớn hơn 0");
+            return false;
+        }
+
+        // kiểm tra số ngày được mượn có > 0
+        if (hoaDon.getSoNgayDuocMuon() <= 0){
+            thongBao("Số ngày được mượn phải lớn hơn 0");
+            return false;
+        }
+
         // kiểm tra số lượng đặt có đủ không
-        if ((hoaDon.getBangDia().getSoLuongTon() + (isChinhSua ? hoaDon.getSoLuong() : 0)) < hoaDon.getSoLuong()){
+        if ((hoaDon.getBangDia().getSoLuongTon() + soLuongCu) < hoaDon.getSoLuong()){
             thongBao("Không đủ số lượng băng đĩa");
             return false;
         }
@@ -170,6 +182,11 @@ public class QuanLyChoThueTabbed extends JPanel {
         return true;
     }
 
+
+    /**
+     * Dialog thông báo
+     * @param message
+     */
     private void thongBao(String message){
         thongBaoDialog = new ThongBaoDialog(
                 new JFrame(),
@@ -179,6 +196,11 @@ public class QuanLyChoThueTabbed extends JPanel {
         );
     }
 
+
+    /**
+     * Dialog thông báo lỗi
+     * @param message
+     */
     private void thongBaoLoi(String message){
         thongBaoDialog = new ThongBaoDialog(
                 new JFrame(),
@@ -188,7 +210,12 @@ public class QuanLyChoThueTabbed extends JPanel {
         );
     }
 
+
+    /**
+     * Refresh giao diện khi có cập nhật dữ liệu
+     */
     public void refresh(){
+        // load lại dữ liệu từ DB
         try {
             danhSachBangDia.loadData();
             danhSachKhachHang.loadData();
@@ -197,6 +224,7 @@ public class QuanLyChoThueTabbed extends JPanel {
             thongBaoLoi(e.getMessage());
         }
 
+        // load lại table
         choThueTableModel.setModel(danhSachChoThue.getAll());
         tblChoThue.setModel(choThueTableModel);
 
@@ -258,13 +286,14 @@ public class QuanLyChoThueTabbed extends JPanel {
                 btnXoa.setEnabled(false);
             }
         }
-
-
-
-
-
     }
 
+
+    /**
+     * Tìm kiếm
+     * Sử dụng dối tượng filter table
+     * @param filter_text
+     */
     private void filterTable(String filter_text) {
         if (filter_text.isEmpty())
             sorter.setRowFilter(null);
@@ -283,15 +312,24 @@ public class QuanLyChoThueTabbed extends JPanel {
         }
     }
 
+
+    /**
+     * Sự kiện button thêm
+     * @return
+     */
     private ActionListener btnThem_Click(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // hiện dialog thêm hoá đơn
                 ChoThueDialog choThueDialog = new ChoThueDialog(new JFrame(), null);
+
+                // lấy hoá đơn nhập trong dialog
                 HoaDon hoaDon = choThueDialog.getHoaDon();
 
+                // kiểm tra tình trạng thuê và thêm vào DB
                 try{
-                    if (hoaDon != null && kiemTraTinhTrangThue(hoaDon, false)){
+                    if (hoaDon != null && kiemTraTinhTrangThue(hoaDon, 0)){
                         danhSachChoThue.them(hoaDon);
                         refresh();
                     }
@@ -302,23 +340,37 @@ public class QuanLyChoThueTabbed extends JPanel {
         };
     }
 
+
+    /**
+     * Sự kiện button sửa
+     * @return
+     */
     private ActionListener btnSua_Click(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // lấy dòng cần sửa
                 int index = tblChoThue.convertRowIndexToModel(tblChoThue.getSelectedRow());
 
+                // nếu người dùng chưa chọn dòng nào thì thông báo
                 if (index == -1){
                     thongBao("Vui lòng chọn hoá đơn cần sửa");
                     return;
                 }
 
+                // lấy thông tin hoá đơn
                 HoaDon hoaDon = danhSachChoThue.getAll().get(index);
+                int soLuongCu = hoaDon.getSoLuong();
+
+                // hiện dialog sửa và thông tin sản phẩm
                 ChoThueDialog choThueDialog = new ChoThueDialog(new JFrame(), hoaDon);
+
+                // lấy thông tin hoá đơn đã sửa
                 hoaDon = choThueDialog.getHoaDon();
 
+                // kiểm tra hoá đơn có rỗng không và tình trạng thuê
                 try{
-                    if (hoaDon != null){
+                    if (hoaDon != null && kiemTraTinhTrangThue(hoaDon, soLuongCu)){
                         danhSachChoThue.sua(hoaDon);
                         refresh();
                     }
@@ -329,12 +381,20 @@ public class QuanLyChoThueTabbed extends JPanel {
         };
     }
 
+
+    /**
+     * Sự kiện button xoá
+     * @return
+     */
     private ActionListener btnXoa_Click(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // lấy dòng cần xoá
                 int index = tblChoThue.convertRowIndexToModel(tblChoThue.getSelectedRow());
 
+                // nếu người dùng chưa chọn dòng nào thì thông báo
+                // nếu hoá đơn đó đã thanh toán thì không cho xoá
                 if (index == -1){
                     thongBao("Vui lòng chọn hoá đơn cần xoá");
                     return;
@@ -343,10 +403,12 @@ public class QuanLyChoThueTabbed extends JPanel {
                     return;
                 }
 
+                // lấy thông tin hoá đơn cần xoá
                 String maHoaDon = choThueTableModel.getValueAt(index, 0).toString();
                 String tenKhachHang = choThueTableModel.getValueAt(index, 1).toString();
                 String tenBangDia = choThueTableModel.getValueAt(index, 2).toString();
 
+                // hiện dialog xác nhận
                 ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
                         new JFrame(),
                         "Cảnh báo",
@@ -354,6 +416,7 @@ public class QuanLyChoThueTabbed extends JPanel {
                         ThongBaoDialog.OK_CANCLE_OPTION
                 );
 
+                // nếu người dùng đồng ý
                 if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     try{
                         danhSachChoThue.xoa(maHoaDon);
@@ -367,21 +430,30 @@ public class QuanLyChoThueTabbed extends JPanel {
         };
     }
 
+
+    /**
+     * Sự kiện button thanh toán
+     * @return
+     */
     private ActionListener btnThanhToan_Click(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // lấy vị trí dòng người dùng chọn
                 int index = tblChoThue.convertRowIndexToModel(tblChoThue.getSelectedRow());
 
+                // nếu người dùng chưa chọn dòng nào thì thông báo
                 if (index == -1){
                     thongBao("Vui lòng chọn hoá đơn cần thanh toán");
                     return;
                 }
 
+                // lấy thông tin hoá đơn cần thanh toán
                 String maHoaDon = choThueTableModel.getValueAt(index, 0).toString();
                 String tenKhachHang = choThueTableModel.getValueAt(index, 1).toString();
                 String tenBangDia = choThueTableModel.getValueAt(index, 2).toString();
 
+                // Dialog xác nhận thanh toán
                 ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
                         new JFrame(),
                         "Cảnh báo",
@@ -389,6 +461,7 @@ public class QuanLyChoThueTabbed extends JPanel {
                         ThongBaoDialog.OK_CANCLE_OPTION
                 );
 
+                // Nếu người dùng đồng ý thanh toán
                 if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     try{
                         danhSachChoThue.thanhToanHoaDon(maHoaDon);
@@ -402,6 +475,11 @@ public class QuanLyChoThueTabbed extends JPanel {
         };
     }
 
+
+    /**
+     * Sự kiện button tìm kiếm
+     * @return
+     */
     private ActionListener btnTimKiem_Click(){
         return new ActionListener() {
             @Override
@@ -411,12 +489,22 @@ public class QuanLyChoThueTabbed extends JPanel {
         };
     }
 
+
+    /**
+     * Sự kiện ComboBox filter table theo Tình trạng hoá đơn
+     * @return
+     */
     private ActionListener cbFilter_Selected(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String filter_text = String.valueOf(cbFilter.getSelectedItem());
 
+                /**
+                 * Nếu người dùng chọn tất cả thì hiện tất cả hoá đơn trong bảng
+                 * Nếu người dùng chọn Đang thuê thì chỉ hiện hoá đơn đang thuê
+                 * Nếu người dùng chọn Đã thanh toán thì chỉ hiện hoá đơn đã thanh toán
+                 */
                 if (filter_text.equalsIgnoreCase("Tất cả"))
                     sorter.setRowFilter(null);
                 else {
@@ -436,6 +524,12 @@ public class QuanLyChoThueTabbed extends JPanel {
         };
     }
 
+
+    /**
+     * Sự kiện khi nhập text tìm kiếm
+     * Tìm kiếm realtime
+     * @return
+     */
     private DocumentListener txtTimKiem_DocumentListener(){
         return new DocumentListener() {
             @Override
@@ -455,6 +549,11 @@ public class QuanLyChoThueTabbed extends JPanel {
         };
     }
 
+
+    /**
+     * Sự kiện table cho thuê
+     * @return
+     */
     private MouseListener tblChoThue_MouseListener(){
         return new MouseListener() {
             @Override
@@ -463,26 +562,19 @@ public class QuanLyChoThueTabbed extends JPanel {
             }
 
             @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
+            public void mousePressed(MouseEvent e) {}
 
             @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
+            public void mouseReleased(MouseEvent e) {}
 
             @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
+            public void mouseEntered(MouseEvent e) {}
 
             @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
+            public void mouseExited(MouseEvent e) {}
         };
     }
+
 
     public QuanLyChoThueTabbed(){
         try {
