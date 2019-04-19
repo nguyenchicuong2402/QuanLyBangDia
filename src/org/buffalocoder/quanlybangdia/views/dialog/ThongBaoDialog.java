@@ -138,6 +138,13 @@ public class ThongBaoDialog extends JDialog{
     }
 
 
+    /**
+     * Constructor
+     * @param frame
+     * @param tieuDe
+     * @param noiDung
+     * @param kieuThongBao
+     */
     public ThongBaoDialog(JFrame frame, String tieuDe, String noiDung, int kieuThongBao){
         super(frame, true);
 

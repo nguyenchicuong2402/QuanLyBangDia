@@ -711,6 +711,13 @@ public class NhanVienDialog extends JDialog {
     public TaiKhoan getTaiKhoan() { return taiKhoan; }
 
 
+    /**
+     * Constructor
+     * @param frame
+     * @param nhanVien
+     * @param taiKhoan
+     * @throws Exception
+     */
     public NhanVienDialog(JFrame frame, NhanVien nhanVien, TaiKhoan taiKhoan) throws Exception {
         super(frame, true);
         this.nhanVien = nhanVien;
