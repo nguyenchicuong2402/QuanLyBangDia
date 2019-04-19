@@ -260,7 +260,10 @@ public class BangDiaDialog extends JDialog{
     private boolean validateData(){
         Pattern pattern = null;
 
-        // Kiểm tra tên băng đĩa
+        /**
+         * Kiểm tra tên băng đĩa
+         * Rule: tên băng đĩa không được rỗng, không quá 50 kí tự
+         */
         if (txtTenBangDia.getText().isEmpty()){
             errorInput(txtTenBangDia, "Vui lòng nhập tên băng đĩa");
             return false;
@@ -269,7 +272,10 @@ public class BangDiaDialog extends JDialog{
             return false;
         }
 
-        // Kiểm tra thể loại
+        /**
+         * Kiểm tra thể loại
+         * Rule: thể loại không được rỗng, không quá 30 kí tự
+         */
         if (txtTheLoai.getText().trim().isEmpty()){
             errorInput(txtTheLoai, "Vui lòng nhập thể loại");
             return false;
@@ -278,7 +284,10 @@ public class BangDiaDialog extends JDialog{
             return false;
         }
 
-        // Kiểm tra hãng sản xuất
+        /**
+         * Kiểm tra hãng sản xuất
+         * Rule: hãng sản xuất không được rỗng, không quá 50 kí tự
+         */
         if (txtHangSanXuat.getText().trim().isEmpty()){
             errorInput(txtHangSanXuat, "Vui lòng nhập hãng sản xuất");
             return false;
@@ -287,7 +296,10 @@ public class BangDiaDialog extends JDialog{
             return false;
         }
 
-        // Kiểm tra đơn giá
+        /**
+         * Kiểm tra đơn giá
+         * Rule: đơn giá không được rỗng, phải là số thực lớn hơn 0
+         */
         pattern = Pattern.compile(PatternRegexs.REGEX_SOTHUC);
         if (txtDonGia.getText().trim().isEmpty()){
             errorInput(txtDonGia, "Vui lòng nhập đơn giá");
@@ -295,9 +307,15 @@ public class BangDiaDialog extends JDialog{
         }else if (!pattern.matcher(txtDonGia.getText().trim()).matches()){
             errorInput(txtDonGia, "Đơn giá phải là số");
             return false;
+        }else if (Double.parseDouble(txtDonGia.getText().trim()) <= 0){
+            errorInput(txtDonGia, "Đơn giá phải lớn hơn 0");
+            return false;
         }
 
-        // kiểm tra số lượng
+        /**
+         * Kiểm tra số lượng
+         * Rule: Số lượng không được rỗng, phải là số nguyên dương > 0, và giới hạn là 6 số
+         */
         pattern = Pattern.compile(PatternRegexs.REGEX_SO);
         if (txtSoLuong.getText().trim().isEmpty()){
             errorInput(txtSoLuong, "Vui lòng nhập số lượng");
@@ -305,8 +323,11 @@ public class BangDiaDialog extends JDialog{
         }else if (!pattern.matcher(txtSoLuong.getText().trim()).matches()){
             errorInput(txtSoLuong, "Số lượng phải là số");
             return false;
-        }else if(txtSoLuong.getText().trim().length() > 20){
-            errorInput(txtSoLuong,"nhập số quá lớn");
+        }else if(txtSoLuong.getText().trim().length() >= 6){
+            errorInput(txtSoLuong,"Số lượng quá lớn");
+            return false;
+        }else if (Integer.parseInt(txtSoLuong.getText().trim()) <= 0){
+            errorInput(txtSoLuong, "Số lượng phải lớn hơn 0");
             return false;
         }
 
@@ -509,29 +530,45 @@ public class BangDiaDialog extends JDialog{
         return bangDia;
     }
 
-    public BangDiaDialog(JFrame frame, BangDia bangDia){
+
+    /**
+     * Constructor
+     * @param frame
+     * @param bangDia
+     * @throws Exception
+     */
+    public BangDiaDialog(JFrame frame, BangDia bangDia) throws Exception {
         super(frame, true);
         this.bangDia = bangDia;
 
+        // lấy instance kết nối với db (table BangDia)
         try{
             bangDiaDAO = BangDiaDAO.getInstance();
         }catch (Exception e){
-
+            throw new Exception(e.getMessage());
         }
 
+        /**
+         * Đặt tiêu đề cho dialog
+         * Nếu param bangDia = null > Thêm băng đĩa
+         * Nếu param bangDia != null > Cập nhật thông tin băng đĩa
+         */
         if (bangDia == null){
             tieuDe = "Thêm băng đĩa";
             isChinhSua = false;
         }else{
-            tieuDe = "Sửa thông tin băng đĩa";
+            tieuDe = "Cập nhật thông tin băng đĩa";
             isChinhSua = true;
         }
 
+        // tạo GUI
         prepareDialog();
 
+        // đặt button mặc định khi bấm Enter
         JRootPane rootPane = SwingUtilities.getRootPane(this);
         rootPane.setDefaultButton(btnLuu);
 
+        // cấu hình cho frame
         setResizable(false);
         setSize(600, 620);
         setAlwaysOnTop(true);
