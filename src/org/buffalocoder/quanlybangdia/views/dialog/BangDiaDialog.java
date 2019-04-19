@@ -568,7 +568,7 @@ public class BangDiaDialog extends JDialog{
         JRootPane rootPane = SwingUtilities.getRootPane(this);
         rootPane.setDefaultButton(btnLuu);
 
-        // cấu hình cho frame
+        // cấu hình cho dialog
         setResizable(false);
         setSize(600, 620);
         setAlwaysOnTop(true);

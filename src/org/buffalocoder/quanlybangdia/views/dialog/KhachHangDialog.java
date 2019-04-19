@@ -280,7 +280,10 @@ public class KhachHangDialog extends JDialog {
     private boolean validateData(){
         Pattern pattern = null;
 
-        // Kiểm tra họ tên
+        /**
+         * Kiểm tra họ tên
+         * Rule: không được rỗng, không quá 50 kí tự
+         */
         if (txtHoTen.getText().trim().isEmpty()){
             errorInput(txtHoTen, "Vui lòng nhập họ tên");
             return false;
@@ -289,7 +292,10 @@ public class KhachHangDialog extends JDialog {
             return false;
         }
 
-        // Kiểm tra CMND
+        /**
+         * Kiểm tra CMND
+         * Rule: không được rỗng, phải đúng với pattern
+         */
         pattern = pattern.compile(PatternRegexs.REGEX_CMND);
         if (txtCMND.getText().trim().isEmpty()){
             errorInput(txtCMND, "Vui lòng nhập CMND");
@@ -299,7 +305,10 @@ public class KhachHangDialog extends JDialog {
             return false;
         }
 
-        // Kiểm tra số diện thoại
+        /**
+         * Kiểm tra số diện thoại
+         * rule: không được rỗng, phải đúng theo pattern
+         */
         pattern = Pattern.compile(PatternRegexs.REGEX_SODIENTHOAI);
         if (txtSoDienThoai.getText().trim().isEmpty()){
             errorInput(txtSoDienThoai, "Vui lòng nhập số điện thoại");
@@ -309,7 +318,10 @@ public class KhachHangDialog extends JDialog {
             return false;
         }
 
-        // Kiểm tra địa chỉ
+        /**
+         * Kiểm tra địa chỉ
+         * Rule: Không được rỗng, không quá 100 kí tự
+         */
         if (txtDiaChi.getText().trim().isEmpty()){
             errorInput(txtDiaChi, "Vui lòng nhập địa chỉ");
             return false;
@@ -460,29 +472,43 @@ public class KhachHangDialog extends JDialog {
     }
 
 
-    public KhachHangDialog(JFrame frame, KhachHang khachHang){
+    /**
+     * Constructor
+     * @param frame
+     * @param khachHang
+     */
+    public KhachHangDialog(JFrame frame, KhachHang khachHang) throws Exception {
         super(frame, true);
         this.khachHang = khachHang;
 
+        // tạo kết nối db
         try {
             khachHangDAO = KhachHangDAO.getInstance();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new Exception(e.getMessage());
         }
 
+        /**
+         * Set tiêu đề cho dialog
+         * Nếu param khachHang == null > Thêm khách hàng
+         * Nếu param khachHang != null > Cập nhật thông tin khách hàng
+         */
         if (khachHang == null){
             tieuDe = "Thêm khách hàng";
             isChinhSua = false;
         }else{
-            tieuDe = "Sửa thông tin khách hàng";
+            tieuDe = "Cập nhật thông tin khách hàng";
             isChinhSua = true;
         }
 
+        // Tạo GUI
         prepareDialog();
 
+        // set button mặc định khi nhấn Enter
         JRootPane rootPane = SwingUtilities.getRootPane(this);
         rootPane.setDefaultButton(btnLuu);
 
+        // cấu hình cho dialog
         setResizable(false);
         setSize(600, 500);
         setAlwaysOnTop(true);

@@ -469,7 +469,7 @@ public class ChoThueDialog extends JDialog {
         JRootPane rootPane = SwingUtilities.getRootPane(this);
         rootPane.setDefaultButton(btnLuu);
 
-        // cấu hình cho frame
+        // cấu hình cho dialog
         setResizable(false);
         setSize(600, 480);
         setAlwaysOnTop(true);
