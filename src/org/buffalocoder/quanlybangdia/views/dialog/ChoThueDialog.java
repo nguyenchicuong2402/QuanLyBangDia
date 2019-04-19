@@ -241,29 +241,41 @@ public class ChoThueDialog extends JDialog {
     private boolean validateData(){
         Pattern pattern = null;
 
-        // Kiểm tra số lượng
+        /**
+         * Kiểm tra số lượng
+         * Rule: không được rỗng, phải là số nguyên dương lớn hơn 0,  giới hạn 6 chữ số
+         */
         pattern = pattern.compile(PatternRegexs.REGEX_SO);
         if (txtSoLuong.getText().trim().isEmpty()){
             errorInput(txtSoLuong, "Vui lòng nhập số lượng");
             return false;
         }else if (!pattern.matcher(txtSoLuong.getText().trim()).matches()){
-            errorInput(txtSoLuong, " số lượng phải là số");
+            errorInput(txtSoLuong, "Số lượng phải là số");
             return false;
-        }else if(txtSoLuong.getText().trim().length() > 50){
-            errorInput(txtSoLuong,"nhập số quá lớn");
+        }else if (Integer.parseInt(txtSoLuong.getText().trim()) <= 0){
+            errorInput(txtSoLuong, "Số lượng phải lớn hơn 0");
+            return false;
+        }else if(txtSoLuong.getText().trim().length() >= 6){
+            errorInput(txtSoLuong,"Số lượng quá lớn");
             return false;
         }
 
-        // Kiểm tra số ngày mượn
+        /**
+         * Kiểm tra số ngày mượn
+         * Rule: không được rỗng, phải là số nguyên dương trong khoảng từ 1 - 120
+         */
         pattern = Pattern.compile(PatternRegexs.REGEX_SO);
         if (txtSoNgayDuocMuon.getText().trim().isEmpty()){
             errorInput(txtSoNgayDuocMuon, "Vui lòng nhập số số ngày mượn");
             return false;
         }else if (!pattern.matcher(txtSoNgayDuocMuon.getText().trim()).matches()){
-            errorInput(txtSoNgayDuocMuon, "số ngày mượn phải là số");
+            errorInput(txtSoNgayDuocMuon, "Số ngày mượn phải là số");
             return false;
-        }else if(txtSoNgayDuocMuon.getText().trim().length() > 50){
-            errorInput(txtSoNgayDuocMuon,"nhập số quá lớn");
+        }else if(Integer.parseInt(txtSoNgayDuocMuon.getText().trim()) <= 0){
+            errorInput(txtSoNgayDuocMuon,"Số ngày mượn phải lớn hơn 0");
+            return false;
+        }else if(Integer.parseInt(txtSoNgayDuocMuon.getText().trim()) > 120){
+            errorInput(txtSoNgayDuocMuon,"Số ngày mượn phải nhỏ hơn 120");
             return false;
         }
 
@@ -382,7 +394,7 @@ public class ChoThueDialog extends JDialog {
 
                 // lấy dữ liệu băng đĩa
                 pattern = Pattern.compile("(BD\\d.*)]", Pattern.MULTILINE);
-                matcher = pattern.matcher(cbMaBangDia.getSelectedItem().toString());
+                matcher = pattern.matcher(String.valueOf(cbMaBangDia.getSelectedItem()));
 
                 if (matcher.find())
                     bangDia = danhSachBangDia.getAll().get(danhSachBangDia.tim(matcher.group(1)));
@@ -419,17 +431,29 @@ public class ChoThueDialog extends JDialog {
     }
 
 
-    public ChoThueDialog(JFrame frame, HoaDon hoaDon){
+    /**
+     * Constructor
+     * @param frame
+     * @param hoaDon
+     */
+    public ChoThueDialog(JFrame frame, HoaDon hoaDon) throws Exception {
         super(frame, true);
         this.hoaDon = hoaDon;
 
+        // Tạo kết nối đến db
         try {
             hoaDonDAO = HoaDonDAO.getInstance();
             danhSachKhachHang = new DanhSachKhachHang();
             danhSachBangDia = new DanhSachBangDia();
         } catch (Exception e) {
+            throw new Exception(e.getMessage());
         }
 
+        /**
+         * set tiêu đề cho dialog
+         * Nếu param hoaDon == null > Cho thuê
+         * Nếu param hoaDon != null > Cập nhật thông tin cho thuê
+         */
         if (hoaDon == null){
             this.tieuDe = "Cho thuê";
             isChinhSua = false;
@@ -438,11 +462,14 @@ public class ChoThueDialog extends JDialog {
             isChinhSua = true;
         }
 
+        // Tạo GUI
         prepareDialog();
 
+        // Button mặc định khi bấm Enter
         JRootPane rootPane = SwingUtilities.getRootPane(this);
         rootPane.setDefaultButton(btnLuu);
 
+        // cấu hình cho frame
         setResizable(false);
         setSize(600, 480);
         setAlwaysOnTop(true);

@@ -7,12 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ecdd5e3-bc5b-493b-80fa-dbdc743fa957" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/df75f2f0-7ce4-45b2-80a2-e38b7d2fc263.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/df75f2f0-7ce4-45b2-80a2-e38b7d2fc263.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/properties.xml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/properties.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/BangDiaDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/BangDiaDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/ChoThueDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/ChoThueDialog.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -64,23 +61,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/BangDiaDialog.java">
+        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/ChoThueDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4862">
-              <caret line="221" column="37" selection-start-line="221" selection-start-column="37" selection-end-line="221" selection-end-column="37" />
+            <state relative-caret-position="-4180">
+              <caret line="37" column="32" lean-forward="true" selection-start-line="37" selection-start-column="32" selection-end-line="37" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#11817#12621#0" />
-                <element signature="e#12628#13109#0" />
-                <element signature="e#13116#13587#0" />
-                <element signature="e#13594#14078#0" />
-                <element signature="e#14085#14553#0" />
-                <element signature="e#14560#15031#0" />
-                <element signature="e#15038#15377#0" />
-                <element signature="e#15384#16490#0" />
-                <element signature="e#16963#16964#0" expanded="true" />
-                <element signature="e#16993#16994#0" expanded="true" />
-                <element signature="e#16635#17548#0" />
+                <element signature="method#getMaHoaDonMoi#0;class#ChoThueDialog#0" />
+                <element signature="method#txtSoLuong_KeyListener#0;class#ChoThueDialog#0" />
+                <element signature="method#txtSoNgayDuocMuon_KeyListener#0;class#ChoThueDialog#0" />
+                <element signature="method#btnThoat_Click#0;class#ChoThueDialog#0" />
+                <element signature="method#btnLuu_Click#0;class#ChoThueDialog#0" />
+                <element signature="e#14666#14667#0" expanded="true" />
+                <element signature="method#ChoThueDialog#0;class#ChoThueDialog#0" />
               </folding>
             </state>
           </provider>
@@ -147,7 +140,6 @@
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/dao/TaiKhoanDAO.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/dao/ThongTinCaNhanDAO.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/custom/CustomTabbedPanelUI.java" />
-        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/ChoThueDialog.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/ThongBaoDialog.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/CaiDatTabbed.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/ThongKeTabbed.java" />
@@ -163,6 +155,7 @@
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/DangNhap.java" />
         <option value="$PROJECT_DIR$/resources/properties.xml" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/BangDiaDialog.java" />
+        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/ChoThueDialog.java" />
       </list>
     </option>
   </component>
@@ -432,14 +425,7 @@
       <workItem from="1555607369800" duration="147000" />
       <workItem from="1555608975562" duration="262000" />
       <workItem from="1555645826005" duration="919000" />
-      <workItem from="1555671613215" duration="1715000" />
-    </task>
-    <task id="LOCAL-00009" summary="thêm model">
-      <created>1552444807067</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1552444807068</updated>
+      <workItem from="1555671613215" duration="2180000" />
     </task>
     <task id="LOCAL-00010" summary="thêm tabbed quản lý băng đĩa">
       <created>1552476307166</created>
@@ -777,11 +763,18 @@
       <option name="project" value="LOCAL" />
       <updated>1555228300560</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="complete dialog băng đĩa">
+      <created>1555673361395</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1555673361396</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="322226000" />
+    <option name="totallyTimeSpent" value="322691000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -868,7 +861,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="thêm ràng buộc cho dialog băng đĩa" />
     <MESSAGE value="generate id model" />
     <MESSAGE value="thêm custom dialog, update giao diện" />
     <MESSAGE value="update giao diện" />
@@ -893,7 +885,8 @@
     <MESSAGE value="comment package views" />
     <MESSAGE value="fix lỗi Quản lý cho thuê" />
     <MESSAGE value="fix bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix bug" />
+    <MESSAGE value="complete dialog băng đĩa" />
+    <option name="LAST_COMMIT_MESSAGE" value="complete dialog băng đĩa" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/utils/PatternRegexs.java">
@@ -1210,30 +1203,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/ChoThueDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2244">
-          <caret line="420" column="4" selection-start-line="420" selection-start-column="4" selection-end-line="420" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#prepareDialog#0;class#ChoThueDialog#0" />
-            <element signature="method#errorInput#0;class#ChoThueDialog#0" />
-            <element signature="method#unErrorInput#0;class#ChoThueDialog#0" />
-            <element signature="method#validateData#0;class#ChoThueDialog#0" />
-            <element signature="method#getMaHoaDonMoi#0;class#ChoThueDialog#0" />
-            <element signature="method#txtSoLuong_KeyListener#0;class#ChoThueDialog#0" />
-            <element signature="e#11178#11179#0" expanded="true" />
-            <element signature="e#11234#11235#0" expanded="true" />
-            <element signature="method#txtSoNgayDuocMuon_KeyListener#0;class#ChoThueDialog#0" />
-            <element signature="e#11690#11691#0" expanded="true" />
-            <element signature="e#11753#11754#0" expanded="true" />
-            <element signature="method#btnThoat_Click#0;class#ChoThueDialog#0" />
-            <element signature="method#btnLuu_Click#0;class#ChoThueDialog#0" />
-            <element signature="method#ChoThueDialog#0;class#ChoThueDialog#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.base/java/util/regex/Matcher.java" />
     <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/ThongBaoDialog.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1532,21 +1501,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/BangDiaDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4862">
+        <state relative-caret-position="-1875">
           <caret line="221" column="37" selection-start-line="221" selection-start-column="37" selection-end-line="221" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#11817#12621#0" />
-            <element signature="e#12628#13109#0" />
-            <element signature="e#13116#13587#0" />
-            <element signature="e#13594#14078#0" />
-            <element signature="e#14085#14553#0" />
-            <element signature="e#14560#15031#0" />
-            <element signature="e#15038#15377#0" />
-            <element signature="e#15384#16490#0" />
-            <element signature="e#16963#16964#0" expanded="true" />
-            <element signature="e#16993#16994#0" expanded="true" />
-            <element signature="e#16635#17548#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/ChoThueDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4180">
+          <caret line="37" column="32" lean-forward="true" selection-start-line="37" selection-start-column="32" selection-end-line="37" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#getMaHoaDonMoi#0;class#ChoThueDialog#0" />
+            <element signature="method#txtSoLuong_KeyListener#0;class#ChoThueDialog#0" />
+            <element signature="method#txtSoNgayDuocMuon_KeyListener#0;class#ChoThueDialog#0" />
+            <element signature="method#btnThoat_Click#0;class#ChoThueDialog#0" />
+            <element signature="method#btnLuu_Click#0;class#ChoThueDialog#0" />
+            <element signature="e#14666#14667#0" expanded="true" />
+            <element signature="method#ChoThueDialog#0;class#ChoThueDialog#0" />
           </folding>
         </state>
       </provider>
