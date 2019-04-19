@@ -7,14 +7,12 @@ import org.buffalocoder.quanlybangdia.models.TaiKhoan;
 import org.buffalocoder.quanlybangdia.utils.*;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.Date;
-import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -360,7 +358,10 @@ public class NhanVienDialog extends JDialog {
     private boolean validateData(){
         Pattern pattern = null;
 
-        // Kiểm tra họ tên
+        /**
+         * Kiểm tra họ tên
+         * Rule: không được rỗng, không quá 50 kí tự
+         */
         if (txtHoTen.getText().trim().isEmpty()){
             errorInput(txtHoTen, "Vui lòng nhập họ tên");
             return false;
@@ -369,7 +370,10 @@ public class NhanVienDialog extends JDialog {
             return false;
         }
 
-        // Kiểm tra CMND
+        /**
+         * Kiểm tra CMND
+         * Rule: không được rỗng, phải đúng chuẩn của pattern
+         */
         pattern = pattern.compile(PatternRegexs.REGEX_CMND);
         if (txtCMND.getText().trim().isEmpty()){
             errorInput(txtCMND, "Vui lòng nhập CMND");
@@ -379,7 +383,10 @@ public class NhanVienDialog extends JDialog {
             return false;
         }
 
-        // Kiểm tra số diện thoại
+        /**
+         * Kiểm tra số diện thoại
+         * Rule: không được rỗng, phải đúng mẫu pattern
+         */
         pattern = Pattern.compile(PatternRegexs.REGEX_SODIENTHOAI);
         if (txtSoDienThoai.getText().trim().isEmpty()){
             errorInput(txtSoDienThoai, "Vui lòng nhập số điện thoại");
@@ -389,7 +396,10 @@ public class NhanVienDialog extends JDialog {
             return false;
         }
 
-        // Kiểm tra địa chỉ
+        /**
+         * Kiểm tra địa chỉ
+         * Rule: không được rỗng, không quá 100 kí tự
+         */
         if (txtDiaChi.getText().trim().isEmpty()){
             errorInput(txtDiaChi, "Vui lòng nhập địa chỉ");
             return false;
@@ -398,6 +408,10 @@ public class NhanVienDialog extends JDialog {
             return false;
         }
 
+        /**
+         * Kiểm tra tên tài khoản
+         * Rule: không được rỗng, không quá 30 kí tự
+         */
         if (txtTenTaiKhoan.getText().trim().isEmpty()){
             errorInput(txtTenTaiKhoan, "Vui lòng nhập tên tài khoản");
             return false;
@@ -406,7 +420,15 @@ public class NhanVienDialog extends JDialog {
             return false;
         }
 
+        /**
+         * Nếu trạng thái là chỉnh sửa thì không thay đổi mật khẩu
+         * Nếu trạng thái là không chỉnh sửa thì lưu lại mật khẩu
+         */
         if (!isChinhSua){
+            /**
+             * Kiểm tra mật khẩu
+             * Rule: không được rỗng, không quá 128 kí tự
+             */
             if (String.valueOf(txtMatKhau.getPassword()).trim().isEmpty()){
                 errorInput(txtMatKhau, "Vui lòng nhập nhập mật khẩu");
                 return false;
@@ -415,6 +437,10 @@ public class NhanVienDialog extends JDialog {
                 return false;
             }
 
+            /**
+             * Kiểm tra nhập lại mật khẩu
+             * Rule: không được rỗng, không quá 128 kí tự, phải trùng vs mật khẩu đã nhập
+             */
             if (String.valueOf(txtNhapLaiMatKhau.getPassword()).trim().isEmpty()){
                 errorInput(txtNhapLaiMatKhau, "Vui lòng nhập nhập lại mật khẩu");
                 return false;
@@ -685,30 +711,39 @@ public class NhanVienDialog extends JDialog {
     public TaiKhoan getTaiKhoan() { return taiKhoan; }
 
 
-    public NhanVienDialog(JFrame frame, NhanVien nhanVien, TaiKhoan taiKhoan){
+    public NhanVienDialog(JFrame frame, NhanVien nhanVien, TaiKhoan taiKhoan) throws Exception {
         super(frame, true);
         this.nhanVien = nhanVien;
         this.taiKhoan = taiKhoan;
 
+        // tạo kết nối db
         try {
             nhanVienDAO = NhanVienDAO.getInstance();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new Exception(e.getMessage());
         }
 
+        /**
+         * Set tiêu đề cho dialog
+         * Nếu param nhanVien == null > Thêm nhân viên
+         * Nếu param nhanVien != null > Cập nhật thông tin nhân viên
+         */
         if (nhanVien == null){
-            tieuDe = "Thêm Nhân viên";
+            tieuDe = "Thêm nhân viên";
             isChinhSua = false;
         }else{
-            tieuDe = "Sửa thông tin nhân viên";
+            tieuDe = "Cập nhật thông tin nhân viên";
             isChinhSua = true;
         }
 
+        // Tạo GUI
         prepareDialog();
 
+        // button mặc định khi nhấn phím Enter
         JRootPane rootPane = SwingUtilities.getRootPane(this);
         rootPane.setDefaultButton(btnLuu);
 
+        // cấu hình cho dialog
         setResizable(false);
         setSize(600, 750);
         setAlwaysOnTop(true);
