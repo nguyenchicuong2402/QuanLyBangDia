@@ -43,11 +43,6 @@ public class DanhSachNhanVien {
         if (nhanVien == null && nhanViens.contains(nhanVien))
             throw new Exception("Đã có nhân viên trong hệ thống");
 
-        for (NhanVien nhanVien1 : nhanViens){
-            if (nhanVien.getcMND().equals(nhanVien1.getcMND()))
-                throw new Exception("Đã có thông tin người này trong hệ thống");
-        }
-
         nhanViens.add(nhanVienDAO.themNhanVien(nhanVien));
     }
 

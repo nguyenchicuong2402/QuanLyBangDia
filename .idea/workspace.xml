@@ -7,135 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ecdd5e3-bc5b-493b-80fa-dbdc743fa957" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/images/baseline_add_white_18dp.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/images/baseline_create_white_18dp.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/images/baseline_delete_white_18dp.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/images/baseline_exit_to_app_white_24dp.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/images/baseline_payment_white_18dp.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/MainProgram.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/XML/DocGhiFileXML.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/XML/QuanLyXML.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/dao/BangDiaDAO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/dao/DataBaseUtils.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/dao/HoaDonDAO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/dao/KhachHangDAO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/dao/NhanVienDAO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/dao/TaiKhoanDAO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/dao/ThongTinCaNhanDAO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/models/BangDia.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/models/ChiTietHoaDon.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/models/DanhSachBangDia.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/models/DanhSachChoThue.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/models/DanhSachKhachHang.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/models/DanhSachNhanVien.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/models/HoaDon.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/models/KhachHang.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/models/NhanVien.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/models/TaiKhoan.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/models/ThongTinCaNhan.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/models/tablemodel/BangDiaTableModel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/models/tablemodel/ChoThueTableModel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/models/tablemodel/KhachHangTableModel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/models/tablemodel/NhanVienTableModel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/utils/Formats.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/utils/MaterialDesign.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/utils/PatternRegexs.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/DangNhap$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/DangNhap$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/DangNhap$3.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/DangNhap$4.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/DangNhap$5.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/DangNhap.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/MainForm$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/MainForm$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/MainForm$3.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/MainForm.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/custom/CustomTabbedPanelUI.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/BangDiaDialog$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/BangDiaDialog$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/BangDiaDialog$3.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/BangDiaDialog$4.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/BangDiaDialog$5.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/BangDiaDialog$6.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/BangDiaDialog$7.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/BangDiaDialog.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/ChoThueDialog$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/ChoThueDialog$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/ChoThueDialog$3.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/ChoThueDialog$4.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/ChoThueDialog.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/KhachHangDialog$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/KhachHangDialog$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/KhachHangDialog$3.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/KhachHangDialog$4.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/KhachHangDialog$5.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/KhachHangDialog$6.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/KhachHangDialog.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/NhanVienDialog$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/NhanVienDialog$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/NhanVienDialog$3.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/NhanVienDialog$4.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/NhanVienDialog$5.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/NhanVienDialog$6.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/NhanVienDialog$7.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/NhanVienDialog$8.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/NhanVienDialog$9.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/NhanVienDialog.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/ThongBaoDialog$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/ThongBaoDialog$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/ThongBaoDialog.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/CaiDatTabbed$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/CaiDatTabbed$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/CaiDatTabbed$3.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/CaiDatTabbed$4.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/CaiDatTabbed$5.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/CaiDatTabbed$6.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/CaiDatTabbed$7.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/CaiDatTabbed.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed$3.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed$4.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed$5.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed$6.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed$7.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed$8.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$3.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$4.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$5.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$6.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$7$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$7.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$8.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$9.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyKhachHangTabbed$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyKhachHangTabbed$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyKhachHangTabbed$3.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyKhachHangTabbed$4.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyKhachHangTabbed$5.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyKhachHangTabbed$6.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyKhachHangTabbed$7.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyKhachHangTabbed.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyNhanVienTabbed$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyNhanVienTabbed$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyNhanVienTabbed$3.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyNhanVienTabbed$4.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyNhanVienTabbed$5.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyNhanVienTabbed$6.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyNhanVienTabbed$7.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyNhanVienTabbed.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/ThongKeTabbed$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/ThongKeTabbed$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/ThongKeTabbed.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/TrangChuTabbed.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/properties.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/themes.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/script_install.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/properties.xml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/properties.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/dao/ThongTinCaNhanDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/dao/ThongTinCaNhanDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/DanhSachKhachHang.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/DanhSachKhachHang.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/DanhSachNhanVien.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/DanhSachNhanVien.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -187,14 +64,17 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/MainForm.java">
+        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/DanhSachNhanVien.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="100" column="43" selection-start-line="100" selection-start-column="43" selection-end-line="100" selection-end-column="43" />
+            <state relative-caret-position="220">
+              <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#btnDangXuat_Click#0;class#MainForm#0" />
-                <element signature="method#MainForm#0;class#MainForm#0" />
+                <element signature="method#DanhSachNhanVien#0;class#DanhSachNhanVien#0" />
+                <element signature="method#loadData#0;class#DanhSachNhanVien#0" />
+                <element signature="method#xoa#0;class#DanhSachNhanVien#0" />
+                <element signature="method#sua#0;class#DanhSachNhanVien#0" />
+                <element signature="method#tim#0;class#DanhSachNhanVien#0" />
               </folding>
             </state>
           </provider>
@@ -253,7 +133,6 @@
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/dao/KhachHangDAO.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/dao/NhanVienDAO.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/dao/TaiKhoanDAO.java" />
-        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/dao/ThongTinCaNhanDAO.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/custom/CustomTabbedPanelUI.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/ThongKeTabbed.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/TrangChuTabbed.java" />
@@ -262,21 +141,22 @@
         <option value="$PROJECT_DIR$/resources/properties.xml" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/BangDiaDialog.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/ThongBaoDialog.java" />
-        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed.java" />
-        <option value="$PROJECT_DIR$/database/SCRIPT.sql" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyKhachHangTabbed.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/utils/PatternRegexs.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/KhachHang.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/ThongTinCaNhan.java" />
-        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/DanhSachNhanVien.java" />
-        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/DanhSachKhachHang.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyNhanVienTabbed.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/ChoThueDialog.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/NhanVienDialog.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/KhachHangDialog.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/CaiDatTabbed.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/MainForm.java" />
+        <option value="$PROJECT_DIR$/database/SCRIPT.sql" />
+        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed.java" />
+        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/dao/ThongTinCaNhanDAO.java" />
+        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/DanhSachKhachHang.java" />
+        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/DanhSachNhanVien.java" />
       </list>
     </option>
   </component>
@@ -302,11 +182,6 @@
             <path>
               <item name="QuanLyBangDia" type="b2602c69:ProjectViewProjectNode" />
               <item name="QuanLyBangDia" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="QuanLyBangDia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="QuanLyBangDia" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="QuanLyBangDia" type="b2602c69:ProjectViewProjectNode" />
@@ -563,21 +438,7 @@
       <workItem from="1555645826005" duration="919000" />
       <workItem from="1555671613215" duration="3820000" />
       <workItem from="1555756184158" duration="3196000" />
-      <workItem from="1555762574980" duration="8126000" />
-    </task>
-    <task id="LOCAL-00018" summary="update database">
-      <created>1553531750877</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1553531750877</updated>
-    </task>
-    <task id="LOCAL-00019" summary="fix lỗi thêm trùng băng đĩa">
-      <created>1553533854220</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1553533854220</updated>
+      <workItem from="1555762574980" duration="8904000" />
     </task>
     <task id="LOCAL-00020" summary="thêm phân quyền người dùng">
       <created>1553621096043</created>
@@ -908,11 +769,25 @@
       <option name="project" value="LOCAL" />
       <updated>1555771964150</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="complete">
+      <created>1555772584830</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1555772584830</updated>
+    </task>
+    <task id="LOCAL-00068" summary="update script sql">
+      <created>1555772886189</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1555772886189</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="335653000" />
+    <option name="totallyTimeSpent" value="336431000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -925,8 +800,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23927614" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23927614" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -935,7 +811,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32914925" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4919571" visible="true" weight="0.32681563" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4919571" visible="true" weight="0.32681563" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -998,7 +874,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="hoàn thành" />
     <MESSAGE value="config for eclipse" />
     <MESSAGE value="thay đổi cấu trúc thư mục, cập nhật đọc ghi file xml" />
     <MESSAGE value="cập nhật thư viện" />
@@ -1010,7 +885,6 @@
     <MESSAGE value="cập nhật tab thống kê: cho phép người dùng thống kê theo năm, tháng. Chỉ thống kê doanh thu những băng đĩa đã thanh toán" />
     <MESSAGE value="comment package model" />
     <MESSAGE value="comment package dao" />
-    <MESSAGE value="complete" />
     <MESSAGE value="comment package views" />
     <MESSAGE value="fix lỗi Quản lý cho thuê" />
     <MESSAGE value="fix bug" />
@@ -1023,7 +897,9 @@
     <MESSAGE value="complete tabbed Băng đĩa" />
     <MESSAGE value="complete tabbed Khách hàng, nhân viên" />
     <MESSAGE value="fix bug and comment" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix bug and comment" />
+    <MESSAGE value="complete" />
+    <MESSAGE value="update script sql" />
+    <option name="LAST_COMMIT_MESSAGE" value="update script sql" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://T:/GoogleDrive/HocTapIUH/NAM2_2019_HK2/LapTrinhHuongSuKienJava/BaiTap/NguyenChiCuong_17010481/src/tuan4/SachTableModel.java" />
@@ -1192,21 +1068,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/dao/ThongTinCaNhanDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="136" column="42" selection-start-line="136" selection-start-column="42" selection-end-line="136" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#getInstance#0;class#ThongTinCaNhanDAO#0" />
-            <element signature="method#getThongTinCaNhan#0;class#ThongTinCaNhanDAO#0" />
-            <element signature="method#themThongTinCaNhan#0;class#ThongTinCaNhanDAO#0" />
-            <element signature="method#xoaThongTinCaNhan#0;class#ThongTinCaNhanDAO#0" />
-            <element signature="method#suaThongTinCaNhan#0;class#ThongTinCaNhanDAO#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.base/java/util/regex/Matcher.java" />
     <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/ThongKeTabbed.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1367,13 +1228,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/SCRIPT.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/dao/BangDiaDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="367">
@@ -1424,28 +1278,6 @@
             <element signature="method#btnDangNhap_Click#0;class#DangNhap#0" />
             <element signature="method#txtTenNguoiDung_Changed#0;class#DangNhap#0" />
             <element signature="method#txtMatKhau_Changed#0;class#DangNhap#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1518">
-          <caret line="169" column="9" lean-forward="true" selection-start-line="169" selection-start-column="9" selection-end-line="169" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#prepareUI#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#filterTable#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#thongBao#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#thongBaoLoi#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#btnThem_Click#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#btnSua_Click#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#btnXoa_Click#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#btnTimKiem_Click#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#btnXoaBangDiaHong_Click#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#tblBangDia_MouseListener#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#txtTimKiem_DocumentListener#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#QuanLyBangDiaTabbed#0;class#QuanLyBangDiaTabbed#0" />
           </folding>
         </state>
       </provider>
@@ -1510,34 +1342,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="8" column="65" selection-start-line="8" selection-start-column="65" selection-end-line="8" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/DanhSachNhanVien.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="46" column="25" lean-forward="true" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#DanhSachNhanVien#0;class#DanhSachNhanVien#0" />
-            <element signature="method#loadData#0;class#DanhSachNhanVien#0" />
-            <element signature="method#xoa#0;class#DanhSachNhanVien#0" />
-            <element signature="method#sua#0;class#DanhSachNhanVien#0" />
-            <element signature="method#tim#0;class#DanhSachNhanVien#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/DanhSachKhachHang.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="46" column="30" lean-forward="true" selection-start-line="46" selection-start-column="30" selection-end-line="46" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#DanhSachKhachHang#0;class#DanhSachKhachHang#0" />
-            <element signature="method#loadData#0;class#DanhSachKhachHang#0" />
-            <element signature="method#tim#0;class#DanhSachKhachHang#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1633,6 +1437,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/database/SCRIPT.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="176" column="23" lean-forward="true" selection-start-line="176" selection-start-column="23" selection-end-line="176" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/MainForm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="155">
@@ -1641,6 +1452,70 @@
             <element signature="imports" expanded="true" />
             <element signature="method#btnDangXuat_Click#0;class#MainForm#0" />
             <element signature="method#MainForm#0;class#MainForm#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="152" selection-start-line="152" selection-end-line="152" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#prepareUI#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#filterTable#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#thongBao#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#thongBaoLoi#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#btnThem_Click#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#btnSua_Click#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#btnXoa_Click#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#btnTimKiem_Click#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#btnXoaBangDiaHong_Click#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#tblBangDia_MouseListener#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#txtTimKiem_DocumentListener#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#QuanLyBangDiaTabbed#0;class#QuanLyBangDiaTabbed#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/dao/ThongTinCaNhanDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="97" column="81" selection-start-line="97" selection-start-column="81" selection-end-line="97" selection-end-column="81" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#getInstance#0;class#ThongTinCaNhanDAO#0" />
+            <element signature="method#getThongTinCaNhan#0;class#ThongTinCaNhanDAO#0" />
+            <element signature="method#xoaThongTinCaNhan#0;class#ThongTinCaNhanDAO#0" />
+            <element signature="method#suaThongTinCaNhan#0;class#ThongTinCaNhanDAO#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/DanhSachKhachHang.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#DanhSachKhachHang#0;class#DanhSachKhachHang#0" />
+            <element signature="method#loadData#0;class#DanhSachKhachHang#0" />
+            <element signature="method#tim#0;class#DanhSachKhachHang#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/DanhSachNhanVien.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#DanhSachNhanVien#0;class#DanhSachNhanVien#0" />
+            <element signature="method#loadData#0;class#DanhSachNhanVien#0" />
+            <element signature="method#xoa#0;class#DanhSachNhanVien#0" />
+            <element signature="method#sua#0;class#DanhSachNhanVien#0" />
+            <element signature="method#tim#0;class#DanhSachNhanVien#0" />
           </folding>
         </state>
       </provider>

@@ -148,8 +148,14 @@ public class QuanLyBangDiaTabbed extends JPanel {
             tblBangDia.clearSelection();
         }
 
-        // Nếu chưa có băng đĩa nào thì tắt nút xoá băng đĩa hỏng
-        btnXoaBangDiaHong.setEnabled(danhSachBangDia.getAll().size() > 0);
+        // Nếu chưa có băng đĩa nào hư hỏng thì tắt nút xoá băng đĩa hỏng
+        btnXoaBangDiaHong.setEnabled(false);
+        for (BangDia bangDia : danhSachBangDia.getAll()){
+            if (!bangDia.isTinhTrang()){
+                btnXoaBangDiaHong.setEnabled(true);
+                break;
+            }
+        }
 
         /**
          * Kiểm tra xem người dùng có chọn dòng nào không

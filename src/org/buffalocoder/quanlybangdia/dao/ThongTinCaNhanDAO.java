@@ -95,7 +95,7 @@ public class ThongTinCaNhanDAO {
             }
         } catch (Exception e){
             dataBaseUtils.rollbackQuery();
-            throw new Exception("Lỗi thêm thông tin cá nhân");
+            throw new Exception("Thông tin cá nhân người này đã có trong hệ thống");
         } finally {
             preparedStatement.close();
         }

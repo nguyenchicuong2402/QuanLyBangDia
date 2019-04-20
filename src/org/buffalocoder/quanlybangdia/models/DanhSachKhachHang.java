@@ -44,12 +44,6 @@ public class DanhSachKhachHang {
         if (khachHang == null && khachHangs.contains(khachHang))
             throw new Exception("Đã có khách hàng này trong hệ thống");
 
-        // kiểm tra trùng CMND
-        for (KhachHang khachHang1 : khachHangs){
-            if (khachHang.getcMND().equals(khachHang1.getcMND()))
-                throw new Exception("Đã có thông tin người này trong hệ thống");
-        }
-
         khachHangs.add(khachHangDAO.themKhachHang(khachHang));
     }
 
