@@ -170,8 +170,11 @@ public class NhanVienDialog extends JDialog {
 
         dateChooser = new JDateChooser(Formats.DATE_FORMAT.toPattern(), "##/##/####", '_');
         MaterialDesign.materialDateChooser(dateChooser);
+        java.util.Date currentDate = new java.util.Date();
+        currentDate.setYear(currentDate.getYear() - 18);
+        dateChooser.setMaxSelectableDate(currentDate);
         if (isChinhSua) dateChooser.setDate(nhanVien.getNgaySinh());
-        else dateChooser.setDate(new java.util.Date());
+        else dateChooser.setDate(currentDate);
         bx5.add(dateChooser);
         bx5.add(Box.createHorizontalStrut(20));
 
@@ -303,7 +306,9 @@ public class NhanVienDialog extends JDialog {
         lblLoi = new JLabel("      ");
         MaterialDesign.materialLabel(lblLoi);
         lblLoi.setForeground(MaterialDesign.COLOR_ERROR);
-        loiPanel.add(Box.createHorizontalStrut(20));
+        lblLoi.setPreferredSize(new Dimension(500, 30));
+        lblLoi.setHorizontalAlignment(JLabel.CENTER);
+        loiPanel.add(Box.createHorizontalGlue());
         loiPanel.add(lblLoi);
         loiPanel.add(Box.createHorizontalGlue());
 

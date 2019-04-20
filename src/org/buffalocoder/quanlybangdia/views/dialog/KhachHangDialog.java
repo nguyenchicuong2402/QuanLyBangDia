@@ -159,8 +159,12 @@ public class KhachHangDialog extends JDialog {
 
         dateChooser = new JDateChooser(Formats.DATE_FORMAT.toPattern(), "##/##/####", '_');
         MaterialDesign.materialDateChooser(dateChooser);
+        MaterialDesign.materialDateChooser(dateChooser);
+        java.util.Date currentDate = new java.util.Date();
+        currentDate.setYear(currentDate.getYear() - 16);
+        dateChooser.setMaxSelectableDate(currentDate);
         if (isChinhSua) dateChooser.setDate(khachHang.getNgaySinh());
-        else dateChooser.setDate(new java.util.Date());
+        else dateChooser.setDate(currentDate);
         bx5.add(dateChooser);
         bx5.add(Box.createHorizontalStrut(20));
 

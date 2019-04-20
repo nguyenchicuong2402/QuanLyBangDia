@@ -260,7 +260,7 @@ public class CaiDatTabbed extends JPanel {
      * @param textField
      */
     private void unErrorInput(JTextField textField){
-        if (lblLoiDoiMatKhau.getText().isEmpty()){
+        if (!lblLoiDoiMatKhau.getText().isEmpty()){
             MaterialDesign.materialTextField(textField);
             lblLoiDoiMatKhau.setText("    ");
         }

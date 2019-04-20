@@ -152,6 +152,7 @@ public class ChoThueDialog extends JDialog {
         bx4.add(lblNgayThue);
 
         dateChooser = new JDateChooser(Formats.DATE_FORMAT.toPattern(), "##/##/####", '_');
+        dateChooser.setMaxSelectableDate(new java.util.Date());
         MaterialDesign.materialDateChooser(dateChooser);
         if (isChinhSua) dateChooser.setDate(hoaDon.getNgayLap());
         else dateChooser.setDate(new java.util.Date());
