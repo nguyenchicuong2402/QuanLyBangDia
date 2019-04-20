@@ -214,7 +214,12 @@ public class QuanLyKhachHangTabbed extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // dialog nhập khách hàng mới
-                KhachHangDialog khachHangDialog = new KhachHangDialog(new JFrame(), null);
+                KhachHangDialog khachHangDialog = null;
+                try {
+                    khachHangDialog = new KhachHangDialog(new JFrame(), null);
+                } catch (Exception ex) {
+                    thongBaoLoi(ex.getMessage());
+                }
 
                 // lấy khách hàng vừa nhập
                 KhachHang khachHang = khachHangDialog.getKhachHang();
@@ -253,8 +258,13 @@ public class QuanLyKhachHangTabbed extends JPanel {
                 }
 
                 // hiện dialog sửa thông tin khách hàng
-                KhachHangDialog khachHangDialog = new KhachHangDialog(new JFrame(),
-                        danhSachKhachHang.getAll().get(index));
+                KhachHangDialog khachHangDialog = null;
+                try {
+                    khachHangDialog = new KhachHangDialog(new JFrame(),
+                            danhSachKhachHang.getAll().get(index));
+                } catch (Exception ex) {
+                    thongBaoLoi(ex.getMessage());
+                }
 
                 // lấy thông tin khách hàng
                 KhachHang khachHang = khachHangDialog.getKhachHang();

@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Propertise>
-        <Account remember="0">
-                <username/>
-                <password/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Propertise>
+        <Account remember="1">
+                <username>admin</username>
+                <password>admin</password>
         </Account>
         <Setting>
                 <themes>blue</themes>

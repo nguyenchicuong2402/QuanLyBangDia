@@ -120,6 +120,8 @@ public class QuanLyBangDiaTabbed extends JPanel {
         scrollPane = new JScrollPane(tblBangDia);
         MaterialDesign.materialScrollPane(scrollPane);
         box.add(scrollPane, BorderLayout.CENTER);
+
+        refresh(true);
     }
 
 
@@ -145,6 +147,9 @@ public class QuanLyBangDiaTabbed extends JPanel {
             tblBangDia.repaint();
             tblBangDia.clearSelection();
         }
+
+        // Nếu chưa có băng đĩa nào thì tắt nút xoá băng đĩa hỏng
+        btnXoaBangDiaHong.setEnabled(danhSachBangDia.getAll().size() > 0);
 
         /**
          * Kiểm tra xem người dùng có chọn dòng nào không
@@ -229,7 +234,12 @@ public class QuanLyBangDiaTabbed extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // hiện dialog nhập
-                BangDiaDialog bangDiaDialog = new BangDiaDialog(new JFrame(), null);
+                BangDiaDialog bangDiaDialog = null;
+                try {
+                    bangDiaDialog = new BangDiaDialog(new JFrame(), null);
+                } catch (Exception ex) {
+                    thongBaoLoi(ex.getMessage());
+                }
 
                 // lấy băng đĩa vừa nhập
                 BangDia bangDia = bangDiaDialog.getBangDia();
@@ -268,8 +278,13 @@ public class QuanLyBangDiaTabbed extends JPanel {
                 }
 
                 // hiện dialog sửa băng đĩa
-                BangDiaDialog bangDiaDialog = new BangDiaDialog(new JFrame(),
-                        danhSachBangDia.getAll().get(index));
+                BangDiaDialog bangDiaDialog = null;
+                try {
+                    bangDiaDialog = new BangDiaDialog(new JFrame(),
+                            danhSachBangDia.getAll().get(index));
+                } catch (Exception ex) {
+                    thongBaoLoi(ex.getMessage());
+                }
 
                 // lấy thông tin băng đĩa vừa sửa
                 BangDia bangDia = bangDiaDialog.getBangDia();
@@ -319,7 +334,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
                         ThongBaoDialog.OK_CANCLE_OPTION
                 );
 
-                // nếu người dùng muiốn xoá
+                // nếu người dùng đồng ý xoá
                 if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
                     try{
                         danhSachBangDia.xoa(maBangDia);
@@ -425,13 +440,18 @@ public class QuanLyBangDiaTabbed extends JPanel {
     }
 
 
+    /**
+     * Constructor
+     */
     public QuanLyBangDiaTabbed(){
+        // kết nối db
         try {
             danhSachBangDia = new DanhSachBangDia();
         } catch (Exception e) {
             thongBaoLoi(e.getMessage());
         }
 
+        // Tạo GUI
         prepareUI();
     }
 }

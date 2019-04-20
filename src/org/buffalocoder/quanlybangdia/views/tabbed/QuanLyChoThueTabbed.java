@@ -325,7 +325,12 @@ public class QuanLyChoThueTabbed extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // hiện dialog thêm hoá đơn
-                ChoThueDialog choThueDialog = new ChoThueDialog(new JFrame(), null);
+                ChoThueDialog choThueDialog = null;
+                try {
+                    choThueDialog = new ChoThueDialog(new JFrame(), null);
+                } catch (Exception ex) {
+                    thongBaoLoi(ex.getMessage());
+                }
 
                 // lấy hoá đơn nhập trong dialog
                 HoaDon hoaDon = choThueDialog.getHoaDon();
@@ -366,7 +371,12 @@ public class QuanLyChoThueTabbed extends JPanel {
                 int soLuongCu = hoaDon.getSoLuong();
 
                 // hiện dialog sửa và thông tin sản phẩm
-                ChoThueDialog choThueDialog = new ChoThueDialog(new JFrame(), hoaDon);
+                ChoThueDialog choThueDialog = null;
+                try {
+                    choThueDialog = new ChoThueDialog(new JFrame(), hoaDon);
+                } catch (Exception ex) {
+                    thongBaoLoi(ex.getMessage());
+                }
 
                 // lấy thông tin hoá đơn đã sửa
                 hoaDon = choThueDialog.getHoaDon();

@@ -217,7 +217,12 @@ public class QuanLyNhanVienTabbed extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // hiện dialog thêm
-                NhanVienDialog nhanVienDialog = new NhanVienDialog(new JFrame(), null, null);
+                NhanVienDialog nhanVienDialog = null;
+                try {
+                    nhanVienDialog = new NhanVienDialog(new JFrame(), null, null);
+                } catch (Exception ex) {
+                    thongBaoLoi(ex.getMessage());
+                }
 
                 // lấy thông tin nhân viên + tài khoản vừa nhập
                 NhanVien nhanVien = nhanVienDialog.getNhanVien();
@@ -268,7 +273,12 @@ public class QuanLyNhanVienTabbed extends JPanel {
                 }
 
                 // hiện dialog chỉnh sửa
-                NhanVienDialog nhanVienDialog = new NhanVienDialog(new JFrame(), nhanVien, taiKhoan);
+                NhanVienDialog nhanVienDialog = null;
+                try {
+                    nhanVienDialog = new NhanVienDialog(new JFrame(), nhanVien, taiKhoan);
+                } catch (Exception ex) {
+                    thongBaoLoi(ex.getMessage());
+                }
 
                 // lấy thông tin nhân viên và tài khoản sau khi chỉnh sửa
                 nhanVien = nhanVienDialog.getNhanVien();
