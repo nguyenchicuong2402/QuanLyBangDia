@@ -116,6 +116,19 @@ public class QuanLyNhanVienTabbed extends JPanel {
 
 
     /**
+     * Lấy vị trí đang chọn trong table
+     * @return
+     */
+    private int getCurrentSelected(){
+        try{
+            return tblNhanVien.convertRowIndexToModel(tblNhanVien.getSelectedRow());
+        }catch (Exception e){
+            return -1;
+        }
+    }
+
+
+    /**
      * Filter table theo tên nhân viên
      * @param filter_text
      */
@@ -142,8 +155,6 @@ public class QuanLyNhanVienTabbed extends JPanel {
      * Cập nhật giao diện khi có sự thay đổi dữ liệu
      */
     public void refresh(boolean reloadData){
-        int selected = tblNhanVien.convertRowIndexToModel(tblNhanVien.getSelectedRow());
-
         if (reloadData){
             // load dữ liệu từ DB
             try {
@@ -164,7 +175,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
         }
 
         // bật tắt nút xoá/sửa
-        if (tblNhanVien.getSelectedRow() != -1){
+        if (getCurrentSelected() != -1){
             btnSua.setEnabled(true);
             btnSua.setToolTipText("[Alt + S] Cập nhật thông tin nhân viên");
 
@@ -228,7 +239,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
                 NhanVien nhanVien = nhanVienDialog.getNhanVien();
                 TaiKhoan taiKhoan = nhanVienDialog.getTaiKhoan();
 
-                // nếu người dùng không muốn thêm
+                // kiểm tra dữ liệu
                 if (nhanVien == null && taiKhoan == null)
                     return;
 
@@ -253,17 +264,14 @@ public class QuanLyNhanVienTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // lấy vị trí người dùng chọn
-                int index = tblNhanVien.convertRowIndexToModel(tblNhanVien.getSelectedRow());
-
                 // nếu người dùng chưa chọn dòng nào
-                if (index == -1){
+                if (getCurrentSelected() == -1){
                     thongBao("Vui lòng chọn nhân viên cần sửa");
                     return;
                 }
 
                 // lấy thông tin nhân viên + tài khoản
-                NhanVien nhanVien = danhSachNhanVien.getAll().get(index);
+                NhanVien nhanVien = danhSachNhanVien.getAll().get(getCurrentSelected());
                 TaiKhoan taiKhoan = null;
                 try {
                     taiKhoan = taiKhoanDAO.getTaiKhoanByMaNhanVien(nhanVien.getMaNhanVien());
@@ -312,18 +320,15 @@ public class QuanLyNhanVienTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // lấy vị trí người dùng chọn
-                int index = tblNhanVien.convertRowIndexToModel(tblNhanVien.getSelectedRow());
-
                 // nếu người dùng chưa chọn dòng nào thì thông báo
-                if (index == -1){
+                if (getCurrentSelected() == -1){
                     thongBao("Vui lòng chọn nhân viên cần xoá");
                     return;
                 }
 
                 // lấy thông tin nhân viên ở dòng đã chọn
-                String maNhanVien = tblNhanVien.getModel().getValueAt(index, 0).toString();
-                String tenNhanVien = tblNhanVien.getModel().getValueAt(index, 1).toString();
+                String maNhanVien = tblNhanVien.getModel().getValueAt(getCurrentSelected(), 0).toString();
+                String tenNhanVien = tblNhanVien.getModel().getValueAt(getCurrentSelected(), 1).toString();
 
                 // nếu người dùng chọn tài khoản mặc định thì thông báo không cho xoá
                 if (maNhanVien.equals("NV00001")){
@@ -431,6 +436,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
             thongBaoLoi(e.getMessage());
         }
 
+        // Tạo GUI
         prepareUI();
     }
 }

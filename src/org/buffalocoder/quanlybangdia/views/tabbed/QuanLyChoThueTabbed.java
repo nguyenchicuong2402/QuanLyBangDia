@@ -134,6 +134,8 @@ public class QuanLyChoThueTabbed extends JPanel {
         scrollPane = new JScrollPane(tblChoThue);
         MaterialDesign.materialScrollPane(scrollPane);
         box.add(scrollPane, BorderLayout.CENTER);
+
+        refresh(true);
     }
 
 
@@ -144,17 +146,17 @@ public class QuanLyChoThueTabbed extends JPanel {
      * @return
      */
     private boolean kiemTraTinhTrangThue(HoaDon hoaDon, int soLuongCu){
-        // kiểm tra số lượng thuê có lớn > 0
-        if (hoaDon.getSoLuong() <= 0){
-            thongBao("Số lượng băng đĩa phải lớn hơn 0");
-            return false;
-        }
-
-        // kiểm tra số ngày được mượn có > 0
-        if (hoaDon.getSoNgayDuocMuon() <= 0){
-            thongBao("Số ngày được mượn phải lớn hơn 0");
-            return false;
-        }
+//        // kiểm tra số lượng thuê có lớn > 0
+//        if (hoaDon.getSoLuong() <= 0){
+//            thongBao("Số lượng băng đĩa phải lớn hơn 0");
+//            return false;
+//        }
+//
+//        // kiểm tra số ngày được mượn có > 0
+//        if (hoaDon.getSoNgayDuocMuon() <= 0){
+//            thongBao("Số ngày được mượn phải lớn hơn 0");
+//            return false;
+//        }
 
         // kiểm tra số lượng đặt có đủ không
         if ((hoaDon.getBangDia().getSoLuongTon() + soLuongCu) < hoaDon.getSoLuong()){
@@ -257,7 +259,10 @@ public class QuanLyChoThueTabbed extends JPanel {
          * Khi người dùng chưa chọn hoá đơn nào thì disable nút xoá, sửa, thanh toán
          * Nếu hoá đơn đã thanh toán thì disable nút thanh toán
          */
-        int rowSelected = tblChoThue.convertRowIndexToModel(tblChoThue.getSelectedRow());
+        int rowSelected = -1;
+        try{
+            rowSelected = tblChoThue.convertRowIndexToModel(tblChoThue.getSelectedRow());
+        }catch (Exception e){}
 
         if (rowSelected == -1){
             btnSua.setToolTipText("Vui lòng chọn hoá đơn cần cập nhật thông tin");

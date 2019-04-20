@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -301,8 +302,22 @@ public class KhachHangDialog extends JDialog {
             errorInput(txtCMND, "Vui lòng nhập CMND");
             return false;
         }else if (!pattern.matcher(txtCMND.getText().trim()).matches()){
-            errorInput(txtCMND, "CMND phải là số (không quá 20 số)");
+            errorInput(txtCMND, "CMND phải là số (từ 9 - 11 số)");
             return false;
+        }
+
+        /**
+         * Kiểm tra ngày sinh
+         * Rule: khách hàng phải trên 16 tuổi (16 tuổi mới bắt đầu có CMND)
+         */
+        java.util.Date currentDate = new java.util.Date();
+        java.util.Date chooseDate = dateChooser.getDate();
+
+        if (currentDate.getYear() - chooseDate.getYear() < 16){
+            lblLoi.setText("Khách hàng chưa đủ 16 tuổi");
+            return false;
+        }else{
+            lblLoi.setText("      ");
         }
 
         /**

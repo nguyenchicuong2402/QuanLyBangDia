@@ -76,7 +76,7 @@ public class ThongTinCaNhan {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ThongTinCaNhan that = (ThongTinCaNhan) o;
-        return cMND == that.cMND;
+        return cMND.equals(that.cMND);
     }
 
     @Override

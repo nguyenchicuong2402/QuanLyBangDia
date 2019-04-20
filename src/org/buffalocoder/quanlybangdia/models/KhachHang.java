@@ -47,7 +47,7 @@ public class KhachHang extends ThongTinCaNhan{
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         KhachHang khachHang = (KhachHang) o;
-        return Objects.equals(maKH, khachHang.maKH);
+        return maKH.equals(khachHang.maKH);
     }
 
     @Override

@@ -384,6 +384,20 @@ public class NhanVienDialog extends JDialog {
         }
 
         /**
+         * Kiểm tra ngày sinh
+         * Rule: nhân viên phải trên 18 tuổi
+         */
+        java.util.Date currentDate = new java.util.Date();
+        java.util.Date chooseDate = dateChooser.getDate();
+
+        if (currentDate.getYear() - chooseDate.getYear() < 18){
+            lblLoi.setText("Nhân viên chưa đủ 18 tuổi");
+            return false;
+        }else{
+            lblLoi.setText("      ");
+        }
+
+        /**
          * Kiểm tra số diện thoại
          * Rule: không được rỗng, phải đúng mẫu pattern
          */

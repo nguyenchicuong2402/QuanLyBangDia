@@ -39,11 +39,18 @@ public class DanhSachKhachHang {
      * @return
      * @throws Exception
      */
-    public boolean them(KhachHang khachHang) throws Exception {
+    public void them(KhachHang khachHang) throws Exception {
+        // kiểm tra trùng mã khách hàng
         if (khachHang == null && khachHangs.contains(khachHang))
-            return false;
+            throw new Exception("Đã có khách hàng này trong hệ thống");
 
-        return khachHangs.add(khachHangDAO.themKhachHang(khachHang));
+        // kiểm tra trùng CMND
+        for (KhachHang khachHang1 : khachHangs){
+            if (khachHang.getcMND().equals(khachHang1.getcMND()))
+                throw new Exception("Đã có thông tin người này trong hệ thống");
+        }
+
+        khachHangs.add(khachHangDAO.themKhachHang(khachHang));
     }
 
 

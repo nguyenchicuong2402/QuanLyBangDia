@@ -109,6 +109,21 @@ public class QuanLyKhachHangTabbed extends JPanel {
         scrollPane = new JScrollPane(tblKhachHang);
         MaterialDesign.materialScrollPane(scrollPane);
         box.add(scrollPane, BorderLayout.CENTER);
+
+        refresh(true);
+    }
+
+
+    /**
+     * Lấy vị trí đang chọn trong table
+     * @return
+     */
+    private int getCurrentSelected(){
+        try{
+            return tblKhachHang.convertRowIndexToModel(tblKhachHang.getSelectedRow());
+        }catch (Exception e){
+            return -1;
+        }
     }
 
 
@@ -136,7 +151,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
         }
 
         // bật tắt chức năng sữa, xoá
-        if (tblKhachHang.getSelectedRow() != -1){
+        if (getCurrentSelected() != -1){
             btnSua.setEnabled(true);
             btnSua.setToolTipText("[Alt + S] Cập nhật thông tin khách hàng");
 
@@ -248,11 +263,8 @@ public class QuanLyKhachHangTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // lấy dòng cần sửa
-                int index = tblKhachHang.convertRowIndexToModel(tblKhachHang.getSelectedRow());
-
                 // nếu người dùng chưa chọn dòng nào thì thông báo
-                if (index == -1){
+                if (getCurrentSelected() == -1){
                     thongBao("Vui lòng chọn khách hàng cần sửa");
                     return;
                 }
@@ -261,7 +273,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
                 KhachHangDialog khachHangDialog = null;
                 try {
                     khachHangDialog = new KhachHangDialog(new JFrame(),
-                            danhSachKhachHang.getAll().get(index));
+                            danhSachKhachHang.getAll().get(getCurrentSelected()));
                 } catch (Exception ex) {
                     thongBaoLoi(ex.getMessage());
                 }
@@ -293,18 +305,15 @@ public class QuanLyKhachHangTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // lấy vị trí người dùng chọn
-                int index = tblKhachHang.convertRowIndexToModel(tblKhachHang.getSelectedRow());
-
                 // nếu người dùng chưa chọn dòn gnào
-                if (index == -1){
+                if (getCurrentSelected() == -1){
                     thongBao("Vui lòng chọn khách hàng cần xoá");
                     return;
                 }
 
                 // lấy thông tin khách hàng ở dòng vừa chọn
-                String maKhachHang = tblKhachHang.getModel().getValueAt(index, 0).toString();
-                String tenKhachHang = tblKhachHang.getModel().getValueAt(index, 1).toString();
+                String maKhachHang = tblKhachHang.getModel().getValueAt(getCurrentSelected(), 0).toString();
+                String tenKhachHang = tblKhachHang.getModel().getValueAt(getCurrentSelected(), 1).toString();
 
                 // dialog cảnh báo người dùng
                 ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
@@ -394,13 +403,18 @@ public class QuanLyKhachHangTabbed extends JPanel {
     }
 
 
+    /**
+     * Constructor
+     */
     public QuanLyKhachHangTabbed(){
+        // kết nối DB
         try {
             danhSachKhachHang = new DanhSachKhachHang();
         } catch (Exception e) {
             thongBaoLoi(e.getMessage());
         }
 
+        // Tạo GUI
         prepareUI();
     }
 }
