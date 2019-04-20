@@ -374,7 +374,10 @@ public class CaiDatTabbed extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 TaiKhoan taiKhoan = DangNhap.taiKhoan;
 
-                // kiểm tra mật khẩu hiện tại
+                /**
+                 * Kiểm tra mật khẩu hiện tại
+                 * Rule: không được rỗng, không quá 128 kí tự, phải khớp với mật khẩu của user hiện tại
+                 */
                 if (String.valueOf(txtMatKhauHienTai.getPassword()).trim().isEmpty()){
                     errorInput(txtMatKhauHienTai, "Vui lòng nhập mật khẩu");
                     return;
@@ -386,7 +389,10 @@ public class CaiDatTabbed extends JPanel {
                     return;
                 }
 
-                // kiểm tra mật khẩu mới
+                /**
+                 * Kiểm tra mật khẩu mới
+                 * Rule: Không được rỗng, không quá 128 kí tự
+                 */
                 if (String.valueOf(txtMatKhauMoi.getPassword()).trim().isEmpty()){
                     errorInput(txtMatKhauMoi, "Vui lòng nhập mật khẩu mới");
                     return;
@@ -395,7 +401,10 @@ public class CaiDatTabbed extends JPanel {
                     return;
                 }
 
-                // kiểm tra mật khẩu nhập lại
+                /**
+                 * Kiểm tra nhập lại mật khẩu mới
+                 * Rule: Không được rỗng, không quá 128 kí tự, phải trùng với mật khẩu mới
+                 */
                 if (String.valueOf(txtNhapLaiMatKhau.getPassword()).trim().isEmpty()){
                     errorInput(txtNhapLaiMatKhau, "Vui lòng nhập lại mật khẩu");
                     return;
@@ -408,8 +417,11 @@ public class CaiDatTabbed extends JPanel {
                     return;
                 }
 
+                // Lưu thay đổi mật khẩu vào db
                 taiKhoan.setMatKhau(String.valueOf(txtMatKhauMoi.getPassword()));
                 try {
+
+                    // Nếu thay đổi thành công thì thông báo
                     if (taiKhoanDAO.suaTaiKhoan(taiKhoan) != null){
                         DangNhap.taiKhoan = taiKhoan;
                         thongBaoDialog = new ThongBaoDialog(
@@ -499,7 +511,11 @@ public class CaiDatTabbed extends JPanel {
     }
 
 
+    /**
+     * Constructor
+     */
     public CaiDatTabbed(){
+        // tạo kết nối db
         try {
             taiKhoanDAO = TaiKhoanDAO.getInstance();
             dataBaseUtils = DataBaseUtils.getInstance();
@@ -512,6 +528,7 @@ public class CaiDatTabbed extends JPanel {
             );
         }
 
+        // Tạo GUI
         prepareUI();
     }
 }
