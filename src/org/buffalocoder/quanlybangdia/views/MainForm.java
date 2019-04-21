@@ -14,8 +14,6 @@ import org.buffalocoder.quanlybangdia.views.tabbed.*;
 
 public class MainForm extends JFrame {
     //========== CONSTANT ==========//
-    private final int WIDTH = 1300;
-    private final int HEIGHT = 800;
     private final String TITLE = "Quản lý băng đĩa";
     private final boolean IS_ADMIN = DangNhap.taiKhoan.getLoaiTaiKhoan() == 1;
 
@@ -180,8 +178,10 @@ public class MainForm extends JFrame {
             public void run() {
                 prepareUI();
 
-                setSize(WIDTH, HEIGHT);
-                setMinimumSize(new Dimension(WIDTH, HEIGHT));
+                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                int width = (int)(screenSize.getWidth() * 0.9);
+                int height = (int)(screenSize.getHeight() * 0.9);
+                setSize(width, height);
                 setExtendedState(JFrame.MAXIMIZED_BOTH);
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
                 setLocationRelativeTo(null);
