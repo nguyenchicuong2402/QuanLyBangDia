@@ -128,9 +128,26 @@ public class QuanLyKhachHangTabbed extends JPanel {
 
 
     /**
+     * Set row được chọn
+     * @param oldSelected
+     */
+    private void setCurrentSelected(int oldSelected){
+        if (oldSelected != -1 && oldSelected <= tblKhachHang.getModel().getRowCount()){
+            tblKhachHang.setRowSelectionInterval(oldSelected, oldSelected);
+        }else if (oldSelected != -1 && oldSelected > tblKhachHang.getModel().getRowCount()){
+            tblKhachHang.setRowSelectionInterval(oldSelected - 1, oldSelected - 1);
+        }else if (oldSelected == -1 && tblKhachHang.getModel().getRowCount() > 0){
+            tblKhachHang.setRowSelectionInterval(0, 0);
+        }else tblKhachHang.clearSelection();
+    }
+
+
+    /**
      * Refresh giao diện khi có cập nhật
      */
     public void refresh(boolean reloadData){
+        int oldSelected = getCurrentSelected();
+
         if (reloadData){
             // load lai dữ liệu
             try {
@@ -147,7 +164,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
 
             tblKhachHang.revalidate();
             tblKhachHang.repaint();
-            tblKhachHang.clearSelection();
+            setCurrentSelected(oldSelected);
         }
 
         // bật tắt chức năng sữa, xoá

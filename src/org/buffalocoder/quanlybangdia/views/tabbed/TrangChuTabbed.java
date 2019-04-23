@@ -5,15 +5,28 @@ import org.buffalocoder.quanlybangdia.models.NhanVien;
 import org.buffalocoder.quanlybangdia.utils.Formats;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.views.DangNhap;
+import org.buffalocoder.quanlybangdia.views.custom.ImagePanel;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalTime;
+import java.util.Random;
 
 public class TrangChuTabbed extends JPanel {
 
+    private static final String PATH = "resources/images/";
+    private static final String IMAGES[] = {"cd001.jpg", "cd002.jpg", "cd003.jpg", "cd004.jpg", "cd005.jpg",};
+
     private static NhanVienDAO nhanVienDAO;
     private static NhanVien nhanVien;
+    private Random random = new Random();
+
 
     private JLabel lblLoiChao, lblLoiChuc, lblMaNV_1, lblMaNV_2, lblTenNguoiDung_1,
                     lblTenNguoiDung_2, lblHoTen_1, lblHoTen_2, lblGioiTinh_1, lblGioiTinh_2,
@@ -21,6 +34,7 @@ public class TrangChuTabbed extends JPanel {
                     lblSoDienThoai_2, lblDiaChi_1, lblDiaChi_2, lblMoTa_1, lblMoTa_2,
                     lblTieuDeThongTin;
     private JPanel headerPanel, leftPanel, rightPanel;
+    private ImagePanel imagePanel;
 
 
     /**
@@ -242,6 +256,19 @@ public class TrangChuTabbed extends JPanel {
         bx9.add(lblMoTa_2);
         bx9.add(Box.createHorizontalGlue());
 
+        rightPanel = new JPanel();
+        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.X_AXIS));
+        MaterialDesign.materialPanel(rightPanel);
+        rightPanel.setBackground(MaterialDesign.COLOR_BACKGROUND);
+        this.add(rightPanel, BorderLayout.CENTER);
+
+        imagePanel = new ImagePanel(generateImagePath());
+        imagePanel.setPreferredSize(new Dimension(500, 500));
+        imagePanel.setMaximumSize(new Dimension(500, 500));
+        MaterialDesign.materialPanel(imagePanel);
+        imagePanel.setBackground(MaterialDesign.COLOR_BACKGROUND);
+        rightPanel.add(imagePanel);
+
         refresh();
     }
 
@@ -283,6 +310,13 @@ public class TrangChuTabbed extends JPanel {
         }
 
         lblLoiChao.setText(loiChao + nhanVien.getHoTen());
+
+        imagePanel.setFilePath(generateImagePath());
+    }
+
+
+    private String generateImagePath(){
+        return PATH + IMAGES[random.nextInt(IMAGES.length)];
     }
 
 

@@ -7,6 +7,7 @@ import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.views.DangNhap;
 import org.buffalocoder.quanlybangdia.views.dialog.BangDiaDialog;
 import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
+import org.buffalocoder.quanlybangdia.views.dialog.XoaBangDiaDialog;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -129,6 +130,8 @@ public class QuanLyBangDiaTabbed extends JPanel {
      * Refresh lại tab khi có cập nhật dữ liệu
      */
     public void refresh(boolean reloadData){
+        int oldSelected = getCurrentSelected();
+
         if (reloadData){
             // load lại dữ liệu từ DB
             try {
@@ -145,7 +148,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
             tblBangDia.revalidate();
             tblBangDia.repaint();
-            tblBangDia.clearSelection();
+            setCurrentSelected(oldSelected);
         }
 
         // Nếu chưa có băng đĩa nào hư hỏng thì tắt nút xoá băng đĩa hỏng
@@ -232,6 +235,34 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
 
     /**
+     * Lấy vị trí đang chọn trong table
+     * @return
+     */
+    private int getCurrentSelected(){
+        try{
+            return tblBangDia.convertRowIndexToModel(tblBangDia.getSelectedRow());
+        }catch (Exception e){
+            return -1;
+        }
+    }
+
+
+    /**
+     * Set row được chọn
+     * @param oldSelected
+     */
+    private void setCurrentSelected(int oldSelected){
+        if (oldSelected != -1 && oldSelected <= tblBangDia.getModel().getRowCount()){
+            tblBangDia.setRowSelectionInterval(oldSelected, oldSelected);
+        }else if (oldSelected != -1 && oldSelected > tblBangDia.getModel().getRowCount()){
+            tblBangDia.setRowSelectionInterval(oldSelected - 1, oldSelected - 1);
+        }else if (oldSelected == -1 && tblBangDia.getModel().getRowCount() > 0){
+            tblBangDia.setRowSelectionInterval(0, 0);
+        }else tblBangDia.clearSelection();
+    }
+
+
+    /**
      * Sự kiện button thêm
      * @return
      */
@@ -274,11 +305,8 @@ public class QuanLyBangDiaTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // lấy vị trí băng đĩa cần sửa
-                int index = tblBangDia.convertRowIndexToModel(tblBangDia.getSelectedRow());
-
                 // nếu người dùng chưa chọn thì thông báo
-                if (index == -1){
+                if (getCurrentSelected() == -1){
                     thongBao("Vui lòng chọn băng đĩa cần sửa");
                     return;
                 }
@@ -287,7 +315,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
                 BangDiaDialog bangDiaDialog = null;
                 try {
                     bangDiaDialog = new BangDiaDialog(new JFrame(),
-                            danhSachBangDia.getAll().get(index));
+                            danhSachBangDia.getAll().get(getCurrentSelected()));
                 } catch (Exception ex) {
                     thongBaoLoi(ex.getMessage());
                 }
@@ -319,32 +347,33 @@ public class QuanLyBangDiaTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // lấy vị trí băng đĩa cần xoá
-                int index = tblBangDia.convertRowIndexToModel(tblBangDia.getSelectedRow());
-
                 // nếu người dùng chưa chọn dòng nào thì thông báo
-                if (index == -1){
+                if (getCurrentSelected() == -1){
                     thongBao("Vui lòng chọn băng đĩa cần xoá");
                     return;
                 }
 
                 // lấy thông tin băng đĩa đã chọn
-                String maBangDia = tblBangDia.getModel().getValueAt(index, 0).toString();
-                String tenBangDia = tblBangDia.getModel().getValueAt(index, 1).toString();
+                String maBangDia = tblBangDia.getModel().getValueAt(getCurrentSelected(), 0).toString();
+                String tenBangDia = tblBangDia.getModel().getValueAt(getCurrentSelected(), 1).toString();
+                int soLuong = Integer.parseInt(tblBangDia.getModel().getValueAt(getCurrentSelected(), 5).toString());
 
-                // hiện dialog thông báo xác nhận xoá
-                ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
-                        new JFrame(),
-                        "Cảnh báo",
-                        String.format("Bạn có muốn xoá băng đĩa này không?\nTên băng đĩa: %s", tenBangDia),
-                        ThongBaoDialog.OK_CANCLE_OPTION
-                );
+                XoaBangDiaDialog xoaBangDiaDialog = new XoaBangDiaDialog(new JFrame(), maBangDia, tenBangDia, soLuong);
 
-                // nếu người dùng đồng ý xoá
-                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
+                if (xoaBangDiaDialog.getKetQua() == 0){
                     try{
                         danhSachBangDia.xoa(maBangDia);
                         tblBangDia.clearSelection();
+                        refresh(true);
+                    }catch (Exception e1){
+                        thongBaoLoi(e1.getMessage());
+                    }
+                }else if (xoaBangDiaDialog.getKetQua() > 0){
+                    try{
+                        BangDia bangDia = danhSachBangDia.getAll().get(danhSachBangDia.tim(maBangDia));
+                        bangDia.setSoLuongTon(xoaBangDiaDialog.getKetQua());
+
+                        danhSachBangDia.sua(bangDia);
                         refresh(true);
                     }catch (Exception e1){
                         thongBaoLoi(e1.getMessage());

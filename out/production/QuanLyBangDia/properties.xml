@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><Propertise>
         <Account remember="1">
                 <username>admin</username>
-                <password>admin</password>
+                <password>123</password>
         </Account>
         <Setting>
                 <themes>indigo</themes>

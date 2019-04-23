@@ -112,6 +112,8 @@ public class QuanLyNhanVienTabbed extends JPanel {
         scrollPane = new JScrollPane(tblNhanVien);
         MaterialDesign.materialScrollPane(scrollPane);
         box.add(scrollPane, BorderLayout.CENTER);
+
+        refresh(true);
     }
 
 
@@ -125,6 +127,21 @@ public class QuanLyNhanVienTabbed extends JPanel {
         }catch (Exception e){
             return -1;
         }
+    }
+
+
+    /**
+     * Set row được chọn
+     * @param oldSelected
+     */
+    private void setCurrentSelected(int oldSelected){
+        if (oldSelected != -1 && oldSelected <= tblNhanVien.getModel().getRowCount()){
+            tblNhanVien.setRowSelectionInterval(oldSelected, oldSelected);
+        }else if (oldSelected != -1 && oldSelected > tblNhanVien.getModel().getRowCount()){
+            tblNhanVien.setRowSelectionInterval(oldSelected - 1, oldSelected - 1);
+        }else if (oldSelected == -1 && tblNhanVien.getModel().getRowCount() > 0){
+            tblNhanVien.setRowSelectionInterval(0, 0);
+        }else tblNhanVien.clearSelection();
     }
 
 
@@ -155,6 +172,8 @@ public class QuanLyNhanVienTabbed extends JPanel {
      * Cập nhật giao diện khi có sự thay đổi dữ liệu
      */
     public void refresh(boolean reloadData){
+        int oldSelected = getCurrentSelected();
+
         if (reloadData){
             // load dữ liệu từ DB
             try {
@@ -171,7 +190,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
 
             tblNhanVien.revalidate();
             tblNhanVien.repaint();
-            tblNhanVien.clearSelection();
+            setCurrentSelected(oldSelected);
         }
 
         // bật tắt nút xoá/sửa

@@ -321,7 +321,7 @@ public class BangDiaDialog extends JDialog{
             errorInput(txtSoLuong, "Vui lòng nhập số lượng");
             return false;
         }else if (!pattern.matcher(txtSoLuong.getText().trim()).matches()){
-            errorInput(txtSoLuong, "Số lượng phải là số");
+            errorInput(txtSoLuong, "Số lượng phải là số nguyên");
             return false;
         }else if(txtSoLuong.getText().trim().length() >= 6){
             errorInput(txtSoLuong,"Số lượng quá lớn");

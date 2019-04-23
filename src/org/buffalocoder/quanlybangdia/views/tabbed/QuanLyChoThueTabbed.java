@@ -146,18 +146,6 @@ public class QuanLyChoThueTabbed extends JPanel {
      * @return
      */
     private boolean kiemTraTinhTrangThue(HoaDon hoaDon, int soLuongCu){
-//        // kiểm tra số lượng thuê có lớn > 0
-//        if (hoaDon.getSoLuong() <= 0){
-//            thongBao("Số lượng băng đĩa phải lớn hơn 0");
-//            return false;
-//        }
-//
-//        // kiểm tra số ngày được mượn có > 0
-//        if (hoaDon.getSoNgayDuocMuon() <= 0){
-//            thongBao("Số ngày được mượn phải lớn hơn 0");
-//            return false;
-//        }
-
         // kiểm tra số lượng đặt có đủ không
         if ((hoaDon.getBangDia().getSoLuongTon() + soLuongCu) < hoaDon.getSoLuong()){
             thongBao("Không đủ số lượng băng đĩa");
@@ -217,6 +205,8 @@ public class QuanLyChoThueTabbed extends JPanel {
      * Refresh giao diện khi có cập nhật dữ liệu
      */
     public void refresh(boolean reloadData){
+        int oldSelected = getCurrentSelected();
+
         if (reloadData){
             // load lại dữ liệu từ DB
             try {
@@ -235,7 +225,7 @@ public class QuanLyChoThueTabbed extends JPanel {
 
             tblChoThue.revalidate();
             tblChoThue.repaint();
-            tblChoThue.clearSelection();
+            setCurrentSelected(oldSelected);
         }
 
         /**
@@ -322,6 +312,34 @@ public class QuanLyChoThueTabbed extends JPanel {
 
 
     /**
+     * Lấy vị trí đang chọn trong table
+     * @return
+     */
+    private int getCurrentSelected(){
+        try{
+            return tblChoThue.convertRowIndexToModel(tblChoThue.getSelectedRow());
+        }catch (Exception e){
+            return -1;
+        }
+    }
+
+
+    /**
+     * Set row được chọn
+     * @param oldSelected
+     */
+    private void setCurrentSelected(int oldSelected){
+        if (oldSelected != -1 && oldSelected <= tblChoThue.getModel().getRowCount()){
+            tblChoThue.setRowSelectionInterval(oldSelected, oldSelected);
+        }else if (oldSelected != -1 && oldSelected > tblChoThue.getModel().getRowCount()){
+            tblChoThue.setRowSelectionInterval(oldSelected - 1, oldSelected - 1);
+        }else if (oldSelected == -1 && tblChoThue.getModel().getRowCount() > 0){
+            tblChoThue.setRowSelectionInterval(0, 0);
+        }else tblChoThue.clearSelection();
+    }
+
+
+    /**
      * Sự kiện button thêm
      * @return
      */
@@ -362,17 +380,14 @@ public class QuanLyChoThueTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // lấy dòng cần sửa
-                int index = tblChoThue.convertRowIndexToModel(tblChoThue.getSelectedRow());
-
                 // nếu người dùng chưa chọn dòng nào thì thông báo
-                if (index == -1){
+                if (getCurrentSelected() == -1){
                     thongBao("Vui lòng chọn hoá đơn cần sửa");
                     return;
                 }
 
                 // lấy thông tin hoá đơn
-                HoaDon hoaDon = danhSachChoThue.getAll().get(index);
+                HoaDon hoaDon = danhSachChoThue.getAll().get(getCurrentSelected());
                 int soLuongCu = hoaDon.getSoLuong();
 
                 // hiện dialog sửa và thông tin sản phẩm
@@ -408,23 +423,20 @@ public class QuanLyChoThueTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // lấy dòng cần xoá
-                int index = tblChoThue.convertRowIndexToModel(tblChoThue.getSelectedRow());
-
                 // nếu người dùng chưa chọn dòng nào thì thông báo
                 // nếu hoá đơn đó đã thanh toán thì không cho xoá
-                if (index == -1){
+                if (getCurrentSelected() == -1){
                     thongBao("Vui lòng chọn hoá đơn cần xoá");
                     return;
-                }else if (String.valueOf(tblChoThue.getModel().getValueAt(index, 7)).equalsIgnoreCase("Đã thanh toán")){
+                }else if (String.valueOf(tblChoThue.getModel().getValueAt(getCurrentSelected(), 7)).equalsIgnoreCase("Đã thanh toán")){
                     thongBao("Không thể xoá hoá đơn đã thanh toán");
                     return;
                 }
 
                 // lấy thông tin hoá đơn cần xoá
-                String maHoaDon = choThueTableModel.getValueAt(index, 0).toString();
-                String tenKhachHang = choThueTableModel.getValueAt(index, 1).toString();
-                String tenBangDia = choThueTableModel.getValueAt(index, 2).toString();
+                String maHoaDon = choThueTableModel.getValueAt(getCurrentSelected(), 0).toString();
+                String tenKhachHang = choThueTableModel.getValueAt(getCurrentSelected(), 1).toString();
+                String tenBangDia = choThueTableModel.getValueAt(getCurrentSelected(), 2).toString();
 
                 // hiện dialog xác nhận
                 ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
