@@ -150,13 +150,13 @@ public class MainForm extends JFrame {
             public void stateChanged(ChangeEvent e) {
                 try{
                     quanLyChoThueTabbed.refresh(true);
-                    quanLyBangDiaTabbed.refresh(false);
-                    quanLyKhachHangTabbed.refresh(false);
+                    quanLyBangDiaTabbed.refresh(true);
+                    quanLyKhachHangTabbed.refresh(true);
                     thongKeTabbed.refresh();
                     trangChuTabbed.refresh();
 
                     if (IS_ADMIN)
-                        quanLyNhanVienTabbed.refresh(false);
+                        quanLyNhanVienTabbed.refresh(true);
                 }catch (Exception ex){
                     return;
                 }

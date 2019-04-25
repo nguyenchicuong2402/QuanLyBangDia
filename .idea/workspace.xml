@@ -8,7 +8,10 @@
   <component name="ChangeListManager">
     <list default="true" id="2ecdd5e3-bc5b-493b-80fa-dbdc743fa957" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/custom/ImagePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/custom/ImagePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/custom/ImagePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/custom/ImagePanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/QuanLyBangDia/properties.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/properties.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/properties.xml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/properties.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/MainForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/MainForm.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -60,25 +63,37 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/TrangChuTabbed.java">
+        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="267" column="48" lean-forward="true" selection-start-line="267" selection-start-column="48" selection-end-line="267" selection-end-column="48" />
+            <state relative-caret-position="-391">
+              <caret line="136" column="17" lean-forward="true" selection-start-line="136" selection-start-column="17" selection-end-line="136" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#prepareUI#0;class#QuanLyBangDiaTabbed#0" />
+                <element signature="method#filterTable#0;class#QuanLyBangDiaTabbed#0" />
+                <element signature="method#thongBao#0;class#QuanLyBangDiaTabbed#0" />
+                <element signature="method#thongBaoLoi#0;class#QuanLyBangDiaTabbed#0" />
+                <element signature="method#btnThem_Click#0;class#QuanLyBangDiaTabbed#0" />
+                <element signature="method#btnSua_Click#0;class#QuanLyBangDiaTabbed#0" />
+                <element signature="method#btnXoa_Click#0;class#QuanLyBangDiaTabbed#0" />
+                <element signature="method#btnTimKiem_Click#0;class#QuanLyBangDiaTabbed#0" />
+                <element signature="method#btnXoaBangDiaHong_Click#0;class#QuanLyBangDiaTabbed#0" />
+                <element signature="method#tblBangDia_MouseListener#0;class#QuanLyBangDiaTabbed#0" />
+                <element signature="method#txtTimKiem_DocumentListener#0;class#QuanLyBangDiaTabbed#0" />
+                <element signature="method#QuanLyBangDiaTabbed#0;class#QuanLyBangDiaTabbed#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/custom/ImagePanel.java">
+        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/MainForm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="5" selection-start-line="5" selection-end-line="5" />
+            <state relative-caret-position="225">
+              <caret line="159" column="38" lean-forward="true" selection-start-line="159" selection-start-column="38" selection-end-line="159" selection-end-column="38" />
               <folding>
-                <element signature="e#355#356#0" expanded="true" />
-                <element signature="e#392#393#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="method#btnDangXuat_Click#0;class#MainForm#0" />
               </folding>
             </state>
           </provider>
@@ -151,7 +166,6 @@
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/dao/ThongTinCaNhanDAO.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/DanhSachKhachHang.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/DanhSachNhanVien.java" />
-        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/MainForm.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/BangDiaDialog.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyNhanVienTabbed.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyKhachHangTabbed.java" />
@@ -161,6 +175,7 @@
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/XoaBangDiaDialog.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/TrangChuTabbed.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/custom/ImagePanel.java" />
+        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/MainForm.java" />
       </list>
     </option>
   </component>
@@ -179,7 +194,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -213,10 +227,19 @@
               <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="custom" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="QuanLyBangDia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="QuanLyBangDia" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="quanlybangdia" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="tabbed" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -432,14 +455,10 @@
       <workItem from="1555855181133" duration="359000" />
       <workItem from="1556006874525" duration="14499000" />
       <workItem from="1556031939949" duration="12000" />
-      <workItem from="1556031973765" duration="2874000" />
-    </task>
-    <task id="LOCAL-00023" summary="update DAO, script sql">
-      <created>1553913145227</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1553913145227</updated>
+      <workItem from="1556031973765" duration="2955000" />
+      <workItem from="1556158441609" duration="980000" />
+      <workItem from="1556160852722" duration="955000" />
+      <workItem from="1556205215568" duration="949000" />
     </task>
     <task id="LOCAL-00024" summary="thêm tài khoản cho nhân viên">
       <created>1553916210290</created>
@@ -777,11 +796,18 @@
       <option name="project" value="LOCAL" />
       <updated>1556027397838</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="fix image trang chủ">
+      <created>1556034970316</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1556034970316</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="354706000" />
+    <option name="totallyTimeSpent" value="357671000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -796,7 +822,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25603217" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2660858" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -868,7 +894,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="cập nhật comment trong package XML" />
     <MESSAGE value="cập nhật comment trong package utils" />
     <MESSAGE value="chỉnh sửa db, thêm chức năng lọc table cho thuê (Tất cả, Đang thuê, Đã thanh toán), Thêm chức năng thanh toán hoá đơn (không xoá hoá đơn), ràng buộc không cho xoá hoá đơn đã thanh toán" />
     <MESSAGE value="thêm chức năng chào người dùng theo thời gian trên hệ thống, thêm dialog hỏi người dùng có muốn đăng xuất phiên không" />
@@ -893,7 +918,8 @@
     <MESSAGE value="fix bug thêm trùng CMND" />
     <MESSAGE value="fix size form" />
     <MESSAGE value="cho phép người dùng xoá băng đĩa theo số lượng (hoặc xoá hết), thêm hiển thị hình ảnh trong tabbed TRang Chủ" />
-    <option name="LAST_COMMIT_MESSAGE" value="cho phép người dùng xoá băng đĩa theo số lượng (hoặc xoá hết), thêm hiển thị hình ảnh trong tabbed TRang Chủ" />
+    <MESSAGE value="fix image trang chủ" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix image trang chủ" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://T:/GoogleDrive/HocTapIUH/NAM2_2019_HK2/LapTrinhHuongSuKienJava/BaiTap/NguyenChiCuong_17010481/src/tuan2/BaiTap1/NhanVienTableModel.java" />
@@ -1339,17 +1365,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/MainForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1830">
-          <caret line="182" column="33" selection-start-line="182" selection-start-column="33" selection-end-line="182" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#btnDangXuat_Click#0;class#MainForm#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/ThongBaoDialog.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-150">
@@ -1407,30 +1422,6 @@
             <element signature="method#txtTimKiem_DocumentListerner#0;class#QuanLyKhachHangTabbed#0" />
             <element signature="method#tblKhachHang_MouseListener#0;class#QuanLyKhachHangTabbed#0" />
             <element signature="method#QuanLyKhachHangTabbed#0;class#QuanLyKhachHangTabbed#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="249" column="7" lean-forward="true" selection-start-line="249" selection-start-column="7" selection-end-line="249" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#prepareUI#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#filterTable#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#thongBao#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#thongBaoLoi#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#btnThem_Click#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#btnSua_Click#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#btnXoa_Click#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#btnTimKiem_Click#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="e#13596#13597#0" expanded="true" />
-            <element signature="e#13668#13669#0" expanded="true" />
-            <element signature="method#btnXoaBangDiaHong_Click#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#tblBangDia_MouseListener#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#txtTimKiem_DocumentListener#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#QuanLyBangDiaTabbed#0;class#QuanLyBangDiaTabbed#0" />
           </folding>
         </state>
       </provider>
@@ -1521,23 +1512,57 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/custom/ImagePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#355#356#0" expanded="true" />
+            <element signature="e#392#393#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/TrangChuTabbed.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="267" column="48" lean-forward="true" selection-start-line="267" selection-start-column="48" selection-end-line="267" selection-end-column="48" />
+        <state relative-caret-position="378">
+          <caret line="267" column="48" selection-start-line="267" selection-start-column="48" selection-end-line="267" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/custom/ImagePanel.java">
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        <state relative-caret-position="-391">
+          <caret line="136" column="17" lean-forward="true" selection-start-line="136" selection-start-column="17" selection-end-line="136" selection-end-column="17" />
           <folding>
-            <element signature="e#355#356#0" expanded="true" />
-            <element signature="e#392#393#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#prepareUI#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#filterTable#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#thongBao#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#thongBaoLoi#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#btnThem_Click#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#btnSua_Click#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#btnXoa_Click#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#btnTimKiem_Click#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#btnXoaBangDiaHong_Click#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#tblBangDia_MouseListener#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#txtTimKiem_DocumentListener#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#QuanLyBangDiaTabbed#0;class#QuanLyBangDiaTabbed#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/MainForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="159" column="38" lean-forward="true" selection-start-line="159" selection-start-column="38" selection-end-line="159" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#btnDangXuat_Click#0;class#MainForm#0" />
           </folding>
         </state>
       </provider>
