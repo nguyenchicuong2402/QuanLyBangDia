@@ -8,6 +8,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class ImagePanel extends JPanel {
+    private static final int WIDTH = 500;
+    private static final int HEIGHT = 500;
+
     private BufferedImage image;
     private String filePath;
 
@@ -17,18 +20,21 @@ public class ImagePanel extends JPanel {
 
     public void setFilePath(String filePath) {
         this.filePath = filePath;
-
-        try {
-            image = ImageIO.read(new File(this.filePath));
-        } catch (IOException ex) {
-            // handle exception...
-        }
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(image, 130, 140, this);
+
+        try {
+            image = ImageIO.read(new File(this.filePath));
+
+            // resize hình ảnh
+            Image image_resize = image.getScaledInstance(WIDTH, HEIGHT, Image.SCALE_SMOOTH);
+
+            g.drawImage(image_resize, 20, 0, this);
+        } catch (IOException ex) {
+        }
     }
 
 }

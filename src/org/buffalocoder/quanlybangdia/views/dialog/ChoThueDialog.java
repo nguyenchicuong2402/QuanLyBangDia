@@ -113,6 +113,7 @@ public class ChoThueDialog extends JDialog {
 
         cbMaKhachHang = new JComboBox<String>();
         MaterialDesign.materialComboBox(cbMaKhachHang);
+        cbMaKhachHang.setPreferredSize(new Dimension(150, 30));
         for (KhachHang khachHang : danhSachKhachHang.getAll())
             cbMaKhachHang.addItem(String.format("[%s] %s", khachHang.getMaKH(), khachHang.getHoTen()));
         if (isChinhSua)
@@ -130,6 +131,7 @@ public class ChoThueDialog extends JDialog {
 
         cbMaBangDia = new JComboBox<String>();
         MaterialDesign.materialComboBox(cbMaBangDia);
+        cbMaBangDia.setPreferredSize(cbMaBangDia.getPreferredSize());
         for (BangDia bangDia : danhSachBangDia.getAll())
             if (bangDia.getSoLuongTon() > 0)
                 cbMaBangDia.addItem(String.format("[%s] %s", bangDia.getMaBangDia(), bangDia.getTenBangDia()));

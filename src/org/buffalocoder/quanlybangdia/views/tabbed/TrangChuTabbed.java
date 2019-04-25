@@ -7,21 +7,16 @@ import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.views.DangNhap;
 import org.buffalocoder.quanlybangdia.views.custom.ImagePanel;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalTime;
 import java.util.Random;
 
 public class TrangChuTabbed extends JPanel {
 
     private static final String PATH = "resources/images/";
-    private static final String IMAGES[] = {"cd001.jpg", "cd002.jpg", "cd003.jpg", "cd004.jpg", "cd005.jpg",};
+    private static final String IMAGES[] =
+            {"cd001.jpg", "cd002.jpg", "cd003.jpg", "cd004.jpg", "cd005.jpg", "cd006.png", "cd007.jpg"};
 
     private static NhanVienDAO nhanVienDAO;
     private static NhanVien nhanVien;
