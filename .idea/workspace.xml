@@ -7,15 +7,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ecdd5e3-bc5b-493b-80fa-dbdc743fa957" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/MainForm$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/MainForm$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/cd001.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/cd001.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/cd002.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/cd002.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/cd003.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/cd003.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/cd004.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/cd004.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/cd005.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/cd005.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/custom/ImagePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/custom/ImagePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/ChoThueDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/ChoThueDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/TrangChuTabbed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/TrangChuTabbed.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/ThanhToanDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/XoaBangDiaDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/XoaBangDiaDialog$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/XoaBangDiaDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/XoaBangDiaDialog$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/XoaBangDiaDialog$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/XoaBangDiaDialog$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/XoaBangDiaDialog$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/XoaBangDiaDialog$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/XoaBangDiaDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/dialog/XoaBangDiaDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$7$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$7$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/QuanLyBangDia/properties.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/QuanLyBangDia/properties.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/properties.xml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/properties.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/XoaBangDiaDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/XoaBangDiaDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyKhachHangTabbed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyKhachHangTabbed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyNhanVienTabbed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyNhanVienTabbed.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -65,35 +81,7 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/TrangChuTabbed.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="20" column="43" lean-forward="true" selection-start-line="20" selection-start-column="43" selection-end-line="20" selection-end-column="43" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1517#10866#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/custom/ImagePanel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#526#527#0" expanded="true" />
-                <element signature="e#566#567#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -106,9 +94,11 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>txtTuKhoa</find>
+      <find>cbFilter</find>
     </findStrings>
     <replaceStrings>
       <replace>txtTimKiem</replace>
+      <replace>cbFilterTimKiem</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -119,7 +109,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/lỗi.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/XML/DocGhiFileXMLFeature.java" />
         <option value="$PROJECT_DIR$/src/properties.xml" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/XML/QuanLyXMLFeature.java" />
@@ -160,16 +149,17 @@
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/DanhSachKhachHang.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/DanhSachNhanVien.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/BangDiaDialog.java" />
-        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyNhanVienTabbed.java" />
-        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyKhachHangTabbed.java" />
-        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed.java" />
         <option value="$PROJECT_DIR$/database/SCRIPT.sql" />
-        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed.java" />
-        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/XoaBangDiaDialog.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/MainForm.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/ChoThueDialog.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/TrangChuTabbed.java" />
         <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/custom/ImagePanel.java" />
+        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/XoaBangDiaDialog.java" />
+        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/ThanhToanDialog.java" />
+        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed.java" />
+        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed.java" />
+        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyKhachHangTabbed.java" />
+        <option value="$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyNhanVienTabbed.java" />
       </list>
     </option>
   </component>
@@ -212,22 +202,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="quanlybangdia" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="QuanLyBangDia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="QuanLyBangDia" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="quanlybangdia" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="QuanLyBangDia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="QuanLyBangDia" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="quanlybangdia" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="dialog" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="QuanLyBangDia" type="b2602c69:ProjectViewProjectNode" />
@@ -460,14 +434,11 @@
       <workItem from="1556031973765" duration="2955000" />
       <workItem from="1556158441609" duration="980000" />
       <workItem from="1556160852722" duration="955000" />
-      <workItem from="1556205215568" duration="4169000" />
-    </task>
-    <task id="LOCAL-00025" summary="add custom textfield auto complete">
-      <created>1553916714069</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1553916714069</updated>
+      <workItem from="1556205215568" duration="4276000" />
+      <workItem from="1556246187333" duration="2794000" />
+      <workItem from="1556249196951" duration="1864000" />
+      <workItem from="1556263266376" duration="797000" />
+      <workItem from="1556276288278" duration="4274000" />
     </task>
     <task id="LOCAL-00026" summary="thêm thư viện JDateChooser, tắt navbar các dialog">
       <created>1553970539469</created>
@@ -805,11 +776,18 @@
       <option name="project" value="LOCAL" />
       <updated>1556207005158</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="thêm hình ảnh, chỉnh sửa kích thước hình ảnh">
+      <created>1556210450681</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1556210450681</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="360891000" />
+    <option name="totallyTimeSpent" value="370727000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -822,9 +800,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2660858" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2808311" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -833,7 +810,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32914925" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4919571" visible="true" weight="0.32635984" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49128687" visible="true" weight="0.32635984" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -843,7 +820,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49865952" weight="0.32775453" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32914925" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5080429" side_tool="true" weight="0.32775453" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5087131" side_tool="true" weight="0.32635984" />
       <window_info anchor="bottom" id="Thumbnails" order="13" weight="0.32914925" />
       <window_info anchor="bottom" id="Database Console" order="14" weight="0.32914925" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -896,7 +873,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="chỉnh sửa db, thêm chức năng lọc table cho thuê (Tất cả, Đang thuê, Đã thanh toán), Thêm chức năng thanh toán hoá đơn (không xoá hoá đơn), ràng buộc không cho xoá hoá đơn đã thanh toán" />
     <MESSAGE value="thêm chức năng chào người dùng theo thời gian trên hệ thống, thêm dialog hỏi người dùng có muốn đăng xuất phiên không" />
     <MESSAGE value="cập nhật tab Cài đặt" />
     <MESSAGE value="cập nhật tab thống kê: cho phép người dùng thống kê theo năm, tháng. Chỉ thống kê doanh thu những băng đĩa đã thanh toán" />
@@ -921,10 +897,10 @@
     <MESSAGE value="cho phép người dùng xoá băng đĩa theo số lượng (hoặc xoá hết), thêm hiển thị hình ảnh trong tabbed TRang Chủ" />
     <MESSAGE value="fix image trang chủ" />
     <MESSAGE value="fix lỗi không reload lại dữ liệu" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix lỗi không reload lại dữ liệu" />
+    <MESSAGE value="thêm hình ảnh, chỉnh sửa kích thước hình ảnh" />
+    <option name="LAST_COMMIT_MESSAGE" value="thêm hình ảnh, chỉnh sửa kích thước hình ảnh" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://T:/GoogleDrive/HocTapIUH/NAM2_2019_HK2/LapTrinhHuongSuKienJava/BaiTap/NguyenChiCuong_17010481/src/tuan2/BaiTap1/NhanVienTableModel.java" />
     <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/TaiKhoan.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-440">
@@ -984,18 +960,6 @@
             <element signature="method#BangDia#1;class#BangDia#0" />
             <element signature="method#equals#0;class#BangDia#0" />
             <element signature="method#toString#0;class#BangDia#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/tablemodel/BangDiaTableModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-935">
-          <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#580#581#0" expanded="true" />
-            <element signature="e#620#621#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1379,100 +1343,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/BangDiaDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="209" column="46" lean-forward="true" selection-start-line="209" selection-start-column="46" selection-end-line="209" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyKhachHangTabbed.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="133" column="30" lean-forward="true" selection-start-line="133" selection-start-column="30" selection-end-line="133" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#prepareUI#0;class#QuanLyKhachHangTabbed#0" />
-            <element signature="method#getCurrentSelected#0;class#QuanLyKhachHangTabbed#0" />
-            <element signature="method#filterTable#0;class#QuanLyKhachHangTabbed#0" />
-            <element signature="method#thongBao#0;class#QuanLyKhachHangTabbed#0" />
-            <element signature="method#thongBaoLoi#0;class#QuanLyKhachHangTabbed#0" />
-            <element signature="method#btnThem_Click#0;class#QuanLyKhachHangTabbed#0" />
-            <element signature="method#btnSua_Click#0;class#QuanLyKhachHangTabbed#0" />
-            <element signature="method#btnXoa_Click#0;class#QuanLyKhachHangTabbed#0" />
-            <element signature="method#btnTimKiem_Click#0;class#QuanLyKhachHangTabbed#0" />
-            <element signature="e#12183#12184#0" expanded="true" />
-            <element signature="e#12255#12256#0" expanded="true" />
-            <element signature="method#txtTimKiem_DocumentListerner#0;class#QuanLyKhachHangTabbed#0" />
-            <element signature="method#tblKhachHang_MouseListener#0;class#QuanLyKhachHangTabbed#0" />
-            <element signature="method#QuanLyKhachHangTabbed#0;class#QuanLyKhachHangTabbed#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyNhanVienTabbed.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="144" column="5" lean-forward="true" selection-start-line="132" selection-start-column="4" selection-end-line="144" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#setCurrentSelected#0;class#QuanLyNhanVienTabbed#0" />
-            <element signature="method#filterTable#0;class#QuanLyNhanVienTabbed#0" />
-            <element signature="method#thongBao#0;class#QuanLyNhanVienTabbed#0" />
-            <element signature="method#thongBaoLoi#0;class#QuanLyNhanVienTabbed#0" />
-            <element signature="method#btnThem_Click#0;class#QuanLyNhanVienTabbed#0" />
-            <element signature="method#btnSua_Click#0;class#QuanLyNhanVienTabbed#0" />
-            <element signature="method#btnXoa_Click#0;class#QuanLyNhanVienTabbed#0" />
-            <element signature="method#btnTimKiem_Click#0;class#QuanLyNhanVienTabbed#0" />
-            <element signature="method#txtTimKiem_DocumentListener#0;class#QuanLyNhanVienTabbed#0" />
-            <element signature="method#tblNhanVien_MouseListener#0;class#QuanLyNhanVienTabbed#0" />
-            <element signature="method#QuanLyNhanVienTabbed#0;class#QuanLyNhanVienTabbed#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/SCRIPT.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="563">
           <caret line="173" column="17" selection-start-line="173" selection-start-column="17" selection-end-line="173" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/XoaBangDiaDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1354">
-          <caret line="171" column="5" lean-forward="true" selection-start-line="171" selection-start-column="5" selection-end-line="171" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#errorInput#0;class#XoaBangDiaDialog#0" />
-            <element signature="method#unErrorInput#0;class#XoaBangDiaDialog#0" />
-            <element signature="method#btnHuy_Click#0;class#XoaBangDiaDialog#0" />
-            <element signature="e#11235#11236#0" expanded="true" />
-            <element signature="e#11265#11266#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/utils/MaterialDesign.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="147" selection-start-line="147" selection-end-line="147" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#materialButton#0;class#MaterialDesign#0" />
-            <element signature="method#materialTextField#0;class#MaterialDesign#0" />
-            <element signature="method#materialTextArea#0;class#MaterialDesign#0" />
-            <element signature="method#materialTable#0;class#MaterialDesign#0" />
-            <element signature="method#materialScrollPane#0;class#MaterialDesign#0" />
-            <element signature="method#materialLabel#0;class#MaterialDesign#0" />
-            <element signature="method#materialCheckBox#0;class#MaterialDesign#0" />
-            <element signature="method#materialComboBox#0;class#MaterialDesign#0" />
-            <element signature="e#5579#5580#0" expanded="true" />
-            <element signature="method#materialDateChooser#0;class#MaterialDesign#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1487,59 +1361,76 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed.java">
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/utils/MaterialDesign.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-391">
-          <caret line="136" column="17" lean-forward="true" selection-start-line="136" selection-start-column="17" selection-end-line="136" selection-end-column="17" />
+        <state relative-caret-position="8">
+          <caret line="83" column="37" lean-forward="true" selection-start-line="83" selection-start-column="37" selection-end-line="83" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#prepareUI#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#filterTable#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#thongBao#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#thongBaoLoi#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#btnThem_Click#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#btnSua_Click#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#btnXoa_Click#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#btnTimKiem_Click#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#btnXoaBangDiaHong_Click#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#tblBangDia_MouseListener#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#txtTimKiem_DocumentListener#0;class#QuanLyBangDiaTabbed#0" />
-            <element signature="method#QuanLyBangDiaTabbed#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#materialButton#0;class#MaterialDesign#0" />
+            <element signature="method#materialTextField#0;class#MaterialDesign#0" />
+            <element signature="method#materialTextArea#0;class#MaterialDesign#0" />
+            <element signature="method#materialScrollPane#0;class#MaterialDesign#0" />
+            <element signature="method#materialLabel#0;class#MaterialDesign#0" />
+            <element signature="method#materialCheckBox#0;class#MaterialDesign#0" />
+            <element signature="method#materialComboBox#0;class#MaterialDesign#0" />
+            <element signature="e#5526#5527#0" expanded="true" />
+            <element signature="e#5579#5580#0" expanded="true" />
+            <element signature="method#materialDateChooser#0;class#MaterialDesign#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed.java">
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/models/tablemodel/BangDiaTableModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2009">
-          <caret line="324" lean-forward="true" selection-start-line="324" selection-end-line="324" />
+        <state relative-caret-position="-116">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#prepareUI#0;class#QuanLyChoThueTabbed#0" />
-            <element signature="method#thongBao#0;class#QuanLyChoThueTabbed#0" />
-            <element signature="method#thongBaoLoi#0;class#QuanLyChoThueTabbed#0" />
-            <element signature="method#filterTable#0;class#QuanLyChoThueTabbed#0" />
-            <element signature="method#getCurrentSelected#0;class#QuanLyChoThueTabbed#0" />
-            <element signature="method#btnThem_Click#0;class#QuanLyChoThueTabbed#0" />
-            <element signature="method#btnSua_Click#0;class#QuanLyChoThueTabbed#0" />
-            <element signature="method#btnXoa_Click#0;class#QuanLyChoThueTabbed#0" />
-            <element signature="method#btnThanhToan_Click#0;class#QuanLyChoThueTabbed#0" />
-            <element signature="method#btnTimKiem_Click#0;class#QuanLyChoThueTabbed#0" />
-            <element signature="method#cbFilter_Selected#0;class#QuanLyChoThueTabbed#0" />
-            <element signature="method#txtTimKiem_DocumentListener#0;class#QuanLyChoThueTabbed#0" />
-            <element signature="method#tblChoThue_MouseListener#0;class#QuanLyChoThueTabbed#0" />
-            <element signature="method#QuanLyChoThueTabbed#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="e#580#581#0" expanded="true" />
+            <element signature="e#620#621#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/custom/ImagePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#526#527#0" expanded="true" />
+            <element signature="e#566#567#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/TrangChuTabbed.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="20" column="43" selection-start-line="20" selection-start-column="43" selection-end-line="20" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/BangDiaDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="209" column="46" lean-forward="true" selection-start-line="209" selection-start-column="46" selection-end-line="209" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/ChoThueDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="263" column="9" selection-start-line="263" selection-start-column="9" selection-end-line="263" selection-end-column="9" />
+        <state relative-caret-position="201">
+          <caret line="160" column="29" lean-forward="true" selection-start-line="160" selection-start-column="29" selection-end-line="160" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#prepareDialog#0;class#ChoThueDialog#0" />
             <element signature="method#errorInput#0;class#ChoThueDialog#0" />
             <element signature="method#unErrorInput#0;class#ChoThueDialog#0" />
             <element signature="method#getMaHoaDonMoi#0;class#ChoThueDialog#0" />
@@ -1551,25 +1442,356 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/TrangChuTabbed.java">
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/XoaBangDiaDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="20" column="43" lean-forward="true" selection-start-line="20" selection-start-column="43" selection-end-line="20" selection-end-column="43" />
+        <state relative-caret-position="-168">
+          <caret line="236" column="29" selection-start-line="236" selection-start-column="29" selection-end-line="236" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1517#10866#0" />
+            <element signature="method#errorInput#0;class#XoaBangDiaDialog#0" />
+            <element signature="method#unErrorInput#0;class#XoaBangDiaDialog#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/custom/ImagePanel.java">
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/dialog/ThanhToanDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        <state relative-caret-position="484">
+          <caret line="159" column="32" lean-forward="true" selection-start-line="159" selection-start-column="32" selection-end-line="159" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyBangDiaTabbed.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="416" column="16" selection-start-line="416" selection-start-column="16" selection-end-line="416" selection-end-column="57" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#526#527#0" expanded="true" />
-            <element signature="e#566#567#0" expanded="true" />
+            <element signature="docComment;method#prepareUI#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="e#1672#1707#0" />
+            <element signature="docComment;method#refresh#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#refresh#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="e#5385#5915#1" />
+            <element signature="e#5441#5500#0" />
+            <element signature="e#5521#5581#0" />
+            <element signature="e#6092#6233#1" />
+            <element signature="e#6133#6223#1" />
+            <element signature="e#6243#6373#0" />
+            <element signature="e#6420#6661#1" />
+            <element signature="e#6665#6888#1" />
+            <element signature="docComment;method#filterTable#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="e#7250#7497#0" expanded="true" />
+            <element signature="e#7496#7497#0" expanded="true" />
+            <element signature="e#7588#7643#0" />
+            <element signature="docComment;method#thongBao#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#thongBao#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="docComment;method#thongBaoLoi#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#thongBaoLoi#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="docComment;method#getCurrentSelected#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#getCurrentSelected#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="e#8372#8466#0" />
+            <element signature="e#8485#8519#0" />
+            <element signature="docComment;method#setCurrentSelected#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#setCurrentSelected#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="e#8733#8818#1" />
+            <element signature="e#8898#8991#1" />
+            <element signature="e#9061#9126#1" />
+            <element signature="docComment;method#btnThem_Click#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#btnThem_Click#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="class#9289:10206" />
+            <element signature="method#actionPerformed#0;class#9289:10206" />
+            <element signature="e#9495#9589#0" />
+            <element signature="e#9611#9680#0" />
+            <element signature="e#9988#10093#0" />
+            <element signature="e#10113#10182#0" />
+            <element signature="docComment;method#btnSua_Click#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#btnSua_Click#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="class#10332:11538" />
+            <element signature="method#actionPerformed#0;class#10332:11538" />
+            <element signature="e#10535#10646#1" />
+            <element signature="e#10764#10932#0" />
+            <element signature="e#10954#11023#0" />
+            <element signature="e#11321#11425#0" />
+            <element signature="e#11445#11514#0" />
+            <element signature="docComment;method#btnXoa_Click#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#btnXoa_Click#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="class#11667:13362" />
+            <element signature="method#actionPerformed#0;class#11667:13362" />
+            <element signature="e#11879#11990#1" />
+            <element signature="e#12547#12858#1" />
+            <element signature="e#12572#12743#0" />
+            <element signature="e#12763#12840#0" />
+            <element signature="e#12900#13338#1" />
+            <element signature="e#12925#13223#0" />
+            <element signature="e#13243#13320#0" />
+            <element signature="docComment;method#cbFilterTimKiem_Changed#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="docComment;method#btnXoaBangDiaHong_Click#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#btnXoaBangDiaHong_Click#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="class#13833:14540" />
+            <element signature="method#actionPerformed#0;class#13833:14540" />
+            <element signature="e#14408#14516#1" />
+            <element signature="docComment;method#tblBangDia_MouseListener#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#tblBangDia_MouseListener#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="class#14696:15152" />
+            <element signature="docComment;method#txtTimKiem_DocumentListener#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#txtTimKiem_DocumentListener#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="class#15349:15832" />
+            <element signature="docComment;method#QuanLyBangDiaTabbed#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="method#QuanLyBangDiaTabbed#0;class#QuanLyBangDiaTabbed#0" />
+            <element signature="e#15945#16009#0" />
+            <element signature="e#16030#16082#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyChoThueTabbed.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="540" column="57" selection-start-line="540" selection-start-column="57" selection-end-line="540" selection-end-column="57" />
+          <folding>
+            <element signature="docComment;method#prepareUI#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="e#1600#1635#0" />
+            <element signature="e#2540#2655#1" />
+            <element signature="docComment;method#kiemTraTinhTrangThue#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="method#kiemTraTinhTrangThue#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="e#5913#6002#1" />
+            <element signature="e#6080#6174#1" />
+            <element signature="e#6284#6639#1" />
+            <element signature="e#6396#6629#1" />
+            <element signature="e#6442#6615#1" />
+            <element signature="docComment;method#thongBao#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="method#thongBao#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="docComment;method#thongBaoLoi#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="method#thongBaoLoi#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="docComment;method#refresh#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="method#refresh#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="e#7441#8052#1" />
+            <element signature="e#7497#7646#0" />
+            <element signature="e#7667#7727#0" />
+            <element signature="e#8062#8183#0" />
+            <element signature="e#8273#8384#1" />
+            <element signature="e#8433#8547#1" />
+            <element signature="e#8593#8705#1" />
+            <element signature="e#8716#8924#0" />
+            <element signature="e#8966#9067#0" />
+            <element signature="e#9120#9485#1" />
+            <element signature="e#9489#10341#1" />
+            <element signature="e#9813#9942#1" />
+            <element signature="e#9946#10331#1" />
+            <element signature="docComment;method#filterTable#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="e#10992#11047#0" />
+            <element signature="docComment;method#getCurrentSelected#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="method#getCurrentSelected#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="e#11186#11280#0" />
+            <element signature="e#11299#11333#0" />
+            <element signature="docComment;method#setCurrentSelected#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="method#setCurrentSelected#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="e#11547#11632#1" />
+            <element signature="e#11712#11805#1" />
+            <element signature="e#11875#11940#1" />
+            <element signature="docComment;method#btnThem_Click#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="method#btnThem_Click#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="class#12103:13014" />
+            <element signature="method#actionPerformed#0;class#12103:13014" />
+            <element signature="e#12317#12411#0" />
+            <element signature="e#12433#12502#0" />
+            <element signature="e#12691#12901#0" />
+            <element signature="e#12767#12883#1" />
+            <element signature="e#12921#12990#0" />
+            <element signature="docComment;method#btnSua_Click#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="method#btnSua_Click#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="class#13143:14483" />
+            <element signature="method#actionPerformed#0;class#13143:14483" />
+            <element signature="e#13355#13465#1" />
+            <element signature="e#13775#13871#0" />
+            <element signature="e#13893#13962#0" />
+            <element signature="e#14153#14370#0" />
+            <element signature="e#14237#14352#1" />
+            <element signature="e#14390#14459#0" />
+            <element signature="docComment;method#btnXoa_Click#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="method#btnXoa_Click#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="class#14612:16440" />
+            <element signature="method#actionPerformed#0;class#14612:16440" />
+            <element signature="e#14726#14776#0" />
+            <element signature="e#14890#15000#1" />
+            <element signature="e#15117#15233#1" />
+            <element signature="e#16106#16416#1" />
+            <element signature="e#16131#16301#0" />
+            <element signature="e#16321#16398#0" />
+            <element signature="docComment;method#btnThanhToan_Click#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="method#btnThanhToan_Click#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="class#16582:18441" />
+            <element signature="method#actionPerformed#0;class#16582:18441" />
+            <element signature="e#16794#16911#1" />
+            <element signature="e#17678#17947#1" />
+            <element signature="e#17703#17832#0" />
+            <element signature="e#17852#17929#0" />
+            <element signature="e#17988#18417#1" />
+            <element signature="e#18013#18302#0" />
+            <element signature="e#18322#18399#0" />
+            <element signature="docComment;method#cbFilterTimKiem_Changed#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="docComment;method#cbFilter_Selected#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="method#cbFilter_Selected#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="class#18927:20124" />
+            <element signature="method#actionPerformed#0;class#18927:20124" />
+            <element signature="e#19123#19395#0" />
+            <element signature="e#19524#20100#1" />
+            <element signature="e#19549#19973#0" />
+            <element signature="e#20005#20082#0" />
+            <element signature="docComment;method#txtTimKiem_DocumentListener#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="method#txtTimKiem_DocumentListener#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="class#20307:20790" />
+            <element signature="docComment;method#tblChoThue_MouseListener#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="method#tblChoThue_MouseListener#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="class#20934:21390" />
+            <element signature="method#QuanLyChoThueTabbed#0;class#QuanLyChoThueTabbed#0" />
+            <element signature="e#21446#21620#0" />
+            <element signature="e#21641#21693#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyKhachHangTabbed.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="391" column="57" selection-start-line="391" selection-start-column="57" selection-end-line="391" selection-end-column="57" />
+          <folding>
+            <element signature="docComment;method#prepareUI#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="method#prepareUI#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="e#1539#1574#0" />
+            <element signature="docComment;method#getCurrentSelected#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="method#getCurrentSelected#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="e#4831#4929#0" />
+            <element signature="e#4948#4982#0" />
+            <element signature="docComment;method#setCurrentSelected#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="method#setCurrentSelected#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="e#5198#5285#1" />
+            <element signature="e#5367#5462#1" />
+            <element signature="e#5534#5601#1" />
+            <element signature="docComment;method#refresh#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="method#refresh#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="e#5819#6350#1" />
+            <element signature="e#5869#5930#0" />
+            <element signature="e#5951#6011#0" />
+            <element signature="e#6429#6656#1" />
+            <element signature="e#6660#6905#1" />
+            <element signature="docComment;method#filterTable#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="method#filterTable#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="e#7172#7656#1" />
+            <element signature="e#7189#7559#0" />
+            <element signature="e#7590#7645#0" />
+            <element signature="docComment;method#thongBao#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="method#thongBao#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="docComment;method#thongBaoLoi#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="method#thongBaoLoi#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="docComment;method#btnThem_Click#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="method#btnThem_Click#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="class#8375:9301" />
+            <element signature="method#actionPerformed#0;class#8375:9301" />
+            <element signature="e#8595#8693#0" />
+            <element signature="e#8715#8784#0" />
+            <element signature="e#9079#9188#0" />
+            <element signature="e#9208#9277#0" />
+            <element signature="docComment;method#btnSua_Click#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="method#btnSua_Click#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="class#9430:10681" />
+            <element signature="method#actionPerformed#0;class#9430:10681" />
+            <element signature="e#9642#9755#1" />
+            <element signature="e#9889#10063#0" />
+            <element signature="e#10085#10154#0" />
+            <element signature="e#10460#10568#0" />
+            <element signature="e#10588#10657#0" />
+            <element signature="docComment;method#btnXoa_Click#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="method#btnXoa_Click#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="class#10810:12238" />
+            <element signature="method#actionPerformed#0;class#10810:12238" />
+            <element signature="e#11008#11121#1" />
+            <element signature="e#11897#12214#1" />
+            <element signature="e#11922#12099#0" />
+            <element signature="e#12119#12196#0" />
+            <element signature="docComment;method#cbFilterTimKiem_Changed#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="docComment;method#txtTimKiem_DocumentListerner#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="method#txtTimKiem_DocumentListerner#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="class#12466:12949" />
+            <element signature="docComment;method#tblKhachHang_MouseListener#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="method#tblKhachHang_MouseListener#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="class#13086:13542" />
+            <element signature="docComment;method#QuanLyKhachHangTabbed#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="method#QuanLyKhachHangTabbed#0;class#QuanLyKhachHangTabbed#0" />
+            <element signature="e#13657#13725#0" />
+            <element signature="e#13746#13798#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buffalocoder/quanlybangdia/views/tabbed/QuanLyNhanVienTabbed.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="24" column="38" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
+          <folding>
+            <element signature="docComment;method#prepareUI#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="method#prepareUI#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="e#1683#1718#0" />
+            <element signature="docComment;method#getCurrentSelected#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="method#getCurrentSelected#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="e#4957#5053#0" />
+            <element signature="e#5072#5106#0" />
+            <element signature="docComment;method#setCurrentSelected#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="method#setCurrentSelected#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="e#5321#5407#1" />
+            <element signature="e#5488#5582#1" />
+            <element signature="e#5653#5719#1" />
+            <element signature="docComment;method#filterTable#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="e#6399#6454#0" />
+            <element signature="docComment;method#refresh#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="method#refresh#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="e#6659#7192#1" />
+            <element signature="e#6711#6771#0" />
+            <element signature="e#6792#6852#0" />
+            <element signature="e#7264#7489#1" />
+            <element signature="e#7494#7737#1" />
+            <element signature="docComment;method#thongBao#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="method#thongBao#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="docComment;method#thongBaoLoi#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="method#thongBaoLoi#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="docComment;method#btnThem_Click#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="method#btnThem_Click#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="class#8453:9525" />
+            <element signature="method#actionPerformed#0;class#8453:9525" />
+            <element signature="e#8661#8763#0" />
+            <element signature="e#8785#8854#0" />
+            <element signature="e#9249#9412#0" />
+            <element signature="e#9432#9501#0" />
+            <element signature="docComment;method#btnSua_Click#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="method#btnSua_Click#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="class#9667:11427" />
+            <element signature="method#actionPerformed#0;class#9667:11427" />
+            <element signature="e#9865#9977#1" />
+            <element signature="e#10185#10298#0" />
+            <element signature="e#10320#10417#0" />
+            <element signature="e#10534#10644#0" />
+            <element signature="e#10666#10735#0" />
+            <element signature="e#11105#11314#0" />
+            <element signature="e#11334#11403#0" />
+            <element signature="docComment;method#btnXoa_Click#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="method#btnXoa_Click#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="class#11556:13228" />
+            <element signature="method#actionPerformed#0;class#11556:13228" />
+            <element signature="e#11768#11880#1" />
+            <element signature="e#12291#12400#1" />
+            <element signature="e#12890#13204#1" />
+            <element signature="e#12915#13089#0" />
+            <element signature="e#13109#13186#0" />
+            <element signature="docComment;method#cbFilterTimKiem_Changed#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="docComment;method#txtTimKiem_DocumentListener#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="method#txtTimKiem_DocumentListener#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="class#13456:13939" />
+            <element signature="docComment;method#tblNhanVien_MouseListener#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="method#tblNhanVien_MouseListener#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="class#14085:14541" />
+            <element signature="docComment;method#QuanLyNhanVienTabbed#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="method#QuanLyNhanVienTabbed#0;class#QuanLyNhanVienTabbed#0" />
+            <element signature="e#14654#14773#0" />
+            <element signature="e#14792#14844#0" />
           </folding>
         </state>
       </provider>

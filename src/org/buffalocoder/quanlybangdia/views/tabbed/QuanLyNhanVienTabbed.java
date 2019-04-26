@@ -22,11 +22,13 @@ public class QuanLyNhanVienTabbed extends JPanel {
     private TaiKhoanDAO taiKhoanDAO;
     private ThongBaoDialog thongBaoDialog;
     private final Component rootComponent = this;
+    private static int indexFilter = 0;
 
     private JTable tblNhanVien;
     private JPanel topPanel, funcPanel, searchPanel;
-    private JButton btnThem, btnXoa, btnSua, btnTimKiem;
+    private JButton btnThem, btnXoa, btnSua;
     private JTextField txtTimKiem;
+    private JComboBox<String> cbFilterTimKiem;
     private NhanVienTableModel nhanVienTableModel;
     private JScrollPane scrollPane;
     private TableRowSorter<TableModel> sorter;
@@ -89,11 +91,17 @@ public class QuanLyNhanVienTabbed extends JPanel {
         MaterialDesign.materialTextField(txtTimKiem);
         searchPanel.add(txtTimKiem);
 
-        btnTimKiem = new JButton("Tìm kiếm");
-        btnTimKiem.setPreferredSize(btnThem.getPreferredSize());
-        btnTimKiem.addActionListener(btnTimKiem_Click());
-        MaterialDesign.materialButton(btnTimKiem);
-        searchPanel.add(btnTimKiem);
+        cbFilterTimKiem = new JComboBox<>(new String[]{
+                "Mã nhân viên",
+                "Tên nhân viên",
+                "CMND",
+                "Số điện thoại",
+                "Địa chỉ"
+        });
+        MaterialDesign.materialComboBox(cbFilterTimKiem);
+        cbFilterTimKiem.setPreferredSize(new Dimension(150, 40));
+        cbFilterTimKiem.addActionListener(cbFilterTimKiem_Changed());
+        searchPanel.add(cbFilterTimKiem);
 
         //table
         Box box = Box.createVerticalBox();
@@ -157,7 +165,7 @@ public class QuanLyNhanVienTabbed extends JPanel {
                 RowFilter<Object, Object> filter = new RowFilter<Object, Object>() {
                     @Override
                     public boolean include(Entry<?, ?> entry) {
-                        return (entry.getStringValue(1).contains(filter_text));
+                        return (entry.getStringValue(indexFilter).contains(filter_text));
                     }
                 };
                 sorter.setRowFilter(filter);
@@ -379,13 +387,31 @@ public class QuanLyNhanVienTabbed extends JPanel {
 
 
     /**
-     * Sự kiện button tìm kiếm
+     * Sự kiện khi chọn tìm kiếm theo gì
      * @return
      */
-    private ActionListener btnTimKiem_Click(){
+    private ActionListener cbFilterTimKiem_Changed(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                switch (cbFilterTimKiem.getSelectedIndex()){
+                    case 0:
+                        indexFilter = 0;
+                        break;
+                    case 1:
+                        indexFilter = 1;
+                        break;
+                    case 2:
+                        indexFilter = 4;
+                        break;
+                    case 3:
+                        indexFilter = 5;
+                        break;
+                    case 4:
+                        indexFilter = 6;
+                        break;
+                }
+
                 filterTable(txtTimKiem.getText().trim());
             }
         };

@@ -4,7 +4,7 @@
                 <password>admin</password>
         </Account>
         <Setting>
-                <themes>cyan</themes>
+                <themes>indigo</themes>
         </Setting>
         <SQL>
                 <server>localhost</server>

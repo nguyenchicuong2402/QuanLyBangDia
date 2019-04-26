@@ -4,6 +4,7 @@ import org.buffalocoder.quanlybangdia.models.*;
 import org.buffalocoder.quanlybangdia.models.tablemodel.ChoThueTableModel;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.views.dialog.ChoThueDialog;
+import org.buffalocoder.quanlybangdia.views.dialog.ThanhToanDialog;
 import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
 
 import javax.swing.*;
@@ -22,10 +23,12 @@ public class QuanLyChoThueTabbed extends JPanel {
     private ThongBaoDialog thongBaoDialog;
     private final Component rootComponent = this;
 
+    private int indexFilter = 0;
     private JTable tblChoThue;
     private JPanel topPanel, funcPanel, searchPanel;
     private JButton btnThem, btnXoa, btnSua, btnTimKiem, btnThanhToan;
     private JTextField txtTimKiem;
+    private JComboBox<String> cbFilterTimKiem;
     private TableRowSorter<TableModel> sorter;
     private ChoThueTableModel choThueTableModel;
     private JScrollPane scrollPane;
@@ -112,11 +115,15 @@ public class QuanLyChoThueTabbed extends JPanel {
         MaterialDesign.materialTextField(txtTimKiem);
         searchPanel.add(txtTimKiem);
 
-        btnTimKiem = new JButton("Tìm kiếm");
-        btnTimKiem.setPreferredSize(btnThem.getPreferredSize());
-        btnTimKiem.addActionListener(btnTimKiem_Click());
-        MaterialDesign.materialButton(btnTimKiem);
-        searchPanel.add(btnTimKiem);
+        cbFilterTimKiem = new JComboBox<>(new String[] {
+                "Mã hoá đơn",
+                "Tên khách hàng",
+                "Tên băng đĩa"
+        });
+        MaterialDesign.materialComboBox(cbFilterTimKiem);
+        cbFilterTimKiem.setPreferredSize(new Dimension(150, 40));
+        cbFilterTimKiem.addActionListener(cbFilterTimKiem_Changed());
+        searchPanel.add(cbFilterTimKiem);
 
         Box box = Box.createVerticalBox();
         box.add(Box.createVerticalStrut(10));
@@ -300,7 +307,7 @@ public class QuanLyChoThueTabbed extends JPanel {
                 RowFilter<Object, Object> filter = new RowFilter<Object, Object>() {
                     @Override
                     public boolean include(Entry<?, ?> entry) {
-                        return (entry.getStringValue(1).contains(filter_text));
+                        return (entry.getStringValue(indexFilter).contains(filter_text));
                     }
                 };
                 sorter.setRowFilter(filter);
@@ -469,33 +476,38 @@ public class QuanLyChoThueTabbed extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // lấy vị trí dòng người dùng chọn
-                int index = tblChoThue.convertRowIndexToModel(tblChoThue.getSelectedRow());
-
                 // nếu người dùng chưa chọn dòng nào thì thông báo
-                if (index == -1){
+                if (getCurrentSelected() == -1){
                     thongBao("Vui lòng chọn hoá đơn cần thanh toán");
                     return;
                 }
 
                 // lấy thông tin hoá đơn cần thanh toán
-                String maHoaDon = choThueTableModel.getValueAt(index, 0).toString();
-                String tenKhachHang = choThueTableModel.getValueAt(index, 1).toString();
-                String tenBangDia = choThueTableModel.getValueAt(index, 2).toString();
+                String maHoaDon = choThueTableModel.getValueAt(getCurrentSelected(), 0).toString();
+                String tenKhachHang = choThueTableModel.getValueAt(getCurrentSelected(), 1).toString();
+                String tenBangDia = choThueTableModel.getValueAt(getCurrentSelected(), 2).toString();
+                int soLuong = Integer.parseInt(choThueTableModel.getValueAt(getCurrentSelected(), 3).toString());
 
-                // Dialog xác nhận thanh toán
-                ThongBaoDialog thongBaoDialog = new ThongBaoDialog(
+                ThanhToanDialog thanhToanDialog = new ThanhToanDialog(
                         new JFrame(),
-                        "Cảnh báo",
-                        String.format("Xác nhận thanh toán hoá đơn này?\nTên khách hàng: %s\nTên băng đĩa: %s", tenKhachHang, tenBangDia),
-                        ThongBaoDialog.OK_CANCLE_OPTION
+                        tenKhachHang,
+                        tenBangDia,
+                        soLuong
                 );
 
-                // Nếu người dùng đồng ý thanh toán
-                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
+                if (thanhToanDialog.getKetQua() == 0){
                     try{
                         danhSachChoThue.thanhToanHoaDon(maHoaDon);
-                        tblChoThue.clearSelection();
+                        refresh(true);
+                    }catch (Exception e1){
+                        thongBaoLoi(e1.getMessage());
+                    }
+                }else if (thanhToanDialog.getKetQua() > 0){
+                    try{
+                        HoaDon hoaDon = danhSachChoThue.getAll().get(danhSachChoThue.tim(maHoaDon));
+                        hoaDon.setSoLuong(thanhToanDialog.getKetQua());
+
+                        danhSachChoThue.sua(hoaDon);
                         refresh(true);
                     }catch (Exception e1){
                         thongBaoLoi(e1.getMessage());
@@ -507,13 +519,25 @@ public class QuanLyChoThueTabbed extends JPanel {
 
 
     /**
-     * Sự kiện button tìm kiếm
+     * Sự kiện khi chọn tìm kiếm theo gì
      * @return
      */
-    private ActionListener btnTimKiem_Click(){
+    private ActionListener cbFilterTimKiem_Changed(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                switch (cbFilterTimKiem.getSelectedIndex()){
+                    case 0:
+                        indexFilter = 0;
+                        break;
+                    case 1:
+                        indexFilter = 1;
+                        break;
+                    case 2:
+                        indexFilter = 2;
+                        break;
+                }
+
                 filterTable(txtTimKiem.getText().trim());
             }
         };

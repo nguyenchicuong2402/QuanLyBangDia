@@ -11,17 +11,17 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.regex.Pattern;
 
-public class XoaBangDiaDialog extends JDialog{
+public class ThanhToanDialog extends JDialog {
     private static ThongBaoDialog thongBaoDialog;
     private int soLuong;
-    private String maBangDia;
+    private String tenKhachHang;
     private String tenBangDia;
 
     private JPanel mainPanel, headerPanel, contentPanel, bottomPanel;
-    private JLabel lblLoi, lblSoLuongHienTai, lblSoLuongMuonXoa, lblTieuDe, lblSoLuongConLai,
-                    lblMaBangDia, lblTenBangDia;
-    private JTextField txtSoLuongHienTai, txtSoLuongMuonXoa, txtSoLuongConLai, txtMaBangDia, txtTenBangDia;
-    private JButton btnXoa, btnXoaHet, btnHuy;
+    private JLabel lblLoi, lblSoLuongHienTai, lblSoLuongMuonThanhToan, lblTieuDe, lblSoLuongConLai,
+            lblTenKhachHang, lblTenBangDia;
+    private JTextField txtSoLuongHienTai, txtSoLuongMuonThanhToan, txtSoLuongConLai, txtTenKhachHang, txtTenBangDia;
+    private JButton btnThanhToan, btnThanhToanHet, btnHuy;
 
 
     /**
@@ -39,7 +39,7 @@ public class XoaBangDiaDialog extends JDialog{
         headerPanel.setBackground(MaterialDesign.COLOR_PRIMARY);
         mainPanel.add(headerPanel, BorderLayout.NORTH);
 
-        lblTieuDe = new JLabel("Xoá băng đĩa");
+        lblTieuDe = new JLabel("Thanh toán");
         MaterialDesign.materialLabel(lblTieuDe);
         lblTieuDe.setForeground(Color.WHITE);
         lblTieuDe.setHorizontalAlignment(SwingConstants.CENTER);
@@ -82,62 +82,67 @@ public class XoaBangDiaDialog extends JDialog{
         box.add(Box.createVerticalStrut(10));
 
 
-        lblMaBangDia = new JLabel("Mã băng đĩa");
-        lblMaBangDia.setPreferredSize(new Dimension(160, 30));
-        MaterialDesign.materialLabel(lblMaBangDia);
+        lblTenKhachHang = new JLabel("Tên khách hàng");
+        lblTenKhachHang.setPreferredSize(new Dimension(180, 30));
+        MaterialDesign.materialLabel(lblTenKhachHang);
         bx1.add(Box.createHorizontalStrut(20));
-        bx1.add(lblMaBangDia);
+        bx1.add(lblTenKhachHang);
 
-        txtMaBangDia = new JTextField(maBangDia);
-        MaterialDesign.materialTextField(txtMaBangDia);
-        txtMaBangDia.setEditable(false);
-        bx1.add(txtMaBangDia);
+        txtTenKhachHang = new JTextField(tenKhachHang);
+        MaterialDesign.materialTextField(txtTenKhachHang);
+        txtTenKhachHang.setPreferredSize(new Dimension(150, 30));
+        txtTenKhachHang.setEditable(false);
+        bx1.add(txtTenKhachHang);
         bx1.add(Box.createHorizontalStrut(20));
 
         lblTenBangDia = new JLabel("Tên băng đĩa");
-        lblTenBangDia.setPreferredSize(lblMaBangDia.getPreferredSize());
+        lblTenBangDia.setPreferredSize(lblTenKhachHang.getPreferredSize());
         MaterialDesign.materialLabel(lblTenBangDia);
         bx2.add(Box.createHorizontalStrut(20));
         bx2.add(lblTenBangDia);
 
         txtTenBangDia = new JTextField(tenBangDia);
         MaterialDesign.materialTextField(txtTenBangDia);
+        txtTenBangDia.setPreferredSize(txtTenKhachHang.getPreferredSize());
         txtTenBangDia.setEditable(false);
         bx2.add(txtTenBangDia);
         bx2.add(Box.createHorizontalStrut(20));
 
         lblSoLuongHienTai = new JLabel("Số lượng hiện tại");
-        lblSoLuongHienTai.setPreferredSize(lblMaBangDia.getPreferredSize());
+        lblSoLuongHienTai.setPreferredSize(lblTenKhachHang.getPreferredSize());
         MaterialDesign.materialLabel(lblSoLuongHienTai);
         bx3.add(Box.createHorizontalStrut(20));
         bx3.add(lblSoLuongHienTai);
 
         txtSoLuongHienTai = new JTextField(String.valueOf(soLuong));
         MaterialDesign.materialTextField(txtSoLuongHienTai);
+        txtSoLuongHienTai.setPreferredSize(txtTenKhachHang.getPreferredSize());
         txtSoLuongHienTai.setEditable(false);
         bx3.add(txtSoLuongHienTai);
         bx3.add(Box.createHorizontalStrut(20));
 
-        lblSoLuongMuonXoa = new JLabel("Số lượng muốn xoá");
-        lblSoLuongMuonXoa.setPreferredSize(lblMaBangDia.getPreferredSize());
-        MaterialDesign.materialLabel(lblSoLuongMuonXoa);
+        lblSoLuongMuonThanhToan = new JLabel("Số lượng thanh toán");
+        lblSoLuongMuonThanhToan.setPreferredSize(lblTenKhachHang.getPreferredSize());
+        MaterialDesign.materialLabel(lblSoLuongMuonThanhToan);
         bx4.add(Box.createHorizontalStrut(20));
-        bx4.add(lblSoLuongMuonXoa);
+        bx4.add(lblSoLuongMuonThanhToan);
 
-        txtSoLuongMuonXoa = new JTextField();
-        MaterialDesign.materialTextField(txtSoLuongMuonXoa);
-        txtSoLuongMuonXoa.addKeyListener(txtSoLuongMuonXoa_KeyListener());
-        bx4.add(txtSoLuongMuonXoa);
+        txtSoLuongMuonThanhToan = new JTextField();
+        MaterialDesign.materialTextField(txtSoLuongMuonThanhToan);
+        txtSoLuongMuonThanhToan.setPreferredSize(txtTenKhachHang.getPreferredSize());
+        txtSoLuongMuonThanhToan.addKeyListener(txtSoLuongMuonXoa_KeyListener());
+        bx4.add(txtSoLuongMuonThanhToan);
         bx4.add(Box.createHorizontalStrut(20));
 
         lblSoLuongConLai = new JLabel("Số lượng còn lại");
-        lblSoLuongConLai.setPreferredSize(lblMaBangDia.getPreferredSize());
+        lblSoLuongConLai.setPreferredSize(lblTenKhachHang.getPreferredSize());
         MaterialDesign.materialLabel(lblSoLuongConLai);
         bx5.add(Box.createHorizontalStrut(20));
         bx5.add(lblSoLuongConLai);
 
         txtSoLuongConLai = new JTextField(String.valueOf(soLuong));
         txtSoLuongConLai.setEditable(false);
+        txtSoLuongConLai.setPreferredSize(txtTenKhachHang.getPreferredSize());
         MaterialDesign.materialTextField(txtSoLuongConLai);
         bx5.add(txtSoLuongConLai);
         bx5.add(Box.createHorizontalStrut(20));
@@ -155,20 +160,19 @@ public class XoaBangDiaDialog extends JDialog{
         btnHuy = new JButton("Huỷ");
         btnHuy.setPreferredSize(new Dimension(250, 50));
         MaterialDesign.materialButton(btnHuy);
+        btnHuy.setBackground(MaterialDesign.COLOR_ERROR);
         btnHuy.addActionListener(btnHuy_Click());
         bottomPanel.add(btnHuy);
 
-        btnXoaHet = new JButton("Xoá hết");
-        MaterialDesign.materialButton(btnXoaHet);
-        btnXoaHet.setBackground(MaterialDesign.COLOR_ERROR);
-        btnXoaHet.addActionListener(btnXoaHet_Click());
-        bottomPanel.add(btnXoaHet);
+        btnThanhToanHet = new JButton("Thanh toán hết");
+        MaterialDesign.materialButton(btnThanhToanHet);
+        btnThanhToanHet.addActionListener(btnThanhToanHet_Click());
+        bottomPanel.add(btnThanhToanHet);
 
-        btnXoa = new JButton("Xoá");
-        MaterialDesign.materialButton(btnXoa);
-        btnXoa.setBackground(MaterialDesign.COLOR_ERROR);
-        btnXoa.addActionListener(btnXoa_Click());
-        bottomPanel.add(btnXoa);
+        btnThanhToan = new JButton("Thanh toán");
+        MaterialDesign.materialButton(btnThanhToan);
+        btnThanhToan.addActionListener(btnThanhToan_Click());
+        bottomPanel.add(btnThanhToan);
     }
 
 
@@ -205,20 +209,20 @@ public class XoaBangDiaDialog extends JDialog{
          * Rule: Số lượng không được rỗng, phải là số nguyên dương > 0, và giới hạn là 6 số
          */
         pattern = Pattern.compile(PatternRegexs.REGEX_SO);
-        if (txtSoLuongMuonXoa.getText().trim().isEmpty()){
-            errorInput(txtSoLuongMuonXoa, "Vui lòng nhập số lượng");
+        if (txtSoLuongMuonThanhToan.getText().trim().isEmpty()){
+            errorInput(txtSoLuongMuonThanhToan, "Vui lòng nhập số lượng");
             return false;
-        }else if (!pattern.matcher(txtSoLuongMuonXoa.getText().trim()).matches()){
-            errorInput(txtSoLuongMuonXoa, "Số lượng phải là số nguyên");
+        }else if (!pattern.matcher(txtSoLuongMuonThanhToan.getText().trim()).matches()){
+            errorInput(txtSoLuongMuonThanhToan, "Số lượng phải là số nguyên");
             return false;
-        }else if(txtSoLuongMuonXoa.getText().trim().length() >= 6){
-            errorInput(txtSoLuongMuonXoa,"Số lượng quá lớn");
+        }else if(txtSoLuongMuonThanhToan.getText().trim().length() >= 6){
+            errorInput(txtSoLuongMuonThanhToan,"Số lượng quá lớn");
             return false;
-        }else if (Integer.parseInt(txtSoLuongMuonXoa.getText().trim()) <= 0){
-            errorInput(txtSoLuongMuonXoa, "Số lượng phải lớn hơn 0");
+        }else if (Integer.parseInt(txtSoLuongMuonThanhToan.getText().trim()) <= 0){
+            errorInput(txtSoLuongMuonThanhToan, "Số lượng phải lớn hơn 0");
             return false;
-        }else if (Integer.parseInt(txtSoLuongMuonXoa.getText().trim()) > soLuong){
-            errorInput(txtSoLuongMuonXoa, "Số lượng muốn xoá lớn hơn số lượng tồn");
+        }else if (Integer.parseInt(txtSoLuongMuonThanhToan.getText().trim()) > soLuong){
+            errorInput(txtSoLuongMuonThanhToan, "Số lượng muốn xoá lớn hơn số lượng tồn");
             return false;
         }
 
@@ -245,7 +249,7 @@ public class XoaBangDiaDialog extends JDialog{
      * Sự kiện button Đồng ý
      * @return
      */
-    private ActionListener btnXoa_Click(){
+    private ActionListener btnThanhToan_Click(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -256,12 +260,12 @@ public class XoaBangDiaDialog extends JDialog{
                 thongBaoDialog = new ThongBaoDialog(
                         new JFrame(),
                         "Cảnh báo",
-                        String.format("Bạn có muốn xoá %s băng đĩa này không ?", txtSoLuongMuonXoa.getText().trim()),
+                        String.format("Bạn có muốn thanh toán %s băng đĩa trong hoá đơn này không ?", txtSoLuongMuonThanhToan.getText().trim()),
                         ThongBaoDialog.OK_CANCLE_OPTION
                 );
 
                 if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
-                    soLuong = soLuong - Integer.parseInt(txtSoLuongMuonXoa.getText().trim());
+                    soLuong = soLuong - Integer.parseInt(txtSoLuongMuonThanhToan.getText().trim());
                     dispose();
                 }
             }
@@ -273,14 +277,14 @@ public class XoaBangDiaDialog extends JDialog{
      * Sự kiện button Đồng ý
      * @return
      */
-    private ActionListener btnXoaHet_Click(){
+    private ActionListener btnThanhToanHet_Click(){
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 thongBaoDialog = new ThongBaoDialog(
                         new JFrame(),
                         "Cảnh báo",
-                        "Bạn có muốn xoá hết băng đĩa này không ?",
+                        "Bạn có muốn thanh toán hết hoá đơn này không ?",
                         ThongBaoDialog.OK_CANCLE_OPTION
                 );
 
@@ -304,13 +308,13 @@ public class XoaBangDiaDialog extends JDialog{
 
             @Override
             public void keyPressed(KeyEvent e) {
-                unErrorInput(txtSoLuongMuonXoa);
+                unErrorInput(txtSoLuongMuonThanhToan);
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
                 try{
-                    int soLuongMuonXoa = Integer.parseInt(txtSoLuongMuonXoa.getText().trim());
+                    int soLuongMuonXoa = Integer.parseInt(txtSoLuongMuonThanhToan.getText().trim());
 
                     if (!validateData()){
                         txtSoLuongConLai.setText(String.valueOf(soLuong));
@@ -340,10 +344,10 @@ public class XoaBangDiaDialog extends JDialog{
      * @param frame
      * @param soLuong
      */
-    public XoaBangDiaDialog(JFrame frame, String maBangDia, String tenBangDia, int soLuong){
+    public ThanhToanDialog(JFrame frame, String tenKhachHang, String tenBangDia, int soLuong){
         super(frame, true);
 
-        this.maBangDia = maBangDia;
+        this.tenKhachHang = tenKhachHang;
         this.tenBangDia = tenBangDia;
         this.soLuong = soLuong;
 
