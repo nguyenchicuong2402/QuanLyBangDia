@@ -40,7 +40,7 @@ public class HoaDon extends ChiTietHoaDon {
 
         tinhTrangThue = (soNgayDaThue < getSoNgayDuocMuon());
 
-        return tinhTrangThue;
+        return isTinhTrang() ? isTinhTrang() : tinhTrangThue;
     }
 
     public double thanhTien() {
