@@ -24,3 +24,22 @@ Bài tập lớn Lập trình hướng sự kiện với Công nghệ Java
   * Tối thiểu chương trình bao gồm các chức năng chính: Thêm, xóa, cập nhật, liệt kê (dạng danh sách và chi tiết), tìm kiếm (đơn giản, nâng cao) dữ liệu của các bảng (lưu ý cập nhật, xóa dữ liệu của các bảng có quan hệ).
   * Giao diện thân thiện, sử dụng các phím tắt, tab khi cần thiết.
   * Phần viết code cần phải dùng Coding Convention chung cho các ngôn ngữ (Java/C#).
+  
+## Hướng dẫn setup trước khi chạy project
+### Add thư viện cần thiết có trong folder library
+  * Thư viện Jcalendar 
+  * Thư viện jdbc
+  
+### Chỉnh đổi font chữ nếu bị lỗi tiếng Việt
+  * Vô Edit chọn Set Encoding chọn UTF-8 (Chỉ áp dụng cho 1 file đang định dạng)
+  * Vô Window chọn Preferences -> General -> Workspace -> Orther là UTF-8 Tự động điều chỉnh cho cả project
+  
+### Cài đặt JRE 11
+  * Chỉ cài đặt JRE 11 mới chạy được
+  
+### Thêm database
+  * Chạy Copy -> paste file Script trong folder database và chạy để khởi tạo csdl
+  
+### Configure SQl
+  * Đổi port, tên Database, username và password cho phù hợp với SQL Server
+  
