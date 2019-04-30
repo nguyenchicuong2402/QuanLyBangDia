@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <eclipse-userlibraries>
   <library name="jcalendar-1.4">
-    <archive path="T:/Projects/QuanLyBangDia/library/jcalendar-1.4.jar" />
+    <archive path="E:/Projects/QuanLyBangDia/library/jcalendar-1.4.jar" />
   </library>
   <library name="mssql-jdbc-7.2.1.jre11">
-    <archive path="T:/Projects/QuanLyBangDia/library/mssql-jdbc-7.2.1.jre11.jar" />
+    <archive path="E:/Projects/QuanLyBangDia/library/mssql-jdbc-7.2.1.jre11.jar" />
   </library>
 </eclipse-userlibraries>
 

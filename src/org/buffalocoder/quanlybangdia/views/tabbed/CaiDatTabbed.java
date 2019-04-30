@@ -35,7 +35,7 @@ public class CaiDatTabbed extends JPanel {
     /**
      * Tạo GUI
      */
-    private void prepareUI(){
+    private void prepareUI() {
         this.setLayout(new BorderLayout());
         MaterialDesign.materialPanel(this);
 
@@ -244,10 +244,11 @@ public class CaiDatTabbed extends JPanel {
 
     /**
      * Thông báo lỗi nhập text
+     *
      * @param textField
      * @param message
      */
-    private void errorInput(JTextField textField, String message){
+    private void errorInput(JTextField textField, String message) {
         lblLoiDoiMatKhau.setText(message);
         textField.setBorder(MaterialDesign.BORDER_ERROR);
         textField.requestFocus();
@@ -257,10 +258,11 @@ public class CaiDatTabbed extends JPanel {
 
     /**
      * Tắt thông báo lỗi nhập text
+     *
      * @param textField
      */
-    private void unErrorInput(JTextField textField){
-        if (!lblLoiDoiMatKhau.getText().isEmpty()){
+    private void unErrorInput(JTextField textField) {
+        if (!lblLoiDoiMatKhau.getText().isEmpty()) {
             MaterialDesign.materialTextField(textField);
             lblLoiDoiMatKhau.setText("    ");
         }
@@ -269,9 +271,10 @@ public class CaiDatTabbed extends JPanel {
 
     /**
      * Sự kiện button xoá database
+     *
      * @return
      */
-    private ActionListener btnXoaDatabase_Click(){
+    private ActionListener btnXoaDatabase_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -284,7 +287,7 @@ public class CaiDatTabbed extends JPanel {
                 );
 
                 // nếu người dùng đồng ý thì xoá dữ liệu
-                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
+                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION) {
                     try {
                         dataBaseUtils.resetDatabase();
 
@@ -313,9 +316,10 @@ public class CaiDatTabbed extends JPanel {
 
     /**
      * Sự kiện thay đổi chủ đề
+     *
      * @return
      */
-    private ActionListener cbChuDe_Change(){
+    private ActionListener cbChuDe_Change() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -323,7 +327,7 @@ public class CaiDatTabbed extends JPanel {
                 Matcher matcher = pattern.matcher(String.valueOf(cbChuDe.getSelectedItem()).toLowerCase());
 
                 // Lấy ID Theme và lưu vào Propertise
-                if (matcher.find()){
+                if (matcher.find()) {
                     String id_color = matcher.group(1);
                     quanLyXML.setIDColor(id_color);
                 }
@@ -346,9 +350,10 @@ public class CaiDatTabbed extends JPanel {
 
     /**
      * Sự kiện button làm mới thay đổi mật khẩu
+     *
      * @return
      */
-    private ActionListener btnLamMoi_Click(){
+    private ActionListener btnLamMoi_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -366,9 +371,10 @@ public class CaiDatTabbed extends JPanel {
 
     /**
      * Sự kiện button thay đổi mật khẩu
+     *
      * @return
      */
-    private ActionListener btnThayDoiMatKhau_Click(){
+    private ActionListener btnThayDoiMatKhau_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -378,13 +384,13 @@ public class CaiDatTabbed extends JPanel {
                  * Kiểm tra mật khẩu hiện tại
                  * Rule: không được rỗng, không quá 128 kí tự, phải khớp với mật khẩu của user hiện tại
                  */
-                if (String.valueOf(txtMatKhauHienTai.getPassword()).trim().isEmpty()){
+                if (String.valueOf(txtMatKhauHienTai.getPassword()).trim().isEmpty()) {
                     errorInput(txtMatKhauHienTai, "Vui lòng nhập mật khẩu");
                     return;
-                }else if (String.valueOf(txtMatKhauHienTai.getPassword()).length() > 128){
+                } else if (String.valueOf(txtMatKhauHienTai.getPassword()).length() > 128) {
                     errorInput(txtMatKhauHienTai, "Mật khẩu không quá 128 kí tự");
                     return;
-                }else if (!String.valueOf(txtMatKhauHienTai.getPassword()).equals(taiKhoan.getMatKhau())){
+                } else if (!String.valueOf(txtMatKhauHienTai.getPassword()).equals(taiKhoan.getMatKhau())) {
                     errorInput(txtMatKhauHienTai, "Mật khẩu không đúng");
                     return;
                 }
@@ -393,10 +399,10 @@ public class CaiDatTabbed extends JPanel {
                  * Kiểm tra mật khẩu mới
                  * Rule: Không được rỗng, không quá 128 kí tự
                  */
-                if (String.valueOf(txtMatKhauMoi.getPassword()).trim().isEmpty()){
+                if (String.valueOf(txtMatKhauMoi.getPassword()).trim().isEmpty()) {
                     errorInput(txtMatKhauMoi, "Vui lòng nhập mật khẩu mới");
                     return;
-                }else if (String.valueOf(txtMatKhauMoi.getPassword()).length() > 128){
+                } else if (String.valueOf(txtMatKhauMoi.getPassword()).length() > 128) {
                     errorInput(txtMatKhauMoi, "Mật khẩu không quá 128 kí tự");
                     return;
                 }
@@ -405,14 +411,14 @@ public class CaiDatTabbed extends JPanel {
                  * Kiểm tra nhập lại mật khẩu mới
                  * Rule: Không được rỗng, không quá 128 kí tự, phải trùng với mật khẩu mới
                  */
-                if (String.valueOf(txtNhapLaiMatKhau.getPassword()).trim().isEmpty()){
+                if (String.valueOf(txtNhapLaiMatKhau.getPassword()).trim().isEmpty()) {
                     errorInput(txtNhapLaiMatKhau, "Vui lòng nhập lại mật khẩu");
                     return;
-                }else if (String.valueOf(txtNhapLaiMatKhau.getPassword()).length() > 128){
+                } else if (String.valueOf(txtNhapLaiMatKhau.getPassword()).length() > 128) {
                     errorInput(txtNhapLaiMatKhau, "Mật khẩu không quá 128 kí tự");
                     return;
-                }else if (!String.valueOf(txtNhapLaiMatKhau.getPassword()).equals(
-                            String.valueOf(txtNhapLaiMatKhau.getPassword()))){
+                } else if (!String.valueOf(txtNhapLaiMatKhau.getPassword()).equals(
+                        String.valueOf(txtNhapLaiMatKhau.getPassword()))) {
                     errorInput(txtNhapLaiMatKhau, "Mật khẩu không trùng khớp");
                     return;
                 }
@@ -422,7 +428,7 @@ public class CaiDatTabbed extends JPanel {
                 try {
 
                     // Nếu thay đổi thành công thì thông báo
-                    if (taiKhoanDAO.suaTaiKhoan(taiKhoan) != null){
+                    if (taiKhoanDAO.suaTaiKhoan(taiKhoan) != null) {
                         DangNhap.taiKhoan = taiKhoan;
                         thongBaoDialog = new ThongBaoDialog(
                                 new JFrame(),
@@ -451,12 +457,14 @@ public class CaiDatTabbed extends JPanel {
     /**
      * Sự kiện nhập text mật khẩu hiện tại
      * Nếu có lỗi thì xoá
+     *
      * @return
      */
-    private KeyListener txtMatKhauHienTai_KeyListener(){
+    private KeyListener txtMatKhauHienTai_KeyListener() {
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {
+            }
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -464,7 +472,8 @@ public class CaiDatTabbed extends JPanel {
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {}
+            public void keyReleased(KeyEvent e) {
+            }
         };
     }
 
@@ -472,12 +481,14 @@ public class CaiDatTabbed extends JPanel {
     /**
      * Sự kiện nhập text mật khẩu mới
      * Nếu có lỗi thì xoá
+     *
      * @return
      */
-    private KeyListener txtMatKhauMoi_KeyListener(){
+    private KeyListener txtMatKhauMoi_KeyListener() {
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {
+            }
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -485,7 +496,8 @@ public class CaiDatTabbed extends JPanel {
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {}
+            public void keyReleased(KeyEvent e) {
+            }
         };
     }
 
@@ -493,12 +505,14 @@ public class CaiDatTabbed extends JPanel {
     /**
      * Sự kiện nhập text mật khẩu hiện tại
      * Nếu có lỗi thì xoá
+     *
      * @return
      */
-    private KeyListener txtNhapLaiMatKhau_KeyListener(){
+    private KeyListener txtNhapLaiMatKhau_KeyListener() {
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {
+            }
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -506,7 +520,8 @@ public class CaiDatTabbed extends JPanel {
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {}
+            public void keyReleased(KeyEvent e) {
+            }
         };
     }
 
@@ -514,7 +529,7 @@ public class CaiDatTabbed extends JPanel {
     /**
      * Constructor
      */
-    public CaiDatTabbed(){
+    public CaiDatTabbed() {
         // tạo kết nối db
         try {
             taiKhoanDAO = TaiKhoanDAO.getInstance();

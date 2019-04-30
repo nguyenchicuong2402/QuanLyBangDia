@@ -15,6 +15,7 @@ public class DataBaseUtils {
 
     /**
      * Tạo kết nối đến DB
+     *
      * @throws Exception
      */
     private DataBaseUtils() throws Exception {
@@ -30,14 +31,15 @@ public class DataBaseUtils {
 
     /**
      * Design Pattern: Singleton
+     *
      * @return
      * @throws Exception
      */
     public static DataBaseUtils getInstance() throws Exception {
-        if(_instance == null) {
-            synchronized(DataBaseUtils.class) {
-                if(null == _instance) {
-                    _instance  = new DataBaseUtils();
+        if (_instance == null) {
+            synchronized (DataBaseUtils.class) {
+                if (null == _instance) {
+                    _instance = new DataBaseUtils();
                 }
             }
         }
@@ -47,13 +49,14 @@ public class DataBaseUtils {
 
     /**
      * Thực thi script sql insert, update, delete
+     *
      * @param sql
      * @return
      */
-    public PreparedStatement excuteQueryWrite(String sql){
+    public PreparedStatement excuteQueryWrite(String sql) {
         try {
             return _connection.prepareStatement(sql);
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return null;
@@ -62,10 +65,11 @@ public class DataBaseUtils {
 
     /**
      * Thực thi script sql select
+     *
      * @param sql
      * @return
      */
-    public ResultSet excuteQueryRead(String sql){
+    public ResultSet excuteQueryRead(String sql) {
         try {
             return _connection.createStatement().executeQuery(sql);
         } catch (SQLException e) {
@@ -78,6 +82,7 @@ public class DataBaseUtils {
 
     /**
      * commit sql
+     *
      * @throws Exception
      */
     public void commitQuery() throws Exception {
@@ -91,6 +96,7 @@ public class DataBaseUtils {
 
     /**
      * rollback sql
+     *
      * @throws Exception
      */
     public void rollbackQuery() throws Exception {
@@ -104,6 +110,7 @@ public class DataBaseUtils {
 
     /**
      * reset DB về trạng thái ban đầu
+     *
      * @return
      * @throws Exception
      */
@@ -123,6 +130,7 @@ public class DataBaseUtils {
 
     /**
      * thực thi hàm, thủ tục trong sql
+     *
      * @param sql
      * @return
      * @throws Exception
@@ -141,6 +149,7 @@ public class DataBaseUtils {
 
     /**
      * load thư viện và tạo connection
+     *
      * @return
      * @throws Exception
      */

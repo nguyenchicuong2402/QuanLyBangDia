@@ -1,4 +1,5 @@
 package org.buffalocoder.quanlybangdia.views.custom;
+
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
@@ -83,7 +84,7 @@ public class CustomTabbedPanelUI extends BasicTabbedPaneUI {
         this.colorTextDeselected = colorTextDeselected;
     }
 
-    public void setMargin(int margin_x, int margin_y){
+    public void setMargin(int margin_x, int margin_y) {
         this.margin[0] = margin_x;
         this.margin[1] = margin_y;
     }
@@ -137,6 +138,7 @@ public class CustomTabbedPanelUI extends BasicTabbedPaneUI {
 
     /**
      * Tuỳ biến background tab
+     *
      * @param g
      * @param tabPlacement
      * @param tabIndex
@@ -196,6 +198,7 @@ public class CustomTabbedPanelUI extends BasicTabbedPaneUI {
 
     /**
      * Cấu hình text và textFont
+     *
      * @param g
      * @param tabPlacement
      * @param font
@@ -238,6 +241,7 @@ public class CustomTabbedPanelUI extends BasicTabbedPaneUI {
 
     /**
      * Tính độ dài của tab
+     *
      * @param tabPlacement
      * @param tabIndex
      * @param metrics
@@ -251,6 +255,7 @@ public class CustomTabbedPanelUI extends BasicTabbedPaneUI {
 
     /**
      * Tính độ rộng của tab
+     *
      * @param tabPlacement
      * @param tabIndex
      * @param fontHeight

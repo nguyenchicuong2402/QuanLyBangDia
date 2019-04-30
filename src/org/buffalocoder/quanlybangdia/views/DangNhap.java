@@ -32,7 +32,7 @@ public class DangNhap extends JFrame {
     /**
      * Tạo GUI
      */
-    private void prepareUI(){
+    private void prepareUI() {
         mainPanel = new JPanel(new BorderLayout());
         this.setContentPane(mainPanel);
 
@@ -158,8 +158,8 @@ public class DangNhap extends JFrame {
     /**
      * Nếu có ghi nhớ tài khoản trong hệ thống thì tiến hành khôi phục tài khoản lên UI
      */
-    private void khoiPhucTaiKhoan(){
-        if (taiKhoan != null){
+    private void khoiPhucTaiKhoan() {
+        if (taiKhoan != null) {
             cbGhiNho.setSelected(true);
             txtTenNguoiDung.setText(taiKhoan.getTenTaiKhoan());
             txtMatKhau.setText(taiKhoan.getMatKhau());
@@ -169,10 +169,11 @@ public class DangNhap extends JFrame {
 
     /**
      * Hiển thị lỗi khi nhập sai text
+     *
      * @param txt
      * @param message
      */
-    private void errorInput(JTextField txt, String message){
+    private void errorInput(JTextField txt, String message) {
         txt.setBorder(MaterialDesign.BORDER_ERROR);
         txt.requestFocus();
         txt.selectAll();
@@ -183,9 +184,10 @@ public class DangNhap extends JFrame {
 
     /**
      * Dialog thông báo
+     *
      * @param message
      */
-    private void thongBao(String message){
+    private void thongBao(String message) {
         thongBaoDialog = new ThongBaoDialog(
                 new JFrame(),
                 "Thông báo",
@@ -197,9 +199,10 @@ public class DangNhap extends JFrame {
 
     /**
      * Dialog thông báo lỗi
+     *
      * @param message
      */
-    private void thongBaoLoi(String message){
+    private void thongBaoLoi(String message) {
         thongBaoDialog = new ThongBaoDialog(
                 new JFrame(),
                 "Lỗi",
@@ -212,7 +215,7 @@ public class DangNhap extends JFrame {
     /**
      * Ghi nhớ tài khoản vào hệ thống
      */
-    private void ghiNhoTaiKhoan(){
+    private void ghiNhoTaiKhoan() {
         if (cbGhiNho.isSelected())
             quanLyXML.ghiNhoTaiKhoan(taiKhoan);
         else
@@ -222,9 +225,10 @@ public class DangNhap extends JFrame {
 
     /**
      * Sự kiện button thoát
+     *
      * @return
      */
-    private ActionListener btnThoat_Click(){
+    private ActionListener btnThoat_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -237,7 +241,7 @@ public class DangNhap extends JFrame {
                 );
 
                 // nếu người dùng đồng ý thoát
-                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
+                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION) {
                     System.exit(0);
                 }
             }
@@ -247,9 +251,10 @@ public class DangNhap extends JFrame {
 
     /**
      * Sự kiện button đăng nhập
+     *
      * @return
      */
-    private ActionListener btnDangNhap_Click(){
+    private ActionListener btnDangNhap_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -258,18 +263,18 @@ public class DangNhap extends JFrame {
                 String matKhau = String.valueOf(txtMatKhau.getPassword());
 
                 // kiểm tra dữ liệu
-                if (tenTaiKhoan.isEmpty()){
+                if (tenTaiKhoan.isEmpty()) {
                     errorInput(txtTenNguoiDung, "Vui lòng nhập tên người dùng");
                     return;
-                }else if (matKhau.isEmpty()){
+                } else if (matKhau.isEmpty()) {
                     errorInput(txtMatKhau, "Vui lòng nhập mật khẩu");
                     return;
                 }
 
                 // lấy tài khoản từ db lên
-                try{
+                try {
                     taiKhoan = taiKhoanDAO.getTaiKhoan(tenTaiKhoan);
-                }catch (Exception e1){
+                } catch (Exception e1) {
                     thongBaoLoi(e1.getMessage());
                     return;
                 }
@@ -278,11 +283,11 @@ public class DangNhap extends JFrame {
                 // nếu đúng thì vào form quản lý
                 // nếu sai thì thông báo
                 // ghi nhớ tài khoản (nếu có check)
-                if (tenTaiKhoan.equals(taiKhoan.getTenTaiKhoan()) && matKhau.equals(taiKhoan.getMatKhau())){
+                if (tenTaiKhoan.equals(taiKhoan.getTenTaiKhoan()) && matKhau.equals(taiKhoan.getMatKhau())) {
                     ghiNhoTaiKhoan();
                     rootComponent.setVisible(false);
                     new MainForm();
-                }else{
+                } else {
                     thongBao("Sai tên đăng nhập hoặc mật khẩu");
                     txtTenNguoiDung.requestFocus();
                     txtTenNguoiDung.selectAll();
@@ -295,9 +300,10 @@ public class DangNhap extends JFrame {
     /**
      * Sự kiện khi nhập text Tên người dùng
      * Nếu có lỗi thì xoá lỗi
+     *
      * @return
      */
-    private KeyListener txtTenNguoiDung_Changed(){
+    private KeyListener txtTenNguoiDung_Changed() {
         return new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -310,7 +316,7 @@ public class DangNhap extends JFrame {
              */
             @Override
             public void keyPressed(KeyEvent e) {
-                if (!lblLoi.getText().trim().isEmpty()){
+                if (!lblLoi.getText().trim().isEmpty()) {
                     MaterialDesign.materialTextField(txtTenNguoiDung);
                     lblLoi.setText("  ");
                 }
@@ -327,9 +333,10 @@ public class DangNhap extends JFrame {
     /**
      * Sự kiện khi nhập text Mật khẩu
      * Nếu có lỗi thì xoá lỗi
+     *
      * @return
      */
-    private KeyListener txtMatKhau_Changed(){
+    private KeyListener txtMatKhau_Changed() {
         return new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -342,7 +349,7 @@ public class DangNhap extends JFrame {
              */
             @Override
             public void keyPressed(KeyEvent e) {
-                if (!lblLoi.getText().trim().isEmpty()){
+                if (!lblLoi.getText().trim().isEmpty()) {
                     MaterialDesign.materialTextField(txtMatKhau);
                     lblLoi.setText("  ");
                 }
@@ -359,9 +366,9 @@ public class DangNhap extends JFrame {
     /**
      * Constructor
      */
-    public DangNhap(){
+    public DangNhap() {
         // kết nối đến DB
-        try{
+        try {
             taiKhoanDAO = TaiKhoanDAO.getInstance();
         } catch (Exception e) {
             thongBaoLoi(e.getMessage());

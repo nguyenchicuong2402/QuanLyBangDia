@@ -24,8 +24,8 @@ public class ThongKeTabbed extends JPanel {
 
     private JPanel doanhThuPanel, thueQuaHanPanel, tinhTrangPanel, leftPanel, rightPanel;
     private JLabel lblTieuDeDoanhThu, lblTieuDeThueQuaHan, lblTieuDeTinhTrang, lblDoanhThu,
-                lblTongSoBangDia_1, lblTongSoBangDia_2, lblTongSoBangDiaDaThue_1, lblTongSoBangDiaDaThue_2,
-                lblTongSoBangDiaHong_1, lblTongSoBangDiaHong_2, lblThoiGian;
+            lblTongSoBangDia_1, lblTongSoBangDia_2, lblTongSoBangDiaDaThue_1, lblTongSoBangDiaDaThue_2,
+            lblTongSoBangDiaHong_1, lblTongSoBangDiaHong_2, lblThoiGian;
     private ChoThueTableModel choThueTableModel;
     private JTable tblChoThue;
     private JComboBox<String> cbThang, cbNam;
@@ -34,7 +34,7 @@ public class ThongKeTabbed extends JPanel {
     /**
      * Tạo GUI
      */
-    private void prepareUI(){
+    private void prepareUI() {
         this.setLayout(new BorderLayout());
         MaterialDesign.materialPanel(this);
 
@@ -209,7 +209,7 @@ public class ThongKeTabbed extends JPanel {
     /**
      * Cập nhật giao diện khi dữ liệu thay đổi
      */
-    public void refresh(){
+    public void refresh() {
         final Pattern pattern = Pattern.compile("^Tháng (\\d.*)");
 
         try {
@@ -219,7 +219,7 @@ public class ThongKeTabbed extends JPanel {
 
             // Card doanh thu
             int nam = String.valueOf(cbNam.getSelectedItem()).equalsIgnoreCase("Tất cả") ? 0 :
-                                Integer.parseInt(String.valueOf(cbNam.getSelectedItem()));
+                    Integer.parseInt(String.valueOf(cbNam.getSelectedItem()));
             int thang = 0;
             final Matcher matcher = pattern.matcher(String.valueOf(cbThang.getSelectedItem()));
             if (matcher.find())
@@ -231,15 +231,13 @@ public class ThongKeTabbed extends JPanel {
             lblDoanhThu.setText(numberFormat.format(danhSachChoThue.tongDoanhThu(thang, nam)));
 
             // Thay đổi title khi người dùng chọn thống kê theo tháng, năm
-            if (thang != 0 && nam != 0){
+            if (thang != 0 && nam != 0) {
                 lblTieuDeDoanhThu.setText("Doanh thu");
                 lblThoiGian.setText(String.format("Tháng %d/%d", thang, nam));
-            }
-            else if (thang == 0 && nam != 0){
+            } else if (thang == 0 && nam != 0) {
                 lblTieuDeDoanhThu.setText("Doanh thu");
                 lblThoiGian.setText(String.format("Năm %d", nam));
-            }
-            else {
+            } else {
                 lblThoiGian.setText("");
                 lblTieuDeDoanhThu.setText("Tổng doanh thu");
             }
@@ -274,9 +272,10 @@ public class ThongKeTabbed extends JPanel {
 
     /**
      * Sự kiện khi chọn item combo box Năm
+     *
      * @return
      */
-    private ActionListener cbNam_Selected(){
+    private ActionListener cbNam_Selected() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -285,10 +284,10 @@ public class ThongKeTabbed extends JPanel {
                  * nếu như người dùng muốn xem tổng doanh thu thì xoá tất cả item tháng
                  * item tháng sẽ phụ thuộc theo năm (nếu chọn năm hiện tại thì tháng không vươt quá tháng hiện tại)
                  */
-                if (String.valueOf(cbNam.getSelectedItem()).equalsIgnoreCase("Tất cả")){
+                if (String.valueOf(cbNam.getSelectedItem()).equalsIgnoreCase("Tất cả")) {
                     cbThang.removeAllItems();
                     cbThang.addItem("Tất cả");
-                }else{
+                } else {
                     // generate dữ liệu tháng theo năm
                     cbThang.removeAllItems();
                     int nam = Integer.parseInt(String.valueOf(cbNam.getSelectedItem()));
@@ -304,9 +303,10 @@ public class ThongKeTabbed extends JPanel {
 
     /**
      * Sự kiện khi chọn item combo box tháng
+     *
      * @return
      */
-    private ActionListener cbThang_Selected(){
+    private ActionListener cbThang_Selected() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -316,7 +316,7 @@ public class ThongKeTabbed extends JPanel {
     }
 
 
-    public ThongKeTabbed(){
+    public ThongKeTabbed() {
         try {
             danhSachChoThue = new DanhSachChoThue();
             danhSachBangDia = new DanhSachBangDia();

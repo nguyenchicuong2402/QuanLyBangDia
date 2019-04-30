@@ -2,20 +2,23 @@ package org.buffalocoder.quanlybangdia.dao;
 
 import org.buffalocoder.quanlybangdia.models.BangDia;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BangDiaDAO {
     private static BangDiaDAO _instance;
     private static DataBaseUtils dataBaseUtils;
 
-    public BangDiaDAO () throws Exception {
+    public BangDiaDAO() throws Exception {
         dataBaseUtils = DataBaseUtils.getInstance();
     }
 
 
     /**
      * Design Pattern: Singleton
+     *
      * @return
      * @throws Exception
      */
@@ -33,6 +36,7 @@ public class BangDiaDAO {
 
     /**
      * Đọc danh sách băng đĩa từ DB
+     *
      * @return
      * @throws Exception
      */
@@ -72,6 +76,7 @@ public class BangDiaDAO {
 
     /**
      * Lấy băng đĩa từ DB
+     *
      * @param maBangDia
      * @return
      * @throws Exception
@@ -109,6 +114,7 @@ public class BangDiaDAO {
     /**
      * Lấy mã băng đĩa cuối trong DB
      * Dùng để generate mã băng đĩa mới
+     *
      * @return
      * @throws Exception
      */
@@ -134,6 +140,7 @@ public class BangDiaDAO {
 
     /**
      * Thêm băng đĩa mới vào DB
+     *
      * @param bangDia
      * @return
      * @throws Exception
@@ -157,7 +164,7 @@ public class BangDiaDAO {
             preparedStatement.setString(7, bangDia.getTheLoai());
             preparedStatement.setInt(8, bangDia.getSoLuongTon());
 
-            if (preparedStatement.executeUpdate() > 0){
+            if (preparedStatement.executeUpdate() > 0) {
                 dataBaseUtils.commitQuery();
                 return getBangDia(bangDia.getMaBangDia());
             }
@@ -174,6 +181,7 @@ public class BangDiaDAO {
 
     /**
      * Xoá băng đĩa trong DB
+     *
      * @param maBangDia
      * @return
      * @throws Exception
@@ -190,7 +198,7 @@ public class BangDiaDAO {
 
             preparedStatement.setString(1, maBangDia);
 
-            if (preparedStatement.executeUpdate() > 0){
+            if (preparedStatement.executeUpdate() > 0) {
                 dataBaseUtils.commitQuery();
                 return true;
             }
@@ -207,6 +215,7 @@ public class BangDiaDAO {
 
     /**
      * Cập nhật thông tin băng đĩa trong DB
+     *
      * @param bangDia
      * @return
      * @throws Exception
@@ -232,7 +241,7 @@ public class BangDiaDAO {
             preparedStatement.setInt(7, bangDia.getSoLuongTon());
             preparedStatement.setString(8, bangDia.getMaBangDia());
 
-            if (preparedStatement.executeUpdate() > 0){
+            if (preparedStatement.executeUpdate() > 0) {
                 dataBaseUtils.commitQuery();
                 return getBangDia(bangDia.getMaBangDia());
             }

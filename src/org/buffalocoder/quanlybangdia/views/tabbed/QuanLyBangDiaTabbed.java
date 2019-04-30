@@ -37,7 +37,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
     /**
      * Tạo GUI
      */
-    private void prepareUI(){
+    private void prepareUI() {
         this.setLayout(new BorderLayout());
         this.setFont(MaterialDesign.FONT_DEFAULT);
         this.setBorder(BorderFactory.createEmptyBorder());
@@ -100,7 +100,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
         MaterialDesign.materialTextField(txtTimKiem);
         searchPanel.add(txtTimKiem, BorderLayout.CENTER);
 
-        cbFilterTimKiem = new JComboBox<>(new String[] {
+        cbFilterTimKiem = new JComboBox<>(new String[]{
                 "Mã băng đĩa",
                 "Tên băng đĩa",
                 "Thể loại",
@@ -136,10 +136,10 @@ public class QuanLyBangDiaTabbed extends JPanel {
     /**
      * Refresh lại tab khi có cập nhật dữ liệu
      */
-    public void refresh(boolean reloadData){
+    public void refresh(boolean reloadData) {
         int oldSelected = getCurrentSelected();
 
-        if (reloadData){
+        if (reloadData) {
             // load lại dữ liệu từ DB
             try {
                 danhSachBangDia.loadData();
@@ -160,8 +160,8 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
         // Nếu chưa có băng đĩa nào hư hỏng thì tắt nút xoá băng đĩa hỏng
         btnXoaBangDiaHong.setEnabled(false);
-        for (BangDia bangDia : danhSachBangDia.getAll()){
-            if (!bangDia.isTinhTrang()){
+        for (BangDia bangDia : danhSachBangDia.getAll()) {
+            if (!bangDia.isTinhTrang()) {
                 btnXoaBangDiaHong.setEnabled(true);
                 break;
             }
@@ -171,13 +171,13 @@ public class QuanLyBangDiaTabbed extends JPanel {
          * Kiểm tra xem người dùng có chọn dòng nào không
          * Nếu người dùng có chọn thì bật nút xoá và sửa
          */
-        if (tblBangDia.getSelectedRow() == -1){
+        if (tblBangDia.getSelectedRow() == -1) {
             btnSua.setToolTipText("Vui lòng chọn băng đĩa cần cập nhật thông tin");
             btnSua.setEnabled(false);
 
             btnXoa.setToolTipText("Vui lòng chọn băng đĩa cần xoá");
             btnXoa.setEnabled(false);
-        }else{
+        } else {
             btnSua.setEnabled(true);
             btnSua.setToolTipText("[Alt + S] Cập nhật thông tin băng đĩa");
 
@@ -191,13 +191,14 @@ public class QuanLyBangDiaTabbed extends JPanel {
      * Tìm kiếm băng đĩa
      * Sử dụng đối tượng filter trong table
      * Tìm kiếm theo tên băng đĩa
+     *
      * @param filter_text
      */
     private void filterTable(String filter_text) {
         if (filter_text.isEmpty())
             sorter.setRowFilter(null);
         else {
-            try{
+            try {
                 RowFilter<Object, Object> filter = new RowFilter<Object, Object>() {
                     @Override
                     public boolean include(Entry<?, ?> entry) {
@@ -205,7 +206,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
                     }
                 };
                 sorter.setRowFilter(filter);
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 txtTimKiem.selectAll();
             }
 
@@ -215,9 +216,10 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
     /**
      * Dialog Thông báo
+     *
      * @param message
      */
-    private void thongBao(String message){
+    private void thongBao(String message) {
         thongBaoDialog = new ThongBaoDialog(
                 new JFrame(),
                 "Thông báo",
@@ -229,9 +231,10 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
     /**
      * Dialog thông báo lỗi
+     *
      * @param message
      */
-    private void thongBaoLoi(String message){
+    private void thongBaoLoi(String message) {
         thongBaoDialog = new ThongBaoDialog(
                 new JFrame(),
                 "Lỗi",
@@ -243,12 +246,13 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
     /**
      * Lấy vị trí đang chọn trong table
+     *
      * @return
      */
-    private int getCurrentSelected(){
-        try{
+    private int getCurrentSelected() {
+        try {
             return tblBangDia.convertRowIndexToModel(tblBangDia.getSelectedRow());
-        }catch (Exception e){
+        } catch (Exception e) {
             return -1;
         }
     }
@@ -256,24 +260,26 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
     /**
      * Set row được chọn
+     *
      * @param oldSelected
      */
-    private void setCurrentSelected(int oldSelected){
-        if (oldSelected != -1 && oldSelected <= tblBangDia.getModel().getRowCount()){
+    private void setCurrentSelected(int oldSelected) {
+        if (oldSelected != -1 && oldSelected <= tblBangDia.getModel().getRowCount()) {
             tblBangDia.setRowSelectionInterval(oldSelected, oldSelected);
-        }else if (oldSelected != -1 && oldSelected > tblBangDia.getModel().getRowCount()){
+        } else if (oldSelected != -1 && oldSelected > tblBangDia.getModel().getRowCount()) {
             tblBangDia.setRowSelectionInterval(oldSelected - 1, oldSelected - 1);
-        }else if (oldSelected == -1 && tblBangDia.getModel().getRowCount() > 0){
+        } else if (oldSelected == -1 && tblBangDia.getModel().getRowCount() > 0) {
             tblBangDia.setRowSelectionInterval(0, 0);
-        }else tblBangDia.clearSelection();
+        } else tblBangDia.clearSelection();
     }
 
 
     /**
      * Sự kiện button thêm
+     *
      * @return
      */
-    private ActionListener btnThem_Click(){
+    private ActionListener btnThem_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -293,10 +299,10 @@ public class QuanLyBangDiaTabbed extends JPanel {
                     return;
 
                 // thêm băng đĩa vào danh sách và lưu vào DB
-                try{
+                try {
                     danhSachBangDia.them(bangDia);
                     refresh(true);
-                }catch (Exception e1){
+                } catch (Exception e1) {
                     thongBaoLoi(e1.getMessage());
                 }
             }
@@ -306,14 +312,15 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
     /**
      * Sự kiện nút Sửa
+     *
      * @return
      */
-    private ActionListener btnSua_Click(){
+    private ActionListener btnSua_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // nếu người dùng chưa chọn thì thông báo
-                if (getCurrentSelected() == -1){
+                if (getCurrentSelected() == -1) {
                     thongBao("Vui lòng chọn băng đĩa cần sửa");
                     return;
                 }
@@ -335,10 +342,10 @@ public class QuanLyBangDiaTabbed extends JPanel {
                     return;
 
                 // sửa băng đĩa trong danh sách và DB
-                try{
+                try {
                     danhSachBangDia.sua(bangDia);
                     refresh(true);
-                }catch (Exception e1){
+                } catch (Exception e1) {
                     thongBaoLoi(e1.getMessage());
                 }
             }
@@ -348,14 +355,15 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
     /**
      * Sự kiện button xoá
+     *
      * @return
      */
-    private ActionListener btnXoa_Click(){
+    private ActionListener btnXoa_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // nếu người dùng chưa chọn dòng nào thì thông báo
-                if (getCurrentSelected() == -1){
+                if (getCurrentSelected() == -1) {
                     thongBao("Vui lòng chọn băng đĩa cần xoá");
                     return;
                 }
@@ -367,22 +375,22 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
                 XoaBangDiaDialog xoaBangDiaDialog = new XoaBangDiaDialog(new JFrame(), maBangDia, tenBangDia, soLuong);
 
-                if (xoaBangDiaDialog.getKetQua() == 0){
-                    try{
+                if (xoaBangDiaDialog.getKetQua() == 0) {
+                    try {
                         danhSachBangDia.xoa(maBangDia);
                         tblBangDia.clearSelection();
                         refresh(true);
-                    }catch (Exception e1){
+                    } catch (Exception e1) {
                         thongBaoLoi(e1.getMessage());
                     }
-                }else if (xoaBangDiaDialog.getKetQua() > 0){
-                    try{
+                } else if (xoaBangDiaDialog.getKetQua() > 0) {
+                    try {
                         BangDia bangDia = danhSachBangDia.getAll().get(danhSachBangDia.tim(maBangDia));
                         bangDia.setSoLuongTon(xoaBangDiaDialog.getKetQua());
 
                         danhSachBangDia.sua(bangDia);
                         refresh(true);
-                    }catch (Exception e1){
+                    } catch (Exception e1) {
                         thongBaoLoi(e1.getMessage());
                     }
                 }
@@ -393,13 +401,14 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
     /**
      * Sự kiện khi chọn tìm kiếm theo gì
+     *
      * @return
      */
-    private ActionListener cbFilterTimKiem_Changed(){
+    private ActionListener cbFilterTimKiem_Changed() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                switch (cbFilterTimKiem.getSelectedIndex()){
+                switch (cbFilterTimKiem.getSelectedIndex()) {
                     case 0:
                         indexFilter = 0;
                         break;
@@ -422,9 +431,10 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
     /**
      * Sự kiện button xoá băng đĩa hỏng
+     *
      * @return
      */
-    private ActionListener btnXoaBangDiaHong_Click(){
+    private ActionListener btnXoaBangDiaHong_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -437,7 +447,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
                 );
 
                 // nếu người dùng đồng ý
-                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
+                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION) {
                     danhSachBangDia.xoaBangDiaHong();
                     refresh(true);
                 }
@@ -448,9 +458,10 @@ public class QuanLyBangDiaTabbed extends JPanel {
 
     /**
      * Sự kiện khi chọn 1 dòng trên table
+     *
      * @return
      */
-    private MouseListener tblBangDia_MouseListener(){
+    private MouseListener tblBangDia_MouseListener() {
         return new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -458,16 +469,20 @@ public class QuanLyBangDiaTabbed extends JPanel {
             }
 
             @Override
-            public void mousePressed(MouseEvent e) {}
+            public void mousePressed(MouseEvent e) {
+            }
 
             @Override
-            public void mouseReleased(MouseEvent e) {}
+            public void mouseReleased(MouseEvent e) {
+            }
 
             @Override
-            public void mouseEntered(MouseEvent e) {}
+            public void mouseEntered(MouseEvent e) {
+            }
 
             @Override
-            public void mouseExited(MouseEvent e) {}
+            public void mouseExited(MouseEvent e) {
+            }
         };
     }
 
@@ -475,9 +490,10 @@ public class QuanLyBangDiaTabbed extends JPanel {
     /**
      * Sự kiện khi nhập text vào ô tìm kiếm
      * Dùng để tìm kiếm realtime
+     *
      * @return
      */
-    private DocumentListener txtTimKiem_DocumentListener(){
+    private DocumentListener txtTimKiem_DocumentListener() {
         return new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -500,7 +516,7 @@ public class QuanLyBangDiaTabbed extends JPanel {
     /**
      * Constructor
      */
-    public QuanLyBangDiaTabbed(){
+    public QuanLyBangDiaTabbed() {
         // kết nối db
         try {
             danhSachBangDia = new DanhSachBangDia();

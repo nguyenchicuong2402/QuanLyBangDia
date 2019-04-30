@@ -7,11 +7,14 @@ import org.buffalocoder.quanlybangdia.utils.PatternRegexs;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class BangDiaDialog extends JDialog{
+public class BangDiaDialog extends JDialog {
     private String tieuDe;
     private BangDia bangDia;
     private boolean isChinhSua;
@@ -29,7 +32,7 @@ public class BangDiaDialog extends JDialog{
     /**
      * tạo GUI
      */
-    private void prepareDialog(){
+    private void prepareDialog() {
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(MaterialDesign.BORDER_DIALOG);
         MaterialDesign.materialPanel(mainPanel);
@@ -229,10 +232,11 @@ public class BangDiaDialog extends JDialog{
 
     /**
      * Thông báo lỗi khi nhập sai
+     *
      * @param textField
      * @param message
      */
-    private void errorInput(JTextField textField, String message){
+    private void errorInput(JTextField textField, String message) {
         textField.setBorder(MaterialDesign.BORDER_ERROR);
         textField.requestFocus();
         textField.selectAll();
@@ -243,10 +247,11 @@ public class BangDiaDialog extends JDialog{
 
     /**
      * Tắt thông báo lỗi khi nhập sai
+     *
      * @param textField
      */
-    private void unErrorInput(JTextField textField){
-        if (!lblLoi.getText().isEmpty()){
+    private void unErrorInput(JTextField textField) {
+        if (!lblLoi.getText().isEmpty()) {
             MaterialDesign.materialTextField(textField);
             lblLoi.setText(" ");
         }
@@ -255,19 +260,20 @@ public class BangDiaDialog extends JDialog{
 
     /**
      * Kiểm tra dữ liệu nhập
+     *
      * @return
      */
-    private boolean validateData(){
+    private boolean validateData() {
         Pattern pattern = null;
 
         /**
          * Kiểm tra tên băng đĩa
          * Rule: tên băng đĩa không được rỗng, không quá 50 kí tự
          */
-        if (txtTenBangDia.getText().isEmpty()){
+        if (txtTenBangDia.getText().isEmpty()) {
             errorInput(txtTenBangDia, "Vui lòng nhập tên băng đĩa");
             return false;
-        }else if (txtTenBangDia.getText().trim().length() > 50){
+        } else if (txtTenBangDia.getText().trim().length() > 50) {
             errorInput(txtTenBangDia, "Tên băng đĩa không quá 50 kí tự");
             return false;
         }
@@ -276,10 +282,10 @@ public class BangDiaDialog extends JDialog{
          * Kiểm tra thể loại
          * Rule: thể loại không được rỗng, không quá 30 kí tự
          */
-        if (txtTheLoai.getText().trim().isEmpty()){
+        if (txtTheLoai.getText().trim().isEmpty()) {
             errorInput(txtTheLoai, "Vui lòng nhập thể loại");
             return false;
-        }else if (txtTheLoai.getText().trim().length() > 30){
+        } else if (txtTheLoai.getText().trim().length() > 30) {
             errorInput(txtTheLoai, "Thể loại không quá 30 kí tự");
             return false;
         }
@@ -288,10 +294,10 @@ public class BangDiaDialog extends JDialog{
          * Kiểm tra hãng sản xuất
          * Rule: hãng sản xuất không được rỗng, không quá 50 kí tự
          */
-        if (txtHangSanXuat.getText().trim().isEmpty()){
+        if (txtHangSanXuat.getText().trim().isEmpty()) {
             errorInput(txtHangSanXuat, "Vui lòng nhập hãng sản xuất");
             return false;
-        }else if (txtHangSanXuat.getText().trim().length() > 50){
+        } else if (txtHangSanXuat.getText().trim().length() > 50) {
             errorInput(txtHangSanXuat, "Hãng sản xuất không vượt quá 50 kí tự");
             return false;
         }
@@ -301,13 +307,13 @@ public class BangDiaDialog extends JDialog{
          * Rule: đơn giá không được rỗng, phải là số thực lớn hơn 0
          */
         pattern = Pattern.compile(PatternRegexs.REGEX_SOTHUC);
-        if (txtDonGia.getText().trim().isEmpty()){
+        if (txtDonGia.getText().trim().isEmpty()) {
             errorInput(txtDonGia, "Vui lòng nhập đơn giá");
             return false;
-        }else if (!pattern.matcher(txtDonGia.getText().trim()).matches()){
+        } else if (!pattern.matcher(txtDonGia.getText().trim()).matches()) {
             errorInput(txtDonGia, "Đơn giá phải là số");
             return false;
-        }else if (Double.parseDouble(txtDonGia.getText().trim()) <= 0){
+        } else if (Double.parseDouble(txtDonGia.getText().trim()) <= 0) {
             errorInput(txtDonGia, "Đơn giá phải lớn hơn 0");
             return false;
         }
@@ -317,16 +323,16 @@ public class BangDiaDialog extends JDialog{
          * Rule: Số lượng không được rỗng, phải là số nguyên dương > 0, và giới hạn là 6 số
          */
         pattern = Pattern.compile(PatternRegexs.REGEX_SO);
-        if (txtSoLuong.getText().trim().isEmpty()){
+        if (txtSoLuong.getText().trim().isEmpty()) {
             errorInput(txtSoLuong, "Vui lòng nhập số lượng");
             return false;
-        }else if (!pattern.matcher(txtSoLuong.getText().trim()).matches()){
+        } else if (!pattern.matcher(txtSoLuong.getText().trim()).matches()) {
             errorInput(txtSoLuong, "Số lượng phải là số nguyên");
             return false;
-        }else if(txtSoLuong.getText().trim().length() >= 6){
-            errorInput(txtSoLuong,"Số lượng quá lớn");
+        } else if (txtSoLuong.getText().trim().length() >= 6) {
+            errorInput(txtSoLuong, "Số lượng quá lớn");
             return false;
-        }else if (Integer.parseInt(txtSoLuong.getText().trim()) <= 0){
+        } else if (Integer.parseInt(txtSoLuong.getText().trim()) <= 0) {
             errorInput(txtSoLuong, "Số lượng phải lớn hơn 0");
             return false;
         }
@@ -337,9 +343,10 @@ public class BangDiaDialog extends JDialog{
 
     /**
      * Generate mã băng đãi mới
+     *
      * @return
      */
-    private String getMaBangDiaMoi(){
+    private String getMaBangDiaMoi() {
         String lastID = "";
         String newID = "";
 
@@ -350,14 +357,14 @@ public class BangDiaDialog extends JDialog{
         }
 
         // nếu chưa có băng đĩa nào trong DB thì trả về mã mặc định đầu tiên
-        if (lastID.isEmpty()){
+        if (lastID.isEmpty()) {
             return "BD00001";
         }
 
         // generate mã
         Pattern pattern = Pattern.compile(PatternRegexs.REGEX_MABANGDIA);
         Matcher matcher = pattern.matcher(lastID);
-        if (matcher.find()){
+        if (matcher.find()) {
             int number = Integer.parseInt(matcher.group(1));
             number++;
 
@@ -371,12 +378,14 @@ public class BangDiaDialog extends JDialog{
     /**
      * Sự kiện khi nhập text tên băng đĩa
      * Nếu có lỗi thì sẽ xoá lỗi
+     *
      * @return
      */
-    private KeyListener txtTenBangDia_KeyListener(){
+    private KeyListener txtTenBangDia_KeyListener() {
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {
+            }
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -384,7 +393,8 @@ public class BangDiaDialog extends JDialog{
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {}
+            public void keyReleased(KeyEvent e) {
+            }
         };
     }
 
@@ -392,12 +402,14 @@ public class BangDiaDialog extends JDialog{
     /**
      * Sự kiện khi nhập text thể loại
      * Nếu có lỗi thì sẽ xoá lỗi
+     *
      * @return
      */
-    private KeyListener txtTheLoai_KeyListener(){
+    private KeyListener txtTheLoai_KeyListener() {
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {
+            }
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -405,7 +417,8 @@ public class BangDiaDialog extends JDialog{
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {}
+            public void keyReleased(KeyEvent e) {
+            }
         };
     }
 
@@ -413,12 +426,14 @@ public class BangDiaDialog extends JDialog{
     /**
      * Sự kiện khi nhập text Hãng sản xuất
      * Nếu có lỗi thì sẽ xoá lỗi
+     *
      * @return
      */
-    private KeyListener txtHangSanXuat_KeyListener(){
+    private KeyListener txtHangSanXuat_KeyListener() {
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {
+            }
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -426,7 +441,8 @@ public class BangDiaDialog extends JDialog{
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {}
+            public void keyReleased(KeyEvent e) {
+            }
         };
     }
 
@@ -434,12 +450,14 @@ public class BangDiaDialog extends JDialog{
     /**
      * Sự kiện khi nhập text dơn giá
      * Nếu có lỗi thì sẽ xoá lỗi
+     *
      * @return
      */
-    private KeyListener txtDonGia_KeyListener(){
+    private KeyListener txtDonGia_KeyListener() {
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {
+            }
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -447,7 +465,8 @@ public class BangDiaDialog extends JDialog{
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {}
+            public void keyReleased(KeyEvent e) {
+            }
         };
     }
 
@@ -455,12 +474,14 @@ public class BangDiaDialog extends JDialog{
     /**
      * Sự kiện khi nhập text số lượng
      * Nếu có lỗi thì sẽ xoá lỗi
+     *
      * @return
      */
-    private KeyListener txtSoLuong_KeyListener(){
+    private KeyListener txtSoLuong_KeyListener() {
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {
+            }
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -468,16 +489,18 @@ public class BangDiaDialog extends JDialog{
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {}
+            public void keyReleased(KeyEvent e) {
+            }
         };
     }
 
 
     /**
      * Sự kiện button thoát > đóng dialog
+     *
      * @return
      */
-    private ActionListener btnThoat_Click(){
+    private ActionListener btnThoat_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -490,9 +513,10 @@ public class BangDiaDialog extends JDialog{
 
     /**
      * Sự kiện button Lưu
+     *
      * @return
      */
-    private ActionListener btnLuu_Click(){
+    private ActionListener btnLuu_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -524,15 +548,17 @@ public class BangDiaDialog extends JDialog{
 
     /**
      * Lấy băn đĩa đã được thêm/chỉnh sửa
+     *
      * @return
      */
-    public BangDia getBangDia(){
+    public BangDia getBangDia() {
         return bangDia;
     }
 
 
     /**
      * Constructor
+     *
      * @param frame
      * @param bangDia
      * @throws Exception
@@ -542,9 +568,9 @@ public class BangDiaDialog extends JDialog{
         this.bangDia = bangDia;
 
         // lấy instance kết nối với db (table BangDia)
-        try{
+        try {
             bangDiaDAO = BangDiaDAO.getInstance();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
 
@@ -553,10 +579,10 @@ public class BangDiaDialog extends JDialog{
          * Nếu param bangDia = null > Thêm băng đĩa
          * Nếu param bangDia != null > Cập nhật thông tin băng đĩa
          */
-        if (bangDia == null){
+        if (bangDia == null) {
             tieuDe = "Thêm băng đĩa";
             isChinhSua = false;
-        }else{
+        } else {
             tieuDe = "Cập nhật thông tin băng đĩa";
             isChinhSua = true;
         }

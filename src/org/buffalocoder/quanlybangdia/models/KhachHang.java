@@ -3,7 +3,7 @@ package org.buffalocoder.quanlybangdia.models;
 import java.sql.Date;
 import java.util.Objects;
 
-public class KhachHang extends ThongTinCaNhan{
+public class KhachHang extends ThongTinCaNhan {
     private String maKH;
     private Date ngayHetHan;
 

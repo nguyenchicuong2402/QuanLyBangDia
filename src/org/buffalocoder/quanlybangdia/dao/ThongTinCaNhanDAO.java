@@ -1,6 +1,7 @@
 package org.buffalocoder.quanlybangdia.dao;
 
 import org.buffalocoder.quanlybangdia.models.ThongTinCaNhan;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -13,6 +14,7 @@ public class ThongTinCaNhanDAO {
 
     /**
      * Tạo kết nối DB
+     *
      * @throws Exception
      */
     private ThongTinCaNhanDAO() throws Exception {
@@ -22,14 +24,15 @@ public class ThongTinCaNhanDAO {
 
     /**
      * Design Pattern: Singleton
+     *
      * @return
      * @throws Exception
      */
     public static ThongTinCaNhanDAO getInstance() throws Exception {
-        if(_instance == null) {
-            synchronized(ThongTinCaNhanDAO.class) {
-                if(null == _instance) {
-                    _instance  = new ThongTinCaNhanDAO();
+        if (_instance == null) {
+            synchronized (ThongTinCaNhanDAO.class) {
+                if (null == _instance) {
+                    _instance = new ThongTinCaNhanDAO();
                 }
             }
         }
@@ -39,6 +42,7 @@ public class ThongTinCaNhanDAO {
 
     /**
      * Lấy thông tin cá nhân
+     *
      * @param CMND
      * @return
      * @throws Exception
@@ -71,6 +75,7 @@ public class ThongTinCaNhanDAO {
 
     /**
      * Thêm thông tin cá nhân váo DB
+     *
      * @param thongTinCaNhan
      * @return
      * @throws Exception
@@ -89,11 +94,11 @@ public class ThongTinCaNhanDAO {
             preparedStatement.setInt(5, thongTinCaNhan.isGioiTinh() ? 1 : 0);
             preparedStatement.setDate(6, thongTinCaNhan.getNgaySinh());
 
-            if (preparedStatement.executeUpdate() > 0){
+            if (preparedStatement.executeUpdate() > 0) {
                 dataBaseUtils.commitQuery();
                 return getThongTinCaNhan(thongTinCaNhan.getcMND());
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             dataBaseUtils.rollbackQuery();
             throw new Exception("Thông tin cá nhân người này đã có trong hệ thống");
         } finally {
@@ -106,6 +111,7 @@ public class ThongTinCaNhanDAO {
 
     /**
      * Xoá thông tin cá nhân trong DB
+     *
      * @param CMND
      * @return
      * @throws Exception
@@ -118,11 +124,11 @@ public class ThongTinCaNhanDAO {
 
             preparedStatement.setString(1, CMND);
 
-            if (preparedStatement.executeUpdate()>0){
+            if (preparedStatement.executeUpdate() > 0) {
                 dataBaseUtils.commitQuery();
                 return true;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             dataBaseUtils.rollbackQuery();
             throw new Exception("Lỗi xoá thông tin cá nhân");
         } finally {
@@ -135,6 +141,7 @@ public class ThongTinCaNhanDAO {
 
     /**
      * Cập nhật thông tin cá nhân trong DB
+     *
      * @param thongTinCaNhan
      * @return
      * @throws Exception
@@ -154,11 +161,11 @@ public class ThongTinCaNhanDAO {
             preparedStatement.setDate(5, thongTinCaNhan.getNgaySinh());
             preparedStatement.setString(6, thongTinCaNhan.getcMND());
 
-            if(preparedStatement.executeUpdate() > 0){
+            if (preparedStatement.executeUpdate() > 0) {
                 dataBaseUtils.commitQuery();
                 return getThongTinCaNhan(thongTinCaNhan.getcMND());
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             dataBaseUtils.rollbackQuery();
             throw new Exception("Lỗi cập nhật thông tin cá nhân");
         } finally {

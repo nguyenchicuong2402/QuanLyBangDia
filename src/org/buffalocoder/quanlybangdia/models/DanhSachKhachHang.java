@@ -16,15 +16,17 @@ public class DanhSachKhachHang {
 
     /**
      * Lấy danh sách khách hàng
+     *
      * @return
      */
-    public ArrayList<KhachHang> getAll(){
+    public ArrayList<KhachHang> getAll() {
         return khachHangs;
     }
 
 
     /**
      * Load danh sách khách hàng từ DB lên
+     *
      * @throws Exception
      */
     public void loadData() throws Exception {
@@ -35,6 +37,7 @@ public class DanhSachKhachHang {
     /**
      * Thêm khách hàng mới (không cho thêm trùng mã khách hàng + CMND)
      * Lưu khách hàng vào DB
+     *
      * @param khachHang
      * @return
      * @throws Exception
@@ -51,6 +54,7 @@ public class DanhSachKhachHang {
     /**
      * Xoá khách hàng
      * Xoá khách hàng tương ứng trong DB
+     *
      * @param maKhachHang
      * @return
      * @throws Exception
@@ -68,6 +72,7 @@ public class DanhSachKhachHang {
     /**
      * Cập nhật thông tin khách hàng
      * Cập nhật thông tin khách hàng tương ứng trong DB
+     *
      * @param khachHang
      * @return
      * @throws Exception
@@ -79,10 +84,11 @@ public class DanhSachKhachHang {
 
     /**
      * Tìm vị trí của khách hàng trong danh sách
+     *
      * @param maKhachHang
      * @return
      */
-    public int tim (String maKhachHang){
+    public int tim(String maKhachHang) {
         for (int i = 0; i < khachHangs.size(); i++)
             if (khachHangs.get(i).getMaKH().equals(maKhachHang))
                 return i;

@@ -2,7 +2,7 @@ package org.buffalocoder.quanlybangdia.models;
 
 import java.sql.Date;
 
-public class NhanVien extends ThongTinCaNhan{
+public class NhanVien extends ThongTinCaNhan {
     private String maNhanVien;
     private String moTa;
 

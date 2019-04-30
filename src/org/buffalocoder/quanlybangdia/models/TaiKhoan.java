@@ -2,7 +2,7 @@ package org.buffalocoder.quanlybangdia.models;
 
 import java.util.Objects;
 
-public class TaiKhoan{
+public class TaiKhoan {
     private String tenTaiKhoan;
     private String matKhau;
     private int loaiTaiKhoan;
@@ -69,7 +69,7 @@ public class TaiKhoan{
                 "tenTaiKhoan='" + tenTaiKhoan + '\'' +
                 ", matKhau='" + matKhau + '\'' +
                 ", loaiTaiKhoan=" + loaiTaiKhoan +
-                ", maNhanVien=" + maNhanVien+
+                ", maNhanVien=" + maNhanVien +
                 '}';
     }
 }

@@ -34,7 +34,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
     /**
      * Tao GUI
      */
-    private void prepareUI(){
+    private void prepareUI() {
         this.setLayout(new BorderLayout());
         this.setFont(MaterialDesign.FONT_DEFAULT);
         this.setBorder(BorderFactory.createEmptyBorder());
@@ -88,7 +88,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
         MaterialDesign.materialTextField(txtTimKiem);
         searchPanel.add(txtTimKiem);
 
-        cbFilterTimKiem = new JComboBox<>(new String[] {
+        cbFilterTimKiem = new JComboBox<>(new String[]{
                 "Mã khách hàng",
                 "Tên khách hàng",
                 "CMND",
@@ -124,12 +124,13 @@ public class QuanLyKhachHangTabbed extends JPanel {
 
     /**
      * Lấy vị trí đang chọn trong table
+     *
      * @return
      */
-    private int getCurrentSelected(){
-        try{
+    private int getCurrentSelected() {
+        try {
             return tblKhachHang.convertRowIndexToModel(tblKhachHang.getSelectedRow());
-        }catch (Exception e){
+        } catch (Exception e) {
             return -1;
         }
     }
@@ -137,26 +138,27 @@ public class QuanLyKhachHangTabbed extends JPanel {
 
     /**
      * Set row được chọn
+     *
      * @param oldSelected
      */
-    private void setCurrentSelected(int oldSelected){
-        if (oldSelected != -1 && oldSelected <= tblKhachHang.getModel().getRowCount()){
+    private void setCurrentSelected(int oldSelected) {
+        if (oldSelected != -1 && oldSelected <= tblKhachHang.getModel().getRowCount()) {
             tblKhachHang.setRowSelectionInterval(oldSelected, oldSelected);
-        }else if (oldSelected != -1 && oldSelected > tblKhachHang.getModel().getRowCount()){
+        } else if (oldSelected != -1 && oldSelected > tblKhachHang.getModel().getRowCount()) {
             tblKhachHang.setRowSelectionInterval(oldSelected - 1, oldSelected - 1);
-        }else if (oldSelected == -1 && tblKhachHang.getModel().getRowCount() > 0){
+        } else if (oldSelected == -1 && tblKhachHang.getModel().getRowCount() > 0) {
             tblKhachHang.setRowSelectionInterval(0, 0);
-        }else tblKhachHang.clearSelection();
+        } else tblKhachHang.clearSelection();
     }
 
 
     /**
      * Refresh giao diện khi có cập nhật
      */
-    public void refresh(boolean reloadData){
+    public void refresh(boolean reloadData) {
         int oldSelected = getCurrentSelected();
 
-        if (reloadData){
+        if (reloadData) {
             // load lai dữ liệu
             try {
                 danhSachKhachHang.loadData();
@@ -176,13 +178,13 @@ public class QuanLyKhachHangTabbed extends JPanel {
         }
 
         // bật tắt chức năng sữa, xoá
-        if (getCurrentSelected() != -1){
+        if (getCurrentSelected() != -1) {
             btnSua.setEnabled(true);
             btnSua.setToolTipText("[Alt + S] Cập nhật thông tin khách hàng");
 
             btnXoa.setToolTipText("[Alt + X] Xoá khách hàng");
             btnXoa.setEnabled(true);
-        }else{
+        } else {
             btnSua.setToolTipText("Vui lòng chọn khách hàng cần cập nhật thông tin");
             btnSua.setEnabled(false);
 
@@ -195,13 +197,14 @@ public class QuanLyKhachHangTabbed extends JPanel {
     /**
      * Tìm kiếm record theo tên khách hàng
      * Dùng đối tượng filter table
+     *
      * @param filter_text
      */
     private void filterTable(String filter_text) {
         if (filter_text.isEmpty())
             sorter.setRowFilter(null);
         else {
-            try{
+            try {
                 RowFilter<Object, Object> filter = new RowFilter<Object, Object>() {
                     @Override
                     public boolean include(Entry<?, ?> entry) {
@@ -209,7 +212,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
                     }
                 };
                 sorter.setRowFilter(filter);
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 txtTimKiem.selectAll();
             }
 
@@ -219,9 +222,10 @@ public class QuanLyKhachHangTabbed extends JPanel {
 
     /**
      * Dialog thông báo
+     *
      * @param message
      */
-    private void thongBao(String message){
+    private void thongBao(String message) {
         thongBaoDialog = new ThongBaoDialog(
                 new JFrame(),
                 "Thông báo",
@@ -233,9 +237,10 @@ public class QuanLyKhachHangTabbed extends JPanel {
 
     /**
      * Dialog thông báo lỗi
+     *
      * @param message
      */
-    private void thongBaoLoi(String message){
+    private void thongBaoLoi(String message) {
         thongBaoDialog = new ThongBaoDialog(
                 new JFrame(),
                 "Lỗi",
@@ -247,9 +252,10 @@ public class QuanLyKhachHangTabbed extends JPanel {
 
     /**
      * Sự kiện button thêm
+     *
      * @return
      */
-    private ActionListener btnThem_Click(){
+    private ActionListener btnThem_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -269,10 +275,10 @@ public class QuanLyKhachHangTabbed extends JPanel {
                     return;
 
                 // thêm vào DB
-                try{
+                try {
                     danhSachKhachHang.them(khachHang);
                     refresh(true);
-                }catch (Exception e1){
+                } catch (Exception e1) {
                     thongBaoLoi(e1.getMessage());
                 }
             }
@@ -282,14 +288,15 @@ public class QuanLyKhachHangTabbed extends JPanel {
 
     /**
      * Sự kiện button sửa
+     *
      * @return
      */
-    private ActionListener btnSua_Click(){
+    private ActionListener btnSua_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // nếu người dùng chưa chọn dòng nào thì thông báo
-                if (getCurrentSelected() == -1){
+                if (getCurrentSelected() == -1) {
                     thongBao("Vui lòng chọn khách hàng cần sửa");
                     return;
                 }
@@ -311,10 +318,10 @@ public class QuanLyKhachHangTabbed extends JPanel {
                     return;
 
                 // lưu thông tin thay đổi vào DB
-                try{
+                try {
                     danhSachKhachHang.sua(khachHang);
                     refresh(true);
-                }catch (Exception e1){
+                } catch (Exception e1) {
                     thongBaoLoi(e1.getMessage());
                 }
             }
@@ -324,14 +331,15 @@ public class QuanLyKhachHangTabbed extends JPanel {
 
     /**
      * Sự kiện button xoá
+     *
      * @return
      */
-    private ActionListener btnXoa_Click(){
+    private ActionListener btnXoa_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // nếu người dùng chưa chọn dòn gnào
-                if (getCurrentSelected() == -1){
+                if (getCurrentSelected() == -1) {
                     thongBao("Vui lòng chọn khách hàng cần xoá");
                     return;
                 }
@@ -349,12 +357,12 @@ public class QuanLyKhachHangTabbed extends JPanel {
                 );
 
                 // nếu người dùng đồng ý
-                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
-                    try{
+                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION) {
+                    try {
                         danhSachKhachHang.xoa(maKhachHang);
                         tblKhachHang.clearSelection();
                         refresh(true);
-                    }catch (Exception e1){
+                    } catch (Exception e1) {
                         thongBaoLoi(e1.getMessage());
                     }
                 }
@@ -365,13 +373,14 @@ public class QuanLyKhachHangTabbed extends JPanel {
 
     /**
      * Sự kiện khi chọn tìm kiếm theo gì
+     *
      * @return
      */
-    private ActionListener cbFilterTimKiem_Changed(){
+    private ActionListener cbFilterTimKiem_Changed() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                switch (cbFilterTimKiem.getSelectedIndex()){
+                switch (cbFilterTimKiem.getSelectedIndex()) {
                     case 0:
                         indexFilter = 0;
                         break;
@@ -398,9 +407,10 @@ public class QuanLyKhachHangTabbed extends JPanel {
     /**
      * Sự kiện khi nhập text tìm kiếm
      * D2ung để tìm kiếm realtime
+     *
      * @return
      */
-    private DocumentListener txtTimKiem_DocumentListerner(){
+    private DocumentListener txtTimKiem_DocumentListerner() {
         return new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -422,9 +432,10 @@ public class QuanLyKhachHangTabbed extends JPanel {
 
     /**
      * Sự kiện table
+     *
      * @return
      */
-    private MouseListener tblKhachHang_MouseListener(){
+    private MouseListener tblKhachHang_MouseListener() {
         return new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -432,16 +443,20 @@ public class QuanLyKhachHangTabbed extends JPanel {
             }
 
             @Override
-            public void mousePressed(MouseEvent e) {}
+            public void mousePressed(MouseEvent e) {
+            }
 
             @Override
-            public void mouseReleased(MouseEvent e) {}
+            public void mouseReleased(MouseEvent e) {
+            }
 
             @Override
-            public void mouseEntered(MouseEvent e) {}
+            public void mouseEntered(MouseEvent e) {
+            }
 
             @Override
-            public void mouseExited(MouseEvent e) {}
+            public void mouseExited(MouseEvent e) {
+            }
         };
     }
 
@@ -449,7 +464,7 @@ public class QuanLyKhachHangTabbed extends JPanel {
     /**
      * Constructor
      */
-    public QuanLyKhachHangTabbed(){
+    public QuanLyKhachHangTabbed() {
         // kết nối DB
         try {
             danhSachKhachHang = new DanhSachKhachHang();

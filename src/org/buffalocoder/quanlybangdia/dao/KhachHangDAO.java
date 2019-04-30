@@ -17,6 +17,7 @@ public class KhachHangDAO {
 
     /**
      * Tạo kết nối DB
+     *
      * @throws Exception
      */
     private KhachHangDAO() throws Exception {
@@ -27,14 +28,15 @@ public class KhachHangDAO {
 
     /**
      * Design Pattern: Singleton
+     *
      * @return
      * @throws Exception
      */
     public static KhachHangDAO getInstance() throws Exception {
-        if(_instance == null) {
-            synchronized(KhachHangDAO.class) {
-                if(null == _instance) {
-                    _instance  = new KhachHangDAO();
+        if (_instance == null) {
+            synchronized (KhachHangDAO.class) {
+                if (null == _instance) {
+                    _instance = new KhachHangDAO();
                 }
             }
         }
@@ -44,6 +46,7 @@ public class KhachHangDAO {
 
     /**
      * Đọc khách hàng từ DB
+     *
      * @param maKhachHang
      * @return
      * @throws Exception
@@ -79,6 +82,7 @@ public class KhachHangDAO {
 
     /**
      * Đọc danh sách khách hàng trong Db
+     *
      * @return
      * @throws Exception
      */
@@ -89,7 +93,7 @@ public class KhachHangDAO {
         try {
             resultSet = dataBaseUtils.excuteQueryRead(sql);
 
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 KhachHang khachHang = new KhachHang(
                         resultSet.getString("CMND"),
                         resultSet.getString("HOTEN"),
@@ -116,6 +120,7 @@ public class KhachHangDAO {
     /**
      * Lấy mã khách hàng cuối
      * dùng để generate mã khách hàng mới
+     *
      * @return
      * @throws Exception
      */
@@ -137,6 +142,7 @@ public class KhachHangDAO {
 
     /**
      * Thêm khách hàng mới vào DB
+     *
      * @param khachHang
      * @return
      * @throws Exception
@@ -161,12 +167,12 @@ public class KhachHangDAO {
             preparedStatement.setString(1, khachHang.getMaKH());
             preparedStatement.setString(2, khachHang.getcMND());
 
-            if (preparedStatement.executeUpdate()>0){
+            if (preparedStatement.executeUpdate() > 0) {
                 dataBaseUtils.commitQuery();
                 return getKhachHang(khachHang.getMaKH());
             }
 
-        } catch (Exception e){
+        } catch (Exception e) {
             dataBaseUtils.rollbackQuery();
             throw new Exception("Lỗi thêm khách hàng");
         } finally {
@@ -179,6 +185,7 @@ public class KhachHangDAO {
 
     /**
      * Xoá khách hàng trong DB
+     *
      * @param maKhachHang
      * @return
      * @throws Exception
@@ -192,11 +199,11 @@ public class KhachHangDAO {
 
             preparedStatement.setString(1, maKhachHang);
 
-            if (preparedStatement.executeUpdate() > 0){
+            if (preparedStatement.executeUpdate() > 0) {
                 dataBaseUtils.commitQuery();
                 return thongTinCaNhanDAO.xoaThongTinCaNhan(cmnd);
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             dataBaseUtils.rollbackQuery();
             throw new Exception("Lỗi xoá khách hàng");
         } finally {
@@ -209,6 +216,7 @@ public class KhachHangDAO {
 
     /**
      * Cập nhật thông tin khách hàng trong DB
+     *
      * @param khachHang
      * @return
      * @throws Exception

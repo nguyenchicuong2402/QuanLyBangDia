@@ -13,12 +13,13 @@ import java.io.File;
 import java.io.FileWriter;
 
 public class DocGhiFileXML {
-    public DocGhiFileXML(){
+    public DocGhiFileXML() {
 
     }
 
     /**
      * Phương thức đọc file XML
+     *
      * @param filePath
      * @return
      * @throws Exception
@@ -41,15 +42,16 @@ public class DocGhiFileXML {
 
     /**
      * Phương thức ghi file XML
+     *
      * @param doc
      * @param filePath
      * @throws Exception
      */
     public void ghiFileXML(Document doc, String filePath) throws Exception {
-        try{
+        try {
             File file = new File(filePath);
 
-            DOMSource domSource = new DOMSource((Node)doc);
+            DOMSource domSource = new DOMSource((Node) doc);
 
             TransformerFactory factory = TransformerFactory.newInstance();
 
@@ -60,7 +62,7 @@ public class DocGhiFileXML {
             StreamResult sr = new StreamResult(fileWriter);
 
             transformer.transform(domSource, sr);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception("Lỗi ghi file cấu hình");
         }
     }

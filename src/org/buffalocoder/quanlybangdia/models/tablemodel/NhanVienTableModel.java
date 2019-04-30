@@ -13,7 +13,7 @@ public class NhanVienTableModel extends AbstractTableModel {
             "Mã NV", "Họ tên", "Giới tính", "Ngày sinh", "CMND", "Số điện thoại", "Địa chỉ", "Mô tả"
     };
 
-    public void setModel(ArrayList<NhanVien> nhanViens){
+    public void setModel(ArrayList<NhanVien> nhanViens) {
         this.nhanViens = nhanViens;
     }
 
@@ -38,20 +38,28 @@ public class NhanVienTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        try{
+        try {
             NhanVien nhanVien = nhanViens.get(rowIndex);
 
-            switch (columnIndex){
-                case 0: return nhanVien.getMaNhanVien();
-                case 1: return nhanVien.getHoTen();
-                case 2: return nhanVien.isGioiTinh() ? "Nam" : "Nữ";
-                case 3: return Formats.DATE_FORMAT.format(nhanVien.getNgaySinh());
-                case 4: return nhanVien.getcMND();
-                case 5: return nhanVien.getSoDienThoai();
-                case 6: return nhanVien.getDiaChi();
-                case 7: return nhanVien.getMoTa();
+            switch (columnIndex) {
+                case 0:
+                    return nhanVien.getMaNhanVien();
+                case 1:
+                    return nhanVien.getHoTen();
+                case 2:
+                    return nhanVien.isGioiTinh() ? "Nam" : "Nữ";
+                case 3:
+                    return Formats.DATE_FORMAT.format(nhanVien.getNgaySinh());
+                case 4:
+                    return nhanVien.getcMND();
+                case 5:
+                    return nhanVien.getSoDienThoai();
+                case 6:
+                    return nhanVien.getDiaChi();
+                case 7:
+                    return nhanVien.getMoTa();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 

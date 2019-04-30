@@ -1,6 +1,9 @@
 package org.buffalocoder.quanlybangdia.views.tabbed;
 
-import org.buffalocoder.quanlybangdia.models.*;
+import org.buffalocoder.quanlybangdia.models.DanhSachBangDia;
+import org.buffalocoder.quanlybangdia.models.DanhSachChoThue;
+import org.buffalocoder.quanlybangdia.models.DanhSachKhachHang;
+import org.buffalocoder.quanlybangdia.models.HoaDon;
 import org.buffalocoder.quanlybangdia.models.tablemodel.ChoThueTableModel;
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.views.dialog.ChoThueDialog;
@@ -38,7 +41,7 @@ public class QuanLyChoThueTabbed extends JPanel {
     /**
      * Tạo GUI
      */
-    private void prepareUI(){
+    private void prepareUI() {
         this.setLayout(new BorderLayout());
         this.setFont(MaterialDesign.FONT_DEFAULT);
         this.setBorder(BorderFactory.createEmptyBorder());
@@ -115,7 +118,7 @@ public class QuanLyChoThueTabbed extends JPanel {
         MaterialDesign.materialTextField(txtTimKiem);
         searchPanel.add(txtTimKiem);
 
-        cbFilterTimKiem = new JComboBox<>(new String[] {
+        cbFilterTimKiem = new JComboBox<>(new String[]{
                 "Mã hoá đơn",
                 "Tên khách hàng",
                 "Tên băng đĩa"
@@ -148,28 +151,29 @@ public class QuanLyChoThueTabbed extends JPanel {
 
     /**
      * Kiểm tra tình trạng thuê trước khi thêm/sửa
+     *
      * @param hoaDon
      * @param soLuongCu
      * @return
      */
-    private boolean kiemTraTinhTrangThue(HoaDon hoaDon, int soLuongCu){
+    private boolean kiemTraTinhTrangThue(HoaDon hoaDon, int soLuongCu) {
         // kiểm tra số lượng đặt có đủ không
-        if ((hoaDon.getBangDia().getSoLuongTon() + soLuongCu) < hoaDon.getSoLuong()){
+        if ((hoaDon.getBangDia().getSoLuongTon() + soLuongCu) < hoaDon.getSoLuong()) {
             thongBao("Không đủ số lượng băng đĩa");
             return false;
         }
 
         // kiểm tra băng đĩa
-        if (!hoaDon.getBangDia().isTinhTrang()){
+        if (!hoaDon.getBangDia().isTinhTrang()) {
             thongBao("Băng đĩa không còn sử dụng được");
             return false;
         }
 
         // kiểm tra người dùng có mượn quá hạn không
-        for (HoaDon hoaDon1 : danhSachChoThue.getAll()){
+        for (HoaDon hoaDon1 : danhSachChoThue.getAll()) {
             if (hoaDon1.getKhachHang().getMaKH().equals(
-                    hoaDon.getKhachHang().getMaKH())){
-                if (!hoaDon1.isThueQuaHan()){
+                    hoaDon.getKhachHang().getMaKH())) {
+                if (!hoaDon1.isThueQuaHan()) {
                     thongBao("Khách hàng thuê băng đĩa quá hạn\nVui lòng nhắc khách hàng trả băng đĩa trước khi thuê");
                     return false;
                 }
@@ -182,9 +186,10 @@ public class QuanLyChoThueTabbed extends JPanel {
 
     /**
      * Dialog thông báo
+     *
      * @param message
      */
-    private void thongBao(String message){
+    private void thongBao(String message) {
         thongBaoDialog = new ThongBaoDialog(
                 new JFrame(),
                 "Thông báo",
@@ -196,9 +201,10 @@ public class QuanLyChoThueTabbed extends JPanel {
 
     /**
      * Dialog thông báo lỗi
+     *
      * @param message
      */
-    private void thongBaoLoi(String message){
+    private void thongBaoLoi(String message) {
         thongBaoDialog = new ThongBaoDialog(
                 new JFrame(),
                 "Lỗi",
@@ -211,10 +217,10 @@ public class QuanLyChoThueTabbed extends JPanel {
     /**
      * Refresh giao diện khi có cập nhật dữ liệu
      */
-    public void refresh(boolean reloadData){
+    public void refresh(boolean reloadData) {
         int oldSelected = getCurrentSelected();
 
-        if (reloadData){
+        if (reloadData) {
             // load lại dữ liệu từ DB
             try {
                 danhSachBangDia.loadData();
@@ -239,13 +245,13 @@ public class QuanLyChoThueTabbed extends JPanel {
          * Bật tắt nút thêm hoá đơn
          * Khi chưa có người dùng và băng đĩa thì k được thêm hoá đơn
          */
-        if (danhSachKhachHang.getAll().size() > 0 && danhSachBangDia.getAll().size() > 0){
+        if (danhSachKhachHang.getAll().size() > 0 && danhSachBangDia.getAll().size() > 0) {
             btnThem.setEnabled(true);
             btnThem.setToolTipText("[Alt + T] Thêm hoá đơn");
-        }else if (danhSachKhachHang.getAll().size() <= 0) {
+        } else if (danhSachKhachHang.getAll().size() <= 0) {
             btnThem.setEnabled(false);
             btnThem.setToolTipText("Vui lòng thêm khách hàng");
-        }else if (danhSachBangDia.getAll().size() <= 0){
+        } else if (danhSachBangDia.getAll().size() <= 0) {
             btnThem.setEnabled(false);
             btnThem.setToolTipText("Vui lòng thêm băng đĩa");
         }
@@ -257,11 +263,12 @@ public class QuanLyChoThueTabbed extends JPanel {
          * Nếu hoá đơn đã thanh toán thì disable nút thanh toán
          */
         int rowSelected = -1;
-        try{
+        try {
             rowSelected = tblChoThue.convertRowIndexToModel(tblChoThue.getSelectedRow());
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
 
-        if (rowSelected == -1){
+        if (rowSelected == -1) {
             btnSua.setToolTipText("Vui lòng chọn hoá đơn cần cập nhật thông tin");
             btnSua.setEnabled(false);
 
@@ -270,17 +277,17 @@ public class QuanLyChoThueTabbed extends JPanel {
 
             btnThanhToan.setToolTipText("Vui lòng chọn hoá đơn cần thanh toán");
             btnThanhToan.setEnabled(false);
-        }else{
+        } else {
             btnSua.setEnabled(true);
             btnSua.setToolTipText("[Alt + S] Cập nhật thông tin hoá đơn");
 
             btnXoa.setToolTipText("[Alt + X] Xoá hoá đơn");
             btnXoa.setEnabled(true);
 
-            if (String.valueOf(tblChoThue.getModel().getValueAt(rowSelected, 7)).equalsIgnoreCase("Đang thuê")){
+            if (String.valueOf(tblChoThue.getModel().getValueAt(rowSelected, 7)).equalsIgnoreCase("Đang thuê")) {
                 btnThanhToan.setToolTipText("Thanh toán hoá đơn");
                 btnThanhToan.setEnabled(true);
-            }else{
+            } else {
                 btnThanhToan.setToolTipText("Hoá đơn đã được thanh toán");
                 btnThanhToan.setEnabled(false);
 
@@ -297,13 +304,14 @@ public class QuanLyChoThueTabbed extends JPanel {
     /**
      * Tìm kiếm
      * Sử dụng dối tượng filter table
+     *
      * @param filter_text
      */
     private void filterTable(String filter_text) {
         if (filter_text.isEmpty())
             sorter.setRowFilter(null);
         else {
-            try{
+            try {
                 RowFilter<Object, Object> filter = new RowFilter<Object, Object>() {
                     @Override
                     public boolean include(Entry<?, ?> entry) {
@@ -311,7 +319,7 @@ public class QuanLyChoThueTabbed extends JPanel {
                     }
                 };
                 sorter.setRowFilter(filter);
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 txtTimKiem.selectAll();
             }
         }
@@ -320,12 +328,13 @@ public class QuanLyChoThueTabbed extends JPanel {
 
     /**
      * Lấy vị trí đang chọn trong table
+     *
      * @return
      */
-    private int getCurrentSelected(){
-        try{
+    private int getCurrentSelected() {
+        try {
             return tblChoThue.convertRowIndexToModel(tblChoThue.getSelectedRow());
-        }catch (Exception e){
+        } catch (Exception e) {
             return -1;
         }
     }
@@ -333,24 +342,26 @@ public class QuanLyChoThueTabbed extends JPanel {
 
     /**
      * Set row được chọn
+     *
      * @param oldSelected
      */
-    private void setCurrentSelected(int oldSelected){
-        if (oldSelected != -1 && oldSelected <= tblChoThue.getModel().getRowCount()){
+    private void setCurrentSelected(int oldSelected) {
+        if (oldSelected != -1 && oldSelected <= tblChoThue.getModel().getRowCount()) {
             tblChoThue.setRowSelectionInterval(oldSelected, oldSelected);
-        }else if (oldSelected != -1 && oldSelected > tblChoThue.getModel().getRowCount()){
+        } else if (oldSelected != -1 && oldSelected > tblChoThue.getModel().getRowCount()) {
             tblChoThue.setRowSelectionInterval(oldSelected - 1, oldSelected - 1);
-        }else if (oldSelected == -1 && tblChoThue.getModel().getRowCount() > 0){
+        } else if (oldSelected == -1 && tblChoThue.getModel().getRowCount() > 0) {
             tblChoThue.setRowSelectionInterval(0, 0);
-        }else tblChoThue.clearSelection();
+        } else tblChoThue.clearSelection();
     }
 
 
     /**
      * Sự kiện button thêm
+     *
      * @return
      */
-    private ActionListener btnThem_Click(){
+    private ActionListener btnThem_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -366,12 +377,12 @@ public class QuanLyChoThueTabbed extends JPanel {
                 HoaDon hoaDon = choThueDialog.getHoaDon();
 
                 // kiểm tra tình trạng thuê và thêm vào DB
-                try{
-                    if (hoaDon != null && kiemTraTinhTrangThue(hoaDon, 0)){
+                try {
+                    if (hoaDon != null && kiemTraTinhTrangThue(hoaDon, 0)) {
                         danhSachChoThue.them(hoaDon);
                         refresh(true);
                     }
-                }catch (Exception e1){
+                } catch (Exception e1) {
                     thongBaoLoi(e1.getMessage());
                 }
             }
@@ -381,14 +392,15 @@ public class QuanLyChoThueTabbed extends JPanel {
 
     /**
      * Sự kiện button sửa
+     *
      * @return
      */
-    private ActionListener btnSua_Click(){
+    private ActionListener btnSua_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // nếu người dùng chưa chọn dòng nào thì thông báo
-                if (getCurrentSelected() == -1){
+                if (getCurrentSelected() == -1) {
                     thongBao("Vui lòng chọn hoá đơn cần sửa");
                     return;
                 }
@@ -409,12 +421,12 @@ public class QuanLyChoThueTabbed extends JPanel {
                 hoaDon = choThueDialog.getHoaDon();
 
                 // kiểm tra hoá đơn có rỗng không và tình trạng thuê
-                try{
-                    if (hoaDon != null && kiemTraTinhTrangThue(hoaDon, soLuongCu)){
+                try {
+                    if (hoaDon != null && kiemTraTinhTrangThue(hoaDon, soLuongCu)) {
                         danhSachChoThue.sua(hoaDon);
                         refresh(true);
                     }
-                }catch (Exception e1){
+                } catch (Exception e1) {
                     thongBaoLoi(e1.getMessage());
                 }
             }
@@ -424,18 +436,19 @@ public class QuanLyChoThueTabbed extends JPanel {
 
     /**
      * Sự kiện button xoá
+     *
      * @return
      */
-    private ActionListener btnXoa_Click(){
+    private ActionListener btnXoa_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // nếu người dùng chưa chọn dòng nào thì thông báo
                 // nếu hoá đơn đó đã thanh toán thì không cho xoá
-                if (getCurrentSelected() == -1){
+                if (getCurrentSelected() == -1) {
                     thongBao("Vui lòng chọn hoá đơn cần xoá");
                     return;
-                }else if (String.valueOf(tblChoThue.getModel().getValueAt(getCurrentSelected(), 7)).equalsIgnoreCase("Đã thanh toán")){
+                } else if (String.valueOf(tblChoThue.getModel().getValueAt(getCurrentSelected(), 7)).equalsIgnoreCase("Đã thanh toán")) {
                     thongBao("Không thể xoá hoá đơn đã thanh toán");
                     return;
                 }
@@ -454,12 +467,12 @@ public class QuanLyChoThueTabbed extends JPanel {
                 );
 
                 // nếu người dùng đồng ý
-                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
-                    try{
+                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION) {
+                    try {
                         danhSachChoThue.xoa(maHoaDon);
                         tblChoThue.clearSelection();
                         refresh(true);
-                    }catch (Exception e1){
+                    } catch (Exception e1) {
                         thongBaoLoi(e1.getMessage());
                     }
                 }
@@ -470,14 +483,15 @@ public class QuanLyChoThueTabbed extends JPanel {
 
     /**
      * Sự kiện button thanh toán
+     *
      * @return
      */
-    private ActionListener btnThanhToan_Click(){
+    private ActionListener btnThanhToan_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // nếu người dùng chưa chọn dòng nào thì thông báo
-                if (getCurrentSelected() == -1){
+                if (getCurrentSelected() == -1) {
                     thongBao("Vui lòng chọn hoá đơn cần thanh toán");
                     return;
                 }
@@ -495,21 +509,21 @@ public class QuanLyChoThueTabbed extends JPanel {
                         soLuong
                 );
 
-                if (thanhToanDialog.getKetQua() == 0){
-                    try{
+                if (thanhToanDialog.getKetQua() == 0) {
+                    try {
                         danhSachChoThue.thanhToanHoaDon(maHoaDon);
                         refresh(true);
-                    }catch (Exception e1){
+                    } catch (Exception e1) {
                         thongBaoLoi(e1.getMessage());
                     }
-                }else if (thanhToanDialog.getKetQua() > 0){
-                    try{
+                } else if (thanhToanDialog.getKetQua() > 0) {
+                    try {
                         HoaDon hoaDon = danhSachChoThue.getAll().get(danhSachChoThue.tim(maHoaDon));
                         hoaDon.setSoLuong(thanhToanDialog.getKetQua());
 
                         danhSachChoThue.sua(hoaDon);
                         refresh(true);
-                    }catch (Exception e1){
+                    } catch (Exception e1) {
                         thongBaoLoi(e1.getMessage());
                     }
                 }
@@ -520,13 +534,14 @@ public class QuanLyChoThueTabbed extends JPanel {
 
     /**
      * Sự kiện khi chọn tìm kiếm theo gì
+     *
      * @return
      */
-    private ActionListener cbFilterTimKiem_Changed(){
+    private ActionListener cbFilterTimKiem_Changed() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                switch (cbFilterTimKiem.getSelectedIndex()){
+                switch (cbFilterTimKiem.getSelectedIndex()) {
                     case 0:
                         indexFilter = 0;
                         break;
@@ -546,9 +561,10 @@ public class QuanLyChoThueTabbed extends JPanel {
 
     /**
      * Sự kiện ComboBox filter table theo Tình trạng hoá đơn
+     *
      * @return
      */
-    private ActionListener cbFilter_Selected(){
+    private ActionListener cbFilter_Selected() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -562,7 +578,7 @@ public class QuanLyChoThueTabbed extends JPanel {
                 if (filter_text.equalsIgnoreCase("Tất cả"))
                     sorter.setRowFilter(null);
                 else {
-                    try{
+                    try {
                         RowFilter<Object, Object> filter = new RowFilter<Object, Object>() {
                             @Override
                             public boolean include(Entry<?, ?> entry) {
@@ -570,7 +586,7 @@ public class QuanLyChoThueTabbed extends JPanel {
                             }
                         };
                         sorter.setRowFilter(filter);
-                    }catch (NumberFormatException e1){
+                    } catch (NumberFormatException e1) {
                         cbFilter.setSelectedIndex(0);
                     }
                 }
@@ -582,9 +598,10 @@ public class QuanLyChoThueTabbed extends JPanel {
     /**
      * Sự kiện khi nhập text tìm kiếm
      * Tìm kiếm realtime
+     *
      * @return
      */
-    private DocumentListener txtTimKiem_DocumentListener(){
+    private DocumentListener txtTimKiem_DocumentListener() {
         return new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -606,9 +623,10 @@ public class QuanLyChoThueTabbed extends JPanel {
 
     /**
      * Sự kiện table cho thuê
+     *
      * @return
      */
-    private MouseListener tblChoThue_MouseListener(){
+    private MouseListener tblChoThue_MouseListener() {
         return new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -616,21 +634,25 @@ public class QuanLyChoThueTabbed extends JPanel {
             }
 
             @Override
-            public void mousePressed(MouseEvent e) {}
+            public void mousePressed(MouseEvent e) {
+            }
 
             @Override
-            public void mouseReleased(MouseEvent e) {}
+            public void mouseReleased(MouseEvent e) {
+            }
 
             @Override
-            public void mouseEntered(MouseEvent e) {}
+            public void mouseEntered(MouseEvent e) {
+            }
 
             @Override
-            public void mouseExited(MouseEvent e) {}
+            public void mouseExited(MouseEvent e) {
+            }
         };
     }
 
 
-    public QuanLyChoThueTabbed(){
+    public QuanLyChoThueTabbed() {
         try {
             danhSachChoThue = new DanhSachChoThue();
             danhSachKhachHang = new DanhSachKhachHang();

@@ -16,15 +16,17 @@ public class DanhSachNhanVien {
 
     /**
      * Lấy danh sách nhân viên
+     *
      * @return
      */
-    public ArrayList<NhanVien> getAll(){
+    public ArrayList<NhanVien> getAll() {
         return nhanViens;
     }
 
 
     /**
      * Load danh sách nhân viên từ DB
+     *
      * @throws Exception
      */
     public void loadData() throws Exception {
@@ -35,6 +37,7 @@ public class DanhSachNhanVien {
     /**
      * Thêm nhân viên mới (không cho phép thêm trùng mã nhân viên + CMND)
      * Thêm nhân viên tương ứng vào DB
+     *
      * @param nhanVien
      * @return
      * @throws Exception
@@ -50,6 +53,7 @@ public class DanhSachNhanVien {
     /**
      * Xoá nhân viên
      * Xoá nhân viên tương ứng trong DB
+     *
      * @param maNhanVien
      * @return
      * @throws Exception
@@ -67,6 +71,7 @@ public class DanhSachNhanVien {
     /**
      * Cập nhật thông tin nhân viên
      * Cập nhật thông tin nhân viên tương ứng trong DB
+     *
      * @param nhanVien
      * @return
      * @throws Exception
@@ -79,10 +84,11 @@ public class DanhSachNhanVien {
 
     /**
      * Tìm vị trí nhân viên trong danh sách
+     *
      * @param maNhanVien
      * @return
      */
-    public int tim (String maNhanVien){
+    public int tim(String maNhanVien) {
         for (int i = 0; i < nhanViens.size(); i++)
             if (nhanViens.get(i).getMaNhanVien().equals(maNhanVien))
                 return i;

@@ -13,18 +13,19 @@ public class QuanLyXML {
     private static DocGhiFileXML docGhiFileXML;
     private static Document document;
 
-    public QuanLyXML(){
+    public QuanLyXML() {
         docGhiFileXML = new DocGhiFileXML();
     }
 
     /**
      * Phương thức lấy config database
+     *
      * @return
      */
-    public String[] getConfigDatabase(){
+    public String[] getConfigDatabase() {
         String config[] = new String[5];
 
-        try{
+        try {
             document = docGhiFileXML.docFileXML(FILEPATH_PROPERTISE);
             Element rootElement = document.getDocumentElement();
             Element sqlElement = (Element) rootElement.getElementsByTagName("SQL").item(0);
@@ -35,8 +36,8 @@ public class QuanLyXML {
             config[3] = sqlElement.getElementsByTagName("username").item(0).getTextContent();
             config[4] = sqlElement.getElementsByTagName("password").item(0).getTextContent();
 
-           return config;
-        }catch (Exception e){
+            return config;
+        } catch (Exception e) {
             return null;
         }
     }
@@ -44,19 +45,20 @@ public class QuanLyXML {
 
     /**
      * Lấy tài khoản đã ghi nhớ trong hệ thống
+     *
      * @return
      */
-    public TaiKhoan getGhiNhoTaiKhoan(){
+    public TaiKhoan getGhiNhoTaiKhoan() {
         TaiKhoan taiKhoan = new TaiKhoan();
 
-        try{
+        try {
             document = docGhiFileXML.docFileXML(FILEPATH_PROPERTISE);
             Element rootElement = document.getDocumentElement();
             Element accountElement = (Element) rootElement.getElementsByTagName("Account").item(0);
 
             // kiểm tra xem người dùng có ghi nhớ mật khẩu không
             int remember = Integer.parseInt(accountElement.getAttributes().getNamedItem("remember").getTextContent());
-            if (remember == 1){
+            if (remember == 1) {
                 taiKhoan.setTenTaiKhoan(accountElement.getElementsByTagName("username")
                         .item(0).getTextContent());
 
@@ -65,7 +67,7 @@ public class QuanLyXML {
 
                 return taiKhoan;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
 
@@ -74,21 +76,22 @@ public class QuanLyXML {
 
     /**
      * Ghi nhớ tài khoản vào hệ thống
+     *
      * @param taiKhoan
      * @return
      */
-    public boolean ghiNhoTaiKhoan(TaiKhoan taiKhoan){
-        try{
+    public boolean ghiNhoTaiKhoan(TaiKhoan taiKhoan) {
+        try {
             document = docGhiFileXML.docFileXML(FILEPATH_PROPERTISE);
 
             Element rootElement = document.getDocumentElement();
             Element accountElement = (Element) rootElement.getElementsByTagName("Account").item(0);
 
-            if (taiKhoan != null){
+            if (taiKhoan != null) {
                 accountElement.getAttributes().getNamedItem("remember").setTextContent("1");
                 accountElement.getElementsByTagName("username").item(0).setTextContent(taiKhoan.getTenTaiKhoan());
                 accountElement.getElementsByTagName("password").item(0).setTextContent(taiKhoan.getMatKhau());
-            }else{
+            } else {
                 accountElement.getAttributes().getNamedItem("remember").setTextContent("0");
                 accountElement.getElementsByTagName("username").item(0).setTextContent("");
                 accountElement.getElementsByTagName("password").item(0).setTextContent("");
@@ -96,18 +99,19 @@ public class QuanLyXML {
 
             docGhiFileXML.ghiFileXML(document, FILEPATH_PROPERTISE);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
 
     /**
      * Ghi nhớ ID Color hiện tại
+     *
      * @param id
      * @return
      */
-    public boolean setIDColor(String id){
-        try{
+    public boolean setIDColor(String id) {
+        try {
             document = docGhiFileXML.docFileXML(FILEPATH_PROPERTISE);
 
             Element rootElement = document.getDocumentElement();
@@ -117,34 +121,36 @@ public class QuanLyXML {
 
             docGhiFileXML.ghiFileXML(document, FILEPATH_PROPERTISE);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
 
     /**
      * Lấy ID Theme hiện tại đang sử dụng
+     *
      * @return
      */
-    public String getIDThemes(){
-        try{
+    public String getIDThemes() {
+        try {
             document = docGhiFileXML.docFileXML(FILEPATH_PROPERTISE);
             Element rootElement = document.getDocumentElement();
             Element settingElement = (Element) rootElement.getElementsByTagName("Setting").item(0);
 
             return settingElement.getElementsByTagName("themes").item(0).getTextContent();
-        }catch (Exception e){
+        } catch (Exception e) {
             return "blue";
         }
     }
 
     /**
      * Lấy màu Primary bằng ID Theme
+     *
      * @param id
      * @return
      */
-    public String getColorPrimary(String id){
-        try{
+    public String getColorPrimary(String id) {
+        try {
             document = docGhiFileXML.docFileXML(FILEPATH_THEMES);
             Element rootElement = document.getDocumentElement();
             NodeList templateElement = rootElement.getElementsByTagName("Template");
@@ -152,18 +158,19 @@ public class QuanLyXML {
             Element theme = timMauTheoID(templateElement, id);
 
             return theme.getElementsByTagName("primary").item(0).getTextContent();
-        }catch (Exception e){
+        } catch (Exception e) {
             return "#1976d2";
         }
     }
 
     /**
      * Lấy màu Secondary bằng ID Theme
+     *
      * @param id
      * @return
      */
-    public String getColorSecondary(String id){
-        try{
+    public String getColorSecondary(String id) {
+        try {
             document = docGhiFileXML.docFileXML(FILEPATH_THEMES);
             Element rootElement = document.getDocumentElement();
             NodeList templateElement = rootElement.getElementsByTagName("Template");
@@ -171,7 +178,7 @@ public class QuanLyXML {
             Element theme = timMauTheoID(templateElement, id);
 
             return theme.getElementsByTagName("secondary").item(0).getTextContent();
-        }catch (Exception e){
+        } catch (Exception e) {
             return "#2196f3";
         }
     }
@@ -179,11 +186,12 @@ public class QuanLyXML {
 
     /**
      * Lấy màu Dark bằng ID Theme
+     *
      * @param id
      * @return
      */
-    public String getColorDark(String id){
-        try{
+    public String getColorDark(String id) {
+        try {
             document = docGhiFileXML.docFileXML(FILEPATH_THEMES);
             Element rootElement = document.getDocumentElement();
             NodeList templateElement = rootElement.getElementsByTagName("Template");
@@ -191,7 +199,7 @@ public class QuanLyXML {
             Element theme = timMauTheoID(templateElement, id);
 
             return theme.getElementsByTagName("dark").item(0).getTextContent();
-        }catch (Exception e){
+        } catch (Exception e) {
             return "#0d47a1";
         }
     }
@@ -199,11 +207,12 @@ public class QuanLyXML {
 
     /**
      * Lấy màu bakground bằng ID Theme
+     *
      * @param id
      * @return
      */
-    public String getColorBackground(String id){
-        try{
+    public String getColorBackground(String id) {
+        try {
             document = docGhiFileXML.docFileXML(FILEPATH_THEMES);
             Element rootElement = document.getDocumentElement();
             NodeList templateElement = rootElement.getElementsByTagName("Template");
@@ -211,21 +220,22 @@ public class QuanLyXML {
             Element theme = timMauTheoID(templateElement, id);
 
             return theme.getElementsByTagName("background").item(0).getTextContent();
-        }catch (Exception e){
+        } catch (Exception e) {
             return "#e1f5fe";
         }
     }
 
     /**
      * Tìm màu theo ID trong XML
+     *
      * @param nodeList
      * @param id
      * @return
      */
-    public Element timMauTheoID(NodeList nodeList, String id){
-        for (int i = 0; i < nodeList.getLength(); i++){
+    public Element timMauTheoID(NodeList nodeList, String id) {
+        for (int i = 0; i < nodeList.getLength(); i++) {
             if (nodeList.item(i).getAttributes().item(0).getTextContent().equals(id))
-                return (Element)nodeList.item(i);
+                return (Element) nodeList.item(i);
         }
 
         return null;

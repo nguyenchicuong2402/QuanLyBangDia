@@ -4,9 +4,10 @@ import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class ThongBaoDialog extends JDialog{
+public class ThongBaoDialog extends JDialog {
     public static final int OK_CANCLE_OPTION = 1;
     public static final int OK_OPTION = 2;
     public static final int CANCLE_OPTION = 3;
@@ -83,7 +84,7 @@ public class ThongBaoDialog extends JDialog{
         MaterialDesign.materialButton(btnHuy);
         btnHuy.setBackground(MaterialDesign.COLOR_ERROR);
         btnHuy.addActionListener(btnHuy_Click());
-        if (kieuThongBao == 1){
+        if (kieuThongBao == 1) {
             bx2.add(btnHuy);
             bx2.add(Box.createHorizontalStrut(10));
         }
@@ -101,9 +102,10 @@ public class ThongBaoDialog extends JDialog{
 
     /**
      * Sự kiện button Huỷ
+     *
      * @return
      */
-    private ActionListener btnHuy_Click(){
+    private ActionListener btnHuy_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -116,9 +118,10 @@ public class ThongBaoDialog extends JDialog{
 
     /**
      * Sự kiện button Đồng ý
+     *
      * @return
      */
-    private ActionListener btnDongY_Click(){
+    private ActionListener btnDongY_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -131,6 +134,7 @@ public class ThongBaoDialog extends JDialog{
 
     /**
      * Lấy kết quả người dùng chọn
+     *
      * @return
      */
     public int getKetQua() {
@@ -140,12 +144,13 @@ public class ThongBaoDialog extends JDialog{
 
     /**
      * Constructor
+     *
      * @param frame
      * @param tieuDe
      * @param noiDung
      * @param kieuThongBao
      */
-    public ThongBaoDialog(JFrame frame, String tieuDe, String noiDung, int kieuThongBao){
+    public ThongBaoDialog(JFrame frame, String tieuDe, String noiDung, int kieuThongBao) {
         super(frame, true);
 
         this.tieuDe = tieuDe;

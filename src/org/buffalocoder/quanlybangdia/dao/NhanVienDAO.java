@@ -18,6 +18,7 @@ public class NhanVienDAO {
 
     /**
      * Kết nối DB
+     *
      * @throws Exception
      */
     private NhanVienDAO() throws Exception {
@@ -29,14 +30,15 @@ public class NhanVienDAO {
 
     /**
      * Design Patter: Singleton
+     *
      * @return
      * @throws Exception
      */
     public static NhanVienDAO getInstance() throws Exception {
-        if(_instance == null) {
-            synchronized(NhanVienDAO.class) {
-                if(null == _instance) {
-                    _instance  = new NhanVienDAO();
+        if (_instance == null) {
+            synchronized (NhanVienDAO.class) {
+                if (null == _instance) {
+                    _instance = new NhanVienDAO();
                 }
             }
         }
@@ -46,6 +48,7 @@ public class NhanVienDAO {
 
     /**
      * Đọc nhân viên từ DB
+     *
      * @param maNhanVien
      * @return
      * @throws Exception
@@ -80,6 +83,7 @@ public class NhanVienDAO {
 
     /**
      * Đọc danh sách nhân viên từ DB
+     *
      * @return
      * @throws Exception
      */
@@ -90,7 +94,7 @@ public class NhanVienDAO {
         try {
             resultSet = dataBaseUtils.excuteQueryRead(sql);
 
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 NhanVien nhanVien = new NhanVien(
                         resultSet.getString("CMND"),
                         resultSet.getString("HOTEN"),
@@ -117,6 +121,7 @@ public class NhanVienDAO {
     /**
      * Lấy mã nhân viên cuối
      * dùng để generate mã nhân viên mới
+     *
      * @return
      * @throws Exception
      */
@@ -138,6 +143,7 @@ public class NhanVienDAO {
 
     /**
      * Thêm nhân viên mới vào DB
+     *
      * @param nhanVien
      * @return
      * @throws Exception
@@ -164,11 +170,11 @@ public class NhanVienDAO {
             preparedStatement.setString(2, nhanVien.getcMND());
             preparedStatement.setString(3, nhanVien.getMoTa());
 
-            if (preparedStatement.executeUpdate()>0){
+            if (preparedStatement.executeUpdate() > 0) {
                 dataBaseUtils.commitQuery();
                 return getNhanVien(nhanVien.getMaNhanVien());
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             dataBaseUtils.rollbackQuery();
             throw new Exception("Lỗi thêm nhân viên");
         } finally {
@@ -181,6 +187,7 @@ public class NhanVienDAO {
 
     /**
      * Xoá nhân viên mới vào DB
+     *
      * @param maNhanVien
      * @return
      * @throws Exception
@@ -198,11 +205,11 @@ public class NhanVienDAO {
 
             preparedStatement.setString(1, maNhanVien);
 
-            if (preparedStatement.executeUpdate() > 0){
+            if (preparedStatement.executeUpdate() > 0) {
                 dataBaseUtils.commitQuery();
                 return thongTinCaNhanDAO.xoaThongTinCaNhan(cmnd);
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             dataBaseUtils.rollbackQuery();
             throw new Exception("Lỗi xoá nhân viên");
         } finally {
@@ -215,6 +222,7 @@ public class NhanVienDAO {
 
     /**
      * Cập nhật nhân viên vào DB
+     *
      * @param nhanVien
      * @return
      * @throws Exception
@@ -240,11 +248,11 @@ public class NhanVienDAO {
             preparedStatement.setString(1, nhanVien.getMoTa());
             preparedStatement.setString(2, nhanVien.getMaNhanVien());
 
-            if (preparedStatement.executeUpdate()>0){
+            if (preparedStatement.executeUpdate() > 0) {
                 dataBaseUtils.commitQuery();
                 return getNhanVien(nhanVien.getMaNhanVien());
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             dataBaseUtils.rollbackQuery();
             throw new Exception("Lỗi cập nhật thông tin nhân viên");
         } finally {

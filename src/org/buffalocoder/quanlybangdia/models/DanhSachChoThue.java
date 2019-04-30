@@ -16,15 +16,17 @@ public class DanhSachChoThue {
 
     /**
      * Lấy tất cả danh sách cho thuê
+     *
      * @return
      */
-    public ArrayList<HoaDon> getAll(){
+    public ArrayList<HoaDon> getAll() {
         return hoaDons;
     }
 
 
     /**
      * Load danh sách hoá đơn từ DB
+     *
      * @throws Exception
      */
     public void loadData() throws Exception {
@@ -34,10 +36,11 @@ public class DanhSachChoThue {
 
     /**
      * tìm vị trí hoá đơn trong danh sách
+     *
      * @param maHoaDon
      * @return
      */
-    public int tim (String maHoaDon){
+    public int tim(String maHoaDon) {
         for (int i = 0; i < hoaDons.size(); i++)
             if (hoaDons.get(i).getMaHoaDon().equals(maHoaDon))
                 return i;
@@ -49,21 +52,23 @@ public class DanhSachChoThue {
     /**
      * Thêm hoá đơn mới (không cho thêm hoá đơn trùng mã)
      * Lưu hoá đơn vào DB
+     *
      * @param hoaDon
      * @return
      * @throws Exception
      */
     public boolean them(HoaDon hoaDon) throws Exception {
-        if(hoaDon == null || hoaDons.contains(hoaDon))
+        if (hoaDon == null || hoaDons.contains(hoaDon))
             return false;
 
-        return  hoaDons.add(hoaDonDAO.themHoaDon(hoaDon));
+        return hoaDons.add(hoaDonDAO.themHoaDon(hoaDon));
     }
 
 
     /**
      * Xoá hoá đơn trong danh sách
      * Xoá hoá đơn tương ứng trong DB
+     *
      * @param maHoaDon
      * @return
      * @throws Exception
@@ -81,6 +86,7 @@ public class DanhSachChoThue {
     /**
      * Cập nhật thông tin hoá đơn
      * Cập nhật thông tin tương ứng trong DB
+     *
      * @param hoaDon
      * @return
      * @throws Exception
@@ -94,18 +100,19 @@ public class DanhSachChoThue {
      * Phương thức tính tổng doanh thu (theo tháng, năm và tất cả)
      * Nếu tháng = 0 thì tính tổng doanh thu cả năm
      * Nếu năm = 0 thì tính tổng doanh thu của công ty
+     *
      * @param thang
      * @param nam
      * @return
      */
-    public double tongDoanhThu(int thang, int nam){
+    public double tongDoanhThu(int thang, int nam) {
         double tong = 0;
 
-        for (HoaDon hoaDon : hoaDons){
-            if (hoaDon.isTinhTrang()){
-                if (thang == 0 && nam == 0){
+        for (HoaDon hoaDon : hoaDons) {
+            if (hoaDon.isTinhTrang()) {
+                if (thang == 0 && nam == 0) {
                     tong += hoaDon.thanhTien();
-                }else if (thang == 0 && hoaDon.getNgayLap().toLocalDate().getYear() == nam)
+                } else if (thang == 0 && hoaDon.getNgayLap().toLocalDate().getYear() == nam)
                     tong += hoaDon.thanhTien();
                 else if (hoaDon.getNgayLap().toLocalDate().getMonth().getValue() == thang &&
                         hoaDon.getNgayLap().toLocalDate().getYear() == nam)
@@ -120,6 +127,7 @@ public class DanhSachChoThue {
     /**
      * Phương thức thanh toán hoá đơn
      * Cập nhật thông tin hoá đơn tương ứng trong DB
+     *
      * @param maHoaDon
      * @throws Exception
      */
@@ -130,9 +138,10 @@ public class DanhSachChoThue {
 
     /**
      * Lấy tổng số băng đĩa đã cho thuê
+     *
      * @return
      */
-    public int soLuongBangDiaDaThue(){
+    public int soLuongBangDiaDaThue() {
         int tong = 0;
 
         for (HoaDon hoaDon : hoaDons)

@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-public class HoaDon extends ChiTietHoaDon{
+public class HoaDon extends ChiTietHoaDon {
     private String maHoaDon;
     private KhachHang khachHang;
     private Date ngayLap;
@@ -43,7 +43,7 @@ public class HoaDon extends ChiTietHoaDon{
         return tinhTrangThue;
     }
 
-    public double thanhTien(){
+    public double thanhTien() {
         double tongTien = getSoLuong() * getBangDia().getDonGia();
 
         if (!isThueQuaHan())

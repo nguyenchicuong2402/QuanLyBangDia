@@ -27,7 +27,7 @@ public class ThanhToanDialog extends JDialog {
     /**
      * Tạo GUI
      */
-    private void prepareDialog(){
+    private void prepareDialog() {
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(MaterialDesign.BORDER_DIALOG);
         MaterialDesign.materialPanel(mainPanel);
@@ -178,10 +178,11 @@ public class ThanhToanDialog extends JDialog {
 
     /**
      * Thông báo lỗi khi nhập sai
+     *
      * @param textField
      * @param message
      */
-    private void errorInput(JTextField textField, String message){
+    private void errorInput(JTextField textField, String message) {
         textField.setBorder(MaterialDesign.BORDER_ERROR);
         textField.requestFocus();
         textField.selectAll();
@@ -192,36 +193,37 @@ public class ThanhToanDialog extends JDialog {
 
     /**
      * Tắt thông báo lỗi khi nhập sai
+     *
      * @param textField
      */
-    private void unErrorInput(JTextField textField){
-        if (!lblLoi.getText().isEmpty()){
+    private void unErrorInput(JTextField textField) {
+        if (!lblLoi.getText().isEmpty()) {
             MaterialDesign.materialTextField(textField);
             lblLoi.setText(" ");
         }
     }
 
 
-    private boolean validateData(){
+    private boolean validateData() {
         Pattern pattern = null;
         /**
          * Kiểm tra số lượng
          * Rule: Số lượng không được rỗng, phải là số nguyên dương > 0, và giới hạn là 6 số
          */
         pattern = Pattern.compile(PatternRegexs.REGEX_SO);
-        if (txtSoLuongMuonThanhToan.getText().trim().isEmpty()){
+        if (txtSoLuongMuonThanhToan.getText().trim().isEmpty()) {
             errorInput(txtSoLuongMuonThanhToan, "Vui lòng nhập số lượng");
             return false;
-        }else if (!pattern.matcher(txtSoLuongMuonThanhToan.getText().trim()).matches()){
+        } else if (!pattern.matcher(txtSoLuongMuonThanhToan.getText().trim()).matches()) {
             errorInput(txtSoLuongMuonThanhToan, "Số lượng phải là số nguyên");
             return false;
-        }else if(txtSoLuongMuonThanhToan.getText().trim().length() >= 6){
-            errorInput(txtSoLuongMuonThanhToan,"Số lượng quá lớn");
+        } else if (txtSoLuongMuonThanhToan.getText().trim().length() >= 6) {
+            errorInput(txtSoLuongMuonThanhToan, "Số lượng quá lớn");
             return false;
-        }else if (Integer.parseInt(txtSoLuongMuonThanhToan.getText().trim()) <= 0){
+        } else if (Integer.parseInt(txtSoLuongMuonThanhToan.getText().trim()) <= 0) {
             errorInput(txtSoLuongMuonThanhToan, "Số lượng phải lớn hơn 0");
             return false;
-        }else if (Integer.parseInt(txtSoLuongMuonThanhToan.getText().trim()) > soLuong){
+        } else if (Integer.parseInt(txtSoLuongMuonThanhToan.getText().trim()) > soLuong) {
             errorInput(txtSoLuongMuonThanhToan, "Số lượng muốn xoá lớn hơn số lượng tồn");
             return false;
         }
@@ -232,9 +234,10 @@ public class ThanhToanDialog extends JDialog {
 
     /**
      * Sự kiện button Huỷ
+     *
      * @return
      */
-    private ActionListener btnHuy_Click(){
+    private ActionListener btnHuy_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -247,9 +250,10 @@ public class ThanhToanDialog extends JDialog {
 
     /**
      * Sự kiện button Đồng ý
+     *
      * @return
      */
-    private ActionListener btnThanhToan_Click(){
+    private ActionListener btnThanhToan_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -264,7 +268,7 @@ public class ThanhToanDialog extends JDialog {
                         ThongBaoDialog.OK_CANCLE_OPTION
                 );
 
-                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
+                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION) {
                     soLuong = soLuong - Integer.parseInt(txtSoLuongMuonThanhToan.getText().trim());
                     dispose();
                 }
@@ -275,9 +279,10 @@ public class ThanhToanDialog extends JDialog {
 
     /**
      * Sự kiện button Đồng ý
+     *
      * @return
      */
-    private ActionListener btnThanhToanHet_Click(){
+    private ActionListener btnThanhToanHet_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -288,7 +293,7 @@ public class ThanhToanDialog extends JDialog {
                         ThongBaoDialog.OK_CANCLE_OPTION
                 );
 
-                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
+                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION) {
                     soLuong = 0;
                     dispose();
                 }
@@ -299,12 +304,14 @@ public class ThanhToanDialog extends JDialog {
 
     /**
      * Sự kiện khi nhập text số lượng
+     *
      * @return
      */
-    private KeyListener txtSoLuongMuonXoa_KeyListener(){
+    private KeyListener txtSoLuongMuonXoa_KeyListener() {
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {
+            }
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -313,16 +320,16 @@ public class ThanhToanDialog extends JDialog {
 
             @Override
             public void keyReleased(KeyEvent e) {
-                try{
+                try {
                     int soLuongMuonXoa = Integer.parseInt(txtSoLuongMuonThanhToan.getText().trim());
 
-                    if (!validateData()){
+                    if (!validateData()) {
                         txtSoLuongConLai.setText(String.valueOf(soLuong));
                         return;
                     }
 
                     txtSoLuongConLai.setText(String.valueOf(soLuong - soLuongMuonXoa));
-                }catch (Exception ex) {
+                } catch (Exception ex) {
                     txtSoLuongConLai.setText(String.valueOf(soLuong));
                 }
             }
@@ -332,6 +339,7 @@ public class ThanhToanDialog extends JDialog {
 
     /**
      * Lấy kết quả người dùng chọn
+     *
      * @return
      */
     public int getKetQua() {
@@ -341,10 +349,11 @@ public class ThanhToanDialog extends JDialog {
 
     /**
      * Constructor
+     *
      * @param frame
      * @param soLuong
      */
-    public ThanhToanDialog(JFrame frame, String tenKhachHang, String tenBangDia, int soLuong){
+    public ThanhToanDialog(JFrame frame, String tenKhachHang, String tenBangDia, int soLuong) {
         super(frame, true);
 
         this.tenKhachHang = tenKhachHang;

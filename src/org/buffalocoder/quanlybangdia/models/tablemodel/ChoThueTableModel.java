@@ -15,7 +15,7 @@ public class ChoThueTableModel extends AbstractTableModel {
             "Mã HD", "Tên khách hàng", "Tên băng đĩa", "Số lượng", "Ngày thuê", "Số ngày được thuê", "Thành tiền", "Tình trạng"
     };
 
-    public void setModel(ArrayList<HoaDon> hoaDons){
+    public void setModel(ArrayList<HoaDon> hoaDons) {
         this.hoaDons = hoaDons;
     }
 
@@ -40,23 +40,30 @@ public class ChoThueTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        try{
+        try {
             HoaDon hoaDon = hoaDons.get(rowIndex);
 
             switch (columnIndex) {
-                case 0: return hoaDon.getMaHoaDon();
-                case 1: return hoaDon.getKhachHang().getHoTen();
-                case 2: return hoaDon.getBangDia().getTenBangDia();
-                case 3: return hoaDon.getSoLuong();
-                case 4: return Formats.DATE_FORMAT.format(hoaDon.getNgayLap());
-                case 5: return hoaDon.getSoNgayDuocMuon();
+                case 0:
+                    return hoaDon.getMaHoaDon();
+                case 1:
+                    return hoaDon.getKhachHang().getHoTen();
+                case 2:
+                    return hoaDon.getBangDia().getTenBangDia();
+                case 3:
+                    return hoaDon.getSoLuong();
+                case 4:
+                    return Formats.DATE_FORMAT.format(hoaDon.getNgayLap());
+                case 5:
+                    return hoaDon.getSoNgayDuocMuon();
                 case 6:
                     Locale locale = new Locale("vi", "VN");
                     NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale);
                     return numberFormat.format(hoaDon.thanhTien());
-                case 7: return hoaDon.isTinhTrang() ? "Đã thanh toán" : "Đang thuê";
+                case 7:
+                    return hoaDon.isTinhTrang() ? "Đã thanh toán" : "Đang thuê";
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 

@@ -1,16 +1,16 @@
 package org.buffalocoder.quanlybangdia.views;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
 import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
 import org.buffalocoder.quanlybangdia.views.custom.CustomTabbedPanelUI;
 import org.buffalocoder.quanlybangdia.views.dialog.ThongBaoDialog;
 import org.buffalocoder.quanlybangdia.views.tabbed.*;
+
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MainForm extends JFrame {
     //========== CONSTANT ==========//
@@ -35,7 +35,7 @@ public class MainForm extends JFrame {
     /**
      * Tạo GUI
      */
-    private void prepareUI(){
+    private void prepareUI() {
         /*========== MAIN PANEL =========*/
         mainPanel = new JPanel(new BorderLayout());
         this.setContentPane(mainPanel);
@@ -96,7 +96,7 @@ public class MainForm extends JFrame {
         menuTabbed.setUI(customTabbedPanelUI);
         menuTabbed.setFont(MaterialDesign.FONT_DEFAULT);
         menuTabbed.addTab("Trang chủ", trangChuTabbed = new TrangChuTabbed());
-        menuTabbed.addTab("Quản lý cho thuê", quanLyChoThueTabbed = new QuanLyChoThueTabbed())  ;
+        menuTabbed.addTab("Quản lý cho thuê", quanLyChoThueTabbed = new QuanLyChoThueTabbed());
         menuTabbed.addTab(IS_ADMIN ? "Quản lý băng đĩa" : "Danh sách băng đĩa",
                 quanLyBangDiaTabbed = new QuanLyBangDiaTabbed());
         menuTabbed.addTab("Quản lý khách hàng",
@@ -116,9 +116,10 @@ public class MainForm extends JFrame {
 
     /**
      * Sự kiện button đăng xuất
+     *
      * @return
      */
-    private ActionListener btnDangXuat_Click(){
+    private ActionListener btnDangXuat_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -131,7 +132,7 @@ public class MainForm extends JFrame {
                 );
 
                 // nếu người dùng đồng ý đang xuất
-                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION){
+                if (thongBaoDialog.getKetQua() == ThongBaoDialog.OK_OPTION) {
                     setVisible(false);
                     new DangNhap();
                 }
@@ -142,13 +143,14 @@ public class MainForm extends JFrame {
 
     /**
      * Sự kiện khi chọn 1 tab
+     *
      * @return
      */
-    private ChangeListener menuTabbed_Change(){
+    private ChangeListener menuTabbed_Change() {
         return new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                try{
+                try {
                     quanLyChoThueTabbed.refresh(true);
                     quanLyBangDiaTabbed.refresh(true);
                     quanLyKhachHangTabbed.refresh(true);
@@ -157,7 +159,7 @@ public class MainForm extends JFrame {
 
                     if (IS_ADMIN)
                         quanLyNhanVienTabbed.refresh(true);
-                }catch (Exception ex){
+                } catch (Exception ex) {
                     return;
                 }
 
@@ -171,7 +173,7 @@ public class MainForm extends JFrame {
     /**
      * Constructor
      */
-    public MainForm(){
+    public MainForm() {
         // hiển thị form
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -179,8 +181,8 @@ public class MainForm extends JFrame {
                 prepareUI();
 
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-                int width = (int)(screenSize.getWidth() * 0.9);
-                int height = (int)(screenSize.getHeight() * 0.9);
+                int width = (int) (screenSize.getWidth() * 0.9);
+                int height = (int) (screenSize.getHeight() * 0.9);
                 setSize(width, height);
                 setExtendedState(JFrame.MAXIMIZED_BOTH);
                 setDefaultCloseOperation(EXIT_ON_CLOSE);

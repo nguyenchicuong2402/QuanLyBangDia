@@ -17,6 +17,7 @@ public class HoaDonDAO {
 
     /**
      * Tạo kết nối đến DB
+     *
      * @throws Exception
      */
     private HoaDonDAO() throws Exception {
@@ -27,14 +28,15 @@ public class HoaDonDAO {
 
     /**
      * Design Pattern: Singleton
+     *
      * @return
      * @throws Exception
      */
     public static HoaDonDAO getInstance() throws Exception {
-        if(_instance == null) {
-            synchronized(HoaDonDAO.class) {
-                if(null == _instance) {
-                    _instance  = new HoaDonDAO();
+        if (_instance == null) {
+            synchronized (HoaDonDAO.class) {
+                if (null == _instance) {
+                    _instance = new HoaDonDAO();
                 }
             }
         }
@@ -44,6 +46,7 @@ public class HoaDonDAO {
 
     /**
      * đọc danh sách hoá đơn từ DB
+     *
      * @return
      * @throws Exception
      */
@@ -54,7 +57,7 @@ public class HoaDonDAO {
         try {
             resultSet = dataBaseUtils.excuteQueryRead(sql);
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 HoaDon hoaDon = new HoaDon(
                         bangDiaDAO.getBangDia(resultSet.getString("MABD")),
                         resultSet.getInt("SONGAYDUOCMUON"),
@@ -79,11 +82,12 @@ public class HoaDonDAO {
 
     /**
      * Đọc hoá đơn từ DB
+     *
      * @param maHoaDon
      * @return
      * @throws Exception
      */
-    public HoaDon getHoaDon (String maHoaDon) throws Exception {
+    public HoaDon getHoaDon(String maHoaDon) throws Exception {
         HoaDon hoaDon = null;
         String sql = String.format("SELECT * FROM VIEW_HOADON WHERE MAHD = '%s'", maHoaDon);
 
@@ -113,10 +117,11 @@ public class HoaDonDAO {
     /**
      * Lấy mã hoá đơn cuối
      * dùng để generate mã hoá đơn mới
+     *
      * @return
      * @throws Exception
      */
-    public String getMaHoaDonCuoi () throws Exception {
+    public String getMaHoaDonCuoi() throws Exception {
         String sql = "SELECT TOP 1 MAHD FROM HOADON ORDER BY MAHD DESC";
         String ketQua;
 
@@ -137,13 +142,14 @@ public class HoaDonDAO {
 
     /**
      * Cập nhật thông tin hoá đơn vào DB
+     *
      * @param hoaDon
      * @return
      * @throws Exception
      */
     public HoaDon suaHoaDon(HoaDon hoaDon) throws Exception {
         String sql = "UPDATE CHITIETHOADON SET " +
-                    "MABD = ?, SONGAYDUOCMUON = ?, SOLUONG = ?, TINHTRANG = ? WHERE MAHD = ?";
+                "MABD = ?, SONGAYDUOCMUON = ?, SOLUONG = ?, TINHTRANG = ? WHERE MAHD = ?";
 
         try {
             preparedStatement = dataBaseUtils.excuteQueryWrite(sql);
@@ -154,19 +160,19 @@ public class HoaDonDAO {
             preparedStatement.setInt(4, hoaDon.isTinhTrang() ? 1 : 0);
             preparedStatement.setString(5, hoaDon.getMaHoaDon());
 
-            if (preparedStatement.executeUpdate() > 0){
+            if (preparedStatement.executeUpdate() > 0) {
                 sql = "UPDATE HOADON SET NGAYLAP = ? WHERE MAHD = ?";
                 preparedStatement = dataBaseUtils.excuteQueryWrite(sql);
 
                 preparedStatement.setDate(1, hoaDon.getNgayLap());
                 preparedStatement.setString(2, hoaDon.getMaHoaDon());
 
-                if (preparedStatement.executeUpdate() > 0){
+                if (preparedStatement.executeUpdate() > 0) {
                     dataBaseUtils.commitQuery();
                     return getHoaDon(hoaDon.getMaHoaDon());
                 }
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             dataBaseUtils.rollbackQuery();
             throw new Exception("Lỗi cập nhật thông tin hoá đơn");
         } finally {
@@ -179,6 +185,7 @@ public class HoaDonDAO {
 
     /**
      * Thêm hoá đơn mới vào DB
+     *
      * @param hoaDon
      * @return
      * @throws Exception
@@ -192,7 +199,7 @@ public class HoaDonDAO {
             preparedStatement.setDate(2, hoaDon.getNgayLap());
             preparedStatement.setString(3, hoaDon.getKhachHang().getMaKH());
 
-            if (preparedStatement.executeUpdate() > 0){
+            if (preparedStatement.executeUpdate() > 0) {
                 dataBaseUtils.commitQuery();
                 sql = "INSERT INTO CHITIETHOADON (MAHD, MABD, SONGAYDUOCMUON, SOLUONG, TINHTRANG) VALUES (?, ?, ?, ?, ?)";
 
@@ -204,12 +211,12 @@ public class HoaDonDAO {
                 preparedStatement.setInt(4, hoaDon.getSoLuong());
                 preparedStatement.setInt(5, hoaDon.isTinhTrang() ? 1 : 0);
 
-                if (preparedStatement.executeUpdate() > 0){
+                if (preparedStatement.executeUpdate() > 0) {
                     dataBaseUtils.commitQuery();
                     return getHoaDon(hoaDon.getMaHoaDon());
                 }
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             dataBaseUtils.rollbackQuery();
             throw new Exception("Lỗi thêm hoá đơn");
         } finally {
@@ -222,6 +229,7 @@ public class HoaDonDAO {
 
     /**
      * Cập nhật thanh toán hoá đơn vào BD
+     *
      * @param maHoaDon
      * @return
      * @throws Exception
@@ -240,6 +248,7 @@ public class HoaDonDAO {
 
     /**
      * Xoá hoá đơn trong DB
+     *
      * @param maHoaDon
      * @return
      * @throws Exception
@@ -252,19 +261,19 @@ public class HoaDonDAO {
 
             preparedStatement.setString(1, maHoaDon);
 
-            if (preparedStatement.executeUpdate() > 0){
+            if (preparedStatement.executeUpdate() > 0) {
                 sql = "DELETE FROM HOADON WHERE MAHD = ?";
 
                 preparedStatement = DataBaseUtils.getInstance().excuteQueryWrite(sql);
 
                 preparedStatement.setString(1, maHoaDon);
 
-                if (preparedStatement.executeUpdate() > 0){
+                if (preparedStatement.executeUpdate() > 0) {
                     dataBaseUtils.commitQuery();
                     return true;
                 }
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             dataBaseUtils.rollbackQuery();
             throw new Exception("Lỗi xoá hoá đơn");
         } finally {

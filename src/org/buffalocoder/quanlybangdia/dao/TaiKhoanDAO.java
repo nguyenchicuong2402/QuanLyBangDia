@@ -14,6 +14,7 @@ public class TaiKhoanDAO {
 
     /**
      * Tạo kết nối DB
+     *
      * @throws Exception
      */
     private TaiKhoanDAO() throws Exception {
@@ -23,14 +24,15 @@ public class TaiKhoanDAO {
 
     /**
      * Design Pattern: Singleton
+     *
      * @return
      * @throws Exception
      */
     public static TaiKhoanDAO getInstance() throws Exception {
-        if(_instance == null) {
-            synchronized(TaiKhoanDAO.class) {
-                if(null == _instance) {
-                    _instance  = new TaiKhoanDAO();
+        if (_instance == null) {
+            synchronized (TaiKhoanDAO.class) {
+                if (null == _instance) {
+                    _instance = new TaiKhoanDAO();
                 }
             }
         }
@@ -40,6 +42,7 @@ public class TaiKhoanDAO {
 
     /**
      * Đọc tài khoản trong DB
+     *
      * @param tenTaiKhoan
      * @return
      * @throws Exception
@@ -68,11 +71,12 @@ public class TaiKhoanDAO {
 
     /**
      * Đọc tài khoản trong DB thông qua mã nhân viên
+     *
      * @param maNhanVien
      * @return
      * @throws Exception
      */
-    public TaiKhoan getTaiKhoanByMaNhanVien (String maNhanVien) throws Exception {
+    public TaiKhoan getTaiKhoanByMaNhanVien(String maNhanVien) throws Exception {
         TaiKhoan taiKhoan = new TaiKhoan();
         String sql = String.format("SELECT * FROM TAIKHOAN WHERE MANV = '%s'", maNhanVien);
 
@@ -99,6 +103,7 @@ public class TaiKhoanDAO {
 
     /**
      * Thêm tài khoản mới vào DB
+     *
      * @param taiKhoan
      * @return
      * @throws Exception
@@ -117,7 +122,7 @@ public class TaiKhoanDAO {
             preparedStatement.setInt(3, taiKhoan.getLoaiTaiKhoan());
             preparedStatement.setString(4, taiKhoan.getMaNhanVien());
 
-            if (preparedStatement.executeUpdate() > 0){
+            if (preparedStatement.executeUpdate() > 0) {
                 dataBaseUtils.commitQuery();
                 return getTaiKhoan(taiKhoan.getTenTaiKhoan());
             }
@@ -135,11 +140,12 @@ public class TaiKhoanDAO {
 
     /**
      * Cập nhật tài khoản vào DB
+     *
      * @param taiKhoan
      * @return
      * @throws Exception
      */
-    public TaiKhoan suaTaiKhoan (TaiKhoan taiKhoan) throws Exception {
+    public TaiKhoan suaTaiKhoan(TaiKhoan taiKhoan) throws Exception {
         String sql = "UPDATE TAIKHOAN SET MATKHAU = ?, LOAITK = ? WHERE TENTAIKHOAN = ?";
 
         if (taiKhoan == null)
@@ -152,7 +158,7 @@ public class TaiKhoanDAO {
             preparedStatement.setInt(2, taiKhoan.getLoaiTaiKhoan());
             preparedStatement.setString(3, taiKhoan.getTenTaiKhoan());
 
-            if (preparedStatement.executeUpdate() > 0){
+            if (preparedStatement.executeUpdate() > 0) {
                 dataBaseUtils.commitQuery();
                 return getTaiKhoan(taiKhoan.getTenTaiKhoan());
             }
@@ -169,22 +175,23 @@ public class TaiKhoanDAO {
 
     /**
      * Xoá tài khoản trong Db
+     *
      * @param tenTaiKhoan
      * @return
      * @throws Exception
      */
-    public boolean xoaTaiKhoan (String tenTaiKhoan) throws Exception {
+    public boolean xoaTaiKhoan(String tenTaiKhoan) throws Exception {
         String sql = "DELETE FROM TAIKHOAN WHERE TENTAIKHOAN = ?";
 
         if (getTaiKhoan(tenTaiKhoan) == null)
             return false;
 
-        try{
+        try {
             preparedStatement = dataBaseUtils.excuteQueryWrite(sql);
 
             preparedStatement.setString(1, tenTaiKhoan);
 
-            if (preparedStatement.executeUpdate() > 0){
+            if (preparedStatement.executeUpdate() > 0) {
                 dataBaseUtils.commitQuery();
                 return true;
             }

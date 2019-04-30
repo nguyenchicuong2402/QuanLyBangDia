@@ -24,10 +24,10 @@ public class TrangChuTabbed extends JPanel {
 
 
     private JLabel lblLoiChao, lblLoiChuc, lblMaNV_1, lblMaNV_2, lblTenNguoiDung_1,
-                    lblTenNguoiDung_2, lblHoTen_1, lblHoTen_2, lblGioiTinh_1, lblGioiTinh_2,
-                    lblNgaySinh_1, lblNgaySinh_2, lblCMND_1, lblCMND_2, lblSoDienThoai_1,
-                    lblSoDienThoai_2, lblDiaChi_1, lblDiaChi_2, lblMoTa_1, lblMoTa_2,
-                    lblTieuDeThongTin;
+            lblTenNguoiDung_2, lblHoTen_1, lblHoTen_2, lblGioiTinh_1, lblGioiTinh_2,
+            lblNgaySinh_1, lblNgaySinh_2, lblCMND_1, lblCMND_2, lblSoDienThoai_1,
+            lblSoDienThoai_2, lblDiaChi_1, lblDiaChi_2, lblMoTa_1, lblMoTa_2,
+            lblTieuDeThongTin;
     private JPanel headerPanel, leftPanel, rightPanel;
     private ImagePanel imagePanel;
 
@@ -35,7 +35,7 @@ public class TrangChuTabbed extends JPanel {
     /**
      * Tạo GUI
      */
-    private void prepareUI(){
+    private void prepareUI() {
         this.setLayout(new BorderLayout());
         MaterialDesign.materialPanel(this);
 
@@ -271,7 +271,7 @@ public class TrangChuTabbed extends JPanel {
     /**
      * Refresh dữ liệu
      */
-    public void refresh(){
+    public void refresh() {
         // load dữ liệu DB
         try {
             nhanVien = nhanVienDAO.getNhanVien(DangNhap.taiKhoan.getMaNhanVien());
@@ -294,13 +294,13 @@ public class TrangChuTabbed extends JPanel {
         int hour = LocalTime.now().getHour();
         String loiChao = "Chào " + DangNhap.taiKhoan.getTenTaiKhoan();
 
-        if (hour >= 6 && hour <= 10){
+        if (hour >= 6 && hour <= 10) {
             loiChao = "Chào buổi sáng ";
-        }else if (hour >= 11 && hour <=12){
+        } else if (hour >= 11 && hour <= 12) {
             loiChao = "Chào buổi trưa ";
-        }else if (hour >= 13 && hour <= 17){
+        } else if (hour >= 13 && hour <= 17) {
             loiChao = "Chào buổi chiều ";
-        }else {
+        } else {
             loiChao = "Chào buổi tối ";
         }
 
@@ -310,12 +310,12 @@ public class TrangChuTabbed extends JPanel {
     }
 
 
-    private String generateImagePath(){
+    private String generateImagePath() {
         return PATH + IMAGES[random.nextInt(IMAGES.length)];
     }
 
 
-    public TrangChuTabbed(){
+    public TrangChuTabbed() {
         try {
             nhanVienDAO = NhanVienDAO.getInstance();
             nhanVien = nhanVienDAO.getNhanVien(DangNhap.taiKhoan.getMaNhanVien());

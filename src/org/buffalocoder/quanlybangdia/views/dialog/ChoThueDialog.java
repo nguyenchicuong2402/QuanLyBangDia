@@ -3,7 +3,9 @@ package org.buffalocoder.quanlybangdia.views.dialog;
 import com.toedter.calendar.JDateChooser;
 import org.buffalocoder.quanlybangdia.dao.HoaDonDAO;
 import org.buffalocoder.quanlybangdia.models.*;
-import org.buffalocoder.quanlybangdia.utils.*;
+import org.buffalocoder.quanlybangdia.utils.Formats;
+import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
+import org.buffalocoder.quanlybangdia.utils.PatternRegexs;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,8 +27,8 @@ public class ChoThueDialog extends JDialog {
 
     private JPanel mainPanel, headerPanel, contentPanel, bottomPanel;
     private JButton btnThoat, btnLuu;
-    private JLabel lblTieuDe, lblMaHoaDon, lblMaKhachHang, lblMaBangDia, lblSoNgayDuocMuon, lblSoLuong,lblLoi,
-                        lblNgayThue;
+    private JLabel lblTieuDe, lblMaHoaDon, lblMaKhachHang, lblMaBangDia, lblSoNgayDuocMuon, lblSoLuong, lblLoi,
+            lblNgayThue;
     private JTextField txtMaHoaDon, txtSoNgayDuocMuon, txtSoLuong;
     private JComboBox<String> cbMaKhachHang, cbMaBangDia;
     private JDateChooser dateChooser;
@@ -35,7 +37,7 @@ public class ChoThueDialog extends JDialog {
     /**
      * Tạo GUI
      */
-    private void prepareDialog(){
+    private void prepareDialog() {
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(MaterialDesign.BORDER_DIALOG);
         MaterialDesign.materialPanel(mainPanel);
@@ -136,7 +138,7 @@ public class ChoThueDialog extends JDialog {
             if (bangDia.getSoLuongTon() > 0)
                 cbMaBangDia.addItem(String.format("[%s] %s", bangDia.getMaBangDia(), bangDia.getTenBangDia()));
 
-        if (isChinhSua){
+        if (isChinhSua) {
             cbMaBangDia.addItem(String.format("[%s] %s",
                     hoaDon.getBangDia().getMaBangDia(), hoaDon.getBangDia().getTenBangDia()));
 
@@ -214,10 +216,11 @@ public class ChoThueDialog extends JDialog {
 
     /**
      * Thông báo lỗi nhập text
+     *
      * @param textField
      * @param message
      */
-    private void errorInput(JTextField textField, String message){
+    private void errorInput(JTextField textField, String message) {
         lblLoi.setText(message);
         textField.setBorder(MaterialDesign.BORDER_ERROR);
         textField.requestFocus();
@@ -227,10 +230,11 @@ public class ChoThueDialog extends JDialog {
 
     /**
      * Tắt thông báo lỗi nhập text
+     *
      * @param textField
      */
-    private void unErrorInput(JTextField textField){
-        if (!lblLoi.getText().isEmpty()){
+    private void unErrorInput(JTextField textField) {
+        if (!lblLoi.getText().isEmpty()) {
             MaterialDesign.materialTextField(textField);
             lblLoi.setText("    ");
         }
@@ -239,9 +243,10 @@ public class ChoThueDialog extends JDialog {
 
     /**
      * Kiểm tra nhập dữ liệu
+     *
      * @return
      */
-    private boolean validateData(){
+    private boolean validateData() {
         Pattern pattern = null;
 
         /**
@@ -249,17 +254,17 @@ public class ChoThueDialog extends JDialog {
          * Rule: không được rỗng, phải là số nguyên dương lớn hơn 0,  giới hạn 6 chữ số
          */
         pattern = pattern.compile(PatternRegexs.REGEX_SO);
-        if (txtSoLuong.getText().trim().isEmpty()){
+        if (txtSoLuong.getText().trim().isEmpty()) {
             errorInput(txtSoLuong, "Vui lòng nhập số lượng");
             return false;
-        }else if (!pattern.matcher(txtSoLuong.getText().trim()).matches()){
+        } else if (!pattern.matcher(txtSoLuong.getText().trim()).matches()) {
             errorInput(txtSoLuong, "Số lượng phải là số");
             return false;
-        }else if (Integer.parseInt(txtSoLuong.getText().trim()) <= 0){
+        } else if (Integer.parseInt(txtSoLuong.getText().trim()) <= 0) {
             errorInput(txtSoLuong, "Số lượng phải lớn hơn 0");
             return false;
-        }else if(txtSoLuong.getText().trim().length() >= 6){
-            errorInput(txtSoLuong,"Số lượng quá lớn");
+        } else if (txtSoLuong.getText().trim().length() >= 6) {
+            errorInput(txtSoLuong, "Số lượng quá lớn");
             return false;
         }
 
@@ -268,17 +273,17 @@ public class ChoThueDialog extends JDialog {
          * Rule: không được rỗng, phải là số nguyên dương trong khoảng từ 1 - 120
          */
         pattern = Pattern.compile(PatternRegexs.REGEX_SO);
-        if (txtSoNgayDuocMuon.getText().trim().isEmpty()){
+        if (txtSoNgayDuocMuon.getText().trim().isEmpty()) {
             errorInput(txtSoNgayDuocMuon, "Vui lòng nhập số số ngày mượn");
             return false;
-        }else if (!pattern.matcher(txtSoNgayDuocMuon.getText().trim()).matches()){
+        } else if (!pattern.matcher(txtSoNgayDuocMuon.getText().trim()).matches()) {
             errorInput(txtSoNgayDuocMuon, "Số ngày mượn phải là số");
             return false;
-        }else if(Integer.parseInt(txtSoNgayDuocMuon.getText().trim()) <= 0){
-            errorInput(txtSoNgayDuocMuon,"Số ngày mượn phải lớn hơn 0");
+        } else if (Integer.parseInt(txtSoNgayDuocMuon.getText().trim()) <= 0) {
+            errorInput(txtSoNgayDuocMuon, "Số ngày mượn phải lớn hơn 0");
             return false;
-        }else if(Integer.parseInt(txtSoNgayDuocMuon.getText().trim()) > 120){
-            errorInput(txtSoNgayDuocMuon,"Số ngày mượn phải nhỏ hơn 120");
+        } else if (Integer.parseInt(txtSoNgayDuocMuon.getText().trim()) > 120) {
+            errorInput(txtSoNgayDuocMuon, "Số ngày mượn phải nhỏ hơn 120");
             return false;
         }
 
@@ -288,9 +293,10 @@ public class ChoThueDialog extends JDialog {
 
     /**
      * Generate mã hoá đơn mới
+     *
      * @return
      */
-    private String getMaHoaDonMoi(){
+    private String getMaHoaDonMoi() {
         String lastID = "";
         String newID = "";
 
@@ -301,14 +307,14 @@ public class ChoThueDialog extends JDialog {
         }
 
         // Nếu chưa có hoá đơn nào trong DB thì trả về mã mặc định
-        if (lastID.isEmpty()){
+        if (lastID.isEmpty()) {
             return "HD00001";
         }
 
         // generate mã
         Pattern pattern = Pattern.compile(PatternRegexs.REGEX_MAHOADON);
         Matcher matcher = pattern.matcher(lastID);
-        if (matcher.find()){
+        if (matcher.find()) {
             int number = Integer.parseInt(matcher.group(1));
             number++;
 
@@ -321,12 +327,14 @@ public class ChoThueDialog extends JDialog {
 
     /**
      * Sự kiện khi nhập text số lượng
+     *
      * @return
      */
-    private KeyListener txtSoLuong_KeyListener(){
+    private KeyListener txtSoLuong_KeyListener() {
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {
+            }
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -334,16 +342,18 @@ public class ChoThueDialog extends JDialog {
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {}
+            public void keyReleased(KeyEvent e) {
+            }
         };
     }
 
 
     /**
      * Sự kiện nhập text số ngày được mượn
+     *
      * @return
      */
-    private KeyListener txtSoNgayDuocMuon_KeyListener(){
+    private KeyListener txtSoNgayDuocMuon_KeyListener() {
         return new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -365,9 +375,10 @@ public class ChoThueDialog extends JDialog {
 
     /**
      * Sự kiện nút Thoát
+     *
      * @return
      */
-    private ActionListener btnThoat_Click(){
+    private ActionListener btnThoat_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -380,9 +391,10 @@ public class ChoThueDialog extends JDialog {
 
     /**
      * Sự kiện nút Lưu
+     *
      * @return
      */
-    private ActionListener btnLuu_Click(){
+    private ActionListener btnLuu_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -427,6 +439,7 @@ public class ChoThueDialog extends JDialog {
 
     /**
      * Trả về hoá đơn đã được thêm/chỉnh sửa
+     *
      * @return
      */
     public HoaDon getHoaDon() {
@@ -436,6 +449,7 @@ public class ChoThueDialog extends JDialog {
 
     /**
      * Constructor
+     *
      * @param frame
      * @param hoaDon
      */
@@ -457,10 +471,10 @@ public class ChoThueDialog extends JDialog {
          * Nếu param hoaDon == null > Cho thuê
          * Nếu param hoaDon != null > Cập nhật thông tin cho thuê
          */
-        if (hoaDon == null){
+        if (hoaDon == null) {
             this.tieuDe = "Cho thuê";
             isChinhSua = false;
-        }else{
+        } else {
             this.tieuDe = "Cập nhật thông tin cho thuê";
             isChinhSua = true;
         }

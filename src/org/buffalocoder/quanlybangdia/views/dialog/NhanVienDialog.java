@@ -4,7 +4,9 @@ import com.toedter.calendar.JDateChooser;
 import org.buffalocoder.quanlybangdia.dao.NhanVienDAO;
 import org.buffalocoder.quanlybangdia.models.NhanVien;
 import org.buffalocoder.quanlybangdia.models.TaiKhoan;
-import org.buffalocoder.quanlybangdia.utils.*;
+import org.buffalocoder.quanlybangdia.utils.Formats;
+import org.buffalocoder.quanlybangdia.utils.MaterialDesign;
+import org.buffalocoder.quanlybangdia.utils.PatternRegexs;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,10 +27,10 @@ public class NhanVienDialog extends JDialog {
 
     private JPanel mainPanel, contentPanel, headerPanel, bottomPanel, infoPanel, accountPanel;
     private JLabel lblTieuDe, lblMaNV, lblCMND, lblHoTen, lblGioiTinh, lblSoDienThoai,
-            lblDiaChi, lblNgaySinh, lblMoTa, lblTenTaiKhoan, lblMatKhau, lblNhapLaiMatKhau, lblLoaiTaiKhoan,lblLoi;
+            lblDiaChi, lblNgaySinh, lblMoTa, lblTenTaiKhoan, lblMatKhau, lblNhapLaiMatKhau, lblLoaiTaiKhoan, lblLoi;
     private JButton btnThoat, btnLuu;
     private JTextField txtMaNV, txtCMND, txtHoTen, txtSoDienThoai, txtDiaChi, txtNgaySinh, txtMoTa,
-                        txtTenTaiKhoan;
+            txtTenTaiKhoan;
     private JPasswordField txtMatKhau, txtNhapLaiMatKhau;
     private JComboBox<String> cbGioiTinh, cbLoaiTaiKhoan;
     private JDateChooser dateChooser;
@@ -37,7 +39,7 @@ public class NhanVienDialog extends JDialog {
     /**
      * Tạo GUI
      */
-    private void prepareDialog(){
+    private void prepareDialog() {
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(MaterialDesign.BORDER_DIALOG);
         MaterialDesign.materialPanel(mainPanel);
@@ -240,7 +242,7 @@ public class NhanVienDialog extends JDialog {
         box_account.add(bx11);
         box_account.add(Box.createVerticalStrut(10));
 
-        Box bx12= Box.createHorizontalBox();
+        Box bx12 = Box.createHorizontalBox();
         box_account.add(bx12);
         box_account.add(Box.createVerticalStrut(20));
 
@@ -333,10 +335,11 @@ public class NhanVienDialog extends JDialog {
 
     /**
      * Thông báo nhập text lỗi
+     *
      * @param textField
      * @param message
      */
-    private void errorInput(JTextField textField, String message){
+    private void errorInput(JTextField textField, String message) {
         lblLoi.setText(message);
         textField.setBorder(MaterialDesign.BORDER_ERROR);
         textField.requestFocus();
@@ -346,10 +349,11 @@ public class NhanVienDialog extends JDialog {
 
     /**
      * Tắt thông báo nhập lỗi
+     *
      * @param textField
      */
-    private void unErrorInput(JTextField textField){
-        if (!lblLoi.getText().isEmpty()){
+    private void unErrorInput(JTextField textField) {
+        if (!lblLoi.getText().isEmpty()) {
             MaterialDesign.materialTextField(textField);
             lblLoi.setText("    ");
         }
@@ -358,19 +362,20 @@ public class NhanVienDialog extends JDialog {
 
     /**
      * Kiểm tra nhập dữ liệu
+     *
      * @return
      */
-    private boolean validateData(){
+    private boolean validateData() {
         Pattern pattern = null;
 
         /**
          * Kiểm tra họ tên
          * Rule: không được rỗng, không quá 50 kí tự
          */
-        if (txtHoTen.getText().trim().isEmpty()){
+        if (txtHoTen.getText().trim().isEmpty()) {
             errorInput(txtHoTen, "Vui lòng nhập họ tên");
             return false;
-        }else if (txtHoTen.getText().trim().length() > 50){
+        } else if (txtHoTen.getText().trim().length() > 50) {
             errorInput(txtHoTen, "Không nhập họ tên quá 50 kí tự");
             return false;
         }
@@ -380,11 +385,11 @@ public class NhanVienDialog extends JDialog {
          * Rule: không được rỗng, phải đúng chuẩn của pattern
          */
         pattern = pattern.compile(PatternRegexs.REGEX_CMND);
-        if (txtCMND.getText().trim().isEmpty()){
+        if (txtCMND.getText().trim().isEmpty()) {
             errorInput(txtCMND, "Vui lòng nhập CMND");
             return false;
-        }else if (!pattern.matcher(txtCMND.getText().trim()).matches()){
-            errorInput(txtCMND, "CMND phải là số (không quá 20 số)");
+        } else if (!pattern.matcher(txtCMND.getText().trim()).matches()) {
+            errorInput(txtCMND, "CMND phải là số (từ 9 đến 11 số)");
             return false;
         }
 
@@ -395,10 +400,10 @@ public class NhanVienDialog extends JDialog {
         java.util.Date currentDate = new java.util.Date();
         java.util.Date chooseDate = dateChooser.getDate();
 
-        if (currentDate.getYear() - chooseDate.getYear() < 18){
+        if (currentDate.getYear() - chooseDate.getYear() < 18) {
             lblLoi.setText("Nhân viên chưa đủ 18 tuổi");
             return false;
-        }else{
+        } else {
             lblLoi.setText("      ");
         }
 
@@ -407,10 +412,10 @@ public class NhanVienDialog extends JDialog {
          * Rule: không được rỗng, phải đúng mẫu pattern
          */
         pattern = Pattern.compile(PatternRegexs.REGEX_SODIENTHOAI);
-        if (txtSoDienThoai.getText().trim().isEmpty()){
+        if (txtSoDienThoai.getText().trim().isEmpty()) {
             errorInput(txtSoDienThoai, "Vui lòng nhập số điện thoại");
             return false;
-        }else if (!pattern.matcher(txtSoDienThoai.getText().trim()).matches()){
+        } else if (!pattern.matcher(txtSoDienThoai.getText().trim()).matches()) {
             errorInput(txtSoDienThoai, "Số điện thoại phải là số (không quá 20 số)");
             return false;
         }
@@ -419,10 +424,10 @@ public class NhanVienDialog extends JDialog {
          * Kiểm tra địa chỉ
          * Rule: không được rỗng, không quá 100 kí tự
          */
-        if (txtDiaChi.getText().trim().isEmpty()){
+        if (txtDiaChi.getText().trim().isEmpty()) {
             errorInput(txtDiaChi, "Vui lòng nhập địa chỉ");
             return false;
-        }else if (txtDiaChi.getText().trim().length() > 100){
+        } else if (txtDiaChi.getText().trim().length() > 100) {
             errorInput(txtDiaChi, "Địa chỉ không quá 100 kí tự");
             return false;
         }
@@ -431,10 +436,10 @@ public class NhanVienDialog extends JDialog {
          * Kiểm tra tên tài khoản
          * Rule: không được rỗng, không quá 30 kí tự
          */
-        if (txtTenTaiKhoan.getText().trim().isEmpty()){
+        if (txtTenTaiKhoan.getText().trim().isEmpty()) {
             errorInput(txtTenTaiKhoan, "Vui lòng nhập tên tài khoản");
             return false;
-        }else if (txtTenTaiKhoan.getText().trim().length() > 30){
+        } else if (txtTenTaiKhoan.getText().trim().length() > 30) {
             errorInput(txtTenTaiKhoan, "Tên tài khoản không quá 30 kí tự");
             return false;
         }
@@ -443,15 +448,15 @@ public class NhanVienDialog extends JDialog {
          * Nếu trạng thái là chỉnh sửa thì không thay đổi mật khẩu
          * Nếu trạng thái là không chỉnh sửa thì lưu lại mật khẩu
          */
-        if (!isChinhSua){
+        if (!isChinhSua) {
             /**
              * Kiểm tra mật khẩu
              * Rule: không được rỗng, không quá 128 kí tự
              */
-            if (String.valueOf(txtMatKhau.getPassword()).trim().isEmpty()){
+            if (String.valueOf(txtMatKhau.getPassword()).trim().isEmpty()) {
                 errorInput(txtMatKhau, "Vui lòng nhập nhập mật khẩu");
                 return false;
-            }else if (String.valueOf(txtMatKhau.getPassword()).trim().length() > 128){
+            } else if (String.valueOf(txtMatKhau.getPassword()).trim().length() > 128) {
                 errorInput(txtMatKhau, "Mật khẩu không quá 128 kí tự");
                 return false;
             }
@@ -460,14 +465,14 @@ public class NhanVienDialog extends JDialog {
              * Kiểm tra nhập lại mật khẩu
              * Rule: không được rỗng, không quá 128 kí tự, phải trùng vs mật khẩu đã nhập
              */
-            if (String.valueOf(txtNhapLaiMatKhau.getPassword()).trim().isEmpty()){
+            if (String.valueOf(txtNhapLaiMatKhau.getPassword()).trim().isEmpty()) {
                 errorInput(txtNhapLaiMatKhau, "Vui lòng nhập nhập lại mật khẩu");
                 return false;
-            }else if (String.valueOf(txtNhapLaiMatKhau.getPassword()).trim().length() > 128){
+            } else if (String.valueOf(txtNhapLaiMatKhau.getPassword()).trim().length() > 128) {
                 errorInput(txtNhapLaiMatKhau, "Mật khẩu không quá 128 kí tự");
                 return false;
-            }else if (!String.valueOf(txtMatKhau.getPassword()).trim()
-                    .equals(String.valueOf(txtNhapLaiMatKhau.getPassword()).trim())){
+            } else if (!String.valueOf(txtMatKhau.getPassword()).trim()
+                    .equals(String.valueOf(txtNhapLaiMatKhau.getPassword()).trim())) {
                 errorInput(txtNhapLaiMatKhau, "Mật khẩu không trùng khớp");
                 return false;
             }
@@ -480,12 +485,14 @@ public class NhanVienDialog extends JDialog {
     /**
      * Sự kiện khi nhập text địa chỉ
      * Nếu có lỗi thì tắt lỗi
+     *
      * @return
      */
-    private KeyListener txtDiaChi_KeyListener(){
+    private KeyListener txtDiaChi_KeyListener() {
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {
+            }
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -493,7 +500,8 @@ public class NhanVienDialog extends JDialog {
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {}
+            public void keyReleased(KeyEvent e) {
+            }
         };
     }
 
@@ -501,12 +509,14 @@ public class NhanVienDialog extends JDialog {
     /**
      * Sự kiện nhập text Họ tên
      * Nếu có lỗi thì tắt lỗi
+     *
      * @return
      */
-    private KeyListener txtHoTen_KeyListener(){
+    private KeyListener txtHoTen_KeyListener() {
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {
+            }
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -514,7 +524,8 @@ public class NhanVienDialog extends JDialog {
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {}
+            public void keyReleased(KeyEvent e) {
+            }
         };
     }
 
@@ -522,9 +533,10 @@ public class NhanVienDialog extends JDialog {
     /**
      * Sự kiện nhập text CMND
      * Nếu có lỗi thì tắt lỗi
+     *
      * @return
      */
-    private KeyListener txtCMND_KeyListener(){
+    private KeyListener txtCMND_KeyListener() {
         return new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -547,12 +559,14 @@ public class NhanVienDialog extends JDialog {
     /**
      * Sự kiện nhập text số điện thoại
      * Nếu có lỗi thì tắt lỗi
+     *
      * @return
      */
-    private KeyListener txtSoDienThoai_KeyListener(){
+    private KeyListener txtSoDienThoai_KeyListener() {
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {
+            }
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -560,7 +574,8 @@ public class NhanVienDialog extends JDialog {
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {}
+            public void keyReleased(KeyEvent e) {
+            }
         };
     }
 
@@ -568,12 +583,14 @@ public class NhanVienDialog extends JDialog {
     /**
      * Sự kiện nhập text tên tài khoản
      * Nếu có lỗi thì tắt lỗi
+     *
      * @return
      */
-    private  KeyListener txtTenTaiKhoan_KeyListener(){
+    private KeyListener txtTenTaiKhoan_KeyListener() {
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {
+            }
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -581,7 +598,8 @@ public class NhanVienDialog extends JDialog {
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {}
+            public void keyReleased(KeyEvent e) {
+            }
         };
     }
 
@@ -589,12 +607,14 @@ public class NhanVienDialog extends JDialog {
     /**
      * Sự kiện nhập text Mật khẩu
      * Nếu có lỗi thì tắt lỗi
+     *
      * @return
      */
-    private  KeyListener txtMatKhau_KeyListener(){
+    private KeyListener txtMatKhau_KeyListener() {
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {
+            }
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -606,20 +626,23 @@ public class NhanVienDialog extends JDialog {
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {}
+            public void keyReleased(KeyEvent e) {
+            }
         };
-  }
+    }
 
 
     /**
      * Sự kiện nhập text Nhập lại mật khẩu
      * Nếu có lỗi thì tắt lỗi
+     *
      * @return
      */
-    private  KeyListener txtNhapLaiMatKhau_KeyListener(){
+    private KeyListener txtNhapLaiMatKhau_KeyListener() {
         return new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {
+            }
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -627,16 +650,18 @@ public class NhanVienDialog extends JDialog {
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {}
+            public void keyReleased(KeyEvent e) {
+            }
         };
     }
 
 
     /**
      * Generate mã nhân viên mới
+     *
      * @return
      */
-    private String getMaNhanVienMoi(){
+    private String getMaNhanVienMoi() {
         String lastID = "";
         String newID = "";
 
@@ -647,14 +672,14 @@ public class NhanVienDialog extends JDialog {
         }
 
         // Nếu mã nhân viên rỗng thì trả về mã mặc định
-        if (lastID.isEmpty()){
+        if (lastID.isEmpty()) {
             return "NV00001";
         }
 
         // Generate mã nhân viên mới
         Pattern pattern = Pattern.compile(PatternRegexs.REGEX_MANHANVIEN);
         Matcher matcher = pattern.matcher(lastID);
-        if (matcher.find()){
+        if (matcher.find()) {
             int number = Integer.parseInt(matcher.group(1));
             number++;
 
@@ -667,9 +692,10 @@ public class NhanVienDialog extends JDialog {
 
     /**
      * Sự kiện nút Thoát
+     *
      * @return
      */
-    private ActionListener btnThoat_Click(){
+    private ActionListener btnThoat_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -683,9 +709,10 @@ public class NhanVienDialog extends JDialog {
 
     /**
      * Sự kiện nút Lưu
+     *
      * @return
      */
-    private ActionListener btnLuu_Click(){
+    private ActionListener btnLuu_Click() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -706,14 +733,14 @@ public class NhanVienDialog extends JDialog {
                 );
 
                 // lấy thông tin tài khoản
-                if (!isChinhSua){
+                if (!isChinhSua) {
                     taiKhoan = new TaiKhoan(
                             txtTenTaiKhoan.getText().trim(),
                             String.valueOf(txtMatKhau.getPassword()),
                             cbLoaiTaiKhoan.getSelectedItem().equals("ADMIN") ? 1 : 0,
                             txtMaNV.getText().trim()
                     );
-                }else taiKhoan = null;
+                } else taiKhoan = null;
 
                 // đ1ong dialog
                 dispose();
@@ -722,16 +749,19 @@ public class NhanVienDialog extends JDialog {
     }
 
 
-    public NhanVien getNhanVien(){
+    public NhanVien getNhanVien() {
         return nhanVien;
     }
 
 
-    public TaiKhoan getTaiKhoan() { return taiKhoan; }
+    public TaiKhoan getTaiKhoan() {
+        return taiKhoan;
+    }
 
 
     /**
      * Constructor
+     *
      * @param frame
      * @param nhanVien
      * @param taiKhoan
@@ -754,10 +784,10 @@ public class NhanVienDialog extends JDialog {
          * Nếu param nhanVien == null > Thêm nhân viên
          * Nếu param nhanVien != null > Cập nhật thông tin nhân viên
          */
-        if (nhanVien == null){
+        if (nhanVien == null) {
             tieuDe = "Thêm nhân viên";
             isChinhSua = false;
-        }else{
+        } else {
             tieuDe = "Cập nhật thông tin nhân viên";
             isChinhSua = true;
         }
