@@ -5,5 +5,7 @@
 	<classpathentry kind="src" path="resources"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/jcalendar-1.4"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/mssql-jdbc-7.2.1.jre11"/>
+	<classpathentry kind="lib" path="C:/Users/Admin/Desktop/QuanLyBangDia/library/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Admin/Desktop/QuanLyBangDia/library/mssql-jdbc-7.2.1.jre11.jar"/>
 	<classpathentry kind="output" path="out/production/QuanLyBangDia"/>
 </classpath>

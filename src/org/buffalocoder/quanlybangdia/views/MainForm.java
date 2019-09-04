@@ -92,7 +92,7 @@ public class MainForm extends JFrame {
         customTabbedPanelUI.setColorDeselected(MaterialDesign.COLOR_SECONDARY);
 
         // tabbed panel
-        menuTabbed = new JTabbedPane(JTabbedPane.LEFT);
+         menuTabbed = new JTabbedPane(JTabbedPane.LEFT);
         menuTabbed.setUI(customTabbedPanelUI);
         menuTabbed.setFont(MaterialDesign.FONT_DEFAULT);
         menuTabbed.addTab("Trang chủ", trangChuTabbed = new TrangChuTabbed());
